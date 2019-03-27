@@ -21,4 +21,12 @@ describe('Unit testing the / route', function() {
         })
     });
 
+    it('should there is googleapi on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<script src="https://apis.google.com/js/platform.js" async defer></script>');
+        })
+    });
+
 });
