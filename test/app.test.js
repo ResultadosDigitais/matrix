@@ -41,7 +41,24 @@ describe('Unit testing the / route', function() {
       return request(app)
         .get('/')
         .then(function(response){
-            expect(response.text).to.contain('<div class="g-signin2" data-onsuccess=""></div>');
+            expect(response.text).to.contain('<div id="googleLoginButton" class="g-signin2" data-onsuccess="onSignIn"></div>');
+        })
+    });
+
+    it('should there is index.js login button on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<script src="index.js"></script>');
+        })
+    });
+
+
+    it('should there is jquery login button on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<script src="index.js"></script>');
         })
     });
 

@@ -18,6 +18,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
+    "mock-local-storage": "^1.1.8",
     "supertest": "^4.0.2"
   }
 }
