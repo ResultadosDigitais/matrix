@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
 	res.render('index')
 })
 
+app.get('/office', (req, res) => {
+	res.render('office')
+})
+
 //Listen on port 8080
 server = app.listen(8080)
 
