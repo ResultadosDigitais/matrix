@@ -29,4 +29,12 @@ describe('Unit testing the / route', function() {
         })
     });
 
+    it('should there is <meta> google-signin-client_id on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<meta name="google-signin-client_id" content="1086925412710-eokas20k03k70dhf2rbi97jrtggntusb.apps.googleusercontent.com">');
+        })
+    });
+
 });
