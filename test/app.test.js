@@ -37,4 +37,12 @@ describe('Unit testing the / route', function() {
         })
     });
 
+    it('should there is google login button on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<div class="g-signin2" data-onsuccess=""></div>');
+        })
+    });
+
 });
