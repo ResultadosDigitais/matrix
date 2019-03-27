@@ -1,5 +1,3 @@
-var googleLoginButton = $("#googleLoginButton")
-
 function onSignIn(googleUser){
 	var profile = googleUser.getBasicProfile();
 
