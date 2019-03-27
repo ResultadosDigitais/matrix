@@ -13,7 +13,7 @@ describe('Unit testing the / route', function() {
         })
     });
 
-    it('should return message on rendering', function() {
+    it('should return message "Hello Matrix" on rendering', function() {
       return request(app)
         .get('/')
         .then(function(response){
