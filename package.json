@@ -4,17 +4,20 @@
   "description": "The first open virtual office",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app",
+    "test": "mocha --exit"
   },
   "author": "Juliemar Berri",
-  "scripts": {
-  "start": "nodemon app"
-  },
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.10",
     "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "supertest": "^4.0.2"
   }
 }
