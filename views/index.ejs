@@ -1,6 +1,11 @@
 <html>
-<header><title>Matrix</title></header>
-<body>
-Hello Matrix
-</body>
+	<header>
+		<title>Matrix</title>
+		<meta name="google-signin-client_id" content="<%= googleCredential.publicKey %>">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+	</header>
+	<body>
+		Hello Matrix
+		<div class="g-signin2" data-onsuccess=""></div>
+	</body>
 </html>

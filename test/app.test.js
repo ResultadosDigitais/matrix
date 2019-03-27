@@ -13,11 +13,35 @@ describe('Unit testing the / route', function() {
         })
     });
 
-    it('should return message on rendering', function() {
+    it('should return message "Hello Matrix" on rendering', function() {
       return request(app)
         .get('/')
         .then(function(response){
             expect(response.text).to.contain('Hello Matrix');
+        })
+    });
+
+    it('should there is googleapi on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<script src="https://apis.google.com/js/platform.js" async defer></script>');
+        })
+    });
+
+    it('should there is <meta> google-signin-client_id on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<meta name="google-signin-client_id" content="1086925412710-eokas20k03k70dhf2rbi97jrtggntusb.apps.googleusercontent.com">');
+        })
+    });
+
+    it('should there is google login button on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<div class="g-signin2" data-onsuccess=""></div>');
         })
     });
 

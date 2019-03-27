@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app",
-    "test": "mocha --exit"
+    "test": "mocha './test/**/*.test.js' --exit"
   },
   "author": "Juliemar Berri",
   "license": "ISC",
