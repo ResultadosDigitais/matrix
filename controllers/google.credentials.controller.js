@@ -1,14 +1,14 @@
-
-function GoogleCredentialController() {
-
-  function isCredentialPresent() {
-    return false;
-  }
-
-  return {
-    isCredentialPresent
-  }
-
+// Constructor
+function GoogleCredentialController(publicKey="") {
+  this.publicKey=publicKey;
 }
 
-module.exports = GoogleCredentialController();
+GoogleCredentialController.prototype.isCredentialPresent = function() {
+	if(this.publicKey.length>0){
+  		return true;
+  	}
+  	return false;
+
+};
+
+module.exports = GoogleCredentialController;
