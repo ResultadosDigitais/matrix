@@ -1,6 +1,7 @@
 const express = require('express')
 const GoogleCredentialController =  require('./controllers/google.credentials.controller');
 const app = express()
+const Office = require('./office')
 
 //set the template engine ejs
 app.set('view engine', 'ejs')
@@ -22,5 +23,7 @@ app.get('/office', (req, res) => {
 
 //Listen on port 8080
 server = app.listen(8080)
+
+new Office(server) 
 
 module.exports = server

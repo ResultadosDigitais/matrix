@@ -45,7 +45,7 @@ describe('Unit testing the / route', function() {
         })
     });
 
-    it('should there is index.js login button on rendering', function() {
+    it('should there is index.js on rendering', function() {
       return request(app)
         .get('/')
         .then(function(response){
@@ -53,12 +53,19 @@ describe('Unit testing the / route', function() {
         })
     });
 
-
-    it('should there is jquery login button on rendering', function() {
+    it('should there is profile.js on rendering', function() {
       return request(app)
         .get('/')
         .then(function(response){
-            expect(response.text).to.contain('<script src="index.js"></script>');
+            expect(response.text).to.contain('<script src="profile.js"></script>');
+        })
+    });
+    
+    it('should there is jquery on rendering', function() {
+      return request(app)
+        .get('/')
+        .then(function(response){
+            expect(response.text).to.contain('<script src="http://code.jquery.com/jquery-latest.min.js"></script>');
         })
     });
 
