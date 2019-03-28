@@ -22,7 +22,7 @@ app.get('/office', (req, res) => {
 })
 
 //Listen on port 8080
-server = app.listen(8080)
+server = app.listen(8080,"0.0.0.0")
 
 new Office(server) 
 

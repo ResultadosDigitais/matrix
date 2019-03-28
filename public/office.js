@@ -3,9 +3,9 @@ $(function(){
 	var enterRoom = $("[enter-room]")
 
 	matrixProfile = new MatrixProfile()
-
+	console.log(window.location)
    	//make connection
-	var socket = io.connect('http://localhost:8080',{ query: "user="+matrixProfile.loadStoredProfileAsString() })
+	var socket = io.connect(window.location.protocol+"//"+window.location.host,{ query: "user="+matrixProfile.loadStoredProfileAsString() })
 
 	enterRoom.on("click",function(e){
 		var room = $(e.target).parent().attr("id");
