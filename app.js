@@ -3,6 +3,9 @@ const GoogleCredentialController =  require('./controllers/google.credentials.co
 const app = express()
 const Office = require('./office')
 
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
 //set the template engine ejs
 app.set('view engine', 'ejs')
 
@@ -22,7 +25,8 @@ app.get('/office', (req, res) => {
 })
 
 //Listen on port 8080
-server = app.listen(8080,"0.0.0.0")
+server = app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
 
 new Office(server) 
 
