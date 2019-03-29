@@ -16,12 +16,20 @@ $(function(){
 		showUserInRoom(data.user,data.room);
 	})
 
+	socket.on("disconnect", (userId) => {
+		removeUser(userId);
+	})
+
 	function logArrayElements(element, index, array) {
     	console.log("a[" + index + "] = " + element);
 	}
 
+	function removeUser(userId){
+		$('#'+userId).remove();
+	}
+
 	function showUserInRoom(user,room){
-		console.log(user.id,room)
+		
 		var userView = $('#'+user.id).length;
 		if(userView==0){
 			userView = $('<img width="50px" id="'+user.id+'"src="'+user.imageUrl+'">');

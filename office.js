@@ -27,7 +27,9 @@ function Office(server) {
 
 		socket.on('disconnect', function(socket) {
     		console.log("disconnect");
+    		io.sockets.emit('disconnect', currentUser.id);
     		that.officeController.removeUser(currentUser.id)
+
 		});
 
 		socket.on('enter-room', (data) => {
