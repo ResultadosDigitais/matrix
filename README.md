@@ -10,7 +10,7 @@ To create google credential follow [this](https://developers.google.com/identity
 
 In this moment is possible:
 - Execute login via Google Credentials
-- Navigate into room-1 and room-2
+- Navigate into all rooms
 - Notify clients when another connected user go away 
 
 Next steps
