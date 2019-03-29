@@ -5,6 +5,7 @@ const Office = require('./office')
 
 const PORT = process.env.PORT || 8080
 const HOST = '0.0.0.0';
+const GOOGLECREDENTIAL = process.env.googleCredential || "1086925412710-eokas20k03k70dhf2rbi97jrtggntusb.apps.googleusercontent.com" 
 
 //set the template engine ejs
 app.set('view engine', 'ejs')
@@ -13,7 +14,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 //FIX ME: here we have to get the google APIkey in another way.
-app.locals.googleCredential = new GoogleCredentialController("1086925412710-eokas20k03k70dhf2rbi97jrtggntusb.apps.googleusercontent.com")
+app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL)
 
 //routes
 app.get('/', (req, res) => {
