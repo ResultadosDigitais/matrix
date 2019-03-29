@@ -6,7 +6,7 @@ In local environment use "localhost:8080"
 
 To create google credential follow [this](https://developers.google.com/identity/sign-in/web/sign-in) steps.
 
-We are using the baby steps strategy.
+## We are using the baby steps strategy.
 
 In this moment is possible:
 - Execute login via Google Credentials
