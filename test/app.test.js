@@ -33,7 +33,7 @@ describe('Unit testing the / route', function() {
       return request(app)
         .get('/')
         .then(function(response){
-            expect(response.text).to.contain('<meta name="google-signin-client_id" content="1086925412710-eokas20k03k70dhf2rbi97jrtggntusb.apps.googleusercontent.com">');
+            expect(response.text).to.contain('<meta name="google-signin-client_id" content="990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com">');
         })
     });
 
