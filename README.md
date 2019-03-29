@@ -1,6 +1,6 @@
 # matrix
 
-Matrix produces a virtual office. In this project, you can run a virtual office to simulate the physical environment.
+Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment.
 
 In local environment use "localhost:8080" 
 
