@@ -3,7 +3,7 @@ const GoogleCredentialController =  require('./controllers/google.credentials.co
 const app = express()
 const Office = require('./office')
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080
 const HOST = '0.0.0.0';
 
 //set the template engine ejs
