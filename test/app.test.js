@@ -65,7 +65,7 @@ describe('Unit testing the / route', function() {
       return request(app)
         .get('/')
         .then(function(response){
-            expect(response.text).to.contain('<script src="http://code.jquery.com/jquery-latest.min.js"></script>');
+            expect(response.text).to.contain('<script src="https://code.jquery.com/jquery-latest.min.js"></script>');
         })
     });
 
