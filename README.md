@@ -5,3 +5,13 @@ Matrix produces a virtual office for remote teams. In this project, you can run 
 In local environment use "localhost:8080" 
 
 To create google credential follow [this](https://developers.google.com/identity/sign-in/web/sign-in) steps.
+
+We are using the baby steps strategy.
+
+In this moment is possible:
+- Execute login via Google Credentials
+- Navigate into room-1 and room-2
+
+Next steps
+- Notify clients when the user go away 
+- Open external meeting when the user enter in a room
