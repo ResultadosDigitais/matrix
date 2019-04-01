@@ -17,8 +17,10 @@ In this moment is possible:
 Next priority steps
 - Open external meeting when the user enter in a room
 - On reload, keep user in the last room
+- Implement socket.io tests
 
 Next cool steps
 - Notify when an user enter in a room
 - Notify when an user go out in a room
-- Implement room Design  
+- Implement room Design
+- Implement a cool login page
