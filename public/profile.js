@@ -14,7 +14,7 @@ MatrixProfile.prototype.storeProfileData = function(profileData){
 	localStorage.setItem('user', JSON.stringify(profileData))
 }
 
-MatrixProfile.prototype.IsThereStroredProfile = function(){
+MatrixProfile.prototype.isProfileStored = function(){
 	if(localStorage.getItem('user')!="" && localStorage.getItem('user')!=null){
 		return true;
 	}

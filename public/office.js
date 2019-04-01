@@ -4,7 +4,7 @@ $(function(){
 
 	var matrixProfile = new MatrixProfile()
 
-	if (matrixProfile.IsThereStroredProfile()) {
+	if (matrixProfile.isProfileStored()) {
 		enterInOffice(matrixProfile);
 	}else{
 		redirectToHome();
