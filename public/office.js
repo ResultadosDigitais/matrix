@@ -2,7 +2,7 @@ $(function(){
 
 	var enterRoom = $("[enter-room]")
 
-	var vamatrixProfile = new MatrixProfile()
+	var matrixProfile = new MatrixProfile()
 
 	if (matrixProfile.IsThereStroredProfile()) {
 		enterInOffice(matrixProfile);
