@@ -1,7 +1,7 @@
 const assert = require('assert');
 const expect = require('chai').expect
 const request = require('supertest');
-const app = require('../app')
+const app = require('../app.server')
 
 describe('Unit testing the / route', function() {
 
@@ -45,11 +45,11 @@ describe('Unit testing the / route', function() {
         })
     });
 
-    it('should there is index.js on rendering', function() {
+    it('should there is index.web.js on rendering', function() {
       return request(app)
         .get('/')
         .then(function(response){
-            expect(response.text).to.contain('<script src="index.js"></script>');
+            expect(response.text).to.contain('<script src="index.web.js"></script>');
         })
     });
 
@@ -57,7 +57,7 @@ describe('Unit testing the / route', function() {
       return request(app)
         .get('/')
         .then(function(response){
-            expect(response.text).to.contain('<script src="profile.js"></script>');
+            expect(response.text).to.contain('<script src="profile.web.js"></script>');
         })
     });
     
