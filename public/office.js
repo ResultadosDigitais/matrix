@@ -3,25 +3,11 @@ $(function(){
 	var enterRoom = $("[enter-room]")
 
 	matrixProfile = new MatrixProfile()
-	console.log(window.location)
-   	//make connection
-	var socket = io.connect(window.location.protocol+"//"+window.location.host,{ query: "user="+matrixProfile.loadStoredProfileAsString() })
 
-	enterRoom.on("click",function(e){
-		var room = $(e.target).parent().attr("id");
-		socket.emit('enter-room', {room : room,user:matrixProfile.loadStoredProfile()})
-	})
-
-	socket.on("enter-room", (data) => {
-		showUserInRoom(data.user,data.room);
-	})
-
-	socket.on("disconnect", (userId) => {
-		removeUser(userId);
-	})
-
-	function logArrayElements(element, index, array) {
-    	console.log("a[" + index + "] = " + element);
+	if (matrixProfile.IsThereStroredProfile()) {
+		enterInOffice();
+	}else{
+		redirectToHome();
 	}
 
 	function removeUser(userId){
@@ -38,6 +24,29 @@ $(function(){
 		}	
 
 		$("#"+room).append(userView);
+	}
+
+	function redirectToHome(){
+		window.location.href = "./"
+	}
+
+	function enterInOffice(){
+		console.log(window.location)
+	   	//make connection
+		var socket = io.connect(window.location.protocol+"//"+window.location.host,{ query: "user="+matrixProfile.loadStoredProfileAsString() })
+
+		enterRoom.on("click",function(e){
+			var room = $(e.target).parent().attr("id");
+			socket.emit('enter-room', {room : room,user:matrixProfile.loadStoredProfile()})
+		})
+
+		socket.on("enter-room", (data) => {
+			showUserInRoom(data.user,data.room);
+		})
+
+		socket.on("disconnect", (userId) => {
+			removeUser(userId);
+		})
 	}
 
 });

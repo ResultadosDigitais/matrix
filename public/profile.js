@@ -14,6 +14,14 @@ MatrixProfile.prototype.storeProfileData = function(profileData){
 	localStorage.setItem('user', JSON.stringify(profileData))
 }
 
+MatrixProfile.prototype.IsThereStroredProfile = function(){
+	console.log(localStorage.getItem('user'));
+	if(localStorage.getItem('user')!="" && localStorage.getItem('user')!=null){
+		return true;
+	}
+	return false;
+}
+
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = MatrixProfile;
  }
