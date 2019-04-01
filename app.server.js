@@ -1,7 +1,7 @@
 const express = require('express')
 const GoogleCredentialController =  require('./controllers/google.credentials.controller');
 const app = express()
-const Office = require('./office')
+const Office = require('./office.server')
 
 const PORT = process.env.PORT || 8080
 const HOST = '0.0.0.0';
