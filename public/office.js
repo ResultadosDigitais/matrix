@@ -2,10 +2,10 @@ $(function(){
 
 	var enterRoom = $("[enter-room]")
 
-	matrixProfile = new MatrixProfile()
+	var vamatrixProfile = new MatrixProfile()
 
 	if (matrixProfile.IsThereStroredProfile()) {
-		enterInOffice();
+		enterInOffice(matrixProfile);
 	}else{
 		redirectToHome();
 	}
@@ -30,7 +30,7 @@ $(function(){
 		window.location.href = "./"
 	}
 
-	function enterInOffice(){
+	function enterInOffice(matrixProfile){
 		console.log(window.location)
 	   	//make connection
 		var socket = io.connect(window.location.protocol+"//"+window.location.host,{ query: "user="+matrixProfile.loadStoredProfileAsString() })
