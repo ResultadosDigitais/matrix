@@ -11,8 +11,14 @@ To create google credential follow [this](https://developers.google.com/identity
 In this moment is possible:
 - Execute login via Google Credentials
 - Navigate into all rooms
-- Notify clients when another connected user go away 
+- Notify clients when another connected user go away
+- Redirect to /home when unlogged user enter in /office
 
-Next steps
-
+Next priority steps
 - Open external meeting when the user enter in a room
+- On reload, keep user in the last room
+
+Next cool steps
+- Notify when an user enter in a room
+- Notify when an user go out in a room
+- Implement room Design  
