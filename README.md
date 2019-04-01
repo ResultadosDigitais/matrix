@@ -14,12 +14,12 @@ In this moment is possible:
 - Notify clients when another connected user go away
 - Redirect to /home when unlogged user enter in /office
 
-Next priority steps
+Next priority steps:
 - Open external meeting when the user enter in a room
 - On reload, keep user in the last room
 - Implement socket.io tests
 
-Next cool steps
+Next cool steps:
 - Notify when an user enter in a room
 - Notify when an user go out in a room
 - Implement room Design
