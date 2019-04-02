@@ -13,9 +13,9 @@ In this moment is possible:
 - Navigate into all rooms
 - Notify clients when another connected user go away
 - Redirect to /home when unlogged user enter in /office
+- Open external meeting when the user enter in a room
 
 Next priority steps:
-- Open external meeting when the user enter in a room
 - On reload, keep user in the last room
 - Implement socket.io tests
 
