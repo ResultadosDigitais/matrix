@@ -30,6 +30,15 @@ $(function(){
 		window.location.href = "./"
 	}
 
+	function goToMeet(externalMeetUrl){
+		var r = confirm("Deseja entrar na call?");
+		if (r == true) {
+		  window.open(externalMeetUrl, '_blank');
+		} else {
+		  txt = "You pressed Cancel!";
+		}
+	}
+
 	function enterInOffice(matrixProfile){
 		console.log(window.location)
 	   	//make connection
@@ -38,6 +47,10 @@ $(function(){
 		enterRoom.on("click",function(e){
 			var room = $(e.target).parent().attr("id");
 			socket.emit('enter-room', {room : room,user:matrixProfile.loadStoredProfile()})
+			setTimeout(function () {
+				goToMeet($(e.target).attr("external-meet-url"));
+			},300);
+			
 		})
 
 		socket.on("enter-room", (data) => {
