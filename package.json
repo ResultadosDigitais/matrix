@@ -2,7 +2,7 @@
   "name": "matrix",
   "version": "1.0.0",
   "description": "The first open virtual office",
-  "main": "index.js",
+  "main": "app.server.js",
   "scripts": {
     "start": "nodemon app",
     "test": "mocha './test/**/*.test.js' --exit"
