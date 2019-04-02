@@ -2,6 +2,7 @@ const express = require('express')
 const GoogleCredentialController =  require('./controllers/google.credentials.controller');
 const app = express()
 const Office = require('./office.server')
+const fs = require('fs');
 
 const PORT = process.env.PORT || 8080
 const HOST = '0.0.0.0';
@@ -15,6 +16,13 @@ app.use(express.static('public'))
 
 //FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL)
+
+
+let roomData = process.env.roomData || fs.readFileSync('./file/default.room.web.json');  
+let roomsDetail = JSON.parse(roomData);  
+console.log(roomsDetail); 
+
+app.locals.roomsDetail = roomsDetail;
 
 //routes
 app.get('/', (req, res) => {
