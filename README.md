@@ -17,11 +17,11 @@ In this moment is possible:
 - On reload, keep user in the last room
 
 Next priority steps:
-
+- Implement room Design
+- Implement a cool login page
 - Implement socket.io tests
 
 Next cool steps:
 - Notify when an user enter in a room
 - Notify when an user go out in a room
-- Implement room Design
-- Implement a cool login page
+
