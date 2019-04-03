@@ -10,6 +10,7 @@
   "author": "Juliemar Berri",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.10",
