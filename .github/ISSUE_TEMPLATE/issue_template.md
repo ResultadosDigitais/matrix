@@ -1,6 +1,14 @@
+---
+name: Create an issue
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
+---
+
 <!--- Provide a general summary of the issue in the Title above -->
 <!--- Do not forget to inform the issue's tags -->
-<!--- Issue type: (bug / tech debt / ux debt), Priority: (low / medium / high)>
+<!--- kind: (bug / tech debt / ux debt), priority: (low / medium / high) -->
 
 ## Description
 <!--- Provide a detailed description of the change or addition you are proposing -->
