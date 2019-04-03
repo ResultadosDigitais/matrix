@@ -17,6 +17,9 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "hashmap": "^2.3.0",
     "mocha": "^6.0.2",
     "mock-local-storage": "^1.1.8",
