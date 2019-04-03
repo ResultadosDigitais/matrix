@@ -1,28 +1,27 @@
 <html>
-	<header>
-		<title>Matrix</title>
-		<meta name="google-signin-client_id" content="<%= googleCredential.publicKey %>">
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
-		<link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css" />		
-	</header>
-	<body>
-		<div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-						<h5 class="card-title text-center">Hello Matrix</h5>
-						<hr class="my-4">
-						<div class="d-flex justify-content-center">
-							<div id="googleLoginButton" class="g-signin2" data-onsuccess="onSignIn"></div>
-						</div>
-          </div>
+    <header>
+        <title>Matrix</title>
+        <meta name="google-signin-client_id" content="<%= googleCredential.publicKey %>">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" href="vendor/css/bootstrap/bootstrap.min.css" />
+    </header>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Hello Matrix</h5>
+                            <hr class="my-4">
+                        <div class="d-flex justify-content-center">
+                            <div id="googleLoginButton" class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-		<script src="profile.web.js"></script>
-		<script src="index.web.js"></script>
-		<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-	</body>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="profile.web.js"></script>
+        <script src="index.web.js"></script>
+        </body>
 </html>

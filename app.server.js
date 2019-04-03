@@ -14,7 +14,7 @@ app.set('view engine', 'ejs')
 
 //middlewares
 app.use(express.static('public'))
-app.use('/vendor/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/vendor/css/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 //FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL)
