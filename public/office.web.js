@@ -39,10 +39,17 @@ $(function(){
 		}
 	}
 
+	function saveLastRoom(data) {
+		localStorage.setItem('last_room' + data.user.id, data.room);
+	}
+
 	function enterInOffice(matrixProfile){
+		var lastRoom = localStorage.getItem('last_room' + matrixProfile.loadStoredProfile().id);
 		console.log(window.location)
 	   	//make connection
-		var socket = io.connect(window.location.protocol+"//"+window.location.host,{ query: "user="+matrixProfile.loadStoredProfileAsString() })
+		var socket = io.connect(window.location.protocol + "//" + window.location.host, { 
+			query: "user=" + matrixProfile.loadStoredProfileAsString() + (lastRoom ? "&room=" + lastRoom : "")
+		})
 
 		enterRoom.on("click",function(e){
 			var room = $(e.target).parent().attr("id");
@@ -54,6 +61,7 @@ $(function(){
 		})
 
 		socket.on("enter-room", (data) => {
+			saveLastRoom(data);
 			showUserInRoom(data.user,data.room);
 		})
 

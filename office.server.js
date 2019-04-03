@@ -19,7 +19,9 @@ function Office(server) {
 		var currentUser = socket.user; 
 
 		
-		addUserInRoom(socket.user,"room-1")
+		var room_param = socket.handshake.query.room;
+		var room = room_param ? room_param : "room-1";
+		addUserInRoom(socket.user, room);
 
 		that.officeController.getUsersInOffice().forEach(function(value, key) {
 			addUserInRoom(value.user,value.room);
