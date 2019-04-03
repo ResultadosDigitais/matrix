@@ -3,9 +3,11 @@
 		<title>Matrix</title>
 	</header>
 	<body>
+    <% var roomsDetail = roomService.getAll(); %>
 		<% for(var i=0; i<roomsDetail.length; i++) {%>
       <div id="<%= roomsDetail[i].id%>" style="float:left;width: 300px;height: 300px; border: 1px solid">
         <button external-meet-url="<%= roomsDetail[i].externalMeetUrl%>" enter-room><%= roomsDetail[i].name%></button>
+        <button id="<%= roomsDetail[i].id %>-close" close-room disabled>🔒</button>
       </div>
   <% } %>
 

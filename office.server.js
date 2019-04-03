@@ -1,4 +1,5 @@
 var OfficeController =  require('./controllers/office.controller');
+const roomService = require('./services/room_service')
 
 // Constructor
 function Office(server) {
@@ -24,6 +25,10 @@ function Office(server) {
 		addUserInRoom(socket.user, room);
 
 		that.officeController.getUsersInOffice().forEach(function(value, key) {
+			if (currentUser.id == value.user.id) {
+				io.sockets.emit('enable-close', value.room);
+			}
+
 			addUserInRoom(value.user,value.room);
 		});
 
@@ -36,16 +41,32 @@ function Office(server) {
 		});
 
 		socket.on('enter-room', (data) => {
-			addUserInRoom(currentUser,data.room);
+			room = addUserInRoom(currentUser, data.room);
+
+			if (room != null) {
+				socket.emit('redirect-to-call', room);
+			}
     	})
 
-    	function addUserInRoom(user,room){
-    		//console.log(user,room)
-    		var userInRoom = that.officeController.addUserInRoom(user,room)
-        
-            io.sockets.emit('enter-room', userInRoom);
-    	}
+		socket.on('close-room', (roomId) => {
+			that.officeController.closeRoom(roomId);
+		})
 
+    	function addUserInRoom(user, roomId) {
+			room = roomService.get(roomId)
+
+			if (!room.open) {
+				socket.emit('room-closed', room);
+
+				return;
+			}
+
+    		var userInRoom = that.officeController.addUserInRoom(user, roomId)
+
+            io.sockets.emit('enter-room-all', userInRoom);
+
+            return room;
+    	}
 	});
 
 		

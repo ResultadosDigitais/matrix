@@ -1,6 +1,7 @@
 $(function(){
 
 	var enterRoom = $("[enter-room]")
+	var closeRoom = $("[close-room]")
 
 	var matrixProfile = new MatrixProfile()
 
@@ -15,11 +16,11 @@ $(function(){
 	}
 
 	function showUserInRoom(user,room){
-		
 		var userView = $('#'+user.id).length;
-		if(userView==0){
+
+		if (userView==0) {
 			userView = $('<img width="50px" id="'+user.id+'"src="'+user.imageUrl+'">');
-		}else{
+		} else {
 			userView = $('#'+user.id).detach();
 		}	
 
@@ -51,22 +52,38 @@ $(function(){
 			query: "user=" + matrixProfile.loadStoredProfileAsString() + (lastRoom ? "&room=" + lastRoom : "")
 		})
 
-		enterRoom.on("click",function(e){
+		enterRoom.on("click",function(e) {
 			var room = $(e.target).parent().attr("id");
-			socket.emit('enter-room', {room : room,user:matrixProfile.loadStoredProfile()})
-			setTimeout(function () {
-				goToMeet($(e.target).attr("external-meet-url"));
-			},300);
-			
+			socket.emit('enter-room', {room: room, user: matrixProfile.loadStoredProfile()});
 		})
 
-		socket.on("enter-room", (data) => {
+		closeRoom.on("click", function(e) {
+			var roomId = $(e.target).parent().attr("id");
+			socket.emit('close-room', roomId)
+		})
+
+		socket.on("redirect-to-call", (room) => {
+			setTimeout(function () {
+				goToMeet(room.externalMeetUrl);
+			}, 300);
+		})
+
+		socket.on("enter-room-all", (data) => {
 			saveLastRoom(data);
 			showUserInRoom(data.user,data.room);
 		})
 
 		socket.on("disconnect", (userId) => {
 			removeUser(userId);
+		})
+
+		socket.on("enable-close", (roomId) => {
+			var buttonId = roomId + '-close';
+			$('#' + buttonId).prop('disabled', false);
+		})
+
+		socket.on("room-closed", (room) => {
+			alert("Sala " + room.name + " está fechada!");
 		})
 	}
 

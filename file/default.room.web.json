@@ -2,21 +2,25 @@
 {
 	"id":"room-1",
 	"name":"Sala-1",
-	"externalMeetUrl":"http://meet.google.com"
+	"externalMeetUrl":"http://meet.google.com",
+	"open": true
 },
 {
 	"id":"room-2",
 	"name":"Sala-2",
-	"externalMeetUrl":"http://meet.google.com"
+	"externalMeetUrl":"http://meet.google.com",
+	"open": true
 },
 {
 	"id":"room-3",
 	"name":"Sala-3",
-	"externalMeetUrl":"http://meet.google.com"
+	"externalMeetUrl":"http://meet.google.com",
+	"open": true
 },
 {
 	"id":"room-4",
 	"name":"Sala-4",
-	"externalMeetUrl":"http://meet.google.com"
+	"externalMeetUrl":"http://meet.google.com",
+	"open": true
 }
 ]

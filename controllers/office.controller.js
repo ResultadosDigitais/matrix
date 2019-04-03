@@ -1,15 +1,18 @@
+const roomService = require('../services/room_service')
+
 var HashMap = require('hashmap');
 // Constructor
 function OfficeController() {
   this.usersInRoomOffice = new HashMap();
 }
 
-OfficeController.prototype.addUserInRoom = function(user,room) {
+OfficeController.prototype.addUserInRoom = function(user,roomId) {
 	this.removeUser(user.id) 
+
 	var userInRoom = {
-			user:user,
-			room:room	
-		};
+		user: user,
+		room: roomId	
+	};
 	this.usersInRoomOffice.set(user.id,
 		userInRoom	
 	);
@@ -25,5 +28,8 @@ OfficeController.prototype.getUsersInOffice = function() {
 	return this.usersInRoomOffice;
 };
 
+OfficeController.prototype.closeRoom = function(roomId) {
+	roomService.closeRoom(roomId);
+};
 
 module.exports = OfficeController;
