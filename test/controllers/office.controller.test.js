@@ -1,70 +1,65 @@
-var assert = require('assert');
-var OfficeController =  require('../../controllers/office.controller');
+const assert = require('assert');
+const OfficeController = require('../../controllers/office.controller');
 
 
-describe('Basic Office Test', function () {
-	it('add user in office', function () {
+describe('Basic Office Test', () => {
+  it('add user in office', () => {
+    const officeController = new OfficeController();
 
-		var officeController = new OfficeController();
-
-		var profileData = {
+    const profileData = {
     		id: '111',
     		name: 'Nome do fulano',
     		imageUrl: 'http://localhost/img.jpg',
-    		email: 'Mail@mail.com' 
+    		email: 'Mail@mail.com',
     	};
 
-    	officeController.addUserInRoom(profileData,"room-1");
+    	officeController.addUserInRoom(profileData, 'room-1');
 
-        assert.equal(officeController.getUsersInOffice().get("111").user.id, "111");
-        assert.equal(officeController.getUsersInOffice().get("111").room, "room-1");
-    });
+    assert.equal(officeController.getUsersInOffice().get('111').user.id, '111');
+    assert.equal(officeController.getUsersInOffice().get('111').room, 'room-1');
+  });
 
-    it('remove user in office', function () {
+  it('remove user in office', () => {
+    const officeController = new OfficeController();
 
-		var officeController = new OfficeController();
-
-		var profileData = {
+    const profileData = {
     		id: '111',
     		name: 'Nome do fulano',
     		imageUrl: 'http://localhost/img.jpg',
-    		email: 'Mail@mail.com' 
+    		email: 'Mail@mail.com',
     	};
-    	officeController.addUserInRoom(profileData,"room-1");
+    	officeController.addUserInRoom(profileData, 'room-1');
     	officeController.removeUser(profileData.id);
-        assert.equal(officeController.getUsersInOffice().get("111"), null);
-    });
+    assert.equal(officeController.getUsersInOffice().get('111'), null);
+  });
 
-    it('should size user in office 1', function () {
+  it('should size user in office 1', () => {
+    const officeController = new OfficeController();
 
-		var officeController = new OfficeController();
-
-		var profileData = {
+    const profileData = {
     		id: '111',
     		name: 'Nome do fulano',
     		imageUrl: 'http://localhost/img.jpg',
-    		email: 'Mail@mail.com' 
+    		email: 'Mail@mail.com',
     	};
-    	officeController.addUserInRoom(profileData,"room-1");
-    	officeController.addUserInRoom(profileData,"room-2");
+    	officeController.addUserInRoom(profileData, 'room-1');
+    	officeController.addUserInRoom(profileData, 'room-2');
 
-        assert.equal(officeController.getUsersInOffice().size, 1);
-    });
+    assert.equal(officeController.getUsersInOffice().size, 1);
+  });
 
-    it('should user in room-2', function () {
+  it('should user in room-2', () => {
+    const officeController = new OfficeController();
 
-		var officeController = new OfficeController();
-
-		var profileData = {
+    const profileData = {
     		id: '111',
     		name: 'Nome do fulano',
     		imageUrl: 'http://localhost/img.jpg',
-    		email: 'Mail@mail.com' 
+    		email: 'Mail@mail.com',
     	};
-    	officeController.addUserInRoom(profileData,"room-1");
-    	officeController.addUserInRoom(profileData,"room-2");
+    	officeController.addUserInRoom(profileData, 'room-1');
+    	officeController.addUserInRoom(profileData, 'room-2');
 
-        assert.equal(officeController.getUsersInOffice().get("111").room, "room-2");
-    });
-
+    assert.equal(officeController.getUsersInOffice().get('111').room, 'room-2');
+  });
 });
