@@ -21,6 +21,10 @@ MatrixProfile.prototype.isProfileStored = function(){
 	return false;
 }
 
+MatrixProfile.prototype.terminate = function(){
+	localStorage.removeItem("user");
+}
+
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = MatrixProfile;
- }
+}

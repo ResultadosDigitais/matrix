@@ -10,12 +10,29 @@ $(function () {
 		redirectToHome();
 	}
 
-	function removeUser(data, userId) {
-		notify(data, `${data.user.name} saiu da sala`)
+	var logoutButton = $("#btnLogout");
+
+	logoutButton.on("click", function (e) {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+			matrixProfile.terminate();
+			//Redirect
+			window.location = "/";
+		});
+	})
+
+	function removeUser(userId) {
 		$('#' + userId).remove();
 	}
 
 	function showUserInRoom(user, room) {
+
+		var userView = $('#' + user.id).length;
+		if (userView == 0) {
+			userView = $('<img width="50px" id="' + user.id + '"src="' + user.imageUrl + '">');
+		} else {
+			userView = $('#' + user.id).detach();
+		}
 
 		var userView = $('#' + user.id).length;
 		if (userView == 0) {
@@ -91,3 +108,10 @@ $(function () {
 	}
 
 });
+
+function onLoad() {
+	gapi.load('auth2', function () {
+		console.log("gapi");
+		gapi.auth2.init();
+	});
+}
