@@ -5,13 +5,13 @@ function OfficeController() {
 }
 
 OfficeController.prototype.addUserInRoom = function(user,room) {
-	this.removeUser(user.id) 
+	this.removeUser(user.id)
 	var userInRoom = {
 			user:user,
-			room:room	
+			room:room
 		};
 	this.usersInRoomOffice.set(user.id,
-		userInRoom	
+		userInRoom
 	);
 
 	return userInRoom;
