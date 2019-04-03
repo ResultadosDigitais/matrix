@@ -5,7 +5,8 @@
   "main": "app.server.js",
   "scripts": {
     "start": "nodemon app",
-    "test": "mocha './test/**/*.test.js' --exit"
+    "test": "mocha './test/**/*.test.js' --exit",
+    "lint": "eslint ./**/*.test.js"
   },
   "author": "Juliemar Berri",
   "license": "ISC",
