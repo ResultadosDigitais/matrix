@@ -14,8 +14,10 @@ $(function(){
 
 	logoutButton.on("click",function(e){
 		var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
+		auth2.signOut().then(function () {
+			matrixProfile.terminate();
+			//Redirect
+			window.location = "/";
 		});
 	})
 
@@ -24,13 +26,13 @@ $(function(){
 	}
 
 	function showUserInRoom(user,room){
-		
+
 		var userView = $('#'+user.id).length;
 		if(userView==0){
 			userView = $('<img width="50px" id="'+user.id+'"src="'+user.imageUrl+'">');
 		}else{
 			userView = $('#'+user.id).detach();
-		}	
+		}
 
 		$("#"+room).append(userView);
 	}
@@ -59,7 +61,7 @@ $(function(){
 			setTimeout(function () {
 				goToMeet($(e.target).attr("external-meet-url"));
 			},300);
-			
+
 		})
 
 		socket.on("enter-room", (data) => {
