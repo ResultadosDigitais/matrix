@@ -6,6 +6,14 @@ In local environment use "localhost:8080"
 
 To create google credential follow [this](https://developers.google.com/identity/sign-in/web/sign-in) steps.
 
+## Running local
+Run the following command on the terminal:
+```sh
+docker compose up
+```
+
+Then access in your browser: http://localhost:8080/
+
 ## We are using the baby steps strategy.
 
 In this moment is possible:
