@@ -1,16 +1,14 @@
-var assert = require('assert');
-var GoogleCredentialController =  require('../../controllers/google.credentials.controller');
+const assert = require('assert');
+const GoogleCredentialController = require('../../controllers/google.credentials.controller');
 
-describe('Basic google credential Test', function () {
-	it('should return false of credentials is not present', function () {
+describe('Basic google credential Test', () => {
+  it('should return false of credentials is not present', () => {
+    const googleCredential = new GoogleCredentialController();
+    assert.equal(googleCredential.isCredentialPresent(), false);
+  });
 
-		var googleCredential = new GoogleCredentialController();
-        assert.equal(googleCredential.isCredentialPresent(), false);
-    });
-
-    it('should return true of credentials is present', function () {
-    	var googleCredential = new GoogleCredentialController('key');
-        assert.equal(googleCredential.isCredentialPresent(), true);
-    });
+  it('should return true of credentials is present', () => {
+    	const googleCredential = new GoogleCredentialController('key');
+    assert.equal(googleCredential.isCredentialPresent(), true);
+  });
 });
-

@@ -1,117 +1,113 @@
-$(function () {
+$(() => {
+  const enterRoom = $('[enter-room]');
 
-	var enterRoom = $("[enter-room]")
+  const matrixProfile = new MatrixProfile();
 
-	var matrixProfile = new MatrixProfile()
+  if (matrixProfile.isProfileStored()) {
+    enterInOffice(matrixProfile);
+  } else {
+    redirectToHome();
+  }
 
-	if (matrixProfile.isProfileStored()) {
-		enterInOffice(matrixProfile);
-	} else {
-		redirectToHome();
-	}
+  const logoutButton = $('#btnLogout');
 
-	var logoutButton = $("#btnLogout");
+  logoutButton.on('click', (e) => {
+    const auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(() => {
+      matrixProfile.terminate();
+      // Redirect
+      window.location = '/';
+    });
+  });
 
-	logoutButton.on("click", function (e) {
-		var auth2 = gapi.auth2.getAuthInstance();
-		auth2.signOut().then(function () {
-			matrixProfile.terminate();
-			//Redirect
-			window.location = "/";
-		});
-	})
+  function removeUser(userId) {
+    $(`#${userId}`).remove();
+  }
 
-	function removeUser(userId) {
-		$('#' + userId).remove();
-	}
+  function showUserInRoom(user, room) {
+    var userView = $(`#${user.id}`).length;
+    if (userView == 0) {
+      userView = $(`<img width="50px" id="${user.id}"src="${user.imageUrl}">`);
+    } else {
+      userView = $(`#${user.id}`).detach();
+    }
 
-	function showUserInRoom(user, room) {
+    var userView = $(`#${user.id}`).length;
+    if (userView == 0) {
+      userView = $(`<img width="50px" id="${user.id}"src="${user.imageUrl}">`);
+    } else {
+      userView = $(`#${user.id}`).detach();
+    }
 
-		var userView = $('#' + user.id).length;
-		if (userView == 0) {
-			userView = $('<img width="50px" id="' + user.id + '"src="' + user.imageUrl + '">');
-		} else {
-			userView = $('#' + user.id).detach();
-		}
+    $(`#${room}`).append(userView);
+  }
 
-		var userView = $('#' + user.id).length;
-		if (userView == 0) {
-			userView = $('<img width="50px" id="' + user.id + '"src="' + user.imageUrl + '">');
-		} else {
-			userView = $('#' + user.id).detach();
-		}
+  function redirectToHome() {
+    window.location.href = './';
+  }
 
-		$("#" + room).append(userView);
-	}
+  function goToMeet(externalMeetUrl) {
+    const r = confirm('Deseja entrar na call?');
+    if (r == true) {
+      window.open(externalMeetUrl, '_blank');
+    } else {
+      txt = 'You pressed Cancel!';
+    }
+  }
 
-	function redirectToHome() {
-		window.location.href = "./"
-	}
+  function saveLastRoom(data) {
+    localStorage.setItem(`last_room${data.user.id}`, data.room);
+  }
 
-	function goToMeet(externalMeetUrl) {
-		var r = confirm("Deseja entrar na call?");
-		if (r == true) {
-			window.open(externalMeetUrl, '_blank');
-		} else {
-			txt = "You pressed Cancel!";
-		}
-	}
+  function notify(data, title) {
+    const options = {
+      icon: data.user.imageUrl,
+    };
 
-	function saveLastRoom(data) {
-		localStorage.setItem('last_room' + data.user.id, data.room);
-	}
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    } else {
+      const n = new Notification(title, options);
+    }
+  }
 
-	function notify(data, title) {
-		var options = {
-			icon: data.user.imageUrl,
-		}
+  function enterInOffice(matrixProfile) {
+    const lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
 
-		if (Notification.permission !== "granted") {
-			Notification.requestPermission();
-		} else {
-			var n = new Notification(title, options);
-		}
-	}
+    // make connection
+    const socket = io.connect(`${window.location.protocol}//${window.location.host}`, {
+      query: `user=${matrixProfile.loadStoredProfileAsString()}${lastRoom ? `&room=${lastRoom}` : ''}`,
+    });
 
-	function enterInOffice(matrixProfile) {
-		var lastRoom = localStorage.getItem('last_room' + matrixProfile.loadStoredProfile().id);
+    enterRoom.on('click', (e) => {
+      const room = $(e.target).parent().attr('id');
+      socket.emit('enter-room', { room, user: matrixProfile.loadStoredProfile() });
+      setTimeout(() => {
+        goToMeet($(e.target).attr('external-meet-url'));
+      }, 300);
+    });
 
-		//make connection
-		var socket = io.connect(window.location.protocol + "//" + window.location.host, {
-			query: "user=" + matrixProfile.loadStoredProfileAsString() + (lastRoom ? "&room=" + lastRoom : "")
-		})
+    socket.on('enter-room', (data) => {
+      saveLastRoom(data);
+      showUserInRoom(data.user, data.room);
 
-		enterRoom.on("click", function (e) {
-			var room = $(e.target).parent().attr("id");
-			socket.emit('enter-room', { room: room, user: matrixProfile.loadStoredProfile() })
-			setTimeout(function () {
-				goToMeet($(e.target).attr("external-meet-url"));
-			}, 300);
+      const loggedUserId = JSON.parse(localStorage.getItem('user')).id;
+      const loggedUserRoomId = localStorage.getItem(`last_room${loggedUserId}`);
 
-		})
+      if (loggedUserRoomId == data.room && loggedUserId != data.user.id) {
+        notify(data, `${data.user.email} entrou na sala`);
+      }
+    });
 
-		socket.on("enter-room", (data) => {
-			saveLastRoom(data)
-			showUserInRoom(data.user, data.room)
-
-			var loggedUserId = JSON.parse(localStorage.getItem('user')).id;
-			var loggedUserRoomId = localStorage.getItem('last_room' + loggedUserId);
-
-			if (loggedUserRoomId == data.room && loggedUserId != data.user.id) {
-				notify(data, `${data.user.email} entrou na sala`)
-			}
-		})
-
-		socket.on("disconnect", (data) => {
-			removeUser(data, userId);
-		})
-	}
-
+    socket.on('disconnect', (data) => {
+      removeUser(data, userId);
+    });
+  }
 });
 
 function onLoad() {
-	gapi.load('auth2', function () {
-		console.log("gapi");
-		gapi.auth2.init();
-	});
+  gapi.load('auth2', () => {
+    console.log('gapi');
+    gapi.auth2.init();
+  });
 }
