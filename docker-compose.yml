@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    working_dir: /var/app
     ports:
      - '8080:8080'
     volumes:
