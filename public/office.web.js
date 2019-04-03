@@ -91,15 +91,15 @@ $(function () {
 		})
 
 		socket.on("enter-room", (data) => {
-			var loggedUserId = JSON.parse(localStorage.getItem('user')).id;
-			var loggedUserRoomId = localStorage.getItem('last_room' + data.user.id);
-
-			if (loggedUserRoomId == data.room && loggedUserId != data.user.id) {
-				notify(data, `${data.user.name} entrou na sala`)
-			}
-
 			saveLastRoom(data)
 			showUserInRoom(data.user, data.room)
+
+			var loggedUserId = JSON.parse(localStorage.getItem('user')).id;
+			var loggedUserRoomId = localStorage.getItem('last_room' + loggedUserId);
+
+			if (loggedUserRoomId == data.room && loggedUserId != data.user.id) {
+				notify(data, `${data.user.email} entrou na sala`)
+			}
 		})
 
 		socket.on("disconnect", (data) => {
