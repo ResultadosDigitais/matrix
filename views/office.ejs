@@ -1,8 +1,20 @@
 <html>
 	<header>
-		<title>Matrix</title>
+    <title>Matrix</title>
+    <meta name="google-signin-client_id" content="<%= googleCredential.publicKey %>">
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css" />	
+    <link rel="stylesheet" href="/css/office.css" />	
 	</header>
 	<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <a class="navbar-brand" href="javascript:void(0)">Matrix</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button id="btnLogout" class="btn btn-outline-light my-2 my-sm-0" type="submit" logout >Logout</button>
+      </li>
+    </ul>
+    </nav>
+    </br>
 		<% for(var i=0; i<roomsDetail.length; i++) {%>
       <div id="<%= roomsDetail[i].id%>" style="float:left;width: 300px;height: 300px; border: 1px solid">
         <button external-meet-url="<%= roomsDetail[i].externalMeetUrl%>" enter-room><%= roomsDetail[i].name%></button>
@@ -25,8 +37,9 @@
     <a href="https://meet.google.com/scv-eoyg-tbu" target="_blank">TESTE</a>
 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 		<script src="profile.web.js"></script>
-    	<script src="office.web.js"></script>
+    <script src="office.web.js"></script>    
 	</body>
 </html>
