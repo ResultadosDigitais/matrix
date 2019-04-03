@@ -10,6 +10,15 @@ $(function(){
 		redirectToHome();
 	}
 
+	var logoutButton = $("#btnLogout");
+
+	logoutButton.on("click",function(e){
+		var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+		});
+	})
+
 	function removeUser(userId){
 		$('#'+userId).remove();
 	}
@@ -63,3 +72,10 @@ $(function(){
 	}
 
 });
+
+function onLoad() {
+	gapi.load('auth2', function() {
+		console.log("gapi");
+		gapi.auth2.init();
+	});
+}
