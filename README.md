@@ -2,18 +2,6 @@
 
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment.
 
-In local environment use "localhost:8080" 
-
-To create google credential follow [this](https://developers.google.com/identity/sign-in/web/sign-in) steps.
-
-## Running local
-Run the following command on the terminal:
-```sh
-docker compose up
-```
-
-Then access in your browser: http://localhost:8080/
-
 ## We are using the baby steps strategy.
 
 In this moment is possible:
@@ -33,3 +21,6 @@ Next cool steps:
 - Notify when an user enter in a room
 - Notify when an user go out in a room
 
+## Development environment setup
+
+[ _"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."_](SETUP.md)
