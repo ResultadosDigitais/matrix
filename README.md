@@ -11,6 +11,7 @@ In this moment is possible:
 - Redirect to /home when unlogged user enter in /office
 - Open external meeting when the user enter in a room
 - On reload, keep user in the last room
+
 Next priority steps:
 - Implement room Design
 - Implement a cool login page
@@ -23,4 +24,4 @@ Next cool steps:
 
 ## Development environment setup
 
-[> _"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."_](SETUP.md)
+[ _"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."_](SETUP.md)
