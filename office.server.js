@@ -22,10 +22,7 @@ function Office(server) {
     const room = room_param || 'room-1';
     addUserInRoom(socket.user, room);
 
-    that.officeController.getUsersInOffice().forEach((value, key) => {
-      addUserInRoom(value.user, value.room);
-    });
-
+    socket.emit('sync-office', that.officeController.getUsersInOfficeByMap());
 
     socket.on('disconnect', (socket) => {
       io.sockets.emit('disconnect', currentUser.id);
