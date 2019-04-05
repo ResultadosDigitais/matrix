@@ -28,10 +28,12 @@ $(() => {
     
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
-      userView = $(`<img title="${user.name}" width="50px" id="${user.id}"src="${user.imageUrl}">`);
+      userView = $(`<img class="rounded-circle" title="${user.name}" width="50px" id="${user.id}"src="${user.imageUrl}">`);
     } else {
       userView = $(`#${user.id}`).detach();
     }
+
+    console.log(room,"oi");
 
     $(`#${room}`).append(userView);
   }
@@ -66,15 +68,17 @@ $(() => {
   }
 
   function enterInOffice(matrixProfile) {
-    const lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
-
+    var lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
+    if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
+    	lastRoom = "room-1"
+    }
     // make connection
     const socket = io.connect(`${window.location.protocol}//${window.location.host}`, {
       query: `user=${matrixProfile.loadStoredProfileAsString()}${lastRoom ? `&room=${lastRoom}` : ''}`,
     });
 
     enterRoom.on('click', (e) => {
-      const room = $(e.target).parent().attr('id');
+      const room = $(e.target).attr('room-id');
       socket.emit('enter-room', { room, user: matrixProfile.loadStoredProfile() });
       setTimeout(() => {
         goToMeet($(e.target).attr('external-meet-url'));
@@ -89,6 +93,7 @@ $(() => {
     });
 
     socket.on('enter-room', (data) => {
+    	console.log(data);
       saveLastRoom(data);
       showUserInRoom(data.user, data.room);
 
