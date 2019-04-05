@@ -28,7 +28,7 @@ $(() => {
     
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
-      userView = $(`<img class="rounded-circle" title="${user.name}" width="50px" id="${user.id}"src="${user.imageUrl}">`);
+      userView = $(`<img class="rounded-circle" style="margin:2px;" title="${user.name}" width="50px" id="${user.id}"src="${user.imageUrl}">`);
     } else {
       userView = $(`#${user.id}`).detach();
     }
