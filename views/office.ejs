@@ -15,27 +15,28 @@
     </ul>
     </nav>
     </br>
-		<% for(var i=0; i<roomsDetail.length; i++) {%>
-      <div id="<%= roomsDetail[i].id%>" style="float:left;width: 300px;height: 300px; border: 1px solid">
-        <button external-meet-url="<%= roomsDetail[i].externalMeetUrl%>" enter-room><%= roomsDetail[i].name%></button>
-      </div>
-  <% } %>
+    <div class="container-fluid">
+      <div class="row">
+    		<% for(var i=0; i<roomsDetail.length; i++) {%>
+          <div class="col-sm float-left">
+           <div class="card" style="width: 18rem;height: 300px">
+              <div class="card-header">
+                <%= roomsDetail[i].name%>
+            </div>
+              <div class="card-body" id="<%= roomsDetail[i].id%>" >
+               
+              </div>
+              <div class="card-footer text-muted">
+                  <a href="#<%= roomsDetail[i].id%>" class="card-link" external-meet-url="<%= roomsDetail[i].externalMeetUrl%>" enter-room room-id="<%= roomsDetail[i].id%>" >Entrar na sala <%= roomsDetail[i].name%></a>
+              </div>
+            </div>
+            </br>
+          </br> 
+          </div>
 
-<!--
-	<div id="room-1" style="float:left;width: 300px;height: 300px; border: 1px solid">
-      <button enter-room>Sala-1</button>
-    </div>
-    <div id="room-2" style="float:left;width: 300px;height: 300px; border: 1px solid">
-      <button enter-room >Sala-2</button>
-    </div>
-    <div id="room-3" style="float:left;width: 300px;height: 300px; border: 1px solid">
-      <button enter-room >Sala-3</button>
-    </div>
-    <div id="room-4" style="float:left;width: 300px;height: 300px; border: 1px solid">
-      <button enter-room >Sala-4</button>
-    </div>
-    <a href="https://meet.google.com/scv-eoyg-tbu" target="_blank">TESTE</a>
--->
+        <% } %>
+      </div>
+    </div>  
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
