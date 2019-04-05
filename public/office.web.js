@@ -25,16 +25,10 @@ $(() => {
   }
 
   function showUserInRoom(user, room) {
+    
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
-      userView = $(`<img width="50px" id="${user.id}"src="${user.imageUrl}">`);
-    } else {
-      userView = $(`#${user.id}`).detach();
-    }
-
-    var userView = $(`#${user.id}`).length;
-    if (userView == 0) {
-      userView = $(`<img width="50px" id="${user.id}"src="${user.imageUrl}">`);
+      userView = $(`<img title="${user.name}" width="50px" id="${user.id}"src="${user.imageUrl}">`);
     } else {
       userView = $(`#${user.id}`).detach();
     }
