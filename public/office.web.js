@@ -102,7 +102,7 @@ $(() => {
       const loggedUserRoomId = localStorage.getItem(`last_room${loggedUserId}`);
 
       if (loggedUserRoomId == data.room && loggedUserId != data.user.id) {
-        notify(data, `${data.user.email} entrou na sala`);
+        notify(data, `${data.user.name} entrou na sala`);
       }
     });
 
