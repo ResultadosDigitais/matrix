@@ -87,6 +87,13 @@ $(() => {
       }, 300);
     });
 
+    socket.on('sync-office', (usersInRoom) => {
+      for (var key in usersInRoom) {
+        userInroom = usersInRoom[key];
+        showUserInRoom(userInroom.user, userInroom.room);
+      }
+    });
+
     socket.on('enter-room', (data) => {
       saveLastRoom(data);
       showUserInRoom(data.user, data.room);
@@ -99,8 +106,9 @@ $(() => {
       }
     });
 
-    socket.on('disconnect', (data) => {
-      removeUser(data, userId);
+    socket.on('disconnect', (userId) => {
+      console.log('disconnect',userId);
+      removeUser(userId);
     });
   }
 });

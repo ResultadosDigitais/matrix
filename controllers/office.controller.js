@@ -24,5 +24,13 @@ OfficeController.prototype.getUsersInOffice = function () {
   return this.usersInRoomOffice;
 };
 
+OfficeController.prototype.getUsersInOfficeByMap = function () {
+    var usersInOffice = new Map();
+    this.getUsersInOffice().forEach((value, key) => {
+        usersInOffice[key] = value;
+    });
+    return usersInOffice;
+};
+
 
 module.exports = OfficeController;
