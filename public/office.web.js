@@ -33,8 +33,6 @@ $(() => {
       userView = $(`#${user.id}`).detach();
     }
 
-    console.log(room,"oi");
-
     $(`#${room}`).append(userView);
   }
 
@@ -92,8 +90,7 @@ $(() => {
       }
     });
 
-    socket.on('enter-room', (data) => {
-    	console.log(data);
+    socket.on('enter-room', (data) => {;
       saveLastRoom(data);
       showUserInRoom(data.user, data.room);
 
