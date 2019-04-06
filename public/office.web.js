@@ -40,10 +40,28 @@ $(() => {
     window.location.href = './';
   }
 
-  function goToMeet(externalMeetUrl) {
+  function goToMeet(roomId) {
     const r = confirm('Deseja entrar na call?');
     if (r == true) {
-      window.open(externalMeetUrl, '_blank');
+
+    	const domain = 'meet.jit.si';
+		const options = {
+		    roomName: roomId,
+		    width: "100%",
+		    height: "80%",
+		    parentNode: document.querySelector('#meet')
+		};
+		api = new JitsiMeetExternalAPI(domain, options);
+		api.executeCommand('displayName', matrixProfile.loadStoredProfile().name);
+		api.executeCommand('avatarUrl', matrixProfile.loadStoredProfile().imageUrl);
+		$("#exampleModalCenter").modal("show");
+
+		$("#exampleModalCenter").on("hidden.bs.modal", function () {
+   			api = null;
+   			$("#meet").empty();
+		});
+
+      //window.open(externalMeetUrl, '_blank');
     } else {
       txt = 'You pressed Cancel!';
     }
@@ -79,7 +97,7 @@ $(() => {
       const room = $(e.target).attr('room-id');
       socket.emit('enter-room', { room, user: matrixProfile.loadStoredProfile() });
       setTimeout(() => {
-        goToMeet($(e.target).attr('external-meet-url'));
+        goToMeet($(e.target).attr('room-id'));
       }, 300);
     });
 
