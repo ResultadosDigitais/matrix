@@ -21,7 +21,6 @@ Next cool steps:
 - Notify when an user enter in a room
 - Notify when an user go out in a room
 
-
 ## Development environment setup
 
 [ _"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."_](SETUP.md)

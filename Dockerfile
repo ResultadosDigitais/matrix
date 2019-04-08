@@ -1,19 +1,11 @@
-FROM node:8
+FROM node:8-alpine
 
-# Create app directory
-WORKDIR /usr/src/app
+RUN mkdir -p /var/app
+WORKDIR /var/app
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
+COPY . /var/app
 
 EXPOSE 8080
+ENTRYPOINT ["sh","/docker-entrypoint.sh"]
 CMD [ "npm", "start" ]
