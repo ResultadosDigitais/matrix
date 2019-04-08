@@ -43,8 +43,15 @@ $(() => {
   function goToMeet(roomId) {
     const r = confirm('Deseja entrar na call?');
     if (r == true) {
+    	startVideoConference(roomId);    
+      //window.open(externalMeetUrl, '_blank');
+    } else {
+      txt = 'You pressed Cancel!';
+    }
+  }
 
-    	const domain = 'meet.jit.si';
+  function startVideoConference(roomId){
+  	const domain = 'meet.jit.si';
 		const options = {
 		    roomName: roomId,
 		    width: "100%",
@@ -57,14 +64,8 @@ $(() => {
 		$("#exampleModalCenter").modal("show");
 
 		$("#exampleModalCenter").on("hidden.bs.modal", function () {
-   			api = null;
-   			$("#meet").empty();
+   			api.dispose();
 		});
-
-      //window.open(externalMeetUrl, '_blank');
-    } else {
-      txt = 'You pressed Cancel!';
-    }
   }
 
   function saveLastRoom(data) {
