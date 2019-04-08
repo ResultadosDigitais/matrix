@@ -83,14 +83,31 @@ $(() => {
     }
   }
 
-  function enterInOffice(matrixProfile) {
-    var lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
+   function getLastRoom(matrixProfile){
+  	var lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
     if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
     	lastRoom = "room-1"
+    }	
+  }
+
+  function getUrlRoom(){
+  	var currentRoom = location.hash;
+  	if(currentRoom==null || currentRoom==undefined){
+  		return null;
+  	}else{
+  		return currentRoom.split("#")[1]
+  	}
+  }
+
+  function enterInOffice(matrixProfile) {
+    
+    var currentRoom = getUrlRoom();
+    if(currentRoom==null || currentRoom==undefined || currentRoom== "undefined"){
+    	currentRoom = getLastRoom(matrixProfile);
     }
     // make connection
     const socket = io.connect(`${window.location.protocol}//${window.location.host}`, {
-      query: `user=${matrixProfile.loadStoredProfileAsString()}${lastRoom ? `&room=${lastRoom}` : ''}`,
+      query: `user=${matrixProfile.loadStoredProfileAsString()}${currentRoom ? `&room=${currentRoom}` : ''}`,
     });
 
     enterRoom.on('click', (e) => {
