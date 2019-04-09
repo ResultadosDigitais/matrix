@@ -41,13 +41,13 @@ $(() => {
   }
 
   function goToMeet(roomId) {
-    const r = confirm('Deseja entrar na call?');
-    if (r == true) {
+    //const r = confirm('Deseja entrar na call?');
+    //if (r == true) {
     	startVideoConference(roomId);    
       //window.open(externalMeetUrl, '_blank');
-    } else {
+    //} else {
       txt = 'You pressed Cancel!';
-    }
+    //}
   }
 
   function startVideoConference(roomId){
@@ -56,7 +56,15 @@ $(() => {
 		    roomName: roomId,
 		    width: "100%",
 		    height: "80%",
-		    parentNode: document.querySelector('#meet')
+		    parentNode: document.querySelector('#meet'),
+		    interfaceConfigOverwrite: {TOOLBAR_BUTTONS: [
+		        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+		        'fodeviceselection', 'hangup', 'profile', 
+		         'etherpad', 'sharedvideo', 'settings', 'raisehand',
+		        'videoquality', 'filmstrip',  'stats', 'shortcuts',
+		        'tileview'
+		        // 'chat', 'recording', 'livestreaming', 'invite', 'feedback',
+    		]}
 		};
 		api = new JitsiMeetExternalAPI(domain, options);
 		api.executeCommand('displayName', matrixProfile.loadStoredProfile().name);
