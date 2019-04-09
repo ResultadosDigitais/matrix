@@ -10,12 +10,6 @@ describe('Unit testing the / route', () => {
       assert.equal(response.status, 200);
     }));
 
-  it('should return message "Hello Matrix" on rendering', () => request(app)
-    .get('/')
-    .then((response) => {
-      expect(response.text).to.contain('Hello Matrix');
-    }));
-
   it('should there is googleapi on rendering', () => request(app)
     .get('/')
     .then((response) => {
@@ -31,7 +25,7 @@ describe('Unit testing the / route', () => {
   it('should there is google login button on rendering', () => request(app)
     .get('/')
     .then((response) => {
-      expect(response.text).to.contain('<div id="googleLoginButton" class="g-signin2" data-onsuccess="onSignIn"></div>');
+      expect(response.text).to.contain('<div id="googleLoginButton" class="g-signin2 gButton" data-width="220" data-height="50" data-theme="light" data-longtitle="true" data-onsuccess="onSignIn"></div>');
     }));
 
   it('should there is index.web.js on rendering', () => request(app)
