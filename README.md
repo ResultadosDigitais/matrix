@@ -1,3 +1,7 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+
+[![CircleCI](https://circleci.com/gh/juliemar/matrix/tree/master.svg?style=svg)](https://circleci.com/gh/juliemar/matrix/tree/master)
+
 # matrix
 
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment.
