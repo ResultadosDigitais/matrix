@@ -15,7 +15,14 @@ app.set('view engine', 'ejs');
 
 // middlewares
 app.use(express.static('public'));
-app.use('/vendor/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist/css`));
+
+//css
+app.use('/css/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist/css`));
+app.use('/css/font_awesome', express.static(`${__dirname}/node_modules/font-awesome/css`));
+
+//js
+app.use('/js/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist/js`));
+
 
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL);
