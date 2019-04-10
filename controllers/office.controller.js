@@ -14,18 +14,11 @@ OfficeController.prototype.addUserInRoom = function (user, room) {
     userInRoom);
 };
 
-OfficeController.prototype.setUserInMeet = function (userId) {
-  var userInRoom = this.getUserInRoom(userId);
-  if(userInRoom){
-    userInRoom.user.inMeet = true;
-    this.addUserInRoom(userInRoom.user,userInRoom.room)
-  }
-};
 
-OfficeController.prototype.removeUserInMeet = function (userId) {
+OfficeController.prototype.setUserInMeet = function (userId,isUserInMeet) {
   var userInRoom = this.getUserInRoom(userId);
   if(userInRoom){
-    userInRoom.user.inMeet = false;
+    userInRoom.user.inMeet = isUserInMeet;
     this.addUserInRoom(userInRoom.user,userInRoom.room)
   }
 };

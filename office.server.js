@@ -34,16 +34,18 @@ function Office(server) {
     });
 
     socket.on('start-meet', (userId) => {
-      that.officeController.setUserInMeet(userId);
-      const userInRoom = that.officeController.getUserInRoom(userId);
-      io.sockets.emit('start-meet', userInRoom);
+      updateUserMeetInformation(userId,'start-meet',true);  
     });
 
     socket.on('left-meet', (userId) => {
-      that.officeController.removeUserInMeet(userId);
-      const userInRoom = that.officeController.getUserInRoom(userId);
-      io.sockets.emit('left-meet', userInRoom);
+      updateUserMeetInformation(userId,'left-meet',false);
     });
+
+    function updateUserMeetInformation(userId,meetEvent,isUserInMeet){
+      that.officeController.setUserInMeet(userId,isUserInMeet);
+      const userInRoom = that.officeController.getUserInRoom(userId);
+      io.sockets.emit(meetEvent, userInRoom);
+    }
 
     function addUserInRoom(user, room) {
       that.officeController.addUserInRoom(user, room);
