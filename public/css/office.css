@@ -49,6 +49,10 @@ body {
   line-height: normal;
 }
 
+.room:hover {
+  box-shadow: -3px 3px 0px #0061C3;
+}
+
 .room {
   border: 1px solid #0061C3;
   box-sizing: border-box;
@@ -76,9 +80,11 @@ body {
   height: 35px;
   min-width: 80px;
   max-width: 200px;
-  background-color: #0061C3;
-  border: none;
-  color: white;
+  background-color: white;
+  border: solid 1px;
+  border-top: none;
+  border-color: #0061C3;
+  color: #0061C3;
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
@@ -89,7 +95,6 @@ body {
   display: inline-flex;
   justify-content:center;
   align-items: center;
-
 }
 
 .room-title-text {
@@ -106,26 +111,31 @@ body {
 
 .btn-enter-in-room {
   height: 30px;
-  width: 60px;
+  width: 120px;
   background-color: #0061C3;
   border: none;
   color: white;  
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: normal;
   text-align: center;  
-  text-transform: uppercase;
   display: flex;
   justify-content:center;
   align-items: center;
   flex-flow: column;
-  
+  opacity: 0;  
+  border-radius: 2px;
 }
 
+.room:hover .btn-enter-in-room {
+  opacity: 1;
+}
 .user-room {
   padding: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .blank-user-room {
@@ -141,7 +151,7 @@ body {
 
 .user-in-call{
   border-style: solid;
-  border-color: red;
+  border-color: #FD5F7D;
   border-width: 2px;
 }
 
