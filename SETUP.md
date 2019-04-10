@@ -2,7 +2,7 @@
 
 If you need to create google credential follow [this](https://developers.google.com/identity/sign-in/web/sign-in) steps.
 
-## Runninc with Docker
+## Running with Docker
 Run the following command on the terminal:
 ```sh
 docker compose up
