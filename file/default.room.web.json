@@ -1,17 +1,17 @@
 [
 {
 	"id":"room-1",
-	"name":"Sala-1",
+	"name":"Data Services",
 	"externalMeetUrl":"http://meet.google.com"
 },
 {
 	"id":"room-2",
-	"name":"Sala-2",
+	"name":"CDP",
 	"externalMeetUrl":"http://meet.google.com"
 },
 {
 	"id":"room-3",
-	"name":"Sala-3",
+	"name":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 	"externalMeetUrl":"http://meet.google.com"
 },
 {

@@ -1,3 +1,140 @@
-.navbar {
-  min-height: 30px;
+body {
+  font-family: 'Lato' !important;
+  background-color: #EBF5FC;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: normal;
+  text-align: right;
+}
+
+.navbar-custom {
+  background: #FFFFFF;
+  border: 1px solid #D6D6D6;
+  box-sizing: border-box;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+  color: rgba(255,255,255,.5);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+  color: #ffffff;
+}
+
+.logoutBtn {
+  font-size: 14px;
+  color: #FF2E00;
+  opacity: 0.7;
+  background:none!important;
+  border:none;
+  padding:0!important;
+  cursor: pointer;
+  margin-left: 10px;
+  line-height: normal;
+  opacity: 0.7;
+}
+
+.userName {
+  font-family: Lato;
+  color: #000000;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.room {
+  border: 1px solid #0061C3;
+  box-sizing: border-box;
+  box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.15);
+  width: 19rem;
+  height: 320px;
+  border-radius: 0px;
+}
+
+.room-body {
+  overflow-y: auto;  
+}
+
+.active-room {
+  border: 1px solid #FD5F7D;
+  box-sizing: border-box;
+  box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.15);
+  width: 19rem;
+  height: 320px;
+  border-radius: 0px;
+}
+
+.room-title {
+  margin-left: 30px;
+  height: 35px;
+  min-width: 80px;
+  max-width: 200px;
+  background-color: #0061C3;
+  border: none;
+  color: white;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-flex;
+  justify-content:center;
+  align-items: center;
+
+}
+
+.room-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 10px;
+  text-overflow: ellipsis;
+}
+
+.room-footer {
+  background-color: white;
+  border: none;
+}
+
+.btn-enter-in-room {
+  height: 30px;
+  width: 60px;
+  background-color: #0061C3;
+  border: none;
+  color: white;  
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: normal;
+  text-align: center;  
+  text-transform: uppercase;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-flow: column;
+  
+}
+
+.user-room {
+  padding: 5px;
+}
+
+.blank-user-room {
+  width: 50px;
+  height: 50px;
+  background: #C4C4C4;
+  display: block;
+}
+
+.btn-enter-in-room:hover {
+  color: white;
 }
