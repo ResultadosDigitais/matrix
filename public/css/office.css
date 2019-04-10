@@ -138,3 +138,15 @@ body {
 .btn-enter-in-room:hover {
   color: white;
 }
+
+.user-in-call{
+  border-style: solid;
+  border-color: red;
+  border-width: 2px;
+}
+
+.user-not-in-call{
+  border-style: solid;
+  border-color: gray;
+  border-width: 2px;
+}

@@ -33,10 +33,21 @@ function Office(server) {
       addUserInRoom(currentUser, data.room);
     });
 
-    function addUserInRoom(user, room) {
-      // console.log(user,room)
-      const userInRoom = that.officeController.addUserInRoom(user, room);
+    socket.on('start-meet', (userId) => {
+      that.officeController.setUserInMeet(userId);
+      const userInRoom = that.officeController.getUserInRoom(userId);
+      io.sockets.emit('start-meet', userInRoom);
+    });
 
+    socket.on('left-meet', (userId) => {
+      that.officeController.removeUserInMeet(userId);
+      const userInRoom = that.officeController.getUserInRoom(userId);
+      io.sockets.emit('left-meet', userInRoom);
+    });
+
+    function addUserInRoom(user, room) {
+      that.officeController.addUserInRoom(user, room);
+      const userInRoom = that.officeController.getUserInRoom(user.id);
       io.sockets.emit('enter-room', userInRoom);
     }
   });
