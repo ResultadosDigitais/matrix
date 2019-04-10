@@ -27,6 +27,7 @@ $(() => {
   }
 
   function showUserInRoom(user, room) {
+    debugger;
 
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
@@ -42,10 +43,10 @@ $(() => {
 
   function userInMeetDecorator(user,userView){
     
-    var userMeetClass = "rounded-circle user-not-in-call"
+    var userMeetClass = "rounded-circle user-not-in-call user-room"
     
     if(user.inMeet!=undefined && user.inMeet){
-      userMeetClass = "rounded-circle user-in-call";
+      userMeetClass = "rounded-circle user-in-call user-room";
     }
     
     userView.attr("class",userMeetClass);  
@@ -56,17 +57,17 @@ $(() => {
     window.location.href = './';
   }
 
-  function goToMeet(roomId,socket) {
+  function goToMeet(roomId, roomName, socket) {
     //const r = confirm('Deseja entrar na call?');
     //if (r == true) {
-    	startVideoConference(roomId,socket);    
+    	startVideoConference(roomId,roomName, socket);    
       //window.open(externalMeetUrl, '_blank');
     //} else {
       txt = 'You pressed Cancel!';
     //}
   }
 
-  function startVideoConference(roomId,socket){
+  function startVideoConference(roomId, name, socket){
   	const domain = 'meet.jit.si';
 		const options = {
 		    roomName: roomId,
@@ -92,7 +93,12 @@ $(() => {
 		$("#exampleModalCenter").on("hidden.bs.modal", function () {
         socket.emit('left-meet', matrixProfile.loadStoredProfile().id);
    			api.dispose();
-		});
+    });
+    
+    $('#exampleModalCenter').on('shown.bs.modal', function () {
+      var modal = $(this);
+      modal.find('.modal-title').text(name);
+    });
   }
 
   function saveLastRoom(data) {
@@ -139,10 +145,11 @@ $(() => {
     });
 
     enterRoom.on('click', (e) => {
-      const room = $(e.target).attr('room-id');
-      socket.emit('enter-room', { room, user: matrixProfile.loadStoredProfile() });
+      const roomId = $(e.target).attr('room-id');
+      const roomName = $(e.target).attr('room-name');
+      socket.emit('enter-room', { roomId, user: matrixProfile.loadStoredProfile() });
       setTimeout(() => {
-        goToMeet($(e.target).attr('room-id'),socket);
+        goToMeet(roomId, roomName, socket);
       }, 300);
     });
 
@@ -163,8 +170,6 @@ $(() => {
     });
 
     socket.on('enter-room', (data) => {
-
-
       saveLastRoom(data);
       showUserInRoom(data.user, data.room);
 
