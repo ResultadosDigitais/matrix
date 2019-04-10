@@ -6,15 +6,26 @@ function OfficeController() {
 
 OfficeController.prototype.addUserInRoom = function (user, room) {
   this.removeUser(user.id);
-  const userInRoom = {
+  var userInRoom = {
     user,
     room,
   };
   this.usersInRoomOffice.set(user.id,
     userInRoom);
-
-  return userInRoom;
 };
+
+
+OfficeController.prototype.setUserInMeet = function (userId,isUserInMeet) {
+  var userInRoom = this.getUserInRoom(userId);
+  if(userInRoom){
+    userInRoom.user.inMeet = isUserInMeet;
+    this.addUserInRoom(userInRoom.user,userInRoom.room)
+  }
+};
+
+OfficeController.prototype.getUserInRoom = function (userId) {
+  return this.usersInRoomOffice.get(userId);;
+}
 
 OfficeController.prototype.removeUser = function (userId) {
   this.usersInRoomOffice.delete(userId);
