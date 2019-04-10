@@ -13,10 +13,11 @@ function Office(server) {
   });
 
   io.on('connection', (socket) => {
-    console.log('New user connected');
+    
     const that = this;
     const currentUser = socket.user;
 
+    console.log('connected:',currentUser.id);
 
     const room_param = socket.handshake.query.room;
     const room = room_param || 'room-1';
@@ -25,6 +26,7 @@ function Office(server) {
     socket.emit('sync-office', that.officeController.getUsersInOfficeByMap());
 
     socket.on('disconnect', (socket) => {
+      console.log('disconect:',currentUser.id);
       io.sockets.emit('disconnect', currentUser.id);
       that.officeController.removeUser(currentUser.id);
     });
