@@ -2,15 +2,17 @@
 	<header>
     <title>Matrix</title>
     <meta name="google-signin-client_id" content="<%= googleCredential.publicKey %>">
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />	
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <link rel="stylesheet" href="/css/office.css" />
 	</header>
 	<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-    <a class="navbar-brand" href="javascript:void(0)">Matrix</a>
+  <nav class="navbar navbar-custom">
+    <a class="navbar-brand" href="javascript:void(0)"><img src="/images/logo_min.svg"></a>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button id="btnLogout" class="btn btn-outline-light my-2 my-sm-0" type="submit" logout >Logout</button>
+        <span id="userName" class="userName"></span>
+        <button id="btnLogout" class="logoutBtn" type="submit" logout > Logout</button>
       </li>
     </ul>
     </nav>
@@ -19,8 +21,7 @@
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="
-    max-width: 95%;" >
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width: 95%;" >
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
@@ -37,15 +38,22 @@
       <div class="row">
     		<% for(var i=0; i<roomsDetail.length; i++) {%>
           <div class="col-sm float-left">
-           <div class="card border border-primary" style="width: 18rem;height: 300px">
-              <div class="card-header">
-                <%= roomsDetail[i].name%>
-            </div>
-              <div class="card-body" id="<%= roomsDetail[i].id%>" >
-               
+           <div class="card room">
+             <div class="card-reader" >
+               <div class="room-title float-left">
+                 <span class="room-title-text"><%= roomsDetail[i].name%></span>
+               </div>
+             </div>
+             
+              <div class="card-body room-body" >
+                  <div class="container">
+                      <div class="row thumbnails" id="<%= roomsDetail[i].id%>">
+                        <!-- <div class="thumbnail user-room"><span class="blank-user-room rounded-circle"/></div> -->
+                      </div>
+                  </div>               
               </div>
-              <div class="card-footer text-muted">
-                  <a href="#<%= roomsDetail[i].id%>" class="card-link" external-meet-url="<%= roomsDetail[i].externalMeetUrl%>" enter-room room-id="<%= roomsDetail[i].id%>" >Entrar na sala <%= roomsDetail[i].name%></a>
+              <div class="card-footer text-muted room-footer ">
+                  <a href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-right" external-meet-url="<%=   [i].externalMeetUrl%>" enter-room room-id="<%= roomsDetail[i].id%>" >join</a>
               </div>
             </div>
             </br>
@@ -60,7 +68,7 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>    
 		<script src="profile.web.js"></script>
     <script src="office.web.js"></script>    
 	</body>

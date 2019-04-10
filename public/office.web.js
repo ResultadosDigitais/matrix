@@ -1,6 +1,5 @@
 $(() => {
   const enterRoom = $('[enter-room]');
-
   const matrixProfile = new MatrixProfile();
 
   if (matrixProfile.isProfileStored()) {
@@ -8,6 +7,9 @@ $(() => {
   } else {
     redirectToHome();
   }
+
+  //set user name
+  $("#userName").text("Whats'up " + matrixProfile.userName() + "!");
 
   const logoutButton = $('#btnLogout');
 
@@ -28,9 +30,9 @@ $(() => {
     
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
-      userView = $(`<img class="rounded-circle" style="margin:2px;" title="${user.name}" width="50px" id="${user.id}"src="${user.imageUrl}">`);
-    } else {
-      userView = $(`#${user.id}`).detach();
+      userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img class="rounded-circle" style="margin:2px;display:flex;" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
+     } else {
+       userView = $(`#${user.id}`).detach();
     }
 
     $(`#${room}`).append(userView);
@@ -109,7 +111,7 @@ $(() => {
   }
 
   function enterInOffice(matrixProfile) {
-    
+
     var currentRoom = getUrlRoom();
     if(currentRoom==null || currentRoom==undefined || currentRoom== "undefined"){
     	currentRoom = getLastRoom(matrixProfile);
@@ -134,7 +136,7 @@ $(() => {
       }
     });
 
-    socket.on('enter-room', (data) => {;
+    socket.on('enter-room', (data) => {
       saveLastRoom(data);
       showUserInRoom(data.user, data.room);
 
@@ -153,9 +155,9 @@ $(() => {
   }
 });
 
+
 function onLoad() {
   gapi.load('auth2', () => {
-    console.log('gapi');
     gapi.auth2.init();
   });
 }

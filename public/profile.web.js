@@ -6,6 +6,11 @@ MatrixProfile.prototype.loadStoredProfile = function () {
   return JSON.parse(localStorage.getItem('user'));
 };
 
+MatrixProfile.prototype.userName = function () {
+  const user = JSON.parse(localStorage.getItem('user'))["name"];
+  return user.split(" ").pop();
+};
+
 MatrixProfile.prototype.loadStoredProfileAsString = function () {
   return localStorage.getItem('user');
 };
