@@ -27,7 +27,6 @@ $(() => {
   }
 
   function showUserInRoom(user, room) {
-    debugger;
 
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
@@ -145,11 +144,11 @@ $(() => {
     });
 
     enterRoom.on('click', (e) => {
-      const roomId = $(e.target).attr('room-id');
+      const room = $(e.target).attr('room-id');
       const roomName = $(e.target).attr('room-name');
-      socket.emit('enter-room', { roomId, user: matrixProfile.loadStoredProfile() });
+      socket.emit('enter-room', { room, user: matrixProfile.loadStoredProfile() });
       setTimeout(() => {
-        goToMeet(roomId, roomName, socket);
+        goToMeet($(e.target).attr('room-id'), roomName, socket);
       }, 300);
     });
 
@@ -168,6 +167,8 @@ $(() => {
     socket.on('left-meet', (data) => {
       showUserInRoom(data.user, data.room);  
     });
+
+    
 
     socket.on('enter-room', (data) => {
       saveLastRoom(data);
