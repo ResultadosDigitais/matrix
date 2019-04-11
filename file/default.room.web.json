@@ -18,5 +18,36 @@
 	"id":"room-4",
 	"name":"Sala-4",
 	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-5",
+	"name":"Sala-5",
+	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-6",
+	"name":"Sala-6",
+	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-7",
+	"name":"Sala-7",
+	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-8",
+	"name":"Sala-8",
+	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-9",
+	"name":"Sala-9",
+	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-10",
+	"name":"Sala-10",
+	"externalMeetUrl":"http://meet.google.com"
 }
+
 ]

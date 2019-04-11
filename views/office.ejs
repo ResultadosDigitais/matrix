@@ -18,13 +18,12 @@
     </nav>
     </br>
     <div class="container-fluid">
-
       <!-- Modal -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width: 95%;" >
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle"></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -34,32 +33,29 @@
             </div>
           </div>
         </div>
-      </div>  
+      </div>
       <div class="row">
-    		<% for(var i=0; i<roomsDetail.length; i++) {%>
-          <div class="col-sm float-left">
-           <div class="card room">
-             <div class="card-reader" >
-               <div class="room-title float-left">
-                 <span class="room-title-text"><%= roomsDetail[i].name%></span>
-               </div>
-             </div>
-             
+        <% for(var i=0; i<roomsDetail.length; i++) {%>
+          <div style="padding: 15px;text-align: center">
+            <div class="card room">
+              <div class="card-reader" >
+                <div class="room-title float-left">
+                  <span class="room-title-text"><%= roomsDetail[i].name%></span>
+                </div>
+              </div>
+              
               <div class="card-body room-body" >
                   <div class="container">
                       <div class="row thumbnails" id="<%= roomsDetail[i].id%>">
-                        <!-- <div class="thumbnail user-room"><span class="blank-user-room rounded-circle"/></div> -->
                       </div>
                   </div>               
               </div>
               <div class="card-footer text-muted room-footer ">
-                  <a href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=   [i].externalMeetUrl%>" enter-room room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
+                  <a href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=   [i].externalMeetUrl%>" enter-room room-name="<%= roomsDetail[i].name%>" room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
               </div>
             </div>
-            </br>
-          </br> 
           </div>
-
+  
         <% } %>
       </div>
     </div>  
