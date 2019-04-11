@@ -66,22 +66,26 @@ $(() => {
     //}
   }
 
+  function getMeetingOptions(roomId) {
+    return {
+      roomName: roomId,
+      width: "100%",
+      height: "80%",
+      parentNode: document.querySelector('#meet'),
+      interfaceConfigOverwrite: { TOOLBAR_BUTTONS: [
+          'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+          'fodeviceselection', 'hangup', 'profile', 
+           'etherpad', 'sharedvideo', 'settings', 'raisehand',
+          'videoquality', 'filmstrip',  'stats', 'shortcuts',
+          'tileview'
+          // 'chat', 'recording', 'livestreaming', 'invite', 'feedback',
+      ]}
+    };
+  }
+
   function startVideoConference(roomId, name, socket){
   	const domain = 'meet.jit.si';
-		const options = {
-		    roomName: roomId,
-		    width: "100%",
-		    height: "80%",
-		    parentNode: document.querySelector('#meet'),
-		    interfaceConfigOverwrite: {TOOLBAR_BUTTONS: [
-		        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-		        'fodeviceselection', 'hangup', 'profile', 
-		         'etherpad', 'sharedvideo', 'settings', 'raisehand',
-		        'videoquality', 'filmstrip',  'stats', 'shortcuts',
-		        'tileview'
-		        // 'chat', 'recording', 'livestreaming', 'invite', 'feedback',
-    		]}
-		};
+		const options = getMeetingOptions(roomId);
 		api = new JitsiMeetExternalAPI(domain, options);
 		api.executeCommand('displayName', matrixProfile.loadStoredProfile().name);
 		api.executeCommand('avatarUrl', matrixProfile.loadStoredProfile().imageUrl);
