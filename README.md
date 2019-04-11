@@ -16,11 +16,12 @@ In this moment is possible:
 - Open external meeting when the user enter in a room
 - On reload, keep user in the last room
 - Notify when an user enter in a room
+- Identify when user in a video meeting 
 
 Next priority steps:
-- Implement room Design
-- Implement a cool login page
 - Implement socket.io tests
+- Configure code coverage codeclimate
+- Implement call other user to my room 
 
 Next cool steps:
 
