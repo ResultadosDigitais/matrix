@@ -21,6 +21,11 @@
 },
 {
 	"id":"room-5",
+	"name":"Sala-5",
+	"externalMeetUrl":"http://meet.google.com"
+},
+{
+	"id":"room-6",
 	"name":"Sala-6",
 	"externalMeetUrl":"http://meet.google.com"
 },
@@ -40,8 +45,8 @@
 	"externalMeetUrl":"http://meet.google.com"
 },
 {
-	"id":"room-10",
-	"name":"Sala-10",
+	"id":"room-9",
+	"name":"Sala-9",
 	"externalMeetUrl":"http://meet.google.com"
 }
 
