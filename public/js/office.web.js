@@ -35,8 +35,10 @@ $(() => {
        userView = $(`#${user.id}`).detach();
     }
 
+    userInRoomDecorator(user, room);
     userInMeetDecorator(user,userView);
     addGetUserMenu(user,userView,socket);
+    
 
     $(`#${room}`).append(userView);
     
@@ -62,7 +64,7 @@ $(() => {
   }
 
   function userInMeetDecorator(user,userView){
-    
+
     var userMeetClass = "rounded-circle user-not-in-call user-room"
     
     if(user.inMeet!=undefined && user.inMeet){
@@ -72,6 +74,36 @@ $(() => {
     userView.attr("class",userMeetClass);  
   }
 
+  function userInRoomDecorator(user, room) {
+    if (user.id === matrixProfile.loadStoredProfile().id) {
+      setDefaultRoomStyles();
+      var roomElement = $(`#room_card-${room}`);
+      roomElement.attr("class", "card active-room");
+  
+      var btnElement = $(`#room_btn_enter-${room}`);
+      btnElement.attr("class", "card-link btn-enter-in-room-active float-left");
+  
+      var roomTitle = $(`#room_card_title-${room}`);
+      roomTitle.attr("class", "room-title-active float-left");
+    }
+  }
+
+  function setDefaultRoomStyles() {
+    var oldRoom = $(".active-room");
+    if (oldRoom.length > 0 ) {
+      oldRoom.attr("class", "card room");
+    }
+
+    var btnEnterInRoom = $(".btn-enter-in-room-active");
+    if (btnEnterInRoom.length > 0 ) {
+      btnEnterInRoom.attr("class", "card-link btn-enter-in-room float-left");
+    }
+
+    var btnEnterInRoom = $(".room-title-active");
+    if (btnEnterInRoom.length > 0 ) {
+      btnEnterInRoom.attr("class", "room-title float-left");
+    }
+  }
 
   function redirectToHome() {
     window.location.href = './';

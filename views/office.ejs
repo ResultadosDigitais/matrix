@@ -37,9 +37,9 @@
       <div class="row d-flex justify-content-center">
         <% for(var i=0; i<roomsDetail.length; i++) {%>
           <div style="padding: 15px;text-align: center">
-            <div class="card room">
+            <div class="card room" id="room_card-<%= roomsDetail[i].id %>">
               <div class="card-reader" >
-                <div class="room-title float-left">
+                <div id="room_card_title-<%= roomsDetail[i].id %>"  class="room-title float-left">
                   <span class="room-title-text"><%= roomsDetail[i].name%></span>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                   </div>               
               </div>
               <div class="card-footer text-muted room-footer ">
-                  <a href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=   [i].externalMeetUrl%>" enter-room room-name="<%= roomsDetail[i].name%>" room-disable-meeting="<%= roomsDetail[i].disableMeeting %>" room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
+                  <a id="room_btn_enter-<%= roomsDetail[i].id %>" href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=   [i].externalMeetUrl%>" enter-room room-name="<%= roomsDetail[i].name%>" room-disable-meeting="<%= roomsDetail[i].disableMeeting %>" room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
               </div>
             </div>
           </div>
