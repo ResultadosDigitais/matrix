@@ -123,7 +123,7 @@ $(() => {
    function getLastRoom(matrixProfile){
   	var lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
     if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
-    	lastRoom = $('[enter-room]')[0].attr("room-id");
+    	lastRoom = $($('[enter-room]')[0]).attr("room-id");
     }	
   }
 
