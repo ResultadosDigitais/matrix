@@ -127,6 +127,8 @@ $(() => {
   }
 
   function startVideoConference(roomId, name, socket){
+    $("#exampleModalCenter").modal("hide");
+    $("#exampleModalCenter").modal("dispose");
   	const domain = 'meet.jit.si';
 		const options = getMeetingOptions(roomId);
 		api = new JitsiMeetExternalAPI(domain, options);
@@ -229,6 +231,7 @@ $(() => {
 
       var r = confirm(data.callerName +" está chamado você para "+ data.callerRoomName);
       if (r == true) {
+
         socket.emit('enter-room', { room: data.room, user: matrixProfile.loadStoredProfile() });        
       
         setTimeout(() => {
