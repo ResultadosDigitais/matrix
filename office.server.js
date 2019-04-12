@@ -49,7 +49,9 @@ function Office(server,defaultRoom) {
 
     socket.on('get-user-to-room', (data) => {
       const userInRoom = that.officeController.getUserInRoom(data.userId);
-      io.to(userInRoom.user.socketId).emit("get-user-to-room",data)
+      if(userInRoom){
+        io.to(userInRoom.user.socketId).emit("get-user-to-room",data)
+      }
     });
 
     function updateUserMeetInformation(userId,meetEvent,isUserInMeet){
