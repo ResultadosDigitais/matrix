@@ -36,7 +36,7 @@ $(() => {
     }
 
     userInMeetDecorator(user,userView);
-    userInRoomDecorator(room);
+    userInRoomDecorator(user, room);
     addGetUserMenu(user,userView);
 
     $(`#${room}`).append(userView);
@@ -56,7 +56,7 @@ $(() => {
   }
 
   function userInMeetDecorator(user,userView){
-    
+
     var userMeetClass = "rounded-circle user-not-in-call user-room"
     
     if(user.inMeet!=undefined && user.inMeet){
@@ -66,17 +66,18 @@ $(() => {
     userView.attr("class",userMeetClass);  
   }
 
-  function userInRoomDecorator(room) {
-
-    setDefaultRoomStyles();
-    var roomElement = $(`#room_card-${room}`);
-    roomElement.attr("class", "card active-room");
-
-    var btnElement = $(`#room_btn_enter-${room}`);
-    btnElement.attr("class", "card-link btn-enter-in-room-active float-left");
-
-    var roomTitle = $(`#room_card_title-${room}`);
-    roomTitle.attr("class", "room-title-active float-left");
+  function userInRoomDecorator(user, room) {
+    if (user.id === matrixProfile.loadStoredProfile().id) {
+      setDefaultRoomStyles();
+      var roomElement = $(`#room_card-${room}`);
+      roomElement.attr("class", "card active-room");
+  
+      var btnElement = $(`#room_btn_enter-${room}`);
+      btnElement.attr("class", "card-link btn-enter-in-room-active float-left");
+  
+      var roomTitle = $(`#room_card_title-${room}`);
+      roomTitle.attr("class", "room-title-active float-left");
+    }
   }
 
   function setDefaultRoomStyles() {
