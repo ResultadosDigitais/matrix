@@ -77,8 +77,6 @@ $(() => {
   
       var roomTitle = $(`#room_card_title-${room}`);
       roomTitle.attr("class", "room-title-active float-left");
-    } else {
-      console.log("não é o  user");
     }
   }
 
