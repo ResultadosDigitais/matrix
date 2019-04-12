@@ -30,6 +30,14 @@ app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL);
 
 const roomData = process.env.roomData || fs.readFileSync('./file/default.room.web.json');
 const roomsDetail = JSON.parse(roomData);
+var defaulRoom = "room-1";
+
+if (roomsDetail!=null && roomsDetail.length >0 ) {
+	defaulRoom = roomsDetail[0].id;	
+}
+
+console.log(defaulRoom);
+
 console.log(roomsDetail);
 
 app.locals.roomsDetail = roomsDetail;
@@ -47,6 +55,6 @@ app.get('/office', (req, res) => {
 server = app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
-new Office(server);
+new Office(server,defaulRoom);
 
 module.exports = server;

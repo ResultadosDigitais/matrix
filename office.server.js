@@ -1,7 +1,7 @@
 const OfficeController = require('./controllers/office.controller');
 
 // Constructor
-function Office(server) {
+function Office(server,defaultRoom) {
   this.officeController = new OfficeController();
 
   const io = require('socket.io')(server);
@@ -20,7 +20,7 @@ function Office(server) {
     console.log('connected:',currentUser.id);
 
     const room_param = socket.handshake.query.room;
-    const room = room_param || 'room-1';
+    const room = room_param || defaultRoom;
     addUserInRoom(socket.user, room);
 
     socket.emit('sync-office', that.officeController.getUsersInOfficeByMap());
