@@ -1,8 +1,9 @@
 [
 {
 	"id":"ac2b235a-b1e2-4848-a687-6669a3f7551b",
-	"name":"Data Services",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Lounge",
+	"externalMeetUrl":"http://meet.google.com",
+	"disableMeeting": true
 },
 {
 	"id":"room-2",

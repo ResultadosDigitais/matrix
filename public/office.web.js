@@ -56,16 +56,6 @@ $(() => {
     window.location.href = './';
   }
 
-  function goToMeet(roomId, roomName, socket) {
-    //const r = confirm('Deseja entrar na call?');
-    //if (r == true) {
-    	startVideoConference(roomId,roomName, socket);    
-      //window.open(externalMeetUrl, '_blank');
-    //} else {
-      txt = 'You pressed Cancel!';
-    //}
-  }
-
   function getMeetingOptions(roomId) {
     return {
       roomName: roomId,
@@ -150,9 +140,13 @@ $(() => {
     enterRoom.on('click', (e) => {
       const room = $(e.target).attr('room-id');
       const roomName = $(e.target).attr('room-name');
+      const disableMeeting = new Boolean($(e.target).attr('room-disable-meeting'));
       socket.emit('enter-room', { room, user: matrixProfile.loadStoredProfile() });
+
+      if (disableMeeting == true) return;
+
       setTimeout(() => {
-        goToMeet($(e.target).attr('room-id'), roomName, socket);
+        startVideoConference($(e.target).attr('room-id'), roomName, socket);
       }, 300);
     });
 
