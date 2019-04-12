@@ -48,6 +48,7 @@ $(() => {
             menuSelected: function (invokedOn, selectedMenu) {
             //TODO: here we have to emit a event to notify the user  
             console.log($(invokedOn).attr("user-id"));
+            alert("thanks to try get '"+$(invokedOn).attr("title")+"' this feature is coming soon :)")
           }
         });
     }  
