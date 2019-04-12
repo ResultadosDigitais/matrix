@@ -30,14 +30,28 @@ $(() => {
 
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
-      userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img class="rounded-circle" style="margin:2px;display:flex;" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
+      userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
      } else {
        userView = $(`#${user.id}`).detach();
     }
 
     userInMeetDecorator(user,userView);
-    
+    addGetUserMenu(user,userView);
+
     $(`#${room}`).append(userView);
+  }
+
+  function addGetUserMenu(user,userView){
+    if(user.id != matrixProfile.loadStoredProfile().id){
+        userView.contextMenu({
+            menuSelector: "#getUserMenu",
+            menuSelected: function (invokedOn, selectedMenu) {
+            //TODO: here we have to emit a event to notify the user  
+            console.log($(invokedOn).attr("user-id"));
+            alert("thanks to try get '"+$(invokedOn).attr("title")+"' this feature is coming soon :)")
+          }
+        });
+    }  
   }
 
   function userInMeetDecorator(user,userView){

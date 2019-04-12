@@ -2,7 +2,7 @@ require('mock-local-storage');
 const assert = require('assert');
 const { expect } = require('chai');
 const request = require('supertest');
-const MatrixProfile = require('../../public/profile.web');
+const MatrixProfile = require('../../public/js/profile.web');
 
 
 describe('Basic profile credential Test', () => {
