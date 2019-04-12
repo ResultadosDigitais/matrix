@@ -67,8 +67,8 @@ $(() => {
   }
 
   function userInRoomDecorator(user, room) {
-
-    if (user.id == matrixProfile.loadStoredProfile().id) {
+    if (user.id === matrixProfile.loadStoredProfile().id) {
+      debugger;
       setDefaultRoomStyles();
       var roomElement = $(`#room_card-${room}`);
       roomElement.attr("class", "card active-room");
@@ -78,6 +78,8 @@ $(() => {
   
       var roomTitle = $(`#room_card_title-${room}`);
       roomTitle.attr("class", "room-title-active float-left");
+    } else {
+      console.log("não é o  user");
     }
   }
 
