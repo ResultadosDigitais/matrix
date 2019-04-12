@@ -26,7 +26,7 @@ $(() => {
     $(`#${userId}`).remove();
   }
 
-  function showUserInRoom(user, room) {
+  function showUserInRoom(user, room,socket) {
 
     var userView = $(`#${user.id}`).length;
     if (userView == 0) {
@@ -35,21 +35,29 @@ $(() => {
        userView = $(`#${user.id}`).detach();
     }
 
-    userInMeetDecorator(user,userView);
     userInRoomDecorator(user, room);
-    addGetUserMenu(user,userView);
+    userInMeetDecorator(user,userView);
+    addGetUserMenu(user,userView,socket);
+    
 
     $(`#${room}`).append(userView);
+    
   }
 
-  function addGetUserMenu(user,userView){
+  function addGetUserMenu(user,userView,socket){
+
+    //console.log(getRoomName(roomId));
     if(user.id != matrixProfile.loadStoredProfile().id){
         userView.contextMenu({
             menuSelector: "#getUserMenu",
             menuSelected: function (invokedOn, selectedMenu) {
-            //TODO: here we have to emit a event to notify the user  
-            console.log($(invokedOn).attr("user-id"));
-            alert("thanks to try get '"+$(invokedOn).attr("title")+"' this feature is coming soon :)")
+              var data = {
+                  callerName: matrixProfile.loadStoredProfile().name,
+                  callerRoomName: getRoomName(getLastRoom(matrixProfile)),
+                  userId:$(invokedOn).attr("user-id"),
+                  room:getLastRoom(matrixProfile)
+              }
+            socket.emit('get-user-to-room', data);
           }
         });
     }  
@@ -155,11 +163,17 @@ $(() => {
     }
   }
 
-   function getLastRoom(matrixProfile){
+
+  function getRoomName(roomId){
+    return $("[room-id="+roomId+"]").attr("room-name")
+  }
+
+  function getLastRoom(matrixProfile){
   	var lastRoom = localStorage.getItem(`last_room${matrixProfile.loadStoredProfile().id}`);
     if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
     	lastRoom = $($('[enter-room]')[0]).attr("room-id");
-    }	
+    }
+    return lastRoom;	
   }
 
   function getUrlRoom(){
@@ -198,25 +212,37 @@ $(() => {
     socket.on('sync-office', (usersInRoom) => {
       for (var key in usersInRoom) {
         userInroom = usersInRoom[key];
-        showUserInRoom(userInroom.user, userInroom.room);
+        showUserInRoom(userInroom.user, userInroom.room,socket);
       }
     });
 
 
     socket.on('start-meet', (data) => {
-      showUserInRoom(data.user, data.room);  
+      showUserInRoom(data.user, data.room,socket);  
     });
 
     socket.on('left-meet', (data) => {
-      showUserInRoom(data.user, data.room);  
+      showUserInRoom(data.user, data.room,socket);  
     });
 
-    
+    socket.on('get-user-to-room', (data) => {
+
+      var r = confirm(data.callerName +" está chamado você para "+ data.callerRoomName);
+      if (r == true) {
+        socket.emit('enter-room', { room: data.room, user: matrixProfile.loadStoredProfile() });        
+      
+        setTimeout(() => {
+          startVideoConference(data.room, data.callerRoomName, socket);
+        }, 300);
+      } else {
+        
+      }
+    });
 
     socket.on('enter-room', (data) => {
       console.log(data);
       saveLastRoom(data);
-      showUserInRoom(data.user, data.room);
+      showUserInRoom(data.user, data.room, socket);
 
       const loggedUserId = JSON.parse(localStorage.getItem('user')).id;
       const loggedUserRoomId = localStorage.getItem(`last_room${loggedUserId}`);

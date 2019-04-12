@@ -8,14 +8,18 @@ function Office(server,defaultRoom) {
 
   io.use((socket, next) => {
     socket.user = JSON.parse(socket.handshake.query.user);
+    //socket.user.
 
+    console.log("socket.id:",socket.id)
     return next();
   });
 
   io.on('connection', (socket) => {
     
     const that = this;
-    const currentUser = socket.user;
+    var currentUser = socket.user;
+    currentUser.socketId = socket.id;
+
 
     console.log('connected:',currentUser.id);
 
@@ -41,6 +45,11 @@ function Office(server,defaultRoom) {
 
     socket.on('left-meet', (userId) => {
       updateUserMeetInformation(userId,'left-meet',false);
+    });
+
+    socket.on('get-user-to-room', (data) => {
+      const userInRoom = that.officeController.getUserInRoom(data.userId);
+      io.to(userInRoom.user.socketId).emit("get-user-to-room",data)
     });
 
     function updateUserMeetInformation(userId,meetEvent,isUserInMeet){
