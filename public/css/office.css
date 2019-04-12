@@ -53,6 +53,10 @@ body {
   box-shadow: -3px 3px 0px #0061C3;
 }
 
+.active-room:hover {
+  box-shadow: -3px 3px 0px #FD5F7D;
+}
+
 .room {
   border: 1px solid #0061C3;
   box-sizing: border-box;
@@ -97,6 +101,29 @@ body {
   align-items: center;
 }
 
+.room-title-active {
+  margin-left: 30px;
+  height: 35px;
+  min-width: 80px;
+  max-width: 200px;
+  background-color: white;
+  border: solid 1px;
+  border-top: none;
+  border-color: #FD5F7D;
+  color: white;
+  background: #FD5F7D;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-flex;
+  justify-content:center;
+  align-items: center;
+}
+
 .room-title-text {
   white-space: nowrap;
   overflow: hidden;
@@ -129,9 +156,35 @@ body {
   border-radius: 2px;
 }
 
+.btn-enter-in-room-active {
+  height: 30px;
+  width: 120px;
+  background-color: #FD5F7D;
+  border: none;
+  color: white;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: normal;
+  text-align: center;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-flow: column;
+  opacity: 0;
+  border-radius: 2px;
+}
+
 .room:hover .btn-enter-in-room {
   opacity: 1;
 }
+
+.active-room:hover .btn-enter-in-room-active {
+  opacity: 1;
+  color: white;
+}
+
 .user-room {
   margin-right: 10px;
   margin-bottom: 10px;

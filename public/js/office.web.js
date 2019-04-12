@@ -68,7 +68,6 @@ $(() => {
 
   function userInRoomDecorator(user, room) {
     if (user.id === matrixProfile.loadStoredProfile().id) {
-      debugger;
       setDefaultRoomStyles();
       var roomElement = $(`#room_card-${room}`);
       roomElement.attr("class", "card active-room");
