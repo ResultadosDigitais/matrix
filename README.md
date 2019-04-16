@@ -15,12 +15,13 @@ In this moment is possible:
 - Open external meeting when the user enter in a room
 - On reload, keep user in the last room
 - Notify when an user enter in a room
-- Identify when user in a video meeting 
+- Identify when user in a video meeting
+- Call other user to my room 
 
 Next priority steps:
 - Implement socket.io tests
 - Configure code coverage codeclimate
-- Implement call other user to my room 
+- Refactoring before start your refacto please read [[this article](https://martinfowler.com/articles/refactoring-document-load.html)] 
 
 Next cool steps:
 
