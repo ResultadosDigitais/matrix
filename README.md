@@ -21,7 +21,7 @@ In this moment is possible:
 Next priority steps:
 - Implement socket.io tests
 - Configure code coverage codeclimate
-- Refactoring before start your refacto please read [[this article](https://martinfowler.com/articles/refactoring-document-load.html)] 
+- Refactoring before start refactor please read [[this article](https://martinfowler.com/articles/refactoring-document-load.html)] 
 
 Next cool steps:
 
