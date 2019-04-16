@@ -17,7 +17,8 @@ $(() => {
     const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
       matrixProfile.terminate();
-      // Redirect
+      auth2.disconnect();
+
       window.location = '/';
     });
   });
@@ -38,10 +39,10 @@ $(() => {
     userInRoomDecorator(user, room);
     userInMeetDecorator(user,userView);
     addGetUserMenu(user,userView,socket);
-    
+
 
     $(`#${room}`).append(userView);
-    
+
   }
 
   function addGetUserMenu(user,userView,socket){
@@ -60,18 +61,18 @@ $(() => {
             socket.emit('get-user-to-room', data);
           }
         });
-    }  
+    }
   }
 
   function userInMeetDecorator(user,userView){
 
     var userMeetClass = "rounded-circle user-not-in-call user-room"
-    
+
     if(user.inMeet!=undefined && user.inMeet){
       userMeetClass = "rounded-circle user-in-call user-room";
     }
-    
-    userView.attr("class",userMeetClass);  
+
+    userView.attr("class",userMeetClass);
   }
 
   function userInRoomDecorator(user, room) {
@@ -79,10 +80,10 @@ $(() => {
       setDefaultRoomStyles();
       var roomElement = $(`#room_card-${room}`);
       roomElement.attr("class", "card active-room");
-  
+
       var btnElement = $(`#room_btn_enter-${room}`);
       btnElement.attr("class", "card-link btn-enter-in-room-active float-left");
-  
+
       var roomTitle = $(`#room_card_title-${room}`);
       roomTitle.attr("class", "room-title-active float-left");
     }
@@ -117,7 +118,7 @@ $(() => {
       parentNode: document.querySelector('#meet'),
       interfaceConfigOverwrite: { TOOLBAR_BUTTONS: [
           'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-          'fodeviceselection', 'hangup', 'profile', 
+          'fodeviceselection', 'hangup', 'profile',
            'etherpad', 'sharedvideo', 'settings', 'raisehand',
           'videoquality', 'filmstrip',  'stats', 'shortcuts',
           'tileview'
@@ -135,14 +136,14 @@ $(() => {
 		api.executeCommand('displayName', matrixProfile.loadStoredProfile().name);
 		api.executeCommand('avatarUrl', matrixProfile.loadStoredProfile().imageUrl);
 		$("#exampleModalCenter").modal("show");
-    
+
     socket.emit('start-meet', matrixProfile.loadStoredProfile().id);
 
 		$("#exampleModalCenter").on("hidden.bs.modal", function () {
         socket.emit('left-meet', matrixProfile.loadStoredProfile().id);
    			api.dispose();
     });
-    
+
     $('#exampleModalCenter').on('shown.bs.modal', function () {
       var modal = $(this);
       modal.find('.modal-title').text(name);
@@ -175,7 +176,7 @@ $(() => {
     if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
     	lastRoom = $($('[enter-room]')[0]).attr("room-id");
     }
-    return lastRoom;	
+    return lastRoom;
   }
 
   function getUrlRoom(){
@@ -220,11 +221,11 @@ $(() => {
 
 
     socket.on('start-meet', (data) => {
-      showUserInRoom(data.user, data.room,socket);  
+      showUserInRoom(data.user, data.room,socket);
     });
 
     socket.on('left-meet', (data) => {
-      showUserInRoom(data.user, data.room,socket);  
+      showUserInRoom(data.user, data.room,socket);
     });
 
     socket.on('get-user-to-room', (data) => {
@@ -232,13 +233,13 @@ $(() => {
       var r = confirm(data.callerName +" está chamado você para "+ data.callerRoomName);
       if (r == true) {
 
-        socket.emit('enter-room', { room: data.room, user: matrixProfile.loadStoredProfile() });        
-      
+        socket.emit('enter-room', { room: data.room, user: matrixProfile.loadStoredProfile() });
+
         setTimeout(() => {
           startVideoConference(data.room, data.callerRoomName, socket);
         }, 300);
       } else {
-        
+
       }
     });
 
@@ -262,8 +263,7 @@ $(() => {
   }
 });
 
-
-function onLoad() {
+window.onload = function() {
   gapi.load('auth2', () => {
     gapi.auth2.init();
   });
