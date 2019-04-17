@@ -1,4 +1,4 @@
-const OfficeController = require('./controllers/office.controller');
+import OfficeController from './controllers/office.controller';
 
 // Constructor
 function Office(server,defaultRoom) {
