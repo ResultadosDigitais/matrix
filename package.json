@@ -15,13 +15,14 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.10",
+    "serve-favicon": "^2.5.0",
     "socketio": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "hashmap": "^2.3.0",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.3",
     "mock-local-storage": "^1.1.8",
     "supertest": "^4.0.2"
   }
