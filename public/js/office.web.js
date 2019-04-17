@@ -121,7 +121,7 @@ $(() => {
            'etherpad', 'sharedvideo', 'settings', 'raisehand',
           'videoquality', 'filmstrip',  'stats', 'shortcuts',
           'tileview', 'chat'
-          // 'chat', 'recording', 'livestreaming', 'invite', 'feedback',
+           //'recording', 'livestreaming', 'invite', 'feedback',
       ]}
     };
   }
