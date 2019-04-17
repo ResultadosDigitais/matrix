@@ -4,7 +4,7 @@
   "description": "The first open virtual office",
   "main": "app.server.js",
   "scripts": {
-    "start": "nodemon app",
+    "start": "nodemon --exec babel-node app.server.js",
     "test": "mocha './test/**/*.test.js' --exit",
     "lint": "eslint './**/*.js'"
   },
@@ -18,6 +18,10 @@
     "socketio": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "hashmap": "^2.3.0",

@@ -12,4 +12,4 @@ class GoogleCredentialController {
 	}
 }
 
-module.exports = GoogleCredentialController
+export default GoogleCredentialController
