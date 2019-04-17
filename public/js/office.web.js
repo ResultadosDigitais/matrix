@@ -120,8 +120,8 @@ $(() => {
           'fodeviceselection', 'hangup', 'profile', 
            'etherpad', 'sharedvideo', 'settings', 'raisehand',
           'videoquality', 'filmstrip',  'stats', 'shortcuts',
-          'tileview'
-          // 'chat', 'recording', 'livestreaming', 'invite', 'feedback',
+          'tileview', 'chat'
+           //'recording', 'livestreaming', 'invite', 'feedback',
       ]}
     };
   }
