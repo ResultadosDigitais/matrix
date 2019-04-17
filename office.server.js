@@ -30,9 +30,12 @@ function Office(server,defaultRoom) {
     socket.emit('sync-office', that.officeController.getUsersInOfficeByMap());
 
     socket.on('disconnect', (socket) => {
-      console.log('disconect:',currentUser.id);
-      io.sockets.emit('disconnect', currentUser.id);
-      that.officeController.removeUser(currentUser.id);
+
+      if(canDisconnectUser(currentUser.id)){
+        console.log('disconect:',currentUser.id);
+        io.sockets.emit('disconnect', currentUser.id);
+        that.officeController.removeUser(currentUser.id);
+      }
     });
 
     socket.on('enter-room', (data) => {
@@ -65,6 +68,18 @@ function Office(server,defaultRoom) {
       const userInRoom = that.officeController.getUserInRoom(user.id);
       io.sockets.emit('enter-room', userInRoom);
     }
+
+    function canDisconnectUser(userId){
+      var sockets = io.sockets.sockets;
+      for(var socketId in sockets){
+        var loggedSocket = sockets[socketId];
+        if(userId==loggedSocket.user.id){
+          return false;
+        } 
+      }
+      return true;
+    }
+
   });
 }
 
