@@ -1,4 +1,7 @@
 $(() => {
+
+  Sentry.init({ dsn: 'https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017' });
+
   const enterRoom = $('[enter-room]');
   const matrixProfile = new MatrixProfile();
 
