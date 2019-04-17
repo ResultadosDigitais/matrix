@@ -1,4 +1,7 @@
 $(() => {
+
+  Sentry.init({ dsn: 'https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017' });
+
   const enterRoom = $('[enter-room]');
   const matrixProfile = new MatrixProfile();
 
@@ -121,8 +124,8 @@ $(() => {
           'fodeviceselection', 'hangup', 'profile',
            'etherpad', 'sharedvideo', 'settings', 'raisehand',
           'videoquality', 'filmstrip',  'stats', 'shortcuts',
-          'tileview'
-          // 'chat', 'recording', 'livestreaming', 'invite', 'feedback',
+          'tileview', 'chat'
+           //'recording', 'livestreaming', 'invite', 'feedback',
       ]}
     };
   }
@@ -252,7 +255,8 @@ $(() => {
       const loggedUserRoomId = localStorage.getItem(`last_room${loggedUserId}`);
 
       if (loggedUserRoomId == data.room && loggedUserId != data.user.id) {
-        notify(data, `${data.user.name} entrou na sala`);
+        const roomTitle = $(`#room_card_title-${data.room} span`).text();
+        notify(data, `${data.user.name} entered into the room ${roomTitle}`);
       }
     });
 
