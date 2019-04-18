@@ -8,7 +8,7 @@ describe('Basic google credential Test', () => {
   });
 
   it('should return true of credentials is present', () => {
-    	const googleCredential = new GoogleCredentialController('key');
+    const googleCredential = new GoogleCredentialController('key');
     assert.equal(googleCredential.isCredentialPresent(), true);
   });
 });

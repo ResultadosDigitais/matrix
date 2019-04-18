@@ -5,10 +5,10 @@ class GoogleCredentialController {
 
 	isCredentialPresent() {
 		if (this.publicKey.length > 0) {
-  		return true;
+			return true;
 		}
-		
-  	return false;
+
+		return false;
 	}
 }
 

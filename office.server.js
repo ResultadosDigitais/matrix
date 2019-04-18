@@ -27,7 +27,7 @@ class Office {
 
       const room_param = socket.handshake.query.room;
       const room = room_param || DEFAULT_ROOM;
-      
+
       this.addUserInRoom(socket.user, room);
 
       socket.emit('sync-office', this.officeController.getUsersInOfficeByMap());
@@ -72,7 +72,7 @@ class Office {
   addUserInRoom(user, room) {
     this.officeController.addUserInRoom(user, room);
     const userInRoom = this.officeController.getUserInRoom(user.id);
-    
+
     this.io.sockets.emit('enter-room', userInRoom);
   }
 
