@@ -29,7 +29,7 @@
               </button>
             </div>
             <div id="meet" class="modal-body">
-             
+
             </div>
           </div>
         </div>
@@ -43,19 +43,19 @@
                   <span class="room-title-text"><%= roomsDetail[i].name%></span>
                 </div>
               </div>
-              
+
               <div class="card-body room-body" >
                   <div class="container">
                       <div class="row thumbnails" id="<%= roomsDetail[i].id%>">
                       </div>
-                  </div>               
+                  </div>
               </div>
               <div class="card-footer text-muted room-footer ">
                   <a id="room_btn_enter-<%= roomsDetail[i].id %>" href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=   [i].externalMeetUrl%>" enter-room room-name="<%= roomsDetail[i].name%>" room-disable-meeting="<%= roomsDetail[i].disableMeeting %>" room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
               </div>
             </div>
           </div>
-  
+
         <% } %>
       </div>
 
@@ -65,15 +65,15 @@
 
 
     </div>
-    <script src="https://browser.sentry-cdn.com/5.0.8/bundle.min.js" crossorigin="anonymous"></script>  
+    <script src="https://browser.sentry-cdn.com/5.0.8/bundle.min.js" crossorigin="anonymous"></script>
     <script src='https://meet.jit.si/external_api.js'></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    <script src="./plugins/context-menu/context-menu.js"></script>    
+    <script src="./plugins/context-menu/context-menu.js"></script>
 		<script src="./js/profile.web.js"></script>
-    <script src="./js/office.web.js"></script>    
+    <script src="./js/office.web.js"></script>
 	</body>
 </html>

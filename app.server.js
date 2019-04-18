@@ -1,10 +1,10 @@
-const express = require('express');
-const favicon = require('serve-favicon');
-const fs = require('fs');
-const path = require('path');
-
-const GoogleCredentialController = require('./controllers/google.credentials.controller');
-const Office = require('./office.server');
+import express from 'express';
+import fs from 'fs'
+import path from 'path'
+import favicon from 'serve-favicon'
+import GoogleCredentialController from './controllers/google.credentials.controller';
+import OfficeController from './controllers/office.controller';
+import Office from './office.server';
 
 const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
@@ -34,13 +34,6 @@ app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL);
 
 const roomData = process.env.roomData || fs.readFileSync('./file/default.room.web.json');
 const roomsDetail = JSON.parse(roomData);
-var defaulRoom = "room-1";
-
-if (roomsDetail!=null && roomsDetail.length >0 ) {
-	defaulRoom = roomsDetail[0].id;	
-}
-
-console.log(defaulRoom);
 
 console.log(roomsDetail);
 
@@ -56,9 +49,12 @@ app.get('/office', (req, res) => {
 });
 
 // Listen on port 8080
-server = app.listen(PORT, HOST);
+const server = app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
-new Office(server,defaulRoom);
+const officeControllerInstance = new OfficeController();
+const office = new Office(officeControllerInstance, server);
+
+office.start();
 
 module.exports = server;
