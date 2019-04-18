@@ -1,6 +1,6 @@
 
 # matrix
-[![Maintainability](https://api.codeclimate.com/v1/badges/b413dfd83356f4e128d5/maintainability)](https://codeclimate.com/github/juliemar/matrix/maintainability) [![CircleCI](https://circleci.com/gh/ResultadosDigitais/matrix.svg?style=svg)](https://circleci.com/gh/ResultadosDigitais/matrix)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b413dfd83356f4e128d5/maintainability)](https://codeclimate.com/github/juliemar/matrix/maintainability) [![Maintainability](https://api.codeclimate.com/v1/badges/a41e6e73f69c94d8b9c5/maintainability)](https://codeclimate.com/github/ResultadosDigitais/matrix/maintainability)
 
 
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment.
