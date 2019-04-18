@@ -1,13 +1,18 @@
 import express from 'express';
 import fs from 'fs'
+import path from 'path'
+import favicon from 'serve-favicon'
 import GoogleCredentialController from './controllers/google.credentials.controller';
 import OfficeController from './controllers/office.controller';
 import Office from './office.server';
 
-const app = express();
 const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
 const GOOGLECREDENTIAL = process.env.googleCredential || '990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com';
+const app = express();
+
+// favicon
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 
 // set the template engine ejs
 app.set('view engine', 'ejs');
