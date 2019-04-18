@@ -25,7 +25,7 @@ describe('Basic Office Test', () => {
 		assert.equal(userInRoom, null);
 	});
 
-	it('should size users in office 1', () => {
+	it('should return size of users in in office 1', () => {
 		const officeController = new OfficeController();
 		const profileData = getProfileDataSample();
 
