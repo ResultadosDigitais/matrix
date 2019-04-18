@@ -1,5 +1,5 @@
 const assert = require('assert');
-const OfficeController = require('../../controllers/office.controller');
+import OfficeController from '../../controllers/office.controller';
 
 
 describe('Basic Office Test', () => {

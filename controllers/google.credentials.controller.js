@@ -1,6 +1,6 @@
 class GoogleCredentialController {
 	constructor(publicKey) {
-		this.publicKey = publicKey;
+		this.publicKey = publicKey || '';
 	}
 
 	isCredentialPresent() {
