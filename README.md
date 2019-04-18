@@ -16,7 +16,7 @@ In this moment is possible:
 - On reload, keep user in the last room
 - Notify when an user enter in a room
 - Identify when user in a video meeting
-- Call other user to my room 
+- Right click to call other user to my room 
 
 Next priority steps:
 - Implement socket.io tests
