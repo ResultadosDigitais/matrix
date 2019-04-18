@@ -1,8 +1,8 @@
 import express from 'express';
 import fs from 'fs'
 import GoogleCredentialController from './controllers/google.credentials.controller';
+import OfficeController from './controllers/office.controller';
 import Office from './office.server';
-
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -31,8 +31,8 @@ const roomData = process.env.roomData || fs.readFileSync('./file/default.room.we
 const roomsDetail = JSON.parse(roomData);
 var defaulRoom = "room-1";
 
-if (roomsDetail!=null && roomsDetail.length >0 ) {
-	defaulRoom = roomsDetail[0].id;	
+if (roomsDetail != null && roomsDetail.length > 0) {
+  defaulRoom = roomsDetail[0].id;
 }
 
 console.log(defaulRoom);
@@ -54,6 +54,7 @@ app.get('/office', (req, res) => {
 const server = app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
-new Office(server, defaulRoom);
+const OfficeControllerInstance = new OfficeController();
+new Office(OfficeControllerInstance, server);
 
 module.exports = server;
