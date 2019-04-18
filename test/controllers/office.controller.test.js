@@ -25,7 +25,7 @@ describe('Basic Office Test', () => {
 		assert.equal(userInRoom, null);
 	});
 
-	it('should return size of users in in office 1', () => {
+	it('must return size of users in in office = 1', () => {
 		const officeController = new OfficeController();
 		const profileData = getProfileDataSample();
 
@@ -35,7 +35,7 @@ describe('Basic Office Test', () => {
 		assert.equal(officeController.getUsersInOffice().size, 1);
 	});
 
-	it('should user be in room-2', () => {
+	it('must user be in room-2', () => {
 		const officeController = new OfficeController();
 		const profileData = getProfileDataSample();
 
@@ -46,7 +46,7 @@ describe('Basic Office Test', () => {
 		assert.equal(userInRoom.room, 'room-2');
 	});
 
-	it('should user in meet is true', () => {
+	it('must user in meet is true', () => {
 		const officeController = new OfficeController();
 		const profileData = getProfileDataSample();
 
@@ -57,7 +57,7 @@ describe('Basic Office Test', () => {
 		assert.equal(userInRoom.user.inMeet, true);
 	});
 
-	it('should user in meet is false', () => {
+	it('must user in meet is false', () => {
 		const officeController = new OfficeController();
 		const profileData = getProfileDataSample();
 
@@ -73,17 +73,8 @@ describe('Basic Office Test', () => {
 	  return {
 	    id: '111',
 	    name: 'Nome do fulano',
-	    imageUrl: 'http://localhost/img.jpg'
-	    email: 'Mail@mail.com',
+	    imageUrl: 'http://localhost/img.jpg',
+	    email: 'Mail@mail.com'
 	  }
-	}
-		const profileData = {
-			id: '111',
-			name: 'Nome do fulano',
-			imageUrl: 'http://localhost/img.jpg',
-			email: 'Mail@mail.com',
-		};
-		
-		return profileData; 	
 	}
 });
