@@ -47,7 +47,9 @@ app.get('/office', (req, res) => {
 const server = app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
-const OfficeControllerInstance = new OfficeController();
-new Office(OfficeControllerInstance, server);
+const officeControllerInstance = new OfficeController();
+const office = new Office(officeControllerInstance, server);
+
+office.start();
 
 module.exports = server;

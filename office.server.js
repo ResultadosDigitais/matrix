@@ -1,13 +1,13 @@
-import ioClient from 'socket.io-client';
+import SocketIO from 'socket.io';
 
 const DEFAULT_ROOM = 'room-1';
 // Constructor
 class Office {
 
-  constuctor(officeController, server) {
+  constructor(officeController, server) {
     this.officeController = officeController;
     this.server = server;
-    this.io = ioClient()
+    this.io = new SocketIO(server)
   }
 
   start() {
@@ -27,13 +27,14 @@ class Office {
 
       const room_param = socket.handshake.query.room;
       const room = room_param || DEFAULT_ROOM;
-      addUserInRoom(socket.user, room);
+      
+      this.addUserInRoom(socket.user, room);
 
       socket.emit('sync-office', this.officeController.getUsersInOfficeByMap());
 
       socket.on('disconnect', (socket) => {
 
-        if (canDisconnectUser(currentUser.id)) {
+        if (this.canDisconnectUser(currentUser.id)) {
           console.log('disconect:', currentUser.id);
           this.io.sockets.emit('disconnect', currentUser.id);
           this.officeController.removeUser(currentUser.id);
@@ -41,15 +42,15 @@ class Office {
       });
 
       socket.on('enter-room', (data) => {
-        addUserInRoom(currentUser, data.room);
+        this.addUserInRoom(currentUser, data.room);
       });
 
       socket.on('start-meet', (userId) => {
-        updateUserMeetInformation(userId, 'start-meet', true);
+        this.updateUserMeetInformation(userId, 'start-meet', true);
       });
 
       socket.on('left-meet', (userId) => {
-        updateUserMeetInformation(userId, 'left-meet', false);
+        this.updateUserMeetInformation(userId, 'left-meet', false);
       });
 
       socket.on('get-user-to-room', (data) => {
@@ -70,7 +71,7 @@ class Office {
 
   addUserInRoom(user, room) {
     this.officeController.addUserInRoom(user, room);
-    const userInRoom = that.officeController.getUserInRoom(user.id);
+    const userInRoom = this.officeController.getUserInRoom(user.id);
     
     this.io.sockets.emit('enter-room', userInRoom);
   }

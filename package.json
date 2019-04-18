@@ -15,7 +15,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.10",
-    "socketio": "^1.0.0"
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
