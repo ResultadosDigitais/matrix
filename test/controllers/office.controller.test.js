@@ -5,43 +5,30 @@ import OfficeController from '../../controllers/office.controller';
 describe('Basic Office Test', () => {
 	it('add user in office', () => {
 		const officeController = new OfficeController();
-
-		const profileData = {
-			id: '111',
-			name: 'Nome do fulano',
-			imageUrl: 'http://localhost/img.jpg',
-			email: 'Mail@mail.com',
-		};
+		const profileData = getProfileDataSample();
 
 		officeController.addUserInRoom(profileData, 'room-1');
 
-		assert.equal(officeController.getUsersInOffice().get('111').user.id, '111');
-		assert.equal(officeController.getUsersInOffice().get('111').room, 'room-1');
+		const userInRoom = officeController.getUserInRoom(profileData.id);
+		assert.equal(userInRoom.user.id, profileData.id);
+		assert.equal(userInRoom.room, 'room-1');
 	});
 
 	it('remove user in office', () => {
 		const officeController = new OfficeController();
+		const profileData = getProfileDataSample();
 
-		const profileData = {
-			id: '111',
-			name: 'Nome do fulano',
-			imageUrl: 'http://localhost/img.jpg',
-			email: 'Mail@mail.com',
-		};
 		officeController.addUserInRoom(profileData, 'room-1');
 		officeController.removeUser(profileData.id);
-		assert.equal(officeController.getUsersInOffice().get('111'), null);
+
+		const userInRoom = officeController.getUserInRoom(profileData.id);
+		assert.equal(userInRoom, null);
 	});
 
-	it('should size user in office 1', () => {
+	it('should size users in office 1', () => {
 		const officeController = new OfficeController();
+		const profileData = getProfileDataSample();
 
-		const profileData = {
-			id: '111',
-			name: 'Nome do fulano',
-			imageUrl: 'http://localhost/img.jpg',
-			email: 'Mail@mail.com',
-		};
 		officeController.addUserInRoom(profileData, 'room-1');
 		officeController.addUserInRoom(profileData, 'room-2');
 
@@ -50,16 +37,46 @@ describe('Basic Office Test', () => {
 
 	it('should user in room-2', () => {
 		const officeController = new OfficeController();
+		const profileData = getProfileDataSample();
 
+		officeController.addUserInRoom(profileData, 'room-1');
+		officeController.addUserInRoom(profileData, 'room-2');
+
+		const userInRoom = officeController.getUserInRoom(profileData.id);
+		assert.equal(userInRoom.room, 'room-2');
+	});
+
+	it('should user in meet is true', () => {
+		const officeController = new OfficeController();
+		const profileData = getProfileDataSample();
+
+		officeController.addUserInRoom(profileData, 'room-1');
+		officeController.setUserInMeet(profileData.id,true);
+
+		const userInRoom = officeController.getUserInRoom(profileData.id);
+		assert.equal(userInRoom.user.inMeet, true);
+	});
+
+	it('should user in meet is false', () => {
+		const officeController = new OfficeController();
+		const profileData = getProfileDataSample();
+
+		officeController.addUserInRoom(profileData, 'room-1');
+		officeController.setUserInMeet(profileData.id,true);
+		officeController.setUserInMeet(profileData.id,false);
+
+		const userInRoom = officeController.getUserInRoom(profileData.id);
+		assert.equal(userInRoom.user.inMeet, false);
+	});
+
+	function getProfileDataSample(){
 		const profileData = {
 			id: '111',
 			name: 'Nome do fulano',
 			imageUrl: 'http://localhost/img.jpg',
 			email: 'Mail@mail.com',
 		};
-		officeController.addUserInRoom(profileData, 'room-1');
-		officeController.addUserInRoom(profileData, 'room-2');
-
-		assert.equal(officeController.getUsersInOffice().get('111').room, 'room-2');
-	});
+		
+		return profileData; 	
+	}
 });
