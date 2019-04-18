@@ -1,7 +1,5 @@
 require('mock-local-storage');
 const assert = require('assert');
-const { expect } = require('chai');
-const request = require('supertest');
 const MatrixProfile = require('../../public/js/profile.web');
 
 
@@ -12,12 +10,12 @@ describe('Basic profile credential Test', () => {
   });
 
   it('should return data of credentials is present', () => {
-    	const profileData = {
-    		id: '111',
-    		name: 'Nome do fulano',
-    		imageUrl: 'http://localhost/img.jpg',
-    		email: 'Mail@mail.com',
-    	};
+    const profileData = {
+      id: '111',
+      name: 'Nome do fulano',
+      imageUrl: 'http://localhost/img.jpg',
+      email: 'Mail@mail.com',
+    };
 
     const matrixProfile = new MatrixProfile();
     matrixProfile.storeProfileData(profileData);

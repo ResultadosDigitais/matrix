@@ -9,7 +9,7 @@ class OfficeController {
   addUserInRoom(user, room) {
     this.removeUser(user.id);
 
-    var userInRoom = {
+    const userInRoom = {
       user,
       room,
     };
@@ -18,17 +18,17 @@ class OfficeController {
   }
 
   setUserInMeet(userId, isUserInMeet) {
-    var userInRoom = this.getUserInRoom(userId);
+    const userInRoom = this.getUserInRoom(userId);
 
     if (userInRoom) {
       userInRoom.user.inMeet = isUserInMeet;
 
-      this.addUserInRoom(userInRoom.user, userInRoom.room)
+      this.addUserInRoom(userInRoom.user, userInRoom.room);
     }
   }
 
   getUserInRoom(userId) {
-    return this.usersInRoomOffice.get(userId);;
+    return this.usersInRoomOffice.get(userId);
   }
 
   removeUser(userId) {
@@ -40,7 +40,7 @@ class OfficeController {
   }
 
   getUsersInOfficeByMap() {
-    var usersInOffice = new Map();
+    const usersInOffice = new Map();
 
     this.getUsersInOffice().forEach((value, key) => {
       usersInOffice[key] = value;
