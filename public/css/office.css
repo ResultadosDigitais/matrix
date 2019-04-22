@@ -1,6 +1,6 @@
 body {
-  font-family: 'Lato' !important;
-  background-color: #EBF5FC;
+  font-family: "Lato" !important;
+  background-color: #ebf5fc;
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -10,18 +10,18 @@ body {
 }
 
 .navbar-custom {
-  background: #FFFFFF;
-  border: 1px solid #D6D6D6;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
   box-sizing: border-box;
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-  color: rgba(255,255,255,.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-  color: rgba(255,255,255,.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 /* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link,
@@ -31,11 +31,11 @@ body {
 
 .logoutBtn {
   font-size: 14px;
-  color: #FF2E00;
+  color: #ff2e00;
   opacity: 0.7;
-  background:none!important;
-  border:none;
-  padding:0!important;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
   cursor: pointer;
   margin-left: 10px;
   line-height: normal;
@@ -50,15 +50,15 @@ body {
 }
 
 .room:hover {
-  box-shadow: -3px 3px 0px #0061C3;
+  box-shadow: -3px 3px 0px #0061c3;
 }
 
 .active-room:hover {
-  box-shadow: -3px 3px 0px #FD5F7D;
+  box-shadow: -3px 3px 0px #fd5f7d;
 }
 
 .room {
-  border: 1px solid #0061C3;
+  border: 1px solid #0061c3;
   box-sizing: border-box;
   box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.15);
   width: 300px;
@@ -67,11 +67,11 @@ body {
 }
 
 .room-body {
-  overflow-y: auto;  
+  overflow-y: auto;
 }
 
 .active-room {
-  border: 1px solid #FD5F7D;
+  border: 1px solid #fd5f7d;
   box-sizing: border-box;
   box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.15);
   width: 300px;
@@ -87,8 +87,8 @@ body {
   background-color: white;
   border: solid 1px;
   border-top: none;
-  border-color: #0061C3;
-  color: #0061C3;
+  border-color: #0061c3;
+  color: #0061c3;
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
@@ -97,7 +97,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   display: inline-flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -109,9 +109,9 @@ body {
   background-color: white;
   border: solid 1px;
   border-top: none;
-  border-color: #FD5F7D;
+  border-color: #fd5f7d;
   color: white;
-  background: #FD5F7D;
+  background: #fd5f7d;
   font-family: Lato;
   font-style: normal;
   font-weight: bold;
@@ -120,7 +120,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   display: inline-flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -139,27 +139,7 @@ body {
 .btn-enter-in-room {
   height: 30px;
   width: 120px;
-  background-color: #0061C3;
-  border: none;
-  color: white;  
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: normal;
-  text-align: center;  
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  flex-flow: column;
-  opacity: 0;  
-  border-radius: 2px;
-}
-
-.btn-enter-in-room-active {
-  height: 30px;
-  width: 120px;
-  background-color: #FD5F7D;
+  background-color: #0061c3;
   border: none;
   color: white;
   font-family: Lato;
@@ -169,7 +149,27 @@ body {
   line-height: normal;
   text-align: center;
   display: flex;
-  justify-content:center;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  opacity: 0;
+  border-radius: 2px;
+}
+
+.btn-enter-in-room-active {
+  height: 30px;
+  width: 120px;
+  background-color: #fd5f7d;
+  border: none;
+  color: white;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: normal;
+  text-align: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
   flex-flow: column;
   opacity: 0;
@@ -193,7 +193,7 @@ body {
 .blank-user-room {
   width: 50px;
   height: 50px;
-  background: #C4C4C4;
+  background: #c4c4c4;
   display: block;
 }
 
@@ -201,15 +201,26 @@ body {
   color: white;
 }
 
-.user-in-call{
-  border-style: solid;
-  border-color: #FD5F7D;
-  border-width: 2px;
+.user-in-call .rounded-circle,
+.user-not-in-call .rounded-circle {
+  margin: 0px;
+  border: 2px solid #00ff00;
 }
 
-.user-not-in-call{
-  border-style: solid;
-  border-color: rgb(178, 179, 180);;
-  border-width: 2px;
+.user-in-call .rounded-circle {
+  border-color: transparent;
 }
 
+.user-in-call {
+  position: relative;
+}
+
+.user-in-call:before {
+  content: "";
+  background: transparent url("/images/headset.svg") no-repeat;
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: 1px;
+  bottom: 0;
+}
