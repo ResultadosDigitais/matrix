@@ -1,5 +1,6 @@
-const assert = require('assert');
 import GoogleCredentialController from '../../controllers/google.credentials.controller';
+
+const assert = require('assert');
 
 describe('Basic google credential Test', () => {
   it('should return false of credentials is not present', () => {

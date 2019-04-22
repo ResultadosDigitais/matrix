@@ -1,15 +1,15 @@
 class GoogleCredentialController {
-	constructor(publicKey) {
-		this.publicKey = publicKey || '';
-	}
+  constructor(publicKey) {
+    this.publicKey = publicKey || '';
+  }
 
-	isCredentialPresent() {
-		if (this.publicKey.length > 0) {
-			return true;
-		}
+  isCredentialPresent() {
+    if (this.publicKey.length > 0) {
+      return true;
+    }
 
-		return false;
-	}
+    return false;
+  }
 }
 
-export default GoogleCredentialController
+export default GoogleCredentialController;
