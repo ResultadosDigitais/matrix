@@ -5,8 +5,11 @@ MatrixProfile.prototype.loadStoredProfile = function loadStoredProfile() {
 };
 
 MatrixProfile.prototype.userName = function userName() {
-  const user = JSON.parse(localStorage.getItem('user')).name;
-  return user.split(' ').pop();
+  const user = JSON.parse(localStorage.getItem('user'));
+  if(user){
+    return user.name.split(' ').pop();  
+  }
+  return "";
 };
 
 MatrixProfile.prototype.loadStoredProfileAsString = function loadStoredProfileAsString() {
@@ -15,6 +18,14 @@ MatrixProfile.prototype.loadStoredProfileAsString = function loadStoredProfileAs
 
 MatrixProfile.prototype.storeProfileData = function storeProfileData(profileData) {
   localStorage.setItem('user', JSON.stringify(profileData));
+};
+
+MatrixProfile.prototype.storeRoom = function storeLastRoom(roomId) {
+  localStorage.setItem('roomId', roomId);
+};
+
+MatrixProfile.prototype.loadStoredRoom = function loadStoredRoom() {
+  localStorage.getItem('roomId');
 };
 
 MatrixProfile.prototype.isProfileStored = function isProfileStored() {
