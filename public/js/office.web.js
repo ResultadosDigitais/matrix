@@ -127,6 +127,13 @@ $(() => {
     };
   }
 
+  function isUserInVideoConference(){
+    if($("#exampleModalCenter").data('bs.modal')){
+      return $("#exampleModalCenter").data('bs.modal')._isShown;  
+    }
+    return false;
+  }
+
   function startVideoConference(roomId, name, onLeftMeet){
     $("#exampleModalCenter").modal("hide");
     $("#exampleModalCenter").modal("dispose");
@@ -227,7 +234,7 @@ $(() => {
 
     addGetUserMenu(function(userId,roomId){
         officeIo.callUserForMyRoom(userId,roomId); 
-    })
+    });
 
     officeIo.onParticipantJoined(function (user,roomId){
         showUserInRoom(user,roomId);
@@ -251,6 +258,9 @@ $(() => {
 
     officeIo.onSyncOffice(function (usersInRoom){
         syncOffice(usersInRoom);
+        if(isUserInVideoConference()){
+          officeIo.startMeet();    
+        }
     });
 
 
