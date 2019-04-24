@@ -8,7 +8,7 @@ function OfficeIo(config){
 
 
 OfficeIo.prototype.enterInRoom = function(roomId){
-	this.socketIo.emit('enter-room', { room:roomId, user: this.config.currentUser});	
+	this.socketIO.emit('enter-room', { room:roomId, user: this.config.currentUser });	
 }
 
 OfficeIo.prototype.startMeet = function(){
