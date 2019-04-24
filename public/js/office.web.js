@@ -258,7 +258,7 @@ $(() => {
     const officeEvents = new OfficeEvents({
         domain: domain,
         currentUser:currentUser,
-        currentRoom: getLastRoom(matrixProfile);
+        currentRoom: getLastRoom(matrixProfile)
     });
 
     initEnterRoomButton(officeEvents);
