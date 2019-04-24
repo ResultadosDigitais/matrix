@@ -47,18 +47,17 @@ $(() => {
 
     $(`#${room}`).append(userView);
 
-    return userView;
-
+    notifyRoomEnter(user,room);
   }
 
-  function addGetUserMenu(getCallBack){
+  function initGetUserMenu(officeEvents){
       $("[user-presence]").initialize(function(){
         $(this).contextMenu({
             menuSelector: "#getUserMenu",
             menuSelected: function (invokedOn, selectedMenu) {
             var userId = $(invokedOn).attr("user-id");
             var roomId = getLastRoom(matrixProfile);  
-            getCallBack(userId,roomId)
+            officeEvents.callUserForMyRoom(userId,roomId);
           }
         });
       });
@@ -134,28 +133,32 @@ $(() => {
     return false;
   }
 
-  function startVideoConference(roomId, name, onLeftMeet){
-    $("#exampleModalCenter").modal("hide");
-    $("#exampleModalCenter").modal("dispose");
-  	const domain = 'meet.jit.si';
-		const options = getMeetingOptions(roomId);
-		api = new JitsiMeetExternalAPI(domain, options);
-		api.executeCommand('displayName', matrixProfile.loadStoredProfile().name);
-		api.executeCommand('avatarUrl', matrixProfile.loadStoredProfile().imageUrl);
-		
-    $("#exampleModalCenter").modal("show");
-		$("#exampleModalCenter").on("hidden.bs.modal", function () {
-        onLeftMeet();
-   			api.dispose();
-    });
+  function startVideoConference(roomId, name, officeEvents){
+    setTimeout(() => {
+      $("#exampleModalCenter").modal("hide");
+      $("#exampleModalCenter").modal("dispose");
+    	const domain = 'meet.jit.si';
+  		const options = getMeetingOptions(roomId);
+  		api = new JitsiMeetExternalAPI(domain, options);
+  		api.executeCommand('displayName', matrixProfile.loadStoredProfile().name);
+  		api.executeCommand('avatarUrl', matrixProfile.loadStoredProfile().imageUrl);
+  		
+      officeEvents.startMeet();
 
-    $('#exampleModalCenter').on('shown.bs.modal', function () {
-      var modal = $(this);
-      modal.find('.modal-title').text(name);
-    });
+      $("#exampleModalCenter").modal("show");
+  		$("#exampleModalCenter").on("hidden.bs.modal", function () {
+          officeEvents.leftMeet();
+     			api.dispose();
+      });
+
+      $('#exampleModalCenter').on('shown.bs.modal', function () {
+        var modal = $(this);
+        modal.find('.modal-title').text(name);
+      });
+    }, 300);  
   }
 
-  function notify(user, title) {
+  function notifyRoomEnter(user,roomId) {
     const options = {
       icon: user.imageUrl,
     };
@@ -163,7 +166,13 @@ $(() => {
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
     } else {
-      const n = new Notification(title, options);
+      const loggedUserId = matrixProfile.loadStoredProfile().id;
+      const loggedUserRoomId = getLastRoom(matrixProfile);
+
+      if (loggedUserRoomId == roomId && loggedUserId != user.id) {
+        const roomTitle = getRoomName(roomId);
+        const n = new Notification(`${user.name} entered into the room ${roomTitle}`, options);   
+      }
     }
   }
 
@@ -207,77 +216,19 @@ $(() => {
       }
   }
 
-  function confirmRoomEnter(user,roomId, callback){
-    var isConfirmed = confirm(user.name +" está chamado você para "+ getRoomName(roomId));
-      if (isConfirmed) { callback(roomId) }
+  function confirmRoomEnter(user,roomId, officeEvents){
+    var isConfirmed = confirm(user.name +" is calling you to join in "+ getRoomName(roomId));
+      if (isConfirmed) { 
+        officeEvents.enterInRoom(roomId);
+        startVideoConference(roomId, getRoomName(roomId),officeEvents);
+      }
   }
 
   function gerRoomName(roomId){
     return $("[room-id=${roomId}]").attr("room-name");
   }
 
-  function initOffice(matrixProfile) {
-
-    var lastRoom = getLastRoom(matrixProfile);
-    
-    const domain = `${window.location.protocol}//${window.location.host}`;
-    const currentUser = matrixProfile.loadStoredProfile();   
-
-
-    const officeEvents = new OfficeEvents({
-        domain: domain,
-        currentUser:currentUser,
-        currentRoom: lastRoom
-    });
-
-    addGetUserMenu(function(userId,roomId){
-        officeEvents.callUserForMyRoom(userId,roomId); 
-    });
-
-    officeEvents.onParticipantJoined(function (user,roomId){
-        showUserInRoom(user,roomId);
-
-        const loggedUserId = currentUser.id;
-        const loggedUserRoomId = getLastRoom(matrixProfile);
-
-        if (loggedUserRoomId == roomId && loggedUserId != user.id) {
-          const roomTitle = getRoomName(roomId)
-          notify(user, `${user.name} entered into the room ${roomTitle}`);
-        }
-    });
-
-    officeEvents.onParticipantStartedMeet(function (user,roomId){
-        showUserInRoom(user,roomId);
-    });
-
-    officeEvents.onParticipantLeftMeet(function (user,roomId){
-        showUserInRoom(user,roomId);
-    });
-
-    officeEvents.onSyncOffice(function (usersInRoom){
-        syncOffice(usersInRoom);
-        if(isUserInVideoConference()){
-          officeEvents.startMeet();    
-        }
-    });
-
-
-    officeEvents.onParticipantIsCalled(function (user,roomId){
-        confirmRoomEnter(user,roomId,function(roomId){
-            officeEvents.enterRoom(roomId);
-            setTimeout(() => {
-              officeEvents.startMeet()
-              startVideoConference(roomId, getRoomName(roomId), function(){
-                  officeEvents.leftMeet()  
-              });
-            }, 300);
-        });
-    });
-
-    officeEvents.onDisconnect(function (userId){
-        removeUser(userId);
-    });
-
+  function initEnterRoomButton(officeEvents){
     const enterRoom = $('[enter-room]');
     enterRoom.on('click', (e) => {
       const roomId = $(e.target).attr('room-id');
@@ -289,12 +240,41 @@ $(() => {
 
       if (disableMeeting == true) return;
 
-      setTimeout(() => {
-              officeEvents.startMeet()
-              startVideoConference(roomId, getRoomName(roomId), function(){
-                  officeEvents.leftMeet()  
-              });
-      }, 300);
+      startVideoConference(roomId, getRoomName(roomId),officeEvents);
+    });
+  }
+
+  function initOffice(matrixProfile) {
+
+    var lastRoom = getLastRoom(matrixProfile);
+    
+    const domain = `${window.location.protocol}//${window.location.host}`;
+    const currentUser = matrixProfile.loadStoredProfile();   
+
+    const officeEvents = new OfficeEvents({
+        domain: domain,
+        currentUser:currentUser,
+        currentRoom: lastRoom
+    });
+
+    initEnterRoomButton(officeEvents);
+    initGetUserMenu(officeEvents);
+
+    officeEvents.onParticipantJoined(showUserInRoom);
+    officeEvents.onParticipantStartedMeet(showUserInRoom);
+
+    officeEvents.onParticipantLeftMeet(showUserInRoom);
+    officeEvents.onDisconnect(removeUser);
+
+    officeEvents.onSyncOffice(function (usersInRoom){
+        syncOffice(usersInRoom);
+        if(isUserInVideoConference()){
+          officeEvents.startMeet();    
+        }
+    });
+
+    officeEvents.onParticipantIsCalled(function (user,roomId){
+        confirmRoomEnter(user,roomId,officeEvents);
     });
   }
 });
