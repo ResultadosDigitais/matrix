@@ -209,9 +209,7 @@ $(() => {
 
   function confirmRoomEnter(user,roomId, callback){
     var r = confirm(user.name +" está chamado você para "+ getRoomName(roomId));
-      if (r) { code() }
-        callback(roomId);
-      }
+      if (r) { callback(roomId) }
   }
 
   function gerRoomName(roomId){
@@ -226,17 +224,17 @@ $(() => {
     const currentUser = matrixProfile.loadStoredProfile();   
 
 
-    const officeIo = new OfficeIo({
+    const officeEvents = new OfficeEvents({
         domain: domain,
         currentUser:currentUser,
         currentRoom: lastRoom
     });
 
     addGetUserMenu(function(userId,roomId){
-        officeIo.callUserForMyRoom(userId,roomId); 
+        officeEvents.callUserForMyRoom(userId,roomId); 
     });
 
-    officeIo.onParticipantJoined(function (user,roomId){
+    officeEvents.onParticipantJoined(function (user,roomId){
         showUserInRoom(user,roomId);
 
         const loggedUserId = currentUser.id;
@@ -248,35 +246,35 @@ $(() => {
         }
     });
 
-    officeIo.onParticipantStartedMeet(function (user,roomId){
+    officeEvents.onParticipantStartedMeet(function (user,roomId){
         showUserInRoom(user,roomId);
     });
 
-    officeIo.onParticipantLeftMeet(function (user,roomId){
+    officeEvents.onParticipantLeftMeet(function (user,roomId){
         showUserInRoom(user,roomId);
     });
 
-    officeIo.onSyncOffice(function (usersInRoom){
+    officeEvents.onSyncOffice(function (usersInRoom){
         syncOffice(usersInRoom);
         if(isUserInVideoConference()){
-          officeIo.startMeet();    
+          officeEvents.startMeet();    
         }
     });
 
 
-    officeIo.onParticipantIsCalled(function (user,roomId){
+    officeEvents.onParticipantIsCalled(function (user,roomId){
         confirmRoomEnter(user,roomId,function(roomId){
-            officeIo.enterRoom(roomId);
+            officeEvents.enterRoom(roomId);
             setTimeout(() => {
-              officeIo.startMeet()
+              officeEvents.startMeet()
               startVideoConference(roomId, getRoomName(roomId), function(){
-                  officeIo.leftMeet()  
+                  officeEvents.leftMeet()  
               });
             }, 300);
         });
     });
 
-    officeIo.onDisconnect(function (userId){
+    officeEvents.onDisconnect(function (userId){
         removeUser(userId);
     });
 
@@ -286,15 +284,15 @@ $(() => {
       const roomName = $(e.target).attr('room-name');
       const disableMeeting = new Boolean($(e.target).attr('room-disable-meeting'));
 
-      officeIo.enterInRoom(roomId);
+      officeEvents.enterInRoom(roomId);
       matrixProfile.storeRoom(roomId);
 
       if (disableMeeting == true) return;
 
       setTimeout(() => {
-              officeIo.startMeet()
+              officeEvents.startMeet()
               startVideoConference(roomId, getRoomName(roomId), function(){
-                  officeIo.leftMeet()  
+                  officeEvents.leftMeet()  
               });
       }, 300);
     });
