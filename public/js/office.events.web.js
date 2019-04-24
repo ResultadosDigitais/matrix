@@ -1,13 +1,13 @@
 function OfficeEvents(config){
 	this.config = config;
 	const user = JSON.stringify(config.currentUser);
-	this.socketIo = io.connect(config.domain, {
+	this.socketIO = io.connect(config.domain, {
       	query: `user=${user}&room=${config.currentRoom}`
     }); 
 }
 
 OfficeEvents.prototype.listenEvent = function(event,callback){
-	this.socketIo.on(event, (data) => {
+	this.socketIO.on(event, (data) => {
 		if (data.user) {
 			callback(data.user,data.room);
 		}else{
@@ -18,7 +18,7 @@ OfficeEvents.prototype.listenEvent = function(event,callback){
 }
 
 OfficeEvents.prototype.emitEvent = function(event,data){
-	this.socketIo.emit(event,data);
+	this.socketIO.emit(event,data);
 }
 
 OfficeEvents.prototype.enterInRoom = function(roomId){
