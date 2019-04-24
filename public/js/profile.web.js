@@ -25,7 +25,7 @@ MatrixProfile.prototype.storeRoom = function storeLastRoom(roomId) {
 };
 
 MatrixProfile.prototype.loadStoredRoom = function loadStoredRoom() {
-  localStorage.getItem('roomId');
+  return localStorage.getItem('roomId');
 };
 
 MatrixProfile.prototype.isProfileStored = function isProfileStored() {
