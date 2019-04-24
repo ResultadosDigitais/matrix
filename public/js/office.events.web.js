@@ -7,8 +7,13 @@ function OfficeEvents(config){
 }
 
 OfficeEvents.prototype.listenEvent = function(event,callback){
-	this.socketIo.on(event, (userInRoom) => {
-		callback(userInRoom.user,userInRoom.room);
+	this.socketIo.on(event, (data) => {
+		if (data.user) {
+			callback(data.user,data.room);
+		}else{
+			callback(data);	
+		}
+		
 	});
 }
 
@@ -45,18 +50,14 @@ OfficeEvents.prototype.onParticipantLeftMeet = function(callback){
 }
 
 OfficeEvents.prototype.onSyncOffice = function(callback){
-	this.socketIo.on('sync-office', (usersInRoom) => {
-		callback(usersInRoom);
-	});
+	this.listenEvent('sync-office', callback);
 }
 
 OfficeEvents.prototype.onParticipantIsCalled = function(callback){
-	listenEvent('get-user-to-room', callback);
+	this.listenEvent('get-user-to-room', callback);
 }
 
 OfficeEvents.prototype.onDisconnect = function(callback){
-	this.socketIo.on('disconnect', (userId) => {
-		callback(userId);
-	});
+	this.listenEvent('disconnect', callback);
 }
 
