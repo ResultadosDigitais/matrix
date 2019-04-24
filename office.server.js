@@ -54,9 +54,9 @@ class Office {
       });
 
       socket.on('get-user-to-room', (data) => {
-        const userInRoom = this.officeController.getUserInRoom(data.userId);
+        const userInRoom = this.officeController.getUserInRoom(data.user);
         if (userInRoom) {
-          this.io.to(userInRoom.user.socketId).emit("get-user-to-room", data)
+          this.io.to(userInRoom.user.socketId).emit("get-user-to-room", {user:currentUser,room:data.room})
         }
       });
     });
