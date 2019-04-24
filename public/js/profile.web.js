@@ -9,7 +9,7 @@ MatrixProfile.prototype.userName = function userName() {
   if(user){
     return user.name.split(' ').pop();  
   }
-  return "";
+  return null;
 };
 
 MatrixProfile.prototype.loadStoredProfileAsString = function loadStoredProfileAsString() {
