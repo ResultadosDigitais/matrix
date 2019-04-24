@@ -1,7 +1,7 @@
 function OfficeIo(config){
 	this.config = config;
 	const user = JSON.stringify(config.currentUser);
-	this.socketIo = io.connect(config.domain, {
+	this.socketIO = io.connect(config.domain, {
       	query: `user=${user}&room=${config.currentRoom}`
     }); 
 }
