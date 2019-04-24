@@ -208,8 +208,8 @@ $(() => {
   }
 
   function confirmRoomEnter(user,roomId, callback){
-    var r = confirm(user.name +" está chamado você para "+ getRoomName(roomId));
-      if (r) { callback(roomId) }
+    var isConfirmed = confirm(user.name +" está chamado você para "+ getRoomName(roomId));
+      if (isConfirmed) { callback(roomId) }
   }
 
   function gerRoomName(roomId){
