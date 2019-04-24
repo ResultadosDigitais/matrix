@@ -171,7 +171,7 @@ $(() => {
 
       if (loggedUserRoomId == roomId && loggedUserId != user.id) {
         const roomTitle = getRoomName(roomId);
-        const n = new Notification(`${user.name} entered into the room ${roomTitle}`, options);   
+        new Notification(`${user.name} entered into the room ${roomTitle}`, options);   
       }
     }
   }
@@ -191,7 +191,7 @@ $(() => {
     if(!isValidRoom(lastRoom)){
       lastRoom = getDefaultRoom();
     }
-    
+
     return lastRoom;
   }
 
