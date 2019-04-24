@@ -159,6 +159,7 @@ $(() => {
   }
 
   function notifyRoomEnter(user,roomId) {
+    console.log("vai")
     const options = {
       icon: user.imageUrl,
     };
@@ -266,11 +267,15 @@ $(() => {
     initEnterRoomButton(officeEvents);
     initGetUserMenu(officeEvents);
 
-    officeEvents.onParticipantJoined(showUserInRoom);
-    officeEvents.onParticipantStartedMeet(showUserInRoom);
 
+    officeEvents.onParticipantStartedMeet(showUserInRoom);
     officeEvents.onParticipantLeftMeet(showUserInRoom);
     officeEvents.onDisconnect(removeUser);
+
+    officeEvents.onParticipantJoined(function(user,roomId){
+      showUserInRoom(user,roomId);
+      notifyRoomEnter(user,roomId);
+    });
 
     officeEvents.onSyncOffice(function (usersInRoom){
         syncOffice(usersInRoom);
