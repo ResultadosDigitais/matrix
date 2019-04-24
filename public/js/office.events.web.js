@@ -12,20 +12,24 @@ OfficeEvents.prototype.listenEvent = function(event,callback){
 	});
 }
 
+OfficeEvents.prototype.emitEvent = function(event,data){
+	this.socketIo.emit(event,data);
+}
+
 OfficeEvents.prototype.enterInRoom = function(roomId){
-	this.socketIo.emit('enter-room', { room:roomId, user: this.config.currentUser });	
+	this.emitEvent('enter-room', { room:roomId, user: this.config.currentUser });	
 }
 
 OfficeEvents.prototype.startMeet = function(){
-	this.socketIo.emit('start-meet',this.config.currentUser.id);
+	this.emitEvent('start-meet',this.config.currentUser.id);
 }
 
 OfficeEvents.prototype.leftMeet = function(){
-	this.socketIo.emit('left-meet',this.config.currentUser.id);
+	this.emitEvent('left-meet',this.config.currentUser.id);
 }
 
 OfficeEvents.prototype.callUserForMyRoom = function(userId,roomId){
-	this.socketIo.emit('get-user-to-room', { room:roomId, user: userId});	
+	this.emitEvent('get-user-to-room', { room:roomId, user: userId});	
 }
 
 OfficeEvents.prototype.onParticipantJoined = function(callback){
