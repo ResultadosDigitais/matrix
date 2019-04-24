@@ -242,11 +242,11 @@ $(() => {
     });
 
     officeIo.onParticipantStartedMeet(function (user,roomId){
-        showUserInRoom(user,roomId,officeIo.getSocketIo());
+        showUserInRoom(user,roomId);
     });
 
     officeIo.onParticipantLeftMeet(function (user,roomId){
-        showUserInRoom(user,roomId,officeIo.getSocketIo());
+        showUserInRoom(user,roomId);
     });
 
     officeIo.onSyncOffice(function (usersInRoom){
