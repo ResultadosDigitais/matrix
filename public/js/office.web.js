@@ -209,7 +209,7 @@ $(() => {
 
   function confirmRoomEnter(user,roomId, callback){
     var r = confirm(user.name +" está chamado você para "+ getRoomName(roomId));
-      if (r == true) {
+      if (r) { code() }
         callback(roomId);
       }
   }
