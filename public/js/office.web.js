@@ -264,7 +264,6 @@ $(() => {
     initEnterRoomButton(officeEvents);
     initGetUserMenu(officeEvents);
 
-
     officeEvents.onParticipantStartedMeet(showUserInRoom);
     officeEvents.onParticipantLeftMeet(showUserInRoom);
     officeEvents.onDisconnect(removeUser);
