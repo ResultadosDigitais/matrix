@@ -251,8 +251,6 @@ $(() => {
   }
 
   function initOffice(matrixProfile) {
-
-    var lastRoom = getLastRoom(matrixProfile);
     
     const domain = `${window.location.protocol}//${window.location.host}`;
     const currentUser = matrixProfile.loadStoredProfile();   
@@ -260,7 +258,7 @@ $(() => {
     const officeEvents = new OfficeEvents({
         domain: domain,
         currentUser:currentUser,
-        currentRoom: lastRoom
+        currentRoom: getLastRoom(matrixProfile);
     });
 
     initEnterRoomButton(officeEvents);
