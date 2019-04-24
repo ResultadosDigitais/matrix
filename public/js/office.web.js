@@ -159,7 +159,6 @@ $(() => {
   }
 
   function notifyRoomEnter(user,roomId) {
-    console.log("vai")
     const options = {
       icon: user.imageUrl,
     };
