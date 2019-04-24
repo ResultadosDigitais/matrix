@@ -187,8 +187,7 @@ $(() => {
 
     if(!isValidRoom(lastRoom)){
       lastRoom = matrixProfile.loadStoredRoom();
-    }
-    if(!isValidRoom(lastRoom)){
+    }else if(!isValidRoom(lastRoom)){
       lastRoom = getDefaultRoom();
     }
 
