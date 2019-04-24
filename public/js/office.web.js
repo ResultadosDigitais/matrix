@@ -185,14 +185,22 @@ $(() => {
 
     var lastRoom = getUrlRoom();
 
-    if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
+    if(!isValidRoom(lastRoom)){
       lastRoom = matrixProfile.loadStoredRoom();
     }
 
-    if(lastRoom==null || lastRoom==undefined || lastRoom== "undefined"){
-    	lastRoom = getDefaultRoom();
+    if(!isValidRoom(lastRoom)){
+      lastRoom = getDefaultRoom();
     }
+    
     return lastRoom;
+  }
+
+  function isValidRoom(room){
+    if(room==null || room==undefined || room== "undefined"){
+      return false
+    }
+    return true;
   }
 
   function getDefaultRoom(){
