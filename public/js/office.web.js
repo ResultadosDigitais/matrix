@@ -47,7 +47,7 @@ $(() => {
 
     $(`#${room}`).append(userView);
 
-    notifyRoomEnter(user,room);
+    
   }
 
   function initGetUserMenu(officeEvents){
