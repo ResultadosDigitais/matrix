@@ -47,7 +47,7 @@ $(() => {
 
     $(`#${room}`).append(userView);
 
-    notifyRoomEnter(user,room);
+    
   }
 
   function initGetUserMenu(officeEvents){
@@ -251,8 +251,6 @@ $(() => {
   }
 
   function initOffice(matrixProfile) {
-
-    var lastRoom = getLastRoom(matrixProfile);
     
     const domain = `${window.location.protocol}//${window.location.host}`;
     const currentUser = matrixProfile.loadStoredProfile();   
@@ -260,17 +258,20 @@ $(() => {
     const officeEvents = new OfficeEvents({
         domain: domain,
         currentUser:currentUser,
-        currentRoom: lastRoom
+        currentRoom: getLastRoom(matrixProfile);
     });
 
     initEnterRoomButton(officeEvents);
     initGetUserMenu(officeEvents);
 
-    officeEvents.onParticipantJoined(showUserInRoom);
     officeEvents.onParticipantStartedMeet(showUserInRoom);
-
     officeEvents.onParticipantLeftMeet(showUserInRoom);
     officeEvents.onDisconnect(removeUser);
+
+    officeEvents.onParticipantJoined(function(user,roomId){
+      showUserInRoom(user,roomId);
+      notifyRoomEnter(user,roomId);
+    });
 
     officeEvents.onSyncOffice(function (usersInRoom){
         syncOffice(usersInRoom);
