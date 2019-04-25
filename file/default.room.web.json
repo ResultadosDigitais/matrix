@@ -2,53 +2,43 @@
 {
 	"id":"ac2b235a-b1e2-4848-a687-6669a3f7551b",
 	"name":"Lounge",
-	"externalMeetUrl":"http://meet.google.com",
 	"disableMeeting": true
 },
 {
 	"id":"room-2",
-	"name":"CDP",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"CDP"
 },
 {
 	"id":"room-3",
-	"name":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 },
 {
 	"id":"room-4",
-	"name":"Sala-4",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-4"
 },
 {
 	"id":"room-5",
-	"name":"Sala-5",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-5"
 },
 {
 	"id":"room-6",
-	"name":"Sala-6",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-6"
 },
 {
 	"id":"room-7",
-	"name":"Sala-7",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-7"
 },
 {
 	"id":"room-8",
-	"name":"Sala-8",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-8"
 },
 {
 	"id":"room-9",
-	"name":"Sala-9",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-9"
 },
 {
 	"id":"room-10",
-	"name":"Sala-10",
-	"externalMeetUrl":"http://meet.google.com"
+	"name":"Sala-10"
 }
 
 ]
