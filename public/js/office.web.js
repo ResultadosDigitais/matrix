@@ -1,8 +1,5 @@
 $(() => {
-
   Sentry.init({ dsn: 'https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017' });
-
-
   const matrixProfile = new MatrixProfile();
 
   if (matrixProfile.isProfileStored()) {
@@ -23,51 +20,48 @@ $(() => {
       auth2.signOut().then(() => {
         matrixProfile.terminate();
         auth2.disconnect();
-        window.location = '/';
+
+        redirectToHome();
       });
     });
   }
-
 
   function removeUser(userId) {
     $(`#${userId}`).remove();
   }
 
   function showUserInRoom(user, room) {
-
     const userView = $(`#${user.id}`).length;
+
     if (userView == 0) {
       userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
-     } else {
-       userView = $(`#${user.id}`).detach();
+    } else {
+      userView = $(`#${user.id}`).detach();
     }
 
     userInRoomDecorator(user, room);
-    userInMeetDecorator(user,userView);
+    userInMeetDecorator(user, userView);
 
     $(`#${room}`).append(userView);
-
-
   }
 
-  function initGetUserMenu(officeEvents){
-      $("[user-presence]").initialize(function(){
-        $(this).contextMenu({
-            menuSelector: "#getUserMenu",
-            menuSelected: function (invokedOn, selectedMenu) {
-            const userId = $(invokedOn).attr("user-id");
-            const roomId = getLastRoom(matrixProfile);
-            officeEvents.callUserForMyRoom(userId,roomId);
-          }
-        });
+  function initGetUserMenu(officeEvents) {
+    $("[user-presence]").initialize(function() {
+      $(this).contextMenu({
+        menuSelector: "#getUserMenu",
+        menuSelected: function (invokedOn, selectedMenu) {
+          const userId = $(invokedOn).attr("user-id");
+          const roomId = getLastRoom(matrixProfile);
+          officeEvents.callUserForMyRoom(userId,roomId);
+        }
       });
+    });
   }
 
   function userInMeetDecorator(user,userView){
-
     const userMeetClass = "rounded-circle user-not-in-call user-room"
 
-    if(user.inMeet!=undefined && user.inMeet){
+    if (user.inMeet !== undefined && user.inMeet) {
       userMeetClass = "rounded-circle user-in-call user-room";
     }
 
