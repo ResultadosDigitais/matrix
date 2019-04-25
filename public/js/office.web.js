@@ -31,7 +31,7 @@ $(() => {
   }
 
   function showUserInRoom(user, room) {
-    const userView = $(`#${user.id}`).length;
+    let userView = $(`#${user.id}`).length;
 
     if (userView == 0) {
       userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
@@ -59,7 +59,7 @@ $(() => {
   }
 
   function userInMeetDecorator(user,userView){
-    const userMeetClass = "rounded-circle user-not-in-call user-room"
+    let userMeetClass = "rounded-circle user-not-in-call user-room"
 
     if (user.inMeet !== undefined && user.inMeet) {
       userMeetClass = "rounded-circle user-in-call user-room";
@@ -88,12 +88,14 @@ $(() => {
       oldRoom.attr("class", "card room");
     }
 
-    const btnEnterInRoom = $(".btn-enter-in-room-active");
+    let btnEnterInRoom;
+
+    btnEnterInRoom = $(".btn-enter-in-room-active");
     if (btnEnterInRoom.length > 0 ) {
       btnEnterInRoom.attr("class", "card-link btn-enter-in-room float-left");
     }
 
-    const btnEnterInRoom = $(".room-title-active");
+    btnEnterInRoom = $(".room-title-active");
     if (btnEnterInRoom.length > 0 ) {
       btnEnterInRoom.attr("class", "room-title float-left");
     }
@@ -176,8 +178,7 @@ $(() => {
   }
 
   function getLastRoom(matrixProfile){
-
-    const lastRoom = getUrlRoom();
+    let lastRoom = getUrlRoom();
 
     if(!isValidRoom(lastRoom)){
       lastRoom = matrixProfile.loadStoredRoom();

@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="row d-flex justify-content-center">
-        <% for(const i=0; i<roomsDetail.length; i++) {%>
+        <% for(var i=0; i<roomsDetail.length; i++) {%>
           <div style="padding: 15px;text-align: center">
             <div class="card room" id="room_card-<%= roomsDetail[i].id %>">
               <div class="card-reader" >
@@ -55,7 +55,6 @@
               </div>
             </div>
           </div>
-
         <% } %>
       </div>
 
@@ -77,6 +76,6 @@
 		<script src="./js/profile.web.js"></script>
     <script src="./js/office.events.web.js"></script>
     <script src="./js/office.web.js"></script>
-    
+
 	</body>
 </html>
