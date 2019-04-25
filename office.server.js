@@ -20,7 +20,7 @@ class Office {
     });
 
     this.io.on('connection', (socket) => {
-      var currentUser = socket.user;
+      const currentUser = socket.user;
       currentUser.socketId = socket.id;
 
       console.log('connected:', currentUser.id);
@@ -77,9 +77,9 @@ class Office {
   }
 
   canDisconnectUser(userId) {
-    var sockets = this.io.sockets.sockets;
-    for (var socketId in sockets) {
-      var loggedSocket = sockets[socketId];
+    const sockets = this.io.sockets.sockets;
+    for (const socketId in sockets) {
+      const loggedSocket = sockets[socketId];
       if (userId == loggedSocket.user.id) {
         return false;
       }
