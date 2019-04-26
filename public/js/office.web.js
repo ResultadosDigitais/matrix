@@ -190,7 +190,7 @@ $(() => {
     return lastRoom;
   }
 
-  function isValidRoom2(room) {
+  function isValidRoom(room) {
     return !(room === null || room === undefined || room === "undefined")
   }
 
