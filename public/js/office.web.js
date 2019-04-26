@@ -33,10 +33,10 @@ $(() => {
   function showUserInRoom(user, room) {
     let userView = $(`#${user.id}`);
 
-    if (!userView.length) {
-      userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
-    } else {
+    if (userView.length) {
       userView.detach();
+    } else {
+      userView = $(`<div id="${user.id}" class="thumbnail user-room"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
     }
 
     userInRoomDecorator(user, room);
