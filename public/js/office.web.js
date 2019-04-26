@@ -31,12 +31,12 @@ $(() => {
   }
 
   function showUserInRoom(user, room) {
-    let userView = $(`#${user.id}`).length;
+    let userView = $(`#${user.id}`);
 
-    if (userView == 0) {
+    if (!userView.length) {
       userView = $(`<div  id="${user.id}" class="thumbnail user-room"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
     } else {
-      userView = $(`#${user.id}`).detach();
+      userView.detach();
     }
 
     userInRoomDecorator(user, room);
@@ -58,14 +58,15 @@ $(() => {
     });
   }
 
-  function userInMeetDecorator(user,userView){
-    let userMeetClass = "rounded-circle user-not-in-call user-room"
+  function userInMeetDecorator(user, userView){
+    const userMeetDefaultClasses = "rounded-circle user-room";
 
-    if (user.inMeet !== undefined && user.inMeet) {
-      userMeetClass = "rounded-circle user-in-call user-room";
+    if (user.inMeet) {
+      userView.toggleClass('user-in-call', user.inMeet);
+      userView.toggleClass('user-not-call', !user.inMeet);
     }
 
-    userView.attr("class",userMeetClass);
+    userView.attr("class", userMeetDefaultClasses);
   }
 
   function userInRoomDecorator(user, room) {
@@ -123,9 +124,10 @@ $(() => {
   }
 
   function isUserInVideoConference(){
-    if($("#exampleModalCenter").data('bs.modal')){
-      return $("#exampleModalCenter").data('bs.modal')._isShown;
-    }
+    const dataModal = $("#exampleModalCenter").data("bs.modal");
+
+    if(dataModal) { return dataModal._isShown; }
+
     return false;
   }
 
@@ -172,7 +174,6 @@ $(() => {
     }
   }
 
-
   function getRoomName(roomId){
     return $("[room-id="+roomId+"]").attr("room-name")
   }
@@ -189,11 +190,8 @@ $(() => {
     return lastRoom;
   }
 
-  function isValidRoom(room){
-    if(room==null || room==undefined || room== "undefined"){
-      return false
-    }
-    return true;
+  function isValidRoom2(room) {
+    return !(room === null || room === undefined || room === "undefined")
   }
 
   function getDefaultRoom(){
@@ -202,19 +200,19 @@ $(() => {
 
   function getUrlRoom(){
   	const currentRoom = location.hash;
-  	if(currentRoom==null || currentRoom==undefined){
+
+    if(currentRoom === null || currentRoom === undefined){
   		return null;
-  	}else{
+  	} else {
   		return currentRoom.split("#")[1]
   	}
   }
 
-
   function syncOffice(usersInRoom){
     for (const key in usersInRoom) {
-        userInroom = usersInRoom[key];
-        showUserInRoom(userInroom.user, userInroom.room);
-      }
+      userInroom = usersInRoom[key];
+      showUserInRoom(userInroom.user, userInroom.room);
+    }
   }
 
   function confirmRoomEnter(user,roomId, officeEvents){
