@@ -1,44 +1,44 @@
 [
 {
 	"id":"ac2b235a-b1e2-4848-a687-6669a3f7551b",
-	"name":"Lounge",
+	"name":"The Dock",
 	"disableMeeting": true
 },
 {
 	"id":"room-2",
-	"name":"CDP"
+	"name":"Nebuchadnezzar"
 },
 {
 	"id":"room-3",
-	"name":"Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+	"name":"Logos"
 },
 {
 	"id":"room-4",
-	"name":"Sala-4"
+	"name":"Osiris"
 },
 {
 	"id":"room-5",
-	"name":"Sala-5"
+	"name":"Icarus"
 },
 {
 	"id":"room-6",
-	"name":"Sala-6"
+	"name":"Caduceus"
 },
 {
 	"id":"room-7",
-	"name":"Sala-7"
+	"name":"Brahma"
 },
 {
 	"id":"room-8",
-	"name":"Sala-8"
+	"name":"Novalis"
 },
 {
 	"id":"room-9",
-	"name":"Sala-9"
+	"name":"Vigilant"
 },
 {
 	"id":"room-10",
-	"name":"Sala-10"
+	"name":"Zion"
 }
 
 ]
