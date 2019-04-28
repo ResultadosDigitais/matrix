@@ -180,9 +180,13 @@ $(() => {
 
     if(!isValidRoom(lastRoom)){
       lastRoom = matrixProfile.loadStoredRoom();
-    }else if(!isValidRoom(lastRoom)){
-      lastRoom = getDefaultRoom();
+
+      if(!isValidRoom(lastRoom)){
+        lastRoom = getDefaultRoom();
+      }
     }
+    
+    console.log("lastRoom",lastRoom);
 
     return lastRoom;
   }
