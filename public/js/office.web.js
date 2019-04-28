@@ -166,7 +166,7 @@ $(() => {
     const loggedUserId = matrixProfile.loadStoredProfile().id;
     const loggedUserRoomId = getLastRoom(matrixProfile);
 
-    if (loggedUserRoomId == roomId && loggedUserId != user.id) {
+    if (loggedUserRoomId === roomId && loggedUserId !== user.id) {
       const roomTitle = getRoomName(roomId);
       notify(`${user.name} entered into the room ${roomTitle}`, options);   
     }
