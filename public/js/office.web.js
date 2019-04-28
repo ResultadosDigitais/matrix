@@ -227,7 +227,6 @@ $(() => {
   }
 
   function confirmRoomEnter(user,roomId, officeEvents){
-
     const options = {
       icon: user.imageUrl,
     };
