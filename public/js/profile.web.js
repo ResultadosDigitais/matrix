@@ -6,9 +6,8 @@ MatrixProfile.prototype.loadStoredProfile = function loadStoredProfile() {
 
 MatrixProfile.prototype.userName = function userName() {
   const user = JSON.parse(localStorage.getItem('user'));
-  if(user){
-    return user.name.split(' ').pop();  
-  }
+  if (user) { return user.name.split(' ').pop(); }
+
   return null;
 };
 
