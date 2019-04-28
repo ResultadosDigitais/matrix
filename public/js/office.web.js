@@ -59,9 +59,11 @@ $(() => {
   }
 
   function userInMeetDecorator(user, userView){
-    userView.toggleClass('user-in-call', user.inMeet);
-    userView.toggleClass('user-not-call', !user.inMeet);
     userView.attr("class", "rounded-circle user-room");
+    if(user.inMeet){
+      userView.toggleClass('user-in-call', user.inMeet);
+      userView.toggleClass('user-not-call', !user.inMeet);  
+    }
   }
 
   function userInRoomDecorator(user, room) {
