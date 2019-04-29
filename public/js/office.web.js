@@ -176,6 +176,24 @@ $(() => {
     }
   }
 
+  function notifyRoomExited(user,roomId) {
+    const options = {
+      icon: user.imageUrl,
+    };
+
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    } else {
+      const loggedUserId = matrixProfile.loadStoredProfile().id;
+      const loggedUserRoomId = getLastRoom(matrixProfile);
+
+      if (loggedUserRoomId == roomId && loggedUserId != user.id) {
+        const roomTitle = getRoomName(roomId);
+        new Notification(`${user.name} leave room ${roomTitle}`, options);
+      }
+    }
+  }
+
   function getRoomName(roomId){
     return $("[room-id="+roomId+"]").attr("room-name")
   }
@@ -264,7 +282,11 @@ $(() => {
     initGetUserMenu(officeEvents);
 
     officeEvents.onParticipantStartedMeet(showUserInRoom);
-    officeEvents.onParticipantLeftMeet(showUserInRoom);
+    officeEvents.onParticipantLeftMeet(function(user,roomId){
+      showUserInRoom(user,roomId);
+      notifyRoomExited(user,roomId);
+    });
+
     officeEvents.onDisconnect(removeUser);
 
     officeEvents.onParticipantJoined(function(user,roomId){
