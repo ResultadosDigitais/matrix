@@ -159,24 +159,18 @@ $(() => {
   }
 
   function notifyRoomEnter(user,roomId) {
-    const options = {
-      icon: user.imageUrl,
-    };
-
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission();
-    } else {
-      const loggedUserId = matrixProfile.loadStoredProfile().id;
-      const loggedUserRoomId = getLastRoom(matrixProfile);
-
-      if (loggedUserRoomId == roomId && loggedUserId != user.id) {
-        const roomTitle = getRoomName(roomId);
-        new Notification(`${user.name} entered into the room ${roomTitle}`, options);
-      }
-    }
+    const roomTitle = getRoomName(roomId);
+    const message = `${user.name} entered into the room ${roomTitle}`
+    notifyRoom(user, roomId, message);
   }
 
   function notifyRoomExited(user,roomId) {
+    const roomTitle = getRoomName(roomId);
+    const message = `${user.name} leave room ${roomTitle}`
+    notifyRoom(user, roomId, message);
+  }
+
+  function notifyRoom(user, roomId, message){
     const options = {
       icon: user.imageUrl,
     };
@@ -188,8 +182,7 @@ $(() => {
       const loggedUserRoomId = getLastRoom(matrixProfile);
 
       if (loggedUserRoomId == roomId && loggedUserId != user.id) {
-        const roomTitle = getRoomName(roomId);
-        new Notification(`${user.name} leave room ${roomTitle}`, options);
+        new Notification(message, options);
       }
     }
   }
