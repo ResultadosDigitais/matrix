@@ -36,7 +36,13 @@ $(() => {
     if (userView.length) {
       userView.detach();
     } else {
-      userView = $(`<div id="${user.id}" class="thumbnail user-room"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`);
+      userView = $(
+        `<div id="${
+          user.id
+        }" class="thumbnail user-room rounded-circle"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${
+          user.id
+        }" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`
+      );
     }
 
     userInRoomDecorator(user, room);
@@ -49,21 +55,20 @@ $(() => {
     $("[user-presence]").initialize(function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
-        menuSelected: function (invokedOn, selectedMenu) {
+        menuSelected: function(invokedOn, selectedMenu) {
           const userId = $(invokedOn).attr("user-id");
           const roomId = getLastRoom(matrixProfile);
-          officeEvents.callUserForMyRoom(userId,roomId);
+          officeEvents.callUserForMyRoom(userId, roomId);
         }
       });
     });
   }
 
-  function userInMeetDecorator(user, userView){
-    userView.attr("class", "rounded-circle user-room");
-    if(user.inMeet){
-      userView.toggleClass('user-in-call', user.inMeet);
-      userView.toggleClass('user-not-call', !user.inMeet);  
-    }
+  function userInMeetDecorator(user, userView) {
+    const userInMeet = user.inMeet === true;
+
+    userView.toggleClass("user-in-call", userInMeet);
+    userView.toggleClass("user-not-in-call", !userInMeet);
   }
 
   function userInRoomDecorator(user, room) {
