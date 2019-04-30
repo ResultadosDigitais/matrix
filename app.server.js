@@ -9,8 +9,8 @@ import Office from "./office.server";
 const ROOMS_SOURCE = process.env.ROOMS_SOURCE;
 const PORT = process.env.PORT || 8080;
 const HOST = "0.0.0.0";
-const GOOGLECREDENTIAL =
-  process.env.googleCredential ||
+const GOOGLE_CREDENTIAL =
+  process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
 const app = express();
 
@@ -40,7 +40,7 @@ app.use(
 );
 
 // FIX ME: here we have to get the google APIkey in another way.
-app.locals.googleCredential = new GoogleCredentialController(GOOGLECREDENTIAL);
+app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 // routes
 app.get("/", (req, res) => {
