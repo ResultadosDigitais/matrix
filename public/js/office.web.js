@@ -117,8 +117,10 @@ $(() => {
 
   function startVideoConference(roomId, name, officeEvents){
     setTimeout(() => {
-      $("#exampleModalCenter").modal("hide");
-      $("#exampleModalCenter").modal("dispose");
+      const modalCenter = $("#exampleModalCenter");
+
+      modalCenter.modal("hide");
+      modalCenter.modal("dispose");
     	const domain = 'meet.jit.si';
   		const options = getMeetingOptions(roomId);
   		api = new JitsiMeetExternalAPI(domain, options);
@@ -127,15 +129,14 @@ $(() => {
 
       officeEvents.startMeet();
 
-      $("#exampleModalCenter").modal("show");
-  		$("#exampleModalCenter").on("hidden.bs.modal", function () {
-          officeEvents.leftMeet();
-     			api.dispose();
+      modalCenter.modal("show");
+  		modalCenter.on("hidden.bs.modal", function () {
+        officeEvents.leftMeet();
+        api.dispose();
       });
 
-      $('#exampleModalCenter').on('shown.bs.modal', function () {
-        const modal = $(this);
-        modal.find('.modal-title').text(name);
+      modalCenter.on('shown.bs.modal', function () {
+        $(this).find('.modal-title').text(name);
       });
     }, 300);
   }
