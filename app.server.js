@@ -52,14 +52,14 @@ const fetchRooms = strategy => {
   }
 };
 
-const fetchFromFile = async () => {
+const fetchFromFile = () => {
   const roomsData = fs.readFileSync("./file/default.room.web.json");
   const roomsDetail = JSON.parse(roomsData);
 
   return new Promise((resolve, reject) => resolve(roomsDetail));
 };
 
-const fetchFromEnvironment = async env => {
+const fetchFromEnvironment = env => {
   const roomsData = env.ROOMS_DATA;
   const roomsDetail = JSON.parse(roomsData);
 
@@ -71,13 +71,19 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/office", async (req, res) => {
-  const roomsData = await fetchRooms(ROOMS_SOURCE);
+app.get("/office", (req, res) => {
+  fetchRooms(ROOMS_SOURCE)
+    .then(roomsData => {
+      console.log(roomsData);
 
-  console.log(roomsData);
-  app.locals.roomsDetail = roomsData;
+      app.locals.roomsDetail = roomsData;
+      res.render("office");
+    })
+    .catch(err => {
+      console.error(err);
 
-  res.render("office");
+      res.render("500", { status: 500 });
+    });
 });
 
 // Listen on port 8080
