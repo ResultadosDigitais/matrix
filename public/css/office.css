@@ -1,3 +1,8 @@
+a:hover {
+  text-decoration: none;
+  color: #0061c3;
+}
+
 body {
   font-family: "Lato" !important;
   background-color: #ebf5fc;
@@ -7,46 +12,6 @@ body {
   font-size: 14px;
   line-height: normal;
   text-align: right;
-}
-
-.navbar-custom {
-  background: #ffffff;
-  border: 1px solid #d6d6d6;
-  box-sizing: border-box;
-}
-/* change the brand and text color */
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
-  color: rgba(255, 255, 255, 0.8);
-}
-/* change the link color */
-.navbar-custom .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5);
-}
-/* change the color of active or hovered links */
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
-  color: #ffffff;
-}
-
-.logoutBtn {
-  font-size: 14px;
-  color: #ff2e00;
-  opacity: 0.7;
-  background: none !important;
-  border: none;
-  padding: 0 !important;
-  cursor: pointer;
-  margin-left: 10px;
-  line-height: normal;
-  opacity: 0.7;
-}
-
-.userName {
-  font-family: Lato;
-  color: #000000;
-  font-size: 14px;
-  line-height: normal;
 }
 
 .room:hover {

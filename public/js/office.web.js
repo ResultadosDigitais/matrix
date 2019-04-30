@@ -4,26 +4,8 @@ $(() => {
 
   if (matrixProfile.isProfileStored()) {
     initOffice(matrixProfile);
-    initLoggoutButton(matrixProfile);
-    initHeaderName(matrixProfile);
   } else {
     redirectToHome();
-  }
-
-  function initHeaderName(matrixProfile){
-    $("#userName").text("Whats'up " + matrixProfile.userName() + "!");
-  }
-
-  function initLoggoutButton(matrixProfile){
-    $('#btnLogout').on('click', (e) => {
-      const auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-        matrixProfile.terminate();
-        auth2.disconnect();
-
-        redirectToHome();
-      });
-    });
   }
 
   function removeUser(userId) {
@@ -190,7 +172,7 @@ $(() => {
         lastRoom = getDefaultRoom();
       }
     }
-    
+
     console.log("lastRoom",lastRoom);
 
     return lastRoom;
