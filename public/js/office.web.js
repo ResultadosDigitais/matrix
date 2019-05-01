@@ -159,7 +159,7 @@ $(() => {
   }
 
   function getRoomName(roomId){
-    return $("[room-id="+roomId+"]").attr("room-name")
+    return $(`[room-id="${roomId}"]`).attr("room-name")
   }
 
   function getLastRoom(matrixProfile){
@@ -204,7 +204,7 @@ $(() => {
   }
 
   function confirmRoomEnter(user,roomId, officeEvents){
-    const isConfirmed = confirm(user.name +" is calling you to join in "+ getRoomName(roomId));
+    const isConfirmed = confirm(`${user.name} is calling you to join in ${getRoomName(roomId)}`);
       if (isConfirmed) {
         officeEvents.enterInRoom(roomId);
         startVideoConference(roomId, getRoomName(roomId),officeEvents);
