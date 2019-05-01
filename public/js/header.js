@@ -13,7 +13,7 @@ function onLogout() {
 }
 
 function loadUserName() {
-  document.getElementById('userName').innerText = matrixProfile.userName();
+  document.getElementById('userName').innerText = `Whats'up ${matrixProfile.userName()}`;
 }
 
 function setupEvents() {
