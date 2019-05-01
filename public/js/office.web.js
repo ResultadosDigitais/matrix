@@ -37,7 +37,7 @@ $(() => {
     $("[user-presence]").initialize(function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
-        menuSelected: function(invokedOn, selectedMenu) {
+        menuSelected: function(invokedOn) {
           const userId = $(invokedOn).attr("user-id");
           const roomId = getLastRoom(matrixProfile);
           officeEvents.callUserForMyRoom(userId, roomId);
