@@ -191,9 +191,8 @@ $(() => {
 
     if(currentRoom === null || currentRoom === undefined){
   		return null;
-  	} else {
-  		return currentRoom.split("#")[1]
   	}
+    return currentRoom.split("#")[1]
   }
 
   function syncOffice(usersInRoom){
