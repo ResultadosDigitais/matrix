@@ -210,10 +210,6 @@ $(() => {
       }
   }
 
-  function gerRoomName(roomId){
-    return $("[room-id=${roomId}]").attr("room-name");
-  }
-
   function initEnterRoomButton(officeEvents){
     const enterRoom = $('[enter-room]');
     enterRoom.on('click', (e) => {
