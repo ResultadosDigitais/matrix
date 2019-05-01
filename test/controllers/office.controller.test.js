@@ -44,6 +44,16 @@ describe('Basic Office Test', () => {
     assert.equal(officeController.getUsersInOffice().size, 1);
   });
 
+  it('must return size of users in in office = map', () => {
+    const officeController = new OfficeController();
+    const profileData = getProfileDataSample();
+
+    officeController.addUserInRoom(profileData, 'room-1');
+    officeController.addUserInRoom(profileData, 'room-2');
+
+    assert.ok(typeof officeController.getUsersInOfficeByMap(), "Map");
+  });
+
   it('must user be in room-2', () => {
     const officeController = new OfficeController();
     const profileData = getProfileDataSample();
@@ -76,5 +86,18 @@ describe('Basic Office Test', () => {
 
     const userInRoom = officeController.getUserInRoom(profileData.id);
     assert.equal(userInRoom.user.inMeet, false);
+  });
+
+  it('must prevent broke if try to set user in meet and the user is not logged yet', () => {
+    const officeController = new OfficeController();
+    const profileData = getProfileDataSample();
+
+    officeController.addUserInRoom(profileData, 'room-1');
+    officeController.removeUser(profileData.id);
+    
+    officeController.setUserInMeet(profileData.id, true);
+
+    const userInRoom = officeController.getUserInRoom(profileData.id);
+    assert.equal(userInRoom, null);
   });
 });
