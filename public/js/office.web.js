@@ -37,7 +37,7 @@ $(() => {
     $("[user-presence]").initialize(function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
-        menuSelected: function(invokedOn, selectedMenu) {
+        menuSelected: function(invokedOn) {
           const userId = $(invokedOn).attr("user-id");
           const roomId = getLastRoom(matrixProfile);
           officeEvents.callUserForMyRoom(userId, roomId);
@@ -160,7 +160,7 @@ $(() => {
   }
 
   function getRoomName(roomId){
-    return $("[room-id="+roomId+"]").attr("room-name")
+    return $(`[room-id="${roomId}"]`).attr("room-name")
   }
 
   function getLastRoom(matrixProfile){
@@ -192,9 +192,8 @@ $(() => {
 
     if(currentRoom === null || currentRoom === undefined){
   		return null;
-  	} else {
-  		return currentRoom.split("#")[1]
   	}
+    return currentRoom.split("#")[1]
   }
 
   function syncOffice(usersInRoom){
@@ -205,22 +204,17 @@ $(() => {
   }
 
   function confirmRoomEnter(user,roomId, officeEvents){
-    const isConfirmed = confirm(user.name +" is calling you to join in "+ getRoomName(roomId));
+    const isConfirmed = confirm(`${user.name} is calling you to join in ${getRoomName(roomId)}`);
       if (isConfirmed) {
         officeEvents.enterInRoom(roomId);
         startVideoConference(roomId, getRoomName(roomId),officeEvents);
       }
   }
 
-  function gerRoomName(roomId){
-    return $("[room-id=${roomId}]").attr("room-name");
-  }
-
   function initEnterRoomButton(officeEvents){
     const enterRoom = $('[enter-room]');
     enterRoom.on('click', (e) => {
       const roomId = $(e.target).attr('room-id');
-      const roomName = $(e.target).attr('room-name');
       const disableMeeting = new Boolean($(e.target).attr('room-disable-meeting'));
 
       officeEvents.enterInRoom(roomId);
