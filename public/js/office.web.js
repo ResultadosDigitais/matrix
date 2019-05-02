@@ -146,16 +146,20 @@ $(() => {
       icon: user.imageUrl,
     };
 
+    const loggedUserId = matrixProfile.loadStoredProfile().id;
+    const loggedUserRoomId = getLastRoom(matrixProfile);
+
+    if (loggedUserRoomId === roomId && loggedUserId !== user.id) {
+      const roomTitle = getRoomName(roomId);
+      notify(`${user.name} entered into the room ${roomTitle}`, options);   
+    }
+  }
+
+  function notify(text,options){
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
     } else {
-      const loggedUserId = matrixProfile.loadStoredProfile().id;
-      const loggedUserRoomId = getLastRoom(matrixProfile);
-
-      if (loggedUserRoomId == roomId && loggedUserId != user.id) {
-        const roomTitle = getRoomName(roomId);
-        new Notification(`${user.name} entered into the room ${roomTitle}`, options);
-      }
+      new Notification(text, options);
     }
   }
 
@@ -204,11 +208,20 @@ $(() => {
   }
 
   function confirmRoomEnter(user,roomId, officeEvents){
-    const isConfirmed = confirm(`${user.name} is calling you to join in ${getRoomName(roomId)}`);
+
+    const options = {
+      icon: user.imageUrl,
+    };
+
+    text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
+    notify(text,options);
+    setTimeout(() => {
+      const isConfirmed = confirm(text);
       if (isConfirmed) {
         officeEvents.enterInRoom(roomId);
         startVideoConference(roomId, getRoomName(roomId),officeEvents);
       }
+    }, 300);  
   }
 
   function initEnterRoomButton(officeEvents){
