@@ -37,7 +37,7 @@ $(() => {
     $("[user-presence]").initialize(function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
-        menuSelected: function(invokedOn, selectedMenu) {
+        menuSelected: function(invokedOn) {
           const userId = $(invokedOn).attr("user-id");
           const roomId = getLastRoom(matrixProfile);
           officeEvents.callUserForMyRoom(userId, roomId);
@@ -108,7 +108,7 @@ $(() => {
   }
 
   function isUserInVideoConference(){
-    const dataModal = $("#exampleModalCenter").data("bs.modal");
+    const dataModal = $("#meetModal").data("bs.modal");
 
     if(dataModal) { return dataModal._isShown; }
 
@@ -117,8 +117,10 @@ $(() => {
 
   function startVideoConference(roomId, name, officeEvents){
     setTimeout(() => {
-      $("#exampleModalCenter").modal("hide");
-      $("#exampleModalCenter").modal("dispose");
+      const meetModal = $("#meetModal");
+
+      meetModal.modal("hide");
+      meetModal.modal("dispose");
     	const domain = 'meet.jit.si';
   		const options = getMeetingOptions(roomId);
   		api = new JitsiMeetExternalAPI(domain, options);
@@ -127,15 +129,14 @@ $(() => {
 
       officeEvents.startMeet();
 
-      $("#exampleModalCenter").modal("show");
-  		$("#exampleModalCenter").on("hidden.bs.modal", function () {
-          officeEvents.leftMeet();
-     			api.dispose();
+      meetModal.modal("show");
+  		meetModal.on("hidden.bs.modal", function () {
+        officeEvents.leftMeet();
+        api.dispose();
       });
 
-      $('#exampleModalCenter').on('shown.bs.modal', function () {
-        const modal = $(this);
-        modal.find('.modal-title').text(name);
+      meetModal.on('shown.bs.modal', function () {
+        $(this).find('.modal-title').text(name);
       });
     }, 300);
   }
@@ -163,7 +164,7 @@ $(() => {
   }
 
   function getRoomName(roomId){
-    return $("[room-id="+roomId+"]").attr("room-name")
+    return $(`[room-id="${roomId}"]`).attr("room-name")
   }
 
   function getLastRoom(matrixProfile){
@@ -195,9 +196,8 @@ $(() => {
 
     if(currentRoom === null || currentRoom === undefined){
   		return null;
-  	} else {
-  		return currentRoom.split("#")[1]
   	}
+    return currentRoom.split("#")[1]
   }
 
   function syncOffice(usersInRoom){
@@ -208,15 +208,15 @@ $(() => {
   }
 
   function confirmRoomEnter(user,roomId, officeEvents){
+
     const options = {
       icon: user.imageUrl,
     };
 
-    text = `#{user.name} is calling you to join in #{getRoomName(roomId)}`;
+    text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
     notify(text,options);
     setTimeout(() => {
-
-    const isConfirmed = confirm(user.name +" is calling you to join in "+ getRoomName(roomId));
+      const isConfirmed = confirm(text);
       if (isConfirmed) {
         officeEvents.enterInRoom(roomId);
         startVideoConference(roomId, getRoomName(roomId),officeEvents);
@@ -224,15 +224,10 @@ $(() => {
     }, 300);  
   }
 
-  function gerRoomName(roomId){
-    return $("[room-id=${roomId}]").attr("room-name");
-  }
-
   function initEnterRoomButton(officeEvents){
     const enterRoom = $('[enter-room]');
     enterRoom.on('click', (e) => {
       const roomId = $(e.target).attr('room-id');
-      const roomName = $(e.target).attr('room-name');
       const disableMeeting = new Boolean($(e.target).attr('room-disable-meeting'));
 
       officeEvents.enterInRoom(roomId);
