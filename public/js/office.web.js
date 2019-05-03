@@ -49,6 +49,8 @@ $(() => {
   function userInMeetDecorator(user, userView) {
     const userInMeet = user.inMeet === true;
 
+    if (userInMeet) { userView.attr("title", user.name); }
+
     userView.toggleClass("user-in-call", userInMeet);
     userView.toggleClass("user-not-in-call", !userInMeet);
   }
@@ -151,7 +153,7 @@ $(() => {
 
     if (loggedUserRoomId === roomId && loggedUserId !== user.id) {
       const roomTitle = getRoomName(roomId);
-      notify(`${user.name} entered into the room ${roomTitle}`, options);   
+      notify(`${user.name} entered into the room ${roomTitle}`, options);
     }
   }
 
@@ -221,7 +223,7 @@ $(() => {
         officeEvents.enterInRoom(roomId);
         startVideoConference(roomId, getRoomName(roomId),officeEvents);
       }
-    }, 300);  
+    }, 300);
   }
 
   function initEnterRoomButton(officeEvents){
