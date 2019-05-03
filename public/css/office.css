@@ -189,3 +189,14 @@ body {
   top: 1px;
   bottom: 0;
 }
+
+.meet-frame {
+  position: relative;
+  padding-top: 47%;
+}
+
+.meet-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
