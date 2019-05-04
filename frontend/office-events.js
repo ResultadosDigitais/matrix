@@ -1,3 +1,5 @@
+import io from "socket.io-client";
+
 function OfficeEvents(config) {
   this.config = config;
   const user = JSON.stringify(config.currentUser);
