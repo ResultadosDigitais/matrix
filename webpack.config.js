@@ -1,15 +1,14 @@
+const path = require("path");
+const sourcePath = path.join(__dirname, "frontend");
+const buildPath = path.join(__dirname, "public", "dist");
+
 module.exports = {
   entry: {
-    office: "./frontend/office.web.js",
-    profile: "./frontend/profile.web.js"
+    office: `${sourcePath}/office.js`,
+    login: `${sourcePath}/login.js`
   },
   output: {
-    path: __dirname + "/public",
+    path: buildPath,
     filename: "[name]-bundle.js"
-  },
-  devServer: {
-    inline: true,
-    contentBase: "./public",
-    port: 3333
   }
 };
