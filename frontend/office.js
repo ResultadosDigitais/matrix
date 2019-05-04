@@ -34,7 +34,7 @@ $(() => {
       userView = $(
         `<div id="${
           user.id
-        }" class="thumbnail user-room rounded-circle"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${
+        }" class="thumbnail user-room rounded-circle" user-presence><img class="rounded-circle" style="margin:2px;display:flex;" user-id="${
           user.id
         }" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`
       );
