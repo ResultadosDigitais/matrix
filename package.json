@@ -14,6 +14,7 @@
   "author": "Juliemar Berri",
   "license": "ISC",
   "dependencies": {
+    "@sentry/browser": "^5.1.2",
     "bootstrap": "^4.3.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",

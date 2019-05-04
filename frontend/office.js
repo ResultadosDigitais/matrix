@@ -1,3 +1,4 @@
+import { init as sentryInit } from "@sentry/browser";
 import MatrixProfile from "./profile";
 import OfficeEvents from "./office-events";
 import renderHeader from "./header";
@@ -7,7 +8,7 @@ import "./context-menu/context-menu";
 import "./initialize/jquery.initialize";
 
 $(() => {
-  Sentry.init({
+  sentryInit({
     dsn: "https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017"
   });
 
