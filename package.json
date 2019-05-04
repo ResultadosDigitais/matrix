@@ -34,6 +34,8 @@
     "mocha": "^6.1.4",
     "mock-local-storage": "^1.1.8",
     "nyc": "^14.0.0",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "webpack": "^4.30.0",
+    "webpack-dev-server": "^3.3.1"
   }
 }
