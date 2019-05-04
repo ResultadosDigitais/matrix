@@ -33,12 +33,6 @@ app.use(
   express.static(`${__dirname}/node_modules/font-awesome/css`)
 );
 
-//js
-app.use(
-  "/js/bootstrap",
-  express.static(`${__dirname}/node_modules/bootstrap/dist/js`)
-);
-
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 

@@ -1,26 +1,30 @@
-/* global MatrixProfile, gapi */
+import MatrixProfile from "./profile";
 
-const matrixProfile = new MatrixProfile();
-
-function onLogout() {
+function onLogout(profile) {
   const auth2 = gapi.auth2.getAuthInstance();
 
   auth2.signOut().then(() => {
-    matrixProfile.terminate();
+    profile.terminate();
     auth2.disconnect();
-    window.location.href = './';
+    window.location.href = "./";
   });
 }
 
-function loadUserName() {
-  document.getElementById('userName').innerText = `Whats'up ${matrixProfile.userName()}`;
+function loadUserName(profile) {
+  document.getElementById(
+    "userName"
+  ).innerText = `Whats'up ${profile.userName()}`;
 }
 
-function setupEvents() {
-  document.getElementById('btnLogout').addEventListener('click', onLogout);
+function setupEvents(profile) {
+  document
+    .getElementById("btnLogout")
+    .addEventListener("click", () => onLogout(profile));
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  loadUserName();
-  setupEvents();
-});
+export default () => {
+  const profile = new MatrixProfile();
+
+  loadUserName(profile);
+  setupEvents(profile);
+};

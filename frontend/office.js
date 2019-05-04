@@ -1,7 +1,18 @@
+import MatrixProfile from "./profile";
+import OfficeEvents from "./office-events";
+import renderHeader from "./header";
+
+import "bootstrap";
+import "./context-menu/context-menu";
+import "./initialize/jquery.initialize";
+
 $(() => {
   Sentry.init({
     dsn: "https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017"
   });
+
+  renderHeader();
+
   const matrixProfile = new MatrixProfile();
 
   if (matrixProfile.isProfileStored()) {
@@ -51,7 +62,9 @@ $(() => {
   function userInMeetDecorator(user, userView) {
     const userInMeet = user.inMeet === true;
 
-    if (userInMeet) { userView.attr("title", user.name); }
+    if (userInMeet) {
+      userView.attr("title", user.name);
+    }
 
     userView.toggleClass("user-in-call", userInMeet);
     userView.toggleClass("user-not-in-call", !userInMeet);
@@ -144,7 +157,7 @@ $(() => {
       meetModal.modal("dispose");
       const domain = "meet.jit.si";
       const options = getMeetingOptions(roomId);
-      api = new JitsiMeetExternalAPI(domain, options);
+      const api = new JitsiMeetExternalAPI(domain, options);
       api.executeCommand("displayName", matrixProfile.loadStoredProfile().name);
       api.executeCommand(
         "avatarUrl",
@@ -228,8 +241,8 @@ $(() => {
 
   function syncOffice(usersInRoom) {
     for (const key in usersInRoom) {
-      userInroom = usersInRoom[key];
-      showUserInRoom(userInroom.user, userInroom.room);
+      const userInRoom = usersInRoom[key];
+      showUserInRoom(userInRoom.user, userInRoom.room);
     }
   }
 
