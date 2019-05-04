@@ -6,6 +6,7 @@
   "scripts": {
     "start-server": "nodemon --exec babel-node app.server.js",
     "webpack-server": "webpack --watch --config webpack.development.js",
+    "build": "webpack --mode production --config webpack.production.js",
     "start": "npm-run-all -p start-server webpack-server",
     "test": "nyc --reporter=text mocha --require @babel/register './test/**/*.test.js' --exit",
     "lint": "eslint './**/*.js'"
