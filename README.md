@@ -1,10 +1,10 @@
-# matrix
+# #matrix
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/a41e6e73f69c94d8b9c5/maintainability)](https://codeclimate.com/github/ResultadosDigitais/matrix/maintainability) [![CircleCI](https://circleci.com/gh/ResultadosDigitais/matrix.svg?style=svg)](https://circleci.com/gh/ResultadosDigitais/matrix)
 
-Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more [here](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75)
+#matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more [here](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75)
 
 ## We are using the baby steps strategy.
 
