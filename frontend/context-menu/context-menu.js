@@ -2,6 +2,7 @@
 (function ($, window) {
 
     $.fn.contextMenu = function (settings) {
+        console.log("contextMenu",settings);
 
         return this.each(function () {
 

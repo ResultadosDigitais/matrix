@@ -16,7 +16,7 @@
     // List of MutationSelectorObservers.
     var msobservers = [];
     msobservers.initialize = function (selector, callback) {
-
+        console.log("initialize",selector)
         // Wrap the callback so that we can ensure that it is only
         // called once per element.
         var seen = [];
@@ -48,9 +48,11 @@
 
     // Deprecated API (does not work with jQuery >= 3.1.1):
     $.fn.initialize = function (callback) {
+        console.log("initialize1:",this.selector)
         msobservers.initialize(this.selector, callback);
     };
     $.initialize = function (selector, callback) {
+        console.log("initialize2:",selector)
         msobservers.initialize(selector, callback);
     };
 })(jQuery);
