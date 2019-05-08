@@ -7,8 +7,8 @@ import renderHeader from "./header";
 import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/modal";
 
-import "./initialize/jquery.initialize";
 import "./context-menu/context-menu";
+import "./initialize/jquery.initialize";
 
 $(() => {
   sentryInit({
@@ -51,7 +51,7 @@ $(() => {
   }
 
   function initGetUserMenu(officeEvents) {
-    $.initialize("[user-presence]",function() {
+    $("[user-presence]").initialize(function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
         menuSelected: function(invokedOn) {
@@ -255,7 +255,7 @@ $(() => {
       icon: user.imageUrl
     };
 
-    const text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
+    text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
     notify(text, options);
     setTimeout(() => {
       const isConfirmed = confirm(text);
