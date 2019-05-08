@@ -8,4 +8,4 @@ COPY . /var/app
 
 EXPOSE 8080
 ENTRYPOINT ["sh","/docker-entrypoint.sh"]
-CMD [ "npm", "start" ]
+CMD ["npm" , "run", "start-server"]

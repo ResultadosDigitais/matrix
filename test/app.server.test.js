@@ -38,30 +38,12 @@ describe("Unit testing the / route", () => {
         );
       }));
 
-  it("should there is index.web.js on rendering", () =>
+  it("should there is login-bundle.js on rendering", () =>
     request(app)
       .get("/")
       .then(response => {
         expect(response.text).to.contain(
-          '<script src="./js/index.web.js"></script>'
-        );
-      }));
-
-  it("should there is profile.js on rendering", () =>
-    request(app)
-      .get("/")
-      .then(response => {
-        expect(response.text).to.contain(
-          '<script src="./js/profile.web.js"></script>'
-        );
-      }));
-
-  it("should there is jquery on rendering", () =>
-    request(app)
-      .get("/")
-      .then(response => {
-        expect(response.text).to.contain(
-          '<script src="https://code.jquery.com/jquery-latest.min.js"></script>'
+          '<script src="dist/login-bundle.js"></script>'
         );
       }));
 });

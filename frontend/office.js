@@ -1,7 +1,22 @@
+import { init as sentryInit } from "@sentry/browser";
+import MatrixProfile from "./profile";
+import OfficeEvents from "./office-events";
+import renderHeader from "./header";
+
+
+import "bootstrap/js/dist/dropdown";
+import "bootstrap/js/dist/modal";
+
+import "./context-menu/context-menu";
+import "./initialize/jquery.initialize";
+
 $(() => {
-  Sentry.init({
+  sentryInit({
     dsn: "https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017"
   });
+
+  renderHeader();
+
   const matrixProfile = new MatrixProfile();
 
   if (matrixProfile.isProfileStored()) {
@@ -23,7 +38,7 @@ $(() => {
       userView = $(
         `<div id="${
           user.id
-        }" class="thumbnail user-room rounded-circle"><img user-presence class="rounded-circle" style="margin:2px;display:flex;" user-id="${
+        }" class="thumbnail user-room rounded-circle" user-presence><img class="rounded-circle" style="margin:2px;display:flex;" user-id="${
           user.id
         }" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`
       );
@@ -36,7 +51,7 @@ $(() => {
   }
 
   function initGetUserMenu(officeEvents) {
-    $("[user-presence]").initialize(function() {
+    $.initialize("[user-presence]",function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
         menuSelected: function(invokedOn) {
@@ -51,7 +66,9 @@ $(() => {
   function userInMeetDecorator(user, userView) {
     const userInMeet = user.inMeet === true;
 
-    if (userInMeet) { userView.attr("title", user.name); }
+    if (userInMeet) {
+      userView.attr("title", user.name);
+    }
 
     userView.toggleClass("user-in-call", userInMeet);
     userView.toggleClass("user-not-in-call", !userInMeet);
@@ -144,7 +161,7 @@ $(() => {
       meetModal.modal("dispose");
       const domain = "meet.jit.si";
       const options = getMeetingOptions(roomId);
-      api = new JitsiMeetExternalAPI(domain, options);
+      const api = new JitsiMeetExternalAPI(domain, options);
       api.executeCommand("displayName", matrixProfile.loadStoredProfile().name);
       api.executeCommand(
         "avatarUrl",
@@ -228,8 +245,8 @@ $(() => {
 
   function syncOffice(usersInRoom) {
     for (const key in usersInRoom) {
-      userInroom = usersInRoom[key];
-      showUserInRoom(userInroom.user, userInroom.room);
+      const userInRoom = usersInRoom[key];
+      showUserInRoom(userInRoom.user, userInRoom.room);
     }
   }
 
@@ -238,7 +255,7 @@ $(() => {
       icon: user.imageUrl
     };
 
-    text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
+    const text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
     notify(text, options);
     setTimeout(() => {
       const isConfirmed = confirm(text);
