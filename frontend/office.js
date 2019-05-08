@@ -51,7 +51,7 @@ $(() => {
   }
 
   function initGetUserMenu(officeEvents) {
-    $("[user-presence]").initialize(function() {
+    $.initialize("[user-presence]",function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
         menuSelected: function(invokedOn) {
@@ -255,7 +255,7 @@ $(() => {
       icon: user.imageUrl
     };
 
-    text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
+    const text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
     notify(text, options);
     setTimeout(() => {
       const isConfirmed = confirm(text);
