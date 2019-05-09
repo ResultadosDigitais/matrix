@@ -17,12 +17,12 @@ describe("Basic profile credential Test", () => {
     assert.equal(matrixProfile.loadStoredProfile(), null);
   });
 
-  it("must return false if credentials is not present", () => {
+  it("must return false if credentials is NOT present", () => {
     const matrixProfile = new MatrixProfile();
     assert.equal(matrixProfile.isProfileStored(), false);
   });
 
-  it("must return true if credentials is not present", () => {
+  it("must return true if user credentials is present", () => {
     const profileData = getProfileDataSample();
 
     const matrixProfile = new MatrixProfile();
