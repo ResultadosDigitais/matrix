@@ -112,7 +112,7 @@ $(() => {
 
   function getMeetingOptions(roomId) {
     return {
-      roomName: roomId,
+      roomName: `${roomId}-${window.location.hostname}`,
       width: "100%",
       height: "100%",
       parentNode: document.querySelector("#meet"),
