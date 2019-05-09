@@ -6,6 +6,7 @@ import OfficeController from "./controllers/office.controller";
 import fetchRooms from "./controllers/rooms.controller";
 import Office from "./office.server";
 
+
 const ROOMS_SOURCE = process.env.ROOMS_SOURCE;
 const PORT = process.env.PORT || 8080;
 const HOST = "0.0.0.0";
@@ -38,7 +39,6 @@ app.use(
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
-// FIX ME: follow the correct production protocol
 app.use((req, res, next) => {
   var proto = req.connection.encrypted ? 'https' : 'http';
   // only do this if you trust the proxy
@@ -51,6 +51,7 @@ app.use((req, res, next) => {
   }
 })
 
+
 // routes
 app.get("/", (req, res) => {
   res.render("index");
@@ -59,6 +60,7 @@ app.get("/", (req, res) => {
 app.get("/office", (req, res) => {
   fetchRooms(ROOMS_SOURCE)
     .then(roomsData => {
+
       console.log(roomsData);
 
       app.locals.roomsDetail = roomsData;
