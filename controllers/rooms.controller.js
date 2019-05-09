@@ -1,10 +1,49 @@
 import fs from "fs";
+import uuid from "uuid/v4";
+
+const roomFilePath = "./file/matrix.room.web.json"
 
 const fetchFromFile = () => {
-  const roomsData = fs.readFileSync("./file/default.room.web.json");
+  const roomFileExists = fs.existsSync(roomFilePath)
+  if (!roomFileExists) {
+    createRoomFileSync()
+  }
+
+  const roomsData = fs.readFileSync(roomFilePath);
   const roomsDetail = JSON.parse(roomsData);
 
   return new Promise((resolve, reject) => resolve(roomsDetail));
+};
+
+const createRoomFileSync = () => {
+  let roomsData = []
+
+  roomsData[0] = {
+    "id": uuid(),
+    "name": "The Dock",
+    "disableMeeting": true
+  }
+
+  const niceNames = [
+    "Nebuchadnezzar",
+    "Logos",
+    "Osiris",
+    "Icarus",
+    "Caduceus",
+    "Brahma",
+    "Novalis",
+    "Vigilant",
+    "Zion",
+  ]
+
+  for (const niceName of niceNames) {
+    roomsData.push({
+      "id": uuid(),
+      "name": niceName
+    })
+  }
+
+  fs.writeFileSync(roomFilePath, JSON.stringify(roomsData));
 };
 
 const fetchFromEnvironment = env => {

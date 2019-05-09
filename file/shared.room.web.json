@@ -1,0 +1,43 @@
+[
+  {
+    "id": "ac2b235a-b1e2-4848-a687-6669a3f7551b",
+    "name": "The Dock",
+    "disableMeeting": true
+  },
+  {
+    "id": "room-2",
+    "name": "Nebuchadnezzar"
+  },
+  {
+    "id": "room-3",
+    "name": "Logos"
+  },
+  {
+    "id": "room-4",
+    "name": "Osiris"
+  },
+  {
+    "id": "room-5",
+    "name": "Icarus"
+  },
+  {
+    "id": "room-6",
+    "name": "Caduceus"
+  },
+  {
+    "id": "room-7",
+    "name": "Brahma"
+  },
+  {
+    "id": "room-8",
+    "name": "Novalis"
+  },
+  {
+    "id": "room-9",
+    "name": "Vigilant"
+  },
+  {
+    "id": "room-10",
+    "name": "Zion"
+  }
+]
