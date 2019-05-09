@@ -3,7 +3,6 @@ import MatrixProfile from "./profile";
 import OfficeEvents from "./office-events";
 import renderHeader from "./header";
 
-
 import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/modal";
 
