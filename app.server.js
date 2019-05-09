@@ -12,6 +12,7 @@ const HOST = "0.0.0.0";
 const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
+const PRODUCTION_PROTOCOL = process.env.PRODUCTION_PROTOCOL || "http";  
 const app = express();
 
 // favicon
@@ -35,6 +36,19 @@ app.use(
 
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
+
+// FIX ME: follow the correct production protocol
+app.use((req, res, next) => {
+  var proto = req.connection.encrypted ? 'https' : 'http';
+  // only do this if you trust the proxy
+  proto = req.headers['x-forwarded-proto'] || proto;
+
+  if (proto !== PRODUCTION_PROTOCOL){
+      res.redirect(`${PRODUCTION_PROTOCOL}://${req.header('host')}${req.url}`)
+  }else{
+    next()
+  }
+})
 
 // routes
 app.get("/", (req, res) => {
