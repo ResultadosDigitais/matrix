@@ -12,7 +12,8 @@ const HOST = "0.0.0.0";
 const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
-const PRODUCTION_PROTOCOL = process.env.PRODUCTION_PROTOCOL || "http";  
+const PRODUCTION_PROTOCOL = process.env.PRODUCTION_PROTOCOL || "http";
+  
 const app = express();
 
 // favicon
