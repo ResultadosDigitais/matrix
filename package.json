@@ -20,6 +20,7 @@
     "express": "^4.16.4",
     "hashmap": "^2.3.0",
     "jquery": "^3.4.1",
+    "md5": "^2.2.1",
     "nodemon": "^1.18.10",
     "popper.js": "^1.15.0",
     "serve-favicon": "^2.5.0",

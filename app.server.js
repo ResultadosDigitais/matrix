@@ -5,6 +5,8 @@ import GoogleCredentialController from "./controllers/google.credentials.control
 import OfficeController from "./controllers/office.controller";
 import fetchRooms from "./controllers/rooms.controller";
 import Office from "./office.server";
+import crypto from "crypto"
+
 
 const ROOMS_SOURCE = process.env.ROOMS_SOURCE;
 const PORT = process.env.PORT || 8080;
@@ -48,7 +50,7 @@ app.get("/office", (req, res) => {
       //try to prevent diferente use hostname to identify unique meet: 
       //obviously localhost is not coveraged here
       roomsData.forEach(room => {
-        room.id = `${req.hostname}-${room.id}`;
+        room.id = crypto.createHash('md5').update(`${req.hostname}-${room.id}`).digest("hex");
       });
 
       console.log(roomsData);
