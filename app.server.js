@@ -48,7 +48,7 @@ app.get("/office", (req, res) => {
       //try to prevent diferente use hostname to identify unique meet: 
       //obviously localhost is not coveraged here
       roomsData.forEach(room => {
-        room.id = req.hostname+"-"+room.id;
+        room.id = `${req.hostname}-${room.id}`;
       });
 
       console.log(roomsData);
