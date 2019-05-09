@@ -53,7 +53,7 @@ describe("Basic profile credential Test", () => {
     const matrixProfile = new MatrixProfile();
     matrixProfile.terminate();
 
-    assert.equal(matrixProfile.userName(),null);
+    assert.equal(matrixProfile.userName(), null);
   });
 
   it("must return stored profile data as String", () => {
