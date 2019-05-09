@@ -44,6 +44,13 @@ app.get("/", (req, res) => {
 app.get("/office", (req, res) => {
   fetchRooms(ROOMS_SOURCE)
     .then(roomsData => {
+
+      //try to prevent diferente use hostname to identify unique meet: 
+      //obviously localhost is not coveraged here
+      roomsData.forEach(room => {
+        room.id = `${req.hostname}-${room.id}`;
+      });
+
       console.log(roomsData);
 
       app.locals.roomsDetail = roomsData;
