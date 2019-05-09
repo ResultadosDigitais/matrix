@@ -39,5 +39,5 @@ And then open chrome at: `http://localhost:8080`
       "id":"${UUID}",
       "name":"Data Services"
    }
-   ]
+ ]
 ``` 
