@@ -40,7 +40,7 @@ app.use(
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 app.use((req, res, next) => {
-  var proto = req.connection.encrypted ? 'https' : 'http';
+  let proto = req.secure ? 'https' : 'http';
   // only do this if you trust the proxy
   proto = req.headers['x-forwarded-proto'] || proto;
 
