@@ -13,7 +13,7 @@ const HOST = "0.0.0.0";
 const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
-const ENFORCE_SSL = process.env.ENFORCE_SSL === 'true';
+const ENFORCE_SSL = process.env.ENFORCE_SSL || 'true';
   
 const app = express();
 
@@ -41,7 +41,7 @@ app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 app.use((req, res, next) => {
 
-  if (ENFORCE_SSL && !req.secure){
+  if (ENFORCE_SSL==='true' && !req.secure){
       res.redirect(`https://${req.hostname}${req.url}`)
   }else{
     next()
