@@ -13,7 +13,7 @@ const HOST = "0.0.0.0";
 const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
-const PRODUCTION_PROTOCOL = process.env.PRODUCTION_PROTOCOL || "http";
+const ENFORCE_SSL = process.env.ENFORCE_SSL || false;
   
 const app = express();
 
@@ -40,12 +40,9 @@ app.use(
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 app.use((req, res, next) => {
-  let proto = req.secure ? 'https' : 'http';
-  // only do this if you trust the proxy
-  proto = req.headers['x-forwarded-proto'] || proto;
 
-  if (proto !== PRODUCTION_PROTOCOL){
-      res.redirect(`${PRODUCTION_PROTOCOL}://${req.hostname}${req.url}`)
+  if (ENFORCE_SSL==true & !req.secure){
+      res.redirect(`https://${req.hostname}${req.url}`)
   }else{
     next()
   }

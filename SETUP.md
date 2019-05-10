@@ -22,7 +22,7 @@ And then open chrome at: `http://localhost:8080`
  ## Running with production
 
 1) Configure `GOOGLE_CREDENTIAL` environment with your google autenticator ID follow [this](https://developers.google.com/identity/sign-in/web/sign-in) steps for create a valid credential.
-2) Configure `PRODUCTION_PROTOCOL=https` to force redirect user when http access  
+2) Configure `ENFORCE_SSL=true` to force redirect user when http access  
 3) Configure `ROOMS_DATA` take care, use a unique UUID per room in `id`
 
 ```sh
