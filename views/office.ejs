@@ -1,12 +1,13 @@
 <html>
-<header>
+<head>
   <title>Matrix</title>
   <meta name="google-signin-client_id" content="<%= googleCredential.publicKey %>">
   <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
   <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
   <link rel="stylesheet" href="/css/office.css" />
   <link rel="stylesheet" href="/css/header.css" />
-</header>
+  <%- include('favicons'); %>
+</head>
 <body>
   <%- include('header'); %>
   <div class="matrix-content container-fluid">
@@ -22,7 +23,6 @@
           </div>
           <div class="modal-body">
                <div id="meet" class="meet-frame"></div>
-
           </div>
         </div>
       </div>
