@@ -1,5 +1,6 @@
 import fs from "fs";
 import uuid from "uuid/v4";
+import path from "path";
 
 const roomFilePath = "./file/matrix.room.web.json"
 
@@ -43,6 +44,7 @@ const createRoomFileSync = () => {
     })
   }
 
+  fs.mkdirSync(path.dirname(roomFilePath), { recursive: true });
   fs.writeFileSync(roomFilePath, JSON.stringify(roomsData));
 };
 
