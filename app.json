@@ -8,6 +8,14 @@
     "GOOGLE_CREDENTIAL": {
       "description": "Google Application Credential",
       "value": "xxxxxxx.apps.googleusercontent.com"
+    },
+    "ROOMS_DATA": {
+      "description": "List of avaliable rooms office. Read more in SETUP.md",
+      "value": ""
+    },
+    "ENFORCE_SSL": {
+      "description": "If you running in HTTPS this variable forces redirect to HTTPS when user access with HTTP",
+      "value": "true"
     }
   }
 }
