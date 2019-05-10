@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   proto = req.headers['x-forwarded-proto'] || proto;
 
   if (proto !== PRODUCTION_PROTOCOL){
-      res.redirect(`${PRODUCTION_PROTOCOL}://${req.header('host')}${req.url}`)
+      res.redirect(`${PRODUCTION_PROTOCOL}://${req.hostname}${req.url}`)
   }else{
     next()
   }
