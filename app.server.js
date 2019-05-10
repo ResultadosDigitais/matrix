@@ -13,7 +13,7 @@ const HOST = "0.0.0.0";
 const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
-const ENFORCE_SSL = process.env.ENFORCE_SSL || false;
+const ENFORCE_SSL = process.env.ENFORCE_SSL === 'true';
   
 const app = express();
 
