@@ -41,7 +41,9 @@ app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 app.use((req, res, next) => {
 
-  if (ENFORCE_SSL==='true' && !req.secure){
+  let isSecure = req.secure || req.headers['x-forwared-proto'] === 'https';
+
+  if (ENFORCE_SSL==='true' && !isSecure){
       res.redirect(`https://${req.hostname}${req.url}`)
   }else{
     next()
