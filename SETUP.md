@@ -41,4 +41,4 @@ And then open chrome at: `http://localhost:8080`
    }
  ]
 ``` 
-4) Configure `ROOMS_SOURCE` to `ENVIRONMEN` to get value 
+4) Configure `ROOMS_SOURCE` to `ENVIRONMENT` to get value 
