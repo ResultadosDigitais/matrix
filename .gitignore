@@ -61,3 +61,6 @@ typings/
 .next
 
 public/dist
+
+# Generated random room config
+file/matrix.room.web.json
