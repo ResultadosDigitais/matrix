@@ -13,6 +13,8 @@ const HOST = "0.0.0.0";
 const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
+const ENFORCE_SSL = process.env.ENFORCE_SSL || 'false';
+  
 const app = express();
 
 // favicon
@@ -36,6 +38,18 @@ app.use(
 
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
+
+app.use((req, res, next) => {
+
+  let isSecure = req.secure || req.headers['x-forwared-proto'] === 'https';
+
+  if (ENFORCE_SSL==='true' && !isSecure){
+      res.redirect(`https://${req.hostname}${req.url}`)
+  }else{
+    next()
+  }
+})
+
 
 // routes
 app.get("/", (req, res) => {
