@@ -39,8 +39,6 @@ app.use(
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
-console.log("AQUI")
-
 app.use((req, res, next) => {
 
   let isSecure = req.secure || req.header('x-forwarded-proto') === 'https';
