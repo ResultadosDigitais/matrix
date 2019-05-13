@@ -40,6 +40,7 @@ app.use(
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 app.use((req, res, next) => {
+  console.log("x-forwared-proto",req.headers['x-forwared-proto'])
 
   let isSecure = req.secure || req.headers['x-forwared-proto'] === 'https';
 
