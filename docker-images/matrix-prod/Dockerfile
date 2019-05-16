@@ -1,7 +1,7 @@
 FROM node
 
-WORKDIR /app
-COPY ..
+
+COPY . .
 
 RUN apt-get update && apt-get install -y dnsutils && chmod +x entrypoint.sh
 
