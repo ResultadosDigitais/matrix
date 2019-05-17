@@ -35,36 +35,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run:
-                name: Setup Code Climate test-reporter
-                command: |
-                    # download test reporter as a static binary
-                    curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-                    chmod +x ./cc-test-reporter
-                    ./cc-test-reporter before-build
-                when: always
+      - run: npm test
+      - store_test_results:
+          path: test-results
 
-            - run:
-                name: code-coverage
-                command: |
-                    mkdir coverage
-                    # nyc report requires that nyc has already been run,
-                    # which creates the .nyc_output folder containing necessary data
-                    ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
-                    ./cc-test-reporter after-build -t lcov
-                when: always
-
-            # Upload results
-
-            - store_test_results:
-                path: reports
-
-            - store_artifacts:
-                path: ./reports/mocha/test-results.xml
-
-            - store_artifacts:
-                path: ./reports/eslint/eslint.xml
-
-            - store_artifacts: # upload test coverage as artifact
-                path: ./coverage/lcov.info
-                prefix: tests
