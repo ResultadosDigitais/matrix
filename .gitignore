@@ -61,7 +61,7 @@ typings/
 .next
 
 
-# public/dist weback build output
+# public/dist webpack build output
 public/dist
 
 # backend build output
