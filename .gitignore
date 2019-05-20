@@ -60,7 +60,12 @@ typings/
 # next.js build output
 .next
 
+
+# public/dist weback build output
 public/dist
+
+# backend build output
+dist
 
 # Generated random room config
 file/matrix.room.web.json

@@ -4,10 +4,12 @@
   "description": "The first open virtual office",
   "main": "app.server.js",
   "scripts": {
-    "start-server": "nodemon --exec babel-node app.server.js",
-    "webpack-server": "webpack --watch --config webpack.development.js",
-    "build": "webpack --mode production --config webpack.production.js",
-    "start": "npm-run-all -p start-server webpack-server",
+    "start-backend-development-server": "nodemon --exec babel-node ./backend/app.server.js",
+    "start-frontend-development-server": "webpack --watch --config webpack.development.js",
+    "build-backend": "babel ./backend -d dist",
+    "build-frontend": "webpack --mode production --config webpack.production.js",
+    "start-backend": "node ./dist/app.server.js",
+    "start": "npm-run-all -p start-backend-development-server start-frontend-development-server",
     "test": "nyc --reporter=text mocha --require @babel/register './test/**/*.test.js' --exit",
     "lint": "eslint './**/*.js'"
   },
