@@ -1,3 +1,4 @@
 npm install
-npm run build
+npm run build-backend
+npm run build-frontend
 exec "$@"
