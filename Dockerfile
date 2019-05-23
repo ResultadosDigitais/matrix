@@ -7,5 +7,10 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY . /var/app
 
 EXPOSE 8080
+
+RUN npm install
+RUN npm run build-backend
+RUN npm run build-frontend
+
 ENTRYPOINT ["sh","/docker-entrypoint.sh"]
 CMD ["npm" , "run", "start-backend"]
