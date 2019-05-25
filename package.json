@@ -4,10 +4,12 @@
   "description": "The first open virtual office",
   "main": "app.server.js",
   "scripts": {
-    "start-server": "nodemon --exec babel-node app.server.js",
-    "webpack-server": "webpack --watch --config webpack.development.js",
-    "build": "webpack --mode production --config webpack.production.js",
-    "start": "npm-run-all -p start-server webpack-server",
+    "start-backend-development-server": "nodemon --exec babel-node ./backend/app.server.js",
+    "start-frontend-development-server": "webpack --watch --config webpack.development.js",
+    "build-backend": "babel ./backend -d dist",
+    "build-frontend": "webpack --mode production --config webpack.production.js",
+    "start-backend": "node ./dist/app.server.js",
+    "start": "npm-run-all -p start-backend-development-server start-frontend-development-server",
     "test": "nyc --reporter=text mocha --require @babel/register './test/**/*.test.js' --exit",
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;",
     "lint": "eslint './**/*.js'"
@@ -24,7 +26,6 @@
     "md5": "^2.2.1",
     "nodemon": "^1.18.10",
     "popper.js": "^1.15.0",
-    "serve-favicon": "^2.5.0",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "uuid": "^3.3.2"

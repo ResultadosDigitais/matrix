@@ -27,7 +27,8 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-      - run: npm run build
+      - run: npm run build-frontend
+      - run: npm run build-backend
 
       - save_cache:
           paths:

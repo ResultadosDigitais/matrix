@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import favicon from "serve-favicon";
 import GoogleCredentialController from "./controllers/google.credentials.controller";
 import OfficeController from "./controllers/office.controller";
 import fetchRooms from "./controllers/rooms.controller";
@@ -17,24 +16,18 @@ const ENFORCE_SSL = process.env.ENFORCE_SSL || 'false';
   
 const app = express();
 
-// favicon
-app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
-
 // set the template engine ejs
 app.set("view engine", "ejs");
 
-// middlewares
-app.use(express.static("public"));
+const staticFiles = [
+  ["/", path.join(__dirname, "..", "public")],
+  ["/css/bootstrap", path.join(__dirname, "..", "node_modules", "bootstrap", "dist", "css")],
+  ["/css/font_awesome", path.join(__dirname, "..", "node_modules", "font-awesome", "dist", "css")],
+]
 
-//css
-app.use(
-  "/css/bootstrap",
-  express.static(`${__dirname}/node_modules/bootstrap/dist/css`)
-);
-app.use(
-  "/css/font_awesome",
-  express.static(`${__dirname}/node_modules/font-awesome/css`)
-);
+staticFiles.forEach((source) => 
+        app.use(source[0], express.static(source[1]))
+)
 
 // FIX ME: here we have to get the google APIkey in another way.
 app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
