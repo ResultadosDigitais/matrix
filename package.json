@@ -11,6 +11,7 @@
     "start-backend": "node ./dist/app.server.js",
     "start": "npm-run-all -p start-backend-development-server start-frontend-development-server",
     "test": "nyc --reporter=text mocha --require @babel/register './test/**/*.test.js' --exit",
+    "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;",
     "lint": "eslint './**/*.js'"
   },
   "author": "Juliemar Berri",

@@ -37,3 +37,18 @@ jobs:
 
       # run tests!
       - run: npm test
+      - run:
+          name: Generate code coverage
+          command: npm run cover
+          when: always
+
+      - store_artifacts:
+          path: test/test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: test/coverage
+          prefix: coverage
+      - store_test_results:
+          path: test/test-results.xml
+          prefix: tests
+
