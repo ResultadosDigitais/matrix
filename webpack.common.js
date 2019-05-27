@@ -45,9 +45,15 @@ module.exports = {
               hmr: process.env.NODE_ENV === "development"
             }
           },
-
           "css-loader"
         ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
       }
     ]
   }
