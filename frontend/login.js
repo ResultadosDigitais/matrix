@@ -1,3 +1,6 @@
+import React from "react";
+import { render } from "react-dom";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "./login.css";
 
@@ -25,3 +28,7 @@ function onSignIn(googleUser) {
 }
 
 window.onSignIn = onSignIn;
+
+const HelloReact = () => <p>Hello from react</p>;
+
+render(<HelloReact />, document.getElementById("application"));
