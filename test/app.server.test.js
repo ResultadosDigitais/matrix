@@ -38,12 +38,12 @@ describe("Unit testing the / route", () => {
         );
       }));
 
-  it("should there is login-bundle.js on rendering", () =>
+  it("should there is login.js on rendering", () =>
     request(app)
       .get("/")
       .then(response => {
-        expect(response.text).to.contain(
-          '<script src="dist/login-bundle.js"></script>'
+        expect(response.text).to.match(
+          /<script src="\/dist\/login-.[a-z0-9]+\.js"><\/script>/
         );
       }));
 });
