@@ -1,3 +1,6 @@
+import "bootstrap/dist/css/bootstrap.css";
+import "./login.css";
+
 import MatrixProfile from "./profile";
 
 function goToOffice() {
