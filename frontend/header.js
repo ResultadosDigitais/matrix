@@ -1,5 +1,7 @@
 import MatrixProfile from "./profile";
 
+import "./header.css";
+
 function onLogout(profile) {
   const auth2 = gapi.auth2.getAuthInstance();
 

@@ -1,3 +1,6 @@
+import "bootstrap/dist/css/bootstrap.css";
+import "./office.css";
+
 import { init as sentryInit } from "@sentry/browser";
 import MatrixProfile from "./profile";
 import OfficeEvents from "./office-events";
@@ -50,7 +53,7 @@ $(() => {
   }
 
   function initGetUserMenu(officeEvents) {
-    $.initialize("[user-presence]",function() {
+    $.initialize("[user-presence]", function() {
       $(this).contextMenu({
         menuSelector: "#getUserMenu",
         menuSelected: function(invokedOn) {
@@ -254,7 +257,9 @@ $(() => {
       icon: user.imageUrl
     };
 
-    const text = `${user.name} is calling you to join in ${getRoomName(roomId)}`;
+    const text = `${user.name} is calling you to join in ${getRoomName(
+      roomId
+    )}`;
     notify(text, options);
     setTimeout(() => {
       const isConfirmed = confirm(text);
