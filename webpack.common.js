@@ -13,7 +13,7 @@ const buildPath = path.join(__dirname, "public", "dist");
 module.exports = {
   entry: {
     office: `${sourcePath}/office.js`,
-    login: `${sourcePath}/login.js`
+    login: `${sourcePath}/login-application.js`
   },
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
