@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import "./login-button.css";
+import styles from "./login-button.module.css";
 
 export class LoginButton extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export class LoginButton extends Component {
   render() {
     return (
       <div className="row justify-content-center align-items-center p-3">
-        <div ref={this.buttonContainerRef} className="gButton" />
+        <div ref={this.buttonContainerRef} className={styles.gButton} />
       </div>
     );
   }

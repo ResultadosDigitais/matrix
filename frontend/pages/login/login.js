@@ -9,7 +9,9 @@ import { Title } from "./title";
 import MatrixProfile from "../../profile";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "./login.css";
+import "./global.css";
+
+import styles from "./login.module.css";
 
 export class Login extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ export class Login extends Component {
     return (
       <div className="container-fluid">
         <div className="row h-100">
-          <div className="col-md-3 login_panel">
+          <div className={`col-md-3 ${styles.login_panel}`}>
             <div className="row h-100 justify-content-center align-items-center">
               <div className="col">
                 <Logo />

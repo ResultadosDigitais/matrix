@@ -10,6 +10,24 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const sourcePath = path.join(__dirname, "frontend");
 const buildPath = path.join(__dirname, "public", "dist");
 
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+
+const getStyleLoader = cssOptions => {
+  return [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        hmr: process.env.NODE_ENV === "development"
+      }
+    },
+    {
+      loader: "css-loader",
+      options: cssOptions
+    }
+  ];
+};
+
 module.exports = {
   entry: {
     office: `${sourcePath}/office.js`,
@@ -37,16 +55,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === "development"
-            }
-          },
-          "css-loader"
-        ]
+        test: cssRegex,
+        exclude: cssModuleRegex,
+        use: getStyleLoader({})
+      },
+      {
+        test: cssModuleRegex,
+        use: getStyleLoader({
+          modules: true
+        })
       },
       {
         test: /\.js$/,

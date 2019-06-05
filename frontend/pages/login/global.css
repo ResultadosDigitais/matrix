@@ -6,10 +6,3 @@ body {
   background-size: cover;
   font-family: "Lato" !important;
 }
-
-.login_panel {
-  background-color: white;
-  height: 100%;
-  font-size: 18px;
-  color: #575757;
-}
