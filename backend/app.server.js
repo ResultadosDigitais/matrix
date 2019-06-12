@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
 // routes
 app.get("/new", (req, res) => {
 
-  var newRoom = {
+  const newRoom = {
     "id": req.query.roomId,
     "name": req.query.roomName,
     "disableMeeting": false
