@@ -57,20 +57,54 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// routes
+app.get("/new", (req, res) => {
+
+  var newRoom = {
+    "id": req.query.roomId,
+    "name": req.query.roomName,
+    "disableMeeting": false
+  }
+
+  let found = app.locals.roomsDetail.find(element => element.id == req.query.roomId);
+
+  if(!found){
+      app.locals.roomsDetail.splice( 1, 0, newRoom);
+  }
+
+  res.redirect(`/office#${req.query.roomId}`);
+});
+
+
+app.get("/remove", (req, res) => {
+
+
+  app.locals.roomsDetail = app.locals.roomsDetail.filter(function(value, index, arr){
+
+    return value.id !=req.query.roomId;
+
+  });
+
+  res.redirect(`/office#${app.locals.roomsDetail[0].id}`);
+});
+
+
 app.get("/office", (req, res) => {
-  fetchRooms(ROOMS_SOURCE)
+  res.render("office");
+});
+
+
+fetchRooms(ROOMS_SOURCE)
     .then(roomsData => {
       console.log(roomsData);
 
       app.locals.roomsDetail = roomsData;
-      res.render("office");
+      
     })
     .catch(err => {
       console.error(err);
-
-      res.render("500", { status: 500 });
-    });
 });
+
 
 // Listen on port 8080
 const server = app.listen(PORT, HOST);
