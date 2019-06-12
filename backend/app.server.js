@@ -63,7 +63,8 @@ app.get("/new", (req, res) => {
   const newRoom = {
     "id": req.query.roomId,
     "name": req.query.roomName,
-    "disableMeeting": false
+    "disableMeeting": false,
+    "temporary":true
   }
 
   let found = app.locals.roomsDetail.find(element => element.id == req.query.roomId);
@@ -79,9 +80,9 @@ app.get("/new", (req, res) => {
 app.get("/remove", (req, res) => {
 
 
-  app.locals.roomsDetail = app.locals.roomsDetail.filter(function(value, index, arr){
+    app.locals.roomsDetail = app.locals.roomsDetail.filter(function(value, index, arr){
 
-    return value.id !=req.query.roomId;
+    return (value.id !=req.query.roomId) && value.temporary!=true;
 
   });
 
