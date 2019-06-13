@@ -9,5 +9,5 @@ RUN npm install
 RUN npm run build-backend
 RUN npm run build-frontend
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh", "./entrypoint.sh"]
 CMD ["npm" , "run", "start-backend"]
