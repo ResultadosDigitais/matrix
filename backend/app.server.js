@@ -82,7 +82,7 @@ app.get("/remove", (req, res) => {
 
     app.locals.roomsDetail = app.locals.roomsDetail.filter(function(value, index, arr){
 
-    return value.id !== req.query.roomId && value.temporary !== true;
+    return value.id !== req.query.roomId || value.temporary !== true;
 
   });
 
