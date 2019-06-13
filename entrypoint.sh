@@ -3,6 +3,7 @@ set -e
 ENVFILE="/ENVS/variables"
 
 echo "Running Entrypoint!"
+
 if [[ -f $ENVFILE ]]
 then 
   echo -n "read environment variables...: "
