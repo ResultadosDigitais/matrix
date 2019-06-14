@@ -14,8 +14,11 @@ const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
 const ENFORCE_SSL = process.env.ENFORCE_SSL || "false";
+const CUSTOM_STYLE = process.env.CUSTOM_STYLE || "";
 
 const app = express();
+
+app.locals.CUSTOM_STYLE = CUSTOM_STYLE
 
 // set the template engine ejs
 app.set("view engine", "ejs");
@@ -57,20 +60,55 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// routes
+app.get("/new", (req, res) => {
+
+  const newRoom = {
+    "id": req.query.roomId,
+    "name": req.query.roomName,
+    "disableMeeting": false,
+    "temporary":true
+  }
+
+  let found = app.locals.roomsDetail.find(element => element.id == req.query.roomId);
+
+  if(!found){
+      app.locals.roomsDetail.splice( 1, 0, newRoom);
+  }
+
+  res.redirect(`/office#${req.query.roomId}`);
+});
+
+
+app.get("/remove", (req, res) => {
+
+
+    app.locals.roomsDetail = app.locals.roomsDetail.filter(function(value, index, arr){
+
+    return value.id !== req.query.roomId || value.temporary !== true;
+
+  });
+
+  res.redirect(`/office#${app.locals.roomsDetail[0].id}`);
+});
+
+
 app.get("/office", (req, res) => {
-  fetchRooms(ROOMS_SOURCE)
+  res.render("office");
+});
+
+
+fetchRooms(ROOMS_SOURCE)
     .then(roomsData => {
       console.log(roomsData);
 
       app.locals.roomsDetail = roomsData;
-      res.render("office");
+      
     })
     .catch(err => {
       console.error(err);
-
-      res.render("500", { status: 500 });
-    });
 });
+
 
 // Listen on port 8080
 const server = app.listen(PORT, HOST);
