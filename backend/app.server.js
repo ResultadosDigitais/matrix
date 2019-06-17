@@ -14,8 +14,11 @@ const GOOGLE_CREDENTIAL =
   process.env.GOOGLE_CREDENTIAL ||
   "990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com";
 const ENFORCE_SSL = process.env.ENFORCE_SSL || "false";
+const CUSTOM_STYLE = process.env.CUSTOM_STYLE || "";
 
 const app = express();
+
+app.locals.CUSTOM_STYLE = CUSTOM_STYLE
 
 // set the template engine ejs
 app.set("view engine", "ejs");
