@@ -120,17 +120,17 @@ $(() => {
       height: "100%",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
-        preferH264:true,
-        resolution :360,
+        preferH264: true,
+        resolution: 360,
         constraints: {
           video: {
             ideal: 360,
-            max:360
+            max: 360
           }
-        }   
+        }
       },
       interfaceConfigOverwrite: {
-        DISABLE_VIDEO_BACKGROUND:true,
+        DISABLE_VIDEO_BACKGROUND: true,
         TOOLBAR_BUTTONS: [
           "microphone",
           "camera",
