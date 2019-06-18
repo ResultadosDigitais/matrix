@@ -120,7 +120,7 @@ $(() => {
       height: "100%",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
-        //startAudioOnly:true,
+        preferH264:true,
         resolution :360,
         constraints: {
           video: {
