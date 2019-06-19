@@ -9,11 +9,6 @@
   top: 0;
 }
 
-.matrix-content {
-  margin-top: 70px;
-  z-index: 0;
-}
-
 .dropdown-menu {
   border-radius: 0;
   margin-top: 8px;
@@ -22,7 +17,7 @@
 
 .dropdown-menu button {
   font-size: 14px;
-  color: #007bff;;
+  color: #007bff;
   background: none !important;
   border: none;
   cursor: pointer;

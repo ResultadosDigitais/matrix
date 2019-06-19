@@ -1,7 +1,5 @@
-import "bootstrap/dist/css/bootstrap.css";
 import "./office.css";
 
-import { init as sentryInit } from "@sentry/browser";
 import MatrixProfile from "./profile";
 import OfficeEvents from "./office-events";
 import renderHeader from "./header";
@@ -13,10 +11,6 @@ import "./context-menu/context-menu";
 import "./initialize/jquery.initialize";
 
 $(() => {
-  sentryInit({
-    dsn: "https://cd95f03dd404470a8988fb776de774da@sentry.io/1441017"
-  });
-
   renderHeader();
 
   const matrixProfile = new MatrixProfile();
@@ -38,11 +32,7 @@ $(() => {
       userView.detach();
     } else {
       userView = $(
-        `<div id="${
-          user.id
-        }" class="thumbnail user-room rounded-circle" user-presence><img class="rounded-circle" style="margin:2px;display:flex;" user-id="${
-          user.id
-        }" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`
+        `<div id="${user.id}" class="thumbnail user-room rounded-circle" user-presence><img class="rounded-circle" style="margin:2px;display:flex;" user-id="${user.id}" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`
       );
     }
 

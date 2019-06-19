@@ -30,7 +30,7 @@ const getStyleLoader = cssOptions => {
 
 module.exports = {
   entry: {
-    office: `${sourcePath}/office.js`,
+    office: `${sourcePath}/office-application.js`,
     login: `${sourcePath}/login-application.js`
   },
   optimization: {
