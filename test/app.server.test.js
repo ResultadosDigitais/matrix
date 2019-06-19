@@ -16,7 +16,7 @@ describe("Unit testing the / route", () => {
       .get("/")
       .then(response => {
         expect(response.text).to.contain(
-          '<script src="https://apis.google.com/js/platform.js" async defer></script>'
+          '<script src="https://apis.google.com/js/platform.js"></script>'
         );
       }));
 
@@ -29,13 +29,11 @@ describe("Unit testing the / route", () => {
         );
       }));
 
-  it("should there is google login button on rendering", () =>
+  it("should there is an element with id='application' to render react app", () =>
     request(app)
       .get("/")
       .then(response => {
-        expect(response.text).to.contain(
-          '<div id="googleLoginButton" class="g-signin2 gButton" data-width="220" data-height="50" data-theme="light" data-longtitle="true" data-onsuccess="onSignIn"></div>'
-        );
+        expect(response.text).to.contain('<div id="application"></div>');
       }));
 
   it("should there is login.js on rendering", () =>
