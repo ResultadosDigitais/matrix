@@ -1,6 +1,5 @@
-import OfficeController from "./controllers/office.controller";
-import Office from "./office.server";
 import app from "./app.server";
+import officeFactory from "./office.factory";
 
 const PORT = process.env.PORT || 8080;
 const HOST = "0.0.0.0";
@@ -9,9 +8,6 @@ const server = app.listen(PORT, HOST, undefined, () => {
   console.log(`Running on http://${HOST}:${PORT}`);
 });
 
-const officeControllerInstance = new OfficeController();
-const office = new Office(officeControllerInstance, server);
-
-office.start();
+officeFactory(server).start();
 
 module.exports = server;

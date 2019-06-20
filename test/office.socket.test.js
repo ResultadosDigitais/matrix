@@ -3,7 +3,7 @@ const io = require("socket.io-client");
 const sinon = require("sinon");
 
 const app = require("../backend/app.server");
-const Office = require("../backend/office.server");
+const Office = require("../backend/office.socket");
 
 const SOCKET_HOST = "0.0.0.0";
 const SOCKET_PORT = "3003";
