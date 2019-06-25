@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import GoogleCredentialController from "./controllers/google.credentials.controller";
 import fetchRooms from "./controllers/rooms.controller";
-import assets from "./controllers/assets.controller.js";
+import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
 import {
   ROOMS_SOURCE,
@@ -30,20 +30,19 @@ const assetsManifestFile = path.join(
   "..",
   "public",
   "dist",
-  "manifest.json"
+  "manifest.json",
 );
-const assetsManifestResolver =
-  ENVIRONMENT === "production"
-    ? assets.staticManifestResolver(assetsManifestFile)
-    : assets.lazyManifestResolver(assetsManifestFile);
+const assetsManifestResolver = ENVIRONMENT === "production"
+  ? assets.staticManifestResolver(assetsManifestFile)
+  : assets.lazyManifestResolver(assetsManifestFile);
 
 app.locals.assets = assets.createAssetsResolver(
   assetsManifestResolver,
-  "/dist"
+  "/dist",
 );
 
 app.use((req, res, next) => {
-  let isSecure = req.secure || req.header("x-forwarded-proto") === "https";
+  const isSecure = req.secure || req.header("x-forwarded-proto") === "https";
 
   if (ENFORCE_SSL === "true" && !isSecure) {
     res.redirect(`https://${req.hostname}${req.url}`);

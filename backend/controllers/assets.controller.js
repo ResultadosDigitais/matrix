@@ -1,33 +1,30 @@
-import fs from 'fs'
+import fs from "fs";
 
 const staticManifestResolver = (manifestFile) => {
   const manifestData = fs.readFileSync(manifestFile);
   const manifest = JSON.parse(manifestData);
 
-  return () => manifest
-}
+  return () => manifest;
+};
 
-const lazyManifestResolver = (manifestPath) => {
-  return () =>  {
-    const resolver = staticManifestResolver(manifestPath)
-    return resolver() 
-  }
-}
+const lazyManifestResolver = manifestPath => () => {
+  const resolver = staticManifestResolver(manifestPath);
+  return resolver();
+};
 
 
 const createAssetsResolver = (manifestResolver, assetsBasePath) => {
   const getAssetUrl = (assetName) => {
-    const manifest = manifestResolver()
-    const asset = manifest[assetName] || assetName
+    const manifest = manifestResolver();
+    const asset = manifest[assetName] || assetName;
 
-    return `${assetsBasePath}/${asset}`
-  }
+    return `${assetsBasePath}/${asset}`;
+  };
 
   return {
     url: getAssetUrl,
-  }
-}
+  };
+};
 
 
-export default { staticManifestResolver, lazyManifestResolver, createAssetsResolver }
-
+export default { staticManifestResolver, lazyManifestResolver, createAssetsResolver };
