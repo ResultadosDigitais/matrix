@@ -12,6 +12,10 @@ function getProfileDataSample() {
 }
 
 describe("Basic profile credential Test", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it("must return empty of credentials is not present", () => {
     const matrixProfile = new MatrixProfile();
     assert.equal(matrixProfile.loadStoredProfile(), null);
@@ -68,7 +72,7 @@ describe("Basic profile credential Test", () => {
   it("must return stored room", () => {
     const matrixProfile = new MatrixProfile();
     matrixProfile.storeRoom("room-1");
-    
+
     assert.equal(matrixProfile.loadStoredRoom(), "room-1");
   });
 
