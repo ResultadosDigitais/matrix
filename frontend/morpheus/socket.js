@@ -1,5 +1,5 @@
-import MatrixProfile from "../../profile";
-import OfficeEvents from "../../office-events";
+import MatrixProfile from "../profile";
+import OfficeEvents from "../office-events";
 
 const getDefaultRoom = rooms => rooms[0].id;
 

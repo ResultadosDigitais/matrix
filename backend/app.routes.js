@@ -14,7 +14,9 @@ router.get("/new", (req, res) => {
     temporary: true,
   };
 
-  const found = req.app.locals.roomsDetail.find(element => element.id == req.query.roomId);
+  const found = req.app.locals.roomsDetail.find(
+    element => element.id == req.query.roomId,
+  );
 
   if (!found) {
     req.app.locals.roomsDetail.splice(1, 0, newRoom);
@@ -39,7 +41,7 @@ router.get("/rooms", (req, res) => {
   res.json(req.app.locals.roomsDetail);
 });
 
-router.get("/morpheus", (req, res) => {
+router.get("/morpheus*", (req, res) => {
   res.render("morpheus");
 });
 

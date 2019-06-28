@@ -6,9 +6,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 
-const Room = ({ name, users }) => (
+const Room = ({ name, users, onClick }) => (
   <Card>
-    <CardActionArea>
+    <CardActionArea onClick={onClick}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {name}
@@ -25,12 +25,14 @@ const Room = ({ name, users }) => (
 
 Room.propTypes = {
   name: PropTypes.string,
-  users: PropTypes.arrayOf(PropTypes.object)
+  users: PropTypes.arrayOf(PropTypes.object),
+  onClick: PropTypes.func
 };
 
 Room.defaultProps = {
   name: "",
-  users: []
+  users: [],
+  onClick: undefined
 };
 
 export default Room;

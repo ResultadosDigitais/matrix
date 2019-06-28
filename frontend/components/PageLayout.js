@@ -13,8 +13,9 @@ const useStyles = makeStyles(theme => ({
     minHeight: "100vh"
   },
   main: {
+    display: "flex",
+    flexDirection: "column",
     flexGrow: 1,
-    padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -28,10 +29,18 @@ const useStyles = makeStyles(theme => ({
     }),
     marginLeft: 0
   },
-  drawerHeader: drawerHeader(theme)
+  drawerHeader: drawerHeader(theme),
+  container: {
+    flex: 1
+  }
 }));
 
-const PageLayout = ({ renderAppBarMenu, renderSideBarMenu, children }) => {
+const PageLayout = ({
+  title,
+  renderAppBarMenu,
+  renderSideBarMenu,
+  children
+}) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
   const classes = useStyles();
 
@@ -39,6 +48,7 @@ const PageLayout = ({ renderAppBarMenu, renderSideBarMenu, children }) => {
     <div className={classes.root}>
       <AppBar
         isDrawerOpen={isDrawerOpen}
+        title={title}
         openDrawer={() => {
           toggleDrawer(true);
         }}
@@ -59,19 +69,21 @@ const PageLayout = ({ renderAppBarMenu, renderSideBarMenu, children }) => {
         })}
       >
         <div className={classes.drawerHeader} />
-        {children}
+        <div className={classes.container}>{children}</div>
       </main>
     </div>
   );
 };
 
 PageLayout.propTypes = {
+  title: PropTypes.string,
   renderSideBarMenu: PropTypes.func,
   renderAppBarMenu: PropTypes.func,
   children: PropTypes.node
 };
 
 PageLayout.defaultProps = {
+  title: "",
   renderSideBarMenu: () => {},
   renderAppBarMenu: () => {},
   children: undefined

@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
+const AppBar = ({ title, isDrawerOpen, openDrawer, children }) => {
   const classes = useStyles();
 
   return (
@@ -65,7 +65,7 @@ const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title} color="primary">
-            Matrix
+            {title}
           </Typography>
           {children}
         </Toolbar>
@@ -75,12 +75,14 @@ const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
 };
 
 AppBar.propTypes = {
+  title: PropTypes.string,
   isDrawerOpen: PropTypes.bool,
   openDrawer: PropTypes.func,
   children: PropTypes.node
 };
 
 AppBar.defaultProps = {
+  title: "",
   isDrawerOpen: false,
   openDrawer: undefined,
   children: undefined
