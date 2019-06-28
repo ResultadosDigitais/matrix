@@ -9,9 +9,10 @@ module.exports = {
   },
   rules: {
     quotes: ["error", "double"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js"] }],
     "import/prefer-default-export": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/forbid-prop-types": "off"
   }
 };

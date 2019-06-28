@@ -35,4 +35,12 @@ router.get("/office", (req, res) => {
   res.render("office");
 });
 
+router.get("/rooms", (req, res) => {
+  res.json(req.app.locals.roomsDetail);
+});
+
+router.get("/morpheus", (req, res) => {
+  res.render("morpheus");
+});
+
 module.exports = router;

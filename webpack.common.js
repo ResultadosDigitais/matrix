@@ -32,6 +32,7 @@ module.exports = {
   entry: {
     office: `${sourcePath}/office.js`,
     login: `${sourcePath}/login-application.js`,
+    morpheus: `${sourcePath}/morpheus.js`,
   },
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
