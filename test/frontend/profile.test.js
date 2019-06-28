@@ -4,10 +4,10 @@ const MatrixProfile = require("../../frontend/profile").default;
 
 function getProfileDataSample() {
   return {
-    id: '111',
-    name: 'Nome do fulano',
-    imageUrl: 'http://localhost/img.jpg',
-    email: 'Mail@mail.com',
+    id: "111",
+    name: "Nome do fulano",
+    imageUrl: "http://localhost/img.jpg",
+    email: "Mail@mail.com",
   };
 }
 
@@ -75,5 +75,4 @@ describe("Basic profile credential Test", () => {
 
     assert.equal(matrixProfile.loadStoredRoom(), "room-1");
   });
-
 });

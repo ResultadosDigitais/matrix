@@ -14,7 +14,7 @@ function onLogout(profile) {
 
 function loadUserName(profile) {
   document.getElementById(
-    "userName"
+    "userName",
   ).innerText = `Whats'up ${profile.userName()}`;
 }
 

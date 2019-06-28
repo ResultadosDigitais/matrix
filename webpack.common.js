@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 const path = require("path");
 const webpack = require("webpack");
 
@@ -13,65 +15,63 @@ const buildPath = path.join(__dirname, "public", "dist");
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 
-const getStyleLoader = cssOptions => {
-  return [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: process.env.NODE_ENV === "development"
-      }
+const getStyleLoader = cssOptions => [
+  {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      hmr: process.env.NODE_ENV === "development",
     },
-    {
-      loader: "css-loader",
-      options: cssOptions
-    }
-  ];
-};
+  },
+  {
+    loader: "css-loader",
+    options: cssOptions,
+  },
+];
 
 module.exports = {
   entry: {
     office: `${sourcePath}/office.js`,
-    login: `${sourcePath}/login-application.js`
+    login: `${sourcePath}/login-application.js`,
   },
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.ProvidePlugin({
       $: "jquery",
-      jQuery: "jquery"
+      jQuery: "jquery",
     }),
     new ManifestPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name]-[contenthash].css",
-      chunkFilename: "[id].css"
-    })
+      chunkFilename: "[id].css",
+    }),
   ],
   output: {
     path: buildPath,
-    filename: "[name]-[contenthash].js"
+    filename: "[name]-[contenthash].js",
   },
   module: {
     rules: [
       {
         test: cssRegex,
         exclude: cssModuleRegex,
-        use: getStyleLoader({})
+        use: getStyleLoader({}),
       },
       {
         test: cssModuleRegex,
         use: getStyleLoader({
-          modules: true
-        })
+          modules: true,
+        }),
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
-      }
-    ]
-  }
+          loader: "babel-loader",
+        },
+      },
+    ],
+  },
 };
