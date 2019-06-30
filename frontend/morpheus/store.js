@@ -2,21 +2,25 @@ const CHANGE_USER_NAME = "CHANGE_USER_NAME";
 const ADD_ROOMS = "ADD_ROOMS";
 const SYNC_OFFICE = "SYNC_OFFICE";
 const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
+const CHANGE_USERS_FILTER = "CHANGE_USERS_FILTER";
 
 export const initialState = {
   userName: "",
   rooms: [],
   usersInRoom: [],
   users: [],
+  usersFilter: {
+    search: ""
+  },
   office: [],
-  filter: {
+  officeFilter: {
     onlyFullRoom: false,
     search: ""
   }
 };
 
 const buildOfficeState = state => {
-  const { rooms, usersInRoom, filter } = state;
+  const { rooms, usersInRoom, officeFilter } = state;
 
   let office = rooms.map(room => ({
     id: room.id,
@@ -24,11 +28,11 @@ const buildOfficeState = state => {
     users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
   }));
 
-  if (filter.onlyFullRoom) {
+  if (officeFilter.onlyFullRoom) {
     office = office.filter(o => o.users.length > 0);
   }
-  if (filter.search) {
-    const search = filter.search.toLowerCase();
+  if (officeFilter.search) {
+    const search = officeFilter.search.toLowerCase();
     office = office.filter(o => o.name.toLowerCase().includes(search));
   }
 
@@ -39,13 +43,18 @@ const buildOfficeState = state => {
 };
 
 const buildUsersState = state => {
-  const { usersInRoom } = state;
+  const { usersInRoom, usersFilter } = state;
 
-  const users = usersInRoom.map(u => ({
+  let users = usersInRoom.map(u => ({
     id: u.user.id,
     name: u.user.name,
     avatar: u.user.imageUrl
   }));
+
+  if (usersFilter.search) {
+    const search = usersFilter.search.toLowerCase();
+    users = users.filter(u => u.name.toLowerCase().includes(search));
+  }
 
   return {
     ...state,
@@ -65,6 +74,14 @@ const reducerLogic = (state, action) => {
         ...state,
         rooms: action.rooms
       });
+    case CHANGE_OFFICE_FILTER:
+      return buildOfficeState({
+        ...state,
+        officeFilter: {
+          ...state.officeFilter,
+          [action.key]: action.value
+        }
+      });
     case SYNC_OFFICE:
       return buildUsersState(
         buildOfficeState({
@@ -72,11 +89,11 @@ const reducerLogic = (state, action) => {
           usersInRoom: Object.values(action.usersInRoom)
         })
       );
-    case CHANGE_OFFICE_FILTER:
-      return buildOfficeState({
+    case CHANGE_USERS_FILTER:
+      return buildUsersState({
         ...state,
-        filter: {
-          ...state.filter,
+        usersFilter: {
+          ...state.usersFilter,
           [action.key]: action.value
         }
       });
@@ -88,6 +105,7 @@ const reducerLogic = (state, action) => {
 export const reducer = (state, action) => {
   const newState = reducerLogic(state, action);
 
+  // debug store
   console.log(action.type, newState);
 
   return newState;
@@ -110,6 +128,12 @@ export const syncOffice = usersInRoom => ({
 
 export const changeOfficeFilter = (key, value) => ({
   type: CHANGE_OFFICE_FILTER,
+  key,
+  value
+});
+
+export const changeUsersFilter = (key, value) => ({
+  type: CHANGE_USERS_FILTER,
   key,
   value
 });

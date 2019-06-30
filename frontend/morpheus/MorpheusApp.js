@@ -18,7 +18,8 @@ import {
   changeUserName,
   addRooms,
   syncOffice,
-  changeOfficeFilter
+  changeOfficeFilter,
+  changeUsersFilter
 } from "./store";
 
 const MorpheusApp = ({ location }) => {
@@ -47,7 +48,7 @@ const MorpheusApp = ({ location }) => {
     }
   }, []);
 
-  const { office, filter, users } = state;
+  const { office, officeFilter, users, usersFilter } = state;
   const title =
     location.state && location.state.room ? location.state.room.name : "Matrix";
 
@@ -62,7 +63,7 @@ const MorpheusApp = ({ location }) => {
             render={() => (
               <>
                 <MenuOffice
-                  filter={filter}
+                  filter={officeFilter}
                   onChangeFilter={(key, value) => {
                     dispatch(changeOfficeFilter(key, value));
                   }}
@@ -74,7 +75,15 @@ const MorpheusApp = ({ location }) => {
           <Route path="/morpheus/office" exact render={() => <MenuRoom />} />
         </Switch>
       )}
-      renderSideBarMenu={() => <MenuUsers users={users} />}
+      renderSideBarMenu={() => (
+        <MenuUsers
+          users={users}
+          filter={usersFilter}
+          onChangeFilter={(key, value) => {
+            dispatch(changeUsersFilter(key, value));
+          }}
+        />
+      )}
     >
       {isLoading ? (
         <Loading />
