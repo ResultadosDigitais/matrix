@@ -13,6 +13,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "no-new": "off"
   }
 };

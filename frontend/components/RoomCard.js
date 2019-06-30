@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const RoomCard = ({ name, users, onClick }) => {
+const RoomCard = ({ name, isDefault, users, onClick }) => {
   const [isExpanded, toggleExpand] = useState(false);
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
@@ -53,8 +53,8 @@ const RoomCard = ({ name, users, onClick }) => {
           </Typography>
           <div className={classes.userGrid}>
             {userToShow.map(user => (
-              <Tooltip title={user.name}>
-                <Avatar key={user.id} src={user.imageUrl} />
+              <Tooltip key={user.id} title={user.name}>
+                <Avatar src={user.imageUrl} />
               </Tooltip>
             ))}
             {totalUsersHidden > 0 && (
@@ -67,9 +67,11 @@ const RoomCard = ({ name, users, onClick }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={onClick}>
-          Enter this room
-        </Button>
+        {!isDefault && (
+          <Button size="small" color="primary" onClick={onClick}>
+            Enter this room
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
@@ -78,13 +80,15 @@ const RoomCard = ({ name, users, onClick }) => {
 RoomCard.propTypes = {
   name: PropTypes.string,
   users: PropTypes.arrayOf(PropTypes.object),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  isDefault: PropTypes.bool
 };
 
 RoomCard.defaultProps = {
   name: "",
   users: [],
-  onClick: undefined
+  onClick: undefined,
+  isDefault: false
 };
 
 export default RoomCard;

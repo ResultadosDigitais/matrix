@@ -1,29 +1,47 @@
 import MatrixProfile from "../profile";
 import OfficeEvents from "../office-events";
 
-const getDefaultRoom = rooms => rooms[0].id;
+// singletons
+let profile;
+let events;
+let defaultRoomId;
 
-const getLastRoom = (profile, rooms) => {
+const getLastRoom = () => {
   let lastRoom = profile.loadStoredRoom();
 
   if (!lastRoom) {
-    lastRoom = getDefaultRoom(rooms);
+    lastRoom = defaultRoomId;
   }
 
   return lastRoom;
 };
 
-export const buildProfile = () => new MatrixProfile();
+export const initProfile = () => {
+  profile = new MatrixProfile();
+  return profile;
+};
 
-export const buildEvents = (profile, rooms) => {
+export const initEvents = rooms => {
   const domain = `${window.location.protocol}//${window.location.host}`;
   const currentUser = profile.loadStoredProfile();
 
-  const officeEvents = new OfficeEvents({
+  defaultRoomId = rooms[0].id;
+
+  events = new OfficeEvents({
     domain,
     currentUser,
-    currentRoom: getLastRoom(profile, rooms)
+    currentRoom: getLastRoom()
   });
 
-  return officeEvents;
+  return events;
+};
+
+export const getCurrentUser = () => profile.loadStoredProfile();
+
+export const emitEnterInRoom = roomId => {
+  events.enterInRoom(roomId);
+};
+
+export const emitExitRoom = () => {
+  events.enterInRoom(defaultRoomId);
 };

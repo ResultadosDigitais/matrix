@@ -69,7 +69,7 @@ const MorpheusRoom = ({ location }) => {
     const domain = "meet.jit.si";
     const options = getMeetingOptions("baconx", meetRef.current, config);
 
-    const api = new JitsiMeetExternalAPI(domain, options);
+    new JitsiMeetExternalAPI(domain, options);
   }, [location.state]);
 
   return (

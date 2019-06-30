@@ -7,13 +7,15 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { pink } from "@material-ui/core/colors";
+import { pink, blue } from "@material-ui/core/colors";
+import { SnackbarProvider } from "notistack";
 
 import MorpheusApp from "./morpheus/MorpheusApp";
 
 const theme = createMuiTheme({
   palette: {
-    primary: pink
+    primary: blue,
+    secondary: pink
   }
 });
 
@@ -21,9 +23,14 @@ ReactDOM.render(
   <>
     <CssBaseline />
     <ThemeProvider theme={theme}>
-      <Router>
-        <MorpheusApp />
-      </Router>
+      <SnackbarProvider
+        maxSnack={5}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Router>
+          <MorpheusApp />
+        </Router>
+      </SnackbarProvider>
     </ThemeProvider>
   </>,
   document.getElementById("root")

@@ -64,7 +64,7 @@ const AppBar = ({ title, isDrawerOpen, openDrawer, children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title} color="primary">
+          <Typography variant="h6" className={classes.title} color="secondary">
             {title}
           </Typography>
           {children}

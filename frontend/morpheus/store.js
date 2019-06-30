@@ -1,9 +1,11 @@
+const ADD_ERROR = "ADD_ERROR";
 const CHANGE_USER_NAME = "CHANGE_USER_NAME";
 const ADD_ROOMS = "ADD_ROOMS";
 const SYNC_OFFICE = "SYNC_OFFICE";
 const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
 const CHANGE_USERS_FILTER = "CHANGE_USERS_FILTER";
 const ADD_USER = "ADD_USER";
+const REMOVE_USER = "REMOVE_USER";
 
 export const initialState = {
   userName: "",
@@ -17,15 +19,18 @@ export const initialState = {
   officeFilter: {
     onlyFullRoom: false,
     search: ""
-  }
+  },
+  hasError: false,
+  errorMessage: ""
 };
 
 const buildOfficeState = state => {
   const { rooms, usersInRoom, officeFilter } = state;
 
-  let office = rooms.map(room => ({
+  let office = rooms.map((room, index) => ({
     id: room.id,
     name: room.name,
+    isDefault: index === 0,
     users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
   }));
 
@@ -99,23 +104,42 @@ const reducerLogic = (state, action) => {
         }
       });
     case ADD_USER: {
-      const savedUser = state.usersInRoom.find(
-        u => u.room === action.roomId && u.user.id === action.user.id
+      const index = state.usersInRoom.findIndex(
+        u => u.user.id === action.user.id
       );
-      if (savedUser) {
-        return state;
+      let usersInRoom;
+
+      if (index === -1) {
+        usersInRoom = [].concat(state.usersInRoom, {
+          room: action.roomId,
+          user: action.user
+        });
+      } else {
+        usersInRoom = state.usersInRoom.slice(0);
+        usersInRoom[index].room = action.roomId;
       }
 
       return buildUsersState(
         buildOfficeState({
           ...state,
-          usersInRoom: [].concat(state.usersInRoom, {
-            room: action.roomId,
-            user: action.user
-          })
+          usersInRoom
         })
       );
     }
+    case REMOVE_USER:
+      return buildUsersState(
+        buildOfficeState({
+          ...state,
+          usersInRoom: state.usersInRoom.filter(
+            x => x.user.id !== action.userId
+          )
+        })
+      );
+    case ADD_ERROR:
+      return {
+        hasError: true,
+        errorMessage: action.message
+      };
     default:
       return state;
   }
@@ -161,4 +185,14 @@ export const addUser = (user, roomId) => ({
   type: ADD_USER,
   user,
   roomId
+});
+
+export const removeUser = userId => ({
+  type: REMOVE_USER,
+  userId
+});
+
+export const addError = error => ({
+  type: ADD_ERROR,
+  message: error ? error.message : "An unknown error has occurred."
 });

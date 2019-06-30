@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 
-const MenuRoom = ({ history }) => (
+const MenuRoom = ({ history, onExit }) => (
   <IconButton
     aria-label="Exit room"
     aria-controls="menu-appbar"
     onClick={() => {
+      onExit();
       history.push("/morpheus");
     }}
     color="inherit"
@@ -18,7 +18,8 @@ const MenuRoom = ({ history }) => (
 );
 
 MenuRoom.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  onExit: PropTypes.func.isRequired
 };
 
-export default withRouter(MenuRoom);
+export default MenuRoom;

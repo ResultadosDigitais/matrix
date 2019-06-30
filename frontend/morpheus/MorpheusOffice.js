@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MorpheusOffice = ({ office, history }) => {
+const MorpheusOffice = ({ office, history, onUserEnterRoom }) => {
   const [selectedRoom, setSelectedRoom] = useState({});
   const [isMeetingDialogOpen, setMeetingDialogOpen] = useState(false);
   const classes = useStyles();
@@ -38,6 +38,7 @@ const MorpheusOffice = ({ office, history }) => {
           setMeetingDialogOpen(false);
         }}
         onConfirm={config => {
+          onUserEnterRoom(selectedRoom);
           history.push("/morpheus/office", {
             config,
             room: selectedRoom
@@ -50,12 +51,14 @@ const MorpheusOffice = ({ office, history }) => {
 
 MorpheusOffice.propTypes = {
   office: PropTypes.arrayOf(PropTypes.object),
-  history: PropTypes.object
+  history: PropTypes.object,
+  onUserEnterRoom: PropTypes.func
 };
 
 MorpheusOffice.defaultProps = {
   office: [],
-  history: undefined
+  history: undefined,
+  onUserEnterRoom: () => {}
 };
 
 export default MorpheusOffice;

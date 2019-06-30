@@ -34,6 +34,7 @@
     "lodash.debounce": "^4.0.8",
     "md5": "^2.2.1",
     "nodemon": "^1.19.1",
+    "notistack": "^0.8.8",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
