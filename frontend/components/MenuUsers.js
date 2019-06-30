@@ -69,7 +69,7 @@ const MenuUsers = ({ users, onChangeFilter }) => {
           <ListItemAvatar>
             <Avatar alt={user.name} src={user.avatar} />
           </ListItemAvatar>
-          <ListItemText primary={user.name} />
+          <ListItemText primary={user.name} secondary={user.roomName} />
         </ListItem>
       ))}
     </List>

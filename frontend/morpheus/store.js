@@ -49,13 +49,18 @@ const buildOfficeState = state => {
 };
 
 const buildUsersState = state => {
-  const { usersInRoom, usersFilter } = state;
+  const { usersInRoom, usersFilter, rooms } = state;
 
-  let users = usersInRoom.map(u => ({
-    id: u.user.id,
-    name: u.user.name,
-    avatar: u.user.imageUrl
-  }));
+  let users = usersInRoom.map(u => {
+    const room = rooms.find(r => r.id === u.room);
+
+    return {
+      id: u.user.id,
+      name: u.user.name,
+      avatar: u.user.imageUrl,
+      roomName: room ? room.name : ""
+    };
+  });
 
   if (usersFilter.search) {
     const search = usersFilter.search.toLowerCase();
