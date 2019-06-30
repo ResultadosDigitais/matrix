@@ -10,26 +10,27 @@ export const initialState = {
   users: [],
   office: [],
   filter: {
-    onlyFullRoom: false
+    onlyFullRoom: false,
+    search: ""
   }
 };
 
 const buildOfficeState = state => {
   const { rooms, usersInRoom, filter } = state;
 
-  const office = rooms
-    .map(room => ({
-      id: room.id,
-      name: room.name,
-      users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
-    }))
-    .filter(o => {
-      if (filter.onlyFullRoom) {
-        return o.users.length > 0;
-      }
+  let office = rooms.map(room => ({
+    id: room.id,
+    name: room.name,
+    users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
+  }));
 
-      return true;
-    });
+  if (filter.onlyFullRoom) {
+    office = office.filter(o => o.users.length > 0);
+  }
+  if (filter.search) {
+    const search = filter.search.toLowerCase();
+    office = office.filter(o => o.name.toLowerCase().includes(search));
+  }
 
   return {
     ...state,

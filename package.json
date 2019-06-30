@@ -31,6 +31,7 @@
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
     "jquery": "^3.4.1",
+    "lodash.debounce": "^4.0.8",
     "md5": "^2.2.1",
     "nodemon": "^1.19.1",
     "popper.js": "^1.15.0",
