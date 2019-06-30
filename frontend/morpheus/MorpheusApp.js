@@ -18,7 +18,7 @@ import {
   changeUserName,
   addRooms,
   syncOffice,
-  changeFilter
+  changeOfficeFilter
 } from "./store";
 
 const MorpheusApp = ({ location }) => {
@@ -64,7 +64,7 @@ const MorpheusApp = ({ location }) => {
                 <MenuOffice
                   filter={filter}
                   onChangeFilter={(key, value) => {
-                    dispatch(changeFilter(key, value));
+                    dispatch(changeOfficeFilter(key, value));
                   }}
                 />
                 <MenuAuth userName={state.userName} />

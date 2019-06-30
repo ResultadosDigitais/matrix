@@ -1,7 +1,7 @@
 const CHANGE_USER_NAME = "CHANGE_USER_NAME";
 const ADD_ROOMS = "ADD_ROOMS";
 const SYNC_OFFICE = "SYNC_OFFICE";
-const CHANGE_FILTER = "CHANGE_FILTER";
+const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
 
 export const initialState = {
   userName: "",
@@ -14,7 +14,7 @@ export const initialState = {
   }
 };
 
-const buildState = state => {
+const buildOfficeState = state => {
   const { rooms, usersInRoom, filter } = state;
 
   const office = rooms
@@ -31,26 +31,28 @@ const buildState = state => {
       return true;
     });
 
+  return {
+    ...state,
+    office
+  };
+};
+
+const buildUsersState = state => {
+  const { usersInRoom } = state;
+
   const users = usersInRoom.map(u => ({
     id: u.user.id,
     name: u.user.name,
     avatar: u.user.imageUrl
   }));
 
-  console.log("newState", {
-    ...state,
-    office,
-    users
-  });
-
   return {
     ...state,
-    office,
     users
   };
 };
 
-export const reducer = (state, action) => {
+const reducerLogic = (state, action) => {
   switch (action.type) {
     case CHANGE_USER_NAME:
       return {
@@ -58,17 +60,19 @@ export const reducer = (state, action) => {
         userName: action.name
       };
     case ADD_ROOMS:
-      return buildState({
+      return buildOfficeState({
         ...state,
         rooms: action.rooms
       });
     case SYNC_OFFICE:
-      return buildState({
-        ...state,
-        usersInRoom: Object.values(action.usersInRoom)
-      });
-    case CHANGE_FILTER:
-      return buildState({
+      return buildUsersState(
+        buildOfficeState({
+          ...state,
+          usersInRoom: Object.values(action.usersInRoom)
+        })
+      );
+    case CHANGE_OFFICE_FILTER:
+      return buildOfficeState({
         ...state,
         filter: {
           ...state.filter,
@@ -78,6 +82,14 @@ export const reducer = (state, action) => {
     default:
       throw new Error();
   }
+};
+
+export const reducer = (state, action) => {
+  const newState = reducerLogic(state, action);
+
+  console.log(action.type, newState);
+
+  return newState;
 };
 
 export const changeUserName = name => ({
@@ -95,8 +107,8 @@ export const syncOffice = usersInRoom => ({
   usersInRoom
 });
 
-export const changeFilter = (key, value) => ({
-  type: CHANGE_FILTER,
+export const changeOfficeFilter = (key, value) => ({
+  type: CHANGE_OFFICE_FILTER,
   key,
   value
 });
