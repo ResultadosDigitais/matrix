@@ -164,7 +164,7 @@ const MorpheusApp = ({ history, location }) => {
                       dispatch(changeOfficeFilter(key, value));
                     }}
                   />
-                  <MenuAuth userName={state.userName} />
+                  <MenuAuth userName={currentUser.name} />
                 </>
               )}
             />

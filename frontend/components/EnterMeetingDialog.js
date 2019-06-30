@@ -15,7 +15,8 @@ import VideocamOff from "@material-ui/icons/VideocamOff";
 
 const useStyles = makeStyles(() => ({
   toolbar: {
-    textAlign: "center"
+    textAlign: "center",
+    minWidth: 260
   },
   sideMargin: {
     marginRight: 8
