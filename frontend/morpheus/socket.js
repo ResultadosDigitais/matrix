@@ -36,12 +36,37 @@ export const initEvents = rooms => {
   return events;
 };
 
-export const getCurrentUser = () => profile.loadStoredProfile();
+export const getCurrentUser = () => {
+  if (!profile) {
+    return undefined;
+  }
+
+  return profile.loadStoredProfile();
+};
+
+const saveCurrentUserRoom = roomId => {
+  profile.storeRoom(roomId);
+};
 
 export const emitEnterInRoom = roomId => {
   events.enterInRoom(roomId);
+  saveCurrentUserRoom(roomId);
 };
 
 export const emitExitRoom = () => {
   events.enterInRoom(defaultRoomId);
+  saveCurrentUserRoom(defaultRoomId);
+};
+
+export const isCurrentUserInMeeting = () => {
+  if (!profile) {
+    return false;
+  }
+
+  return profile.loadStoredRoom() !== defaultRoomId;
+};
+
+export const emitInviteUser = userId => {
+  const roomId = profile.loadStoredRoom();
+  events.callUserForMyRoom(userId, roomId);
 };

@@ -1,5 +1,5 @@
 const ADD_ERROR = "ADD_ERROR";
-const CHANGE_USER_NAME = "CHANGE_USER_NAME";
+const SET_CURRENT_USER = "SET_CURRENT_USER";
 const ADD_ROOMS = "ADD_ROOMS";
 const SYNC_OFFICE = "SYNC_OFFICE";
 const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
@@ -8,7 +8,7 @@ const ADD_USER = "ADD_USER";
 const REMOVE_USER = "REMOVE_USER";
 
 export const initialState = {
-  userName: "",
+  currentUser: {},
   rooms: [],
   usersInRoom: [],
   users: [],
@@ -75,10 +75,10 @@ const buildUsersState = state => {
 
 const reducerLogic = (state, action) => {
   switch (action.type) {
-    case CHANGE_USER_NAME:
+    case SET_CURRENT_USER:
       return {
         ...state,
-        userName: action.name
+        currentUser: action.user
       };
     case ADD_ROOMS:
       return buildOfficeState({
@@ -154,14 +154,14 @@ export const reducer = (state, action) => {
   const newState = reducerLogic(state, action);
 
   // debug store
-  console.log(action.type, newState);
+  // console.log(action.type, newState);
 
   return newState;
 };
 
-export const changeUserName = name => ({
-  type: CHANGE_USER_NAME,
-  name
+export const setCurrentUser = user => ({
+  type: SET_CURRENT_USER,
+  user
 });
 
 export const addRooms = rooms => ({
