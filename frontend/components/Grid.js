@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   root: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(345px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
     gridGap: 20
   }
 }));

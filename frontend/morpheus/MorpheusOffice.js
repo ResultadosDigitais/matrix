@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "../components/Grid";
-import Room from "../components/Room";
+import RoomCard from "../components/RoomCard";
 import EnterMeetingDialog from "../components/EnterMeetingDialog";
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +21,7 @@ const MorpheusOffice = ({ office, history }) => {
     <div className={classes.root}>
       <Grid>
         {office.map(room => (
-          <Room
+          <RoomCard
             {...room}
             key={room.id}
             onClick={() => {

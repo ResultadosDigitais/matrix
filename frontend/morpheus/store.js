@@ -3,6 +3,7 @@ const ADD_ROOMS = "ADD_ROOMS";
 const SYNC_OFFICE = "SYNC_OFFICE";
 const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
 const CHANGE_USERS_FILTER = "CHANGE_USERS_FILTER";
+const ADD_USER = "ADD_USER";
 
 export const initialState = {
   userName: "",
@@ -97,8 +98,26 @@ const reducerLogic = (state, action) => {
           [action.key]: action.value
         }
       });
+    case ADD_USER: {
+      const savedUser = state.usersInRoom.find(
+        u => u.room === action.roomId && u.user.id === action.user.id
+      );
+      if (savedUser) {
+        return state;
+      }
+
+      return buildUsersState(
+        buildOfficeState({
+          ...state,
+          usersInRoom: [].concat(state.usersInRoom, {
+            room: action.roomId,
+            user: action.user
+          })
+        })
+      );
+    }
     default:
-      throw new Error();
+      return state;
   }
 };
 
@@ -136,4 +155,10 @@ export const changeUsersFilter = (key, value) => ({
   type: CHANGE_USERS_FILTER,
   key,
   value
+});
+
+export const addUser = (user, roomId) => ({
+  type: ADD_USER,
+  user,
+  roomId
 });
