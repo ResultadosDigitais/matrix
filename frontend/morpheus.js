@@ -8,8 +8,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { pink, blue } from "@material-ui/core/colors";
+import { Provider as ReduxProvider } from "react-redux";
 import { SnackbarProvider } from "notistack";
 
+import store from "./morpheus/store";
 import MorpheusApp from "./morpheus/MorpheusApp";
 
 const theme = createMuiTheme({
@@ -20,7 +22,7 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <>
+  <ReduxProvider store={store}>
     <CssBaseline />
     <ThemeProvider theme={theme}>
       <SnackbarProvider
@@ -32,7 +34,7 @@ ReactDOM.render(
         </Router>
       </SnackbarProvider>
     </ThemeProvider>
-  </>,
+  </ReduxProvider>,
   document.getElementById("root")
 );
 

@@ -1,11 +1,13 @@
-const ADD_ERROR = "ADD_ERROR";
-const SET_CURRENT_USER = "SET_CURRENT_USER";
-const ADD_ROOMS = "ADD_ROOMS";
-const SYNC_OFFICE = "SYNC_OFFICE";
-const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
-const CHANGE_USERS_FILTER = "CHANGE_USERS_FILTER";
-const ADD_USER = "ADD_USER";
-const REMOVE_USER = "REMOVE_USER";
+import {
+  ADD_ERROR,
+  SET_CURRENT_USER,
+  ADD_ROOMS,
+  SYNC_OFFICE,
+  CHANGE_OFFICE_FILTER,
+  CHANGE_USERS_FILTER,
+  ADD_USER,
+  REMOVE_USER
+} from "./actions";
 
 export const initialState = {
   currentUser: {},
@@ -73,7 +75,7 @@ const buildUsersState = state => {
   };
 };
 
-const reducerLogic = (state, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
@@ -150,54 +152,4 @@ const reducerLogic = (state, action) => {
   }
 };
 
-export const reducer = (state, action) => {
-  const newState = reducerLogic(state, action);
-
-  // debug store
-  // console.log(action.type, newState);
-
-  return newState;
-};
-
-export const setCurrentUser = user => ({
-  type: SET_CURRENT_USER,
-  user
-});
-
-export const addRooms = rooms => ({
-  type: ADD_ROOMS,
-  rooms
-});
-
-export const syncOffice = usersInRoom => ({
-  type: SYNC_OFFICE,
-  usersInRoom
-});
-
-export const changeOfficeFilter = (key, value) => ({
-  type: CHANGE_OFFICE_FILTER,
-  key,
-  value
-});
-
-export const changeUsersFilter = (key, value) => ({
-  type: CHANGE_USERS_FILTER,
-  key,
-  value
-});
-
-export const addUser = (user, roomId) => ({
-  type: ADD_USER,
-  user,
-  roomId
-});
-
-export const removeUser = userId => ({
-  type: REMOVE_USER,
-  userId
-});
-
-export const addError = error => ({
-  type: ADD_ERROR,
-  message: error ? error.message : "An unknown error has occurred."
-});
+export default reducers;
