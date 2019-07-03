@@ -13,8 +13,8 @@ import MenuRoom from "../components/MenuRoom";
 import MenuAuth from "../components/MenuAuth";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
+import SnackbarActions from "../components/SnackbarActions";
 import Routes from "./Routes";
-import { buildDefaultAction } from "./snackbar";
 import {
   initProfile,
   initEvents,
@@ -90,7 +90,15 @@ const useEvents = (
       const events = initEvents(rooms);
 
       const showNotification = message => {
-        enqueueSnackbar(message, { action: buildDefaultAction(closeSnackbar) });
+        enqueueSnackbar(message, {
+          action: key => (
+            <SnackbarActions
+              onDismiss={() => {
+                closeSnackbar(key);
+              }}
+            />
+          )
+        });
         new Notification(message);
       };
 
