@@ -13,8 +13,7 @@ import MenuRoom from "../components/MenuRoom";
 import MenuAuth from "../components/MenuAuth";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
-import MorpheusOffice from "./MorpheusOffice";
-import MorpheusRoom from "./MorpheusRoom";
+import Routes from "./Routes";
 import { buildDefaultAction } from "./snackbar";
 import {
   initProfile,
@@ -147,7 +146,6 @@ const MorpheusApp = ({
   location,
   rooms,
   currentUser,
-  office,
   officeFilter,
   users,
   usersFilter
@@ -238,32 +236,7 @@ const MorpheusApp = ({
           />
         )}
       >
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Switch>
-            <Route
-              path="/morpheus"
-              exact
-              render={routeProps => (
-                <MorpheusOffice
-                  {...routeProps}
-                  office={office}
-                  onUserEnterRoom={room => {
-                    emitEnterInRoom(room.id);
-                  }}
-                />
-              )}
-            />
-            <Route
-              path="/morpheus/office"
-              exact
-              render={routeProps => (
-                <MorpheusRoom {...routeProps} office={office} />
-              )}
-            />
-          </Switch>
-        )}
+        {isLoading ? <Loading /> : <Routes />}
       </PageLayout>
       <InviteToMeetingDialog
         open={isInviteModalOpen}

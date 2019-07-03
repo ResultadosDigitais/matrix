@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from "../components/Grid";
-import RoomCard from "../components/RoomCard";
-import EnterMeetingDialog from "../components/EnterMeetingDialog";
+import Grid from "../../components/Grid";
+import RoomCard from "../../components/RoomCard";
+import EnterMeetingDialog from "../../components/EnterMeetingDialog";
+import { selectOffice } from "../store/selectors";
+import { emitEnterInRoom } from "../socket";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MorpheusOffice = ({ office, history, onUserEnterRoom }) => {
+const MorpheusOffice = ({ office, history }) => {
   const [selectedRoom, setSelectedRoom] = useState({});
   const [isMeetingDialogOpen, setMeetingDialogOpen] = useState(false);
   const classes = useStyles();
@@ -38,7 +41,7 @@ const MorpheusOffice = ({ office, history, onUserEnterRoom }) => {
           setMeetingDialogOpen(false);
         }}
         onConfirm={config => {
-          onUserEnterRoom(selectedRoom);
+          emitEnterInRoom(selectedRoom.id);
           history.push("/morpheus/office", {
             config,
             room: selectedRoom
@@ -51,14 +54,16 @@ const MorpheusOffice = ({ office, history, onUserEnterRoom }) => {
 
 MorpheusOffice.propTypes = {
   office: PropTypes.arrayOf(PropTypes.object),
-  history: PropTypes.object,
-  onUserEnterRoom: PropTypes.func
+  history: PropTypes.object
 };
 
 MorpheusOffice.defaultProps = {
   office: [],
-  history: undefined,
-  onUserEnterRoom: () => {}
+  history: undefined
 };
 
-export default MorpheusOffice;
+const mapStateToProps = state => ({
+  office: selectOffice(state)
+});
+
+export default connect(mapStateToProps)(MorpheusOffice);
