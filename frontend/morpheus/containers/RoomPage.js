@@ -8,7 +8,12 @@ import { connect } from "react-redux";
 import EnterMeetingDialog from "../../components/EnterMeetingDialog";
 import Loading from "../../components/Loading";
 import { selectRooms } from "../store/selectors";
-import { getCurrentRoom, emitEnterInRoom } from "../socket";
+import {
+  getCurrentRoom,
+  emitEnterInRoom,
+  emitStartMeet,
+  emitLeftMeet
+} from "../socket";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -92,9 +97,12 @@ const RoomPage = ({ history, match, rooms }) => {
       emitEnterInRoom(roomId);
     }
 
+    emitStartMeet();
+
     const api = new JitsiMeetExternalAPI(domain, options);
 
     api.addEventListener("videoConferenceLeft", () => {
+      emitLeftMeet();
       history.push("/morpheus/");
     });
   };

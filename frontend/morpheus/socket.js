@@ -61,6 +61,14 @@ export const emitEnterInRoom = roomId => {
   saveCurrentUserRoom(roomId);
 };
 
+export const emitStartMeet = () => {
+  events.startMeet();
+};
+
+export const emitLeftMeet = () => {
+  events.leftMeet();
+};
+
 export const isCurrentUserInMeeting = () => {
   if (!profile) {
     return false;
