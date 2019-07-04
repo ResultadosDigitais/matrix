@@ -18,7 +18,8 @@ import {
   getCurrentUser,
   emitEnterInRoom,
   isCurrentUserInMeeting,
-  emitInviteUser
+  emitInviteUser,
+  getCurrentRoom
 } from "./socket";
 import {
   setCurrentUser,
@@ -176,6 +177,9 @@ const MorpheusApp = ({
     onRemoveUser
   );
 
+  const currentRoomId = getCurrentRoom();
+  const currentRoom = rooms.find(r => r.id === currentRoomId);
+
   return (
     <>
       <PageLayout
@@ -201,7 +205,7 @@ const MorpheusApp = ({
       <InviteToMeetingDialog
         open={isInviteModalOpen}
         user={userToInvite}
-        // currentRoomName={"" currentRoomName}
+        currentRoomName={currentRoom && currentRoom.name}
         onClose={() => {
           setInviteModalOpen(false);
         }}
@@ -217,9 +221,7 @@ const MorpheusApp = ({
         }}
         onConfirm={() => {
           emitEnterInRoom(invitation.room.id);
-          history.push("/morpheus/office", {
-            room: invitation.room
-          });
+          history.push(`/morpheus/room/${invitation.room.id}`);
         }}
       />
     </>
