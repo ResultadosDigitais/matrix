@@ -12,7 +12,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { SnackbarProvider } from "notistack";
 
 import store from "./morpheus/store";
-import MorpheusApp from "./morpheus/MorpheusApp";
+import App from "./morpheus/App";
 
 const theme = createMuiTheme({
   palette: {
@@ -30,7 +30,7 @@ ReactDOM.render(
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Router>
-          <MorpheusApp />
+          <App />
         </Router>
       </SnackbarProvider>
     </ThemeProvider>

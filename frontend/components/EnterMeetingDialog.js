@@ -61,7 +61,6 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
         </Button>
         <Button
           onClick={() => {
-            onClose();
             onConfirm({
               startWithAudioMuted: !micEnabled,
               startWithVideoMuted: !videoEnabled

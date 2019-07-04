@@ -4,7 +4,6 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import UIAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -39,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AppBar = ({ title, isDrawerOpen, openDrawer, children }) => {
+const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
   const classes = useStyles();
 
   return (
@@ -64,9 +63,6 @@ const AppBar = ({ title, isDrawerOpen, openDrawer, children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title} color="secondary">
-            {title}
-          </Typography>
           {children}
         </Toolbar>
       </UIAppBar>
@@ -75,14 +71,12 @@ const AppBar = ({ title, isDrawerOpen, openDrawer, children }) => {
 };
 
 AppBar.propTypes = {
-  title: PropTypes.string,
   isDrawerOpen: PropTypes.bool,
   openDrawer: PropTypes.func,
   children: PropTypes.node
 };
 
 AppBar.defaultProps = {
-  title: "",
   isDrawerOpen: false,
   openDrawer: undefined,
   children: undefined

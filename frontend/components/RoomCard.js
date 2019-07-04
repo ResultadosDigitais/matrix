@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const RoomCard = ({ name, isDefault, users, onClick }) => {
+const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
   const [isExpanded, toggleExpand] = useState(false);
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
@@ -67,28 +67,29 @@ const RoomCard = ({ name, isDefault, users, onClick }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {!isDefault && (
-          <Button size="small" color="primary" onClick={onClick}>
-            Enter this room
-          </Button>
-        )}
+        <Button size="small" color="primary" onClick={onEnterRoom}>
+          Enter room
+        </Button>
+        <Button size="small" color="primary" onClick={onEnterMeeting}>
+          Enter meeting
+        </Button>
       </CardActions>
     </Card>
   );
 };
 
 RoomCard.propTypes = {
-  name: PropTypes.string,
+  onEnterRoom: PropTypes.func,
+  onEnterMeeting: PropTypes.func,
   users: PropTypes.arrayOf(PropTypes.object),
-  onClick: PropTypes.func,
-  isDefault: PropTypes.bool
+  name: PropTypes.string
 };
 
 RoomCard.defaultProps = {
-  name: "",
+  onEnterRoom: () => {},
+  onEnterMeeting: () => {},
   users: [],
-  onClick: undefined,
-  isDefault: false
+  name: ""
 };
 
 export default RoomCard;

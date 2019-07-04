@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import PageLayout from "../components/PageLayout";
 import Loading from "../components/Loading";
+import PageLayout from "../components/PageLayout";
 import MenuUsers from "../components/MenuUsers";
-import MenuOffice from "../components/MenuOffice";
-import MenuRoom from "../components/MenuRoom";
-import MenuAuth from "../components/MenuAuth";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
 import SnackbarActions from "../components/SnackbarActions";
-import Routes from "./Routes";
+import PageRoutes, { SidebarRouter } from "./Routes";
 import {
   initProfile,
   initEvents,
   getCurrentUser,
   emitEnterInRoom,
-  emitExitRoom,
   isCurrentUserInMeeting,
   emitInviteUser
 } from "./socket";
@@ -28,7 +24,6 @@ import {
   setCurrentUser,
   addRooms,
   syncOffice,
-  changeOfficeFilter,
   changeUsersFilter,
   addUser,
   addError,
@@ -37,8 +32,6 @@ import {
 import {
   selectRooms,
   selectCurrentUser,
-  selectOffice,
-  selectOfficeFilter,
   selectUsers,
   selectUsersFilter
 } from "./store/selectors";
@@ -142,7 +135,6 @@ const useEvents = (
 };
 
 const MorpheusApp = ({
-  onChangeOfficeFilter,
   onChangeUsersFilter,
   onSetCurrentUser,
   onAddRooms,
@@ -151,10 +143,8 @@ const MorpheusApp = ({
   onAddError,
   onRemoveUser,
   history,
-  location,
   rooms,
   currentUser,
-  officeFilter,
   users,
   usersFilter
 }) => {
@@ -186,48 +176,10 @@ const MorpheusApp = ({
     onRemoveUser
   );
 
-  const currentRoomName =
-    location &&
-    location.state &&
-    location.state.room &&
-    location.state.room.name;
-  const title = currentRoomName || "Matrix";
-
   return (
     <>
       <PageLayout
-        title={title}
-        renderAppBarMenu={() => (
-          <Switch>
-            <Route
-              path="/morpheus"
-              exact
-              render={() => (
-                <>
-                  <MenuOffice
-                    filter={officeFilter}
-                    onChangeFilter={(key, value) => {
-                      onChangeOfficeFilter(key, value);
-                    }}
-                  />
-                  <MenuAuth userName={currentUser.name} />
-                </>
-              )}
-            />
-            <Route
-              path="/morpheus/office"
-              exact
-              render={routeProps => (
-                <MenuRoom
-                  {...routeProps}
-                  onExit={() => {
-                    emitExitRoom();
-                  }}
-                />
-              )}
-            />
-          </Switch>
-        )}
+        renderAppBarMenu={() => <SidebarRouter />}
         renderSideBarMenu={() => (
           <MenuUsers
             users={users}
@@ -244,12 +196,12 @@ const MorpheusApp = ({
           />
         )}
       >
-        {isLoading ? <Loading /> : <Routes />}
+        {isLoading ? <Loading /> : <PageRoutes />}
       </PageLayout>
       <InviteToMeetingDialog
         open={isInviteModalOpen}
         user={userToInvite}
-        currentRoomName={currentRoomName}
+        // currentRoomName={"" currentRoomName}
         onClose={() => {
           setInviteModalOpen(false);
         }}
@@ -275,7 +227,6 @@ const MorpheusApp = ({
 };
 
 MorpheusApp.propTypes = {
-  onChangeOfficeFilter: PropTypes.func,
   onChangeUsersFilter: PropTypes.func,
   onSetCurrentUser: PropTypes.func,
   onAddRooms: PropTypes.func,
@@ -283,18 +234,14 @@ MorpheusApp.propTypes = {
   onAddUser: PropTypes.func,
   onAddError: PropTypes.func,
   onRemoveUser: PropTypes.func,
-  location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
-  office: PropTypes.array.isRequired,
-  officeFilter: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
   usersFilter: PropTypes.object.isRequired
 };
 
 MorpheusApp.defaultProps = {
-  onChangeOfficeFilter: () => {},
   onChangeUsersFilter: () => {},
   onSetCurrentUser: () => {},
   onAddRooms: () => {},
@@ -307,14 +254,11 @@ MorpheusApp.defaultProps = {
 const mapStateToProps = state => ({
   rooms: selectRooms(state),
   currentUser: selectCurrentUser(state),
-  office: selectOffice(state),
-  officeFilter: selectOfficeFilter(state),
   users: selectUsers(state),
   usersFilter: selectUsersFilter(state)
 });
 
 const mapDispatchToProps = {
-  onChangeOfficeFilter: changeOfficeFilter,
   onChangeUsersFilter: changeUsersFilter,
   onSetCurrentUser: setCurrentUser,
   onAddRooms: addRooms,

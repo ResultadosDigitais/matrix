@@ -48,14 +48,17 @@ const saveCurrentUserRoom = roomId => {
   profile.storeRoom(roomId);
 };
 
+export const getCurrentRoom = () => {
+  if (!profile) {
+    return undefined;
+  }
+
+  return profile.loadStoredRoom();
+};
+
 export const emitEnterInRoom = roomId => {
   events.enterInRoom(roomId);
   saveCurrentUserRoom(roomId);
-};
-
-export const emitExitRoom = () => {
-  events.enterInRoom(defaultRoomId);
-  saveCurrentUserRoom(defaultRoomId);
 };
 
 export const isCurrentUserInMeeting = () => {

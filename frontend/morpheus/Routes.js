@@ -1,14 +1,44 @@
 import React from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
-import MorpheusOffice from "./pages/MorpheusOffice";
-import MorpheusRoom from "./pages/MorpheusRoom";
+import OfficePage from "./containers/OfficePage";
+import OfficeSidebar from "./containers/OfficeSidebar";
+import RoomPage from "./containers/RoomPage";
+import RoomSidebar from "./containers/RoomSidebar";
 
-const Routes = () => (
+const routesEntity = [
+  {
+    path: "/morpheus",
+    page: OfficePage,
+    sidebar: OfficeSidebar
+  },
+  {
+    path: "/morpheus/room/:roomId",
+    page: RoomPage,
+    sidebar: RoomSidebar
+  }
+];
+
+const Sidebar = () => (
   <Switch>
-    <Route path="/morpheus" exact component={MorpheusOffice} />
-    <Route path="/morpheus/office" exact component={MorpheusRoom} />
+    {routesEntity.map(route => (
+      <Route
+        key={route.path}
+        path={route.path}
+        component={route.sidebar}
+        exact
+      />
+    ))}
   </Switch>
 );
 
-export default withRouter(Routes);
+const PageRoutes = () => (
+  <Switch>
+    {routesEntity.map(route => (
+      <Route key={route.path} path={route.path} component={route.page} exact />
+    ))}
+  </Switch>
+);
+
+export const SidebarRouter = withRouter(Sidebar);
+export default withRouter(PageRoutes);
