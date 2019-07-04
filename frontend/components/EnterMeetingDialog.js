@@ -12,6 +12,7 @@ import Mic from "@material-ui/icons/Mic";
 import MicOff from "@material-ui/icons/MicOff";
 import Videocam from "@material-ui/icons/Videocam";
 import VideocamOff from "@material-ui/icons/VideocamOff";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(() => ({
   toolbar: {
@@ -36,23 +37,27 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
           Enter the Matrix with:
         </DialogContentText>
         <div className={classes.toolbar}>
-          <Checkbox
-            className={classes.sideMargin}
-            icon={<MicOff fontSize="large" />}
-            checkedIcon={<Mic fontSize="large" />}
-            checked={micEnabled}
-            onChange={event => {
-              setMicEnabled(event.target.checked);
-            }}
-          />
-          <Checkbox
-            icon={<VideocamOff fontSize="large" />}
-            checkedIcon={<Videocam fontSize="large" />}
-            checked={videoEnabled}
-            onChange={event => {
-              setVideoEnabled(event.target.checked);
-            }}
-          />
+          <Tooltip title={`${micEnabled ? "Disable" : "Enable"} MIC`}>
+            <Checkbox
+              className={classes.sideMargin}
+              icon={<MicOff fontSize="large" />}
+              checkedIcon={<Mic fontSize="large" />}
+              checked={micEnabled}
+              onChange={event => {
+                setMicEnabled(event.target.checked);
+              }}
+            />
+          </Tooltip>
+          <Tooltip title={`${videoEnabled ? "Disable" : "Enable"} Video`}>
+            <Checkbox
+              icon={<VideocamOff fontSize="large" />}
+              checkedIcon={<Videocam fontSize="large" />}
+              checked={videoEnabled}
+              onChange={event => {
+                setVideoEnabled(event.target.checked);
+              }}
+            />
+          </Tooltip>
         </div>
       </DialogContent>
       <DialogActions>

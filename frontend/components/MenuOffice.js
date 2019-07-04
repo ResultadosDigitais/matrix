@@ -5,6 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import Tooltip from "@material-ui/core/Tooltip";
 import debounce from "lodash.debounce";
 
 const useStyles = makeStyles(theme => ({
@@ -69,14 +70,16 @@ const MenuOffice = ({ filter, onChangeFilter }) => {
           }}
         />
       </div>
-      <Checkbox
-        icon={<SupervisedUserCircle />}
-        checkedIcon={<SupervisedUserCircle />}
-        checked={filter.onlyFullRoom}
-        onChange={event => {
-          onChangeFilter("onlyFullRoom", event.target.checked);
-        }}
-      />
+      <Tooltip title="Show only full room">
+        <Checkbox
+          icon={<SupervisedUserCircle />}
+          checkedIcon={<SupervisedUserCircle />}
+          checked={filter.onlyFullRoom}
+          onChange={event => {
+            onChangeFilter("onlyFullRoom", event.target.checked);
+          }}
+        />
+      </Tooltip>
     </>
   );
 };
