@@ -8,7 +8,7 @@ import MenuAuth from "../../components/MenuAuth";
 import { changeOfficeFilter } from "../store/actions";
 import { selectOfficeFilter, selectCurrentUser } from "../store/selectors";
 
-const OfficeSidebar = ({ officeFilter, currentUser, onChangeOfficeFilter }) => (
+const OfficeAppBar = ({ officeFilter, currentUser, onChangeOfficeFilter }) => (
   <>
     <AppBarTitle>Matrix</AppBarTitle>
     <MenuOffice
@@ -21,13 +21,13 @@ const OfficeSidebar = ({ officeFilter, currentUser, onChangeOfficeFilter }) => (
   </>
 );
 
-OfficeSidebar.propTypes = {
+OfficeAppBar.propTypes = {
   onChangeOfficeFilter: PropTypes.func,
   officeFilter: PropTypes.object,
   currentUser: PropTypes.object
 };
 
-OfficeSidebar.defaultProps = {
+OfficeAppBar.defaultProps = {
   onChangeOfficeFilter: () => {},
   officeFilter: {},
   currentUser: {}
@@ -45,4 +45,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OfficeSidebar);
+)(OfficeAppBar);

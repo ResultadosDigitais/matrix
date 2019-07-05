@@ -8,7 +8,7 @@ import ShareModal from "../../components/ShareModal";
 import { selectRooms } from "../store/selectors";
 import { emitLeftMeeting } from "../socket";
 
-const RoomSidebar = ({ history, match, rooms }) => {
+const RoomAppBar = ({ history, match, rooms }) => {
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const { roomId } = match.params;
   const findRoomResult = rooms.find(r => r.id === roomId);
@@ -36,13 +36,13 @@ const RoomSidebar = ({ history, match, rooms }) => {
   );
 };
 
-RoomSidebar.propTypes = {
+RoomAppBar.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   rooms: PropTypes.array
 };
 
-RoomSidebar.defaultProps = {
+RoomAppBar.defaultProps = {
   rooms: []
 };
 
@@ -50,4 +50,4 @@ const mapStateToProps = state => ({
   rooms: selectRooms(state)
 });
 
-export default connect(mapStateToProps)(RoomSidebar);
+export default connect(mapStateToProps)(RoomAppBar);

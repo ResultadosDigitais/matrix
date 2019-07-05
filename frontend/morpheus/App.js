@@ -11,7 +11,7 @@ import MenuUsers from "../components/MenuUsers";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
 import SnackbarActions from "../components/SnackbarActions";
-import PageRoutes, { SidebarRouter } from "./Routes";
+import PageRoutes, { AppBarRouter } from "./Routes";
 import {
   initProfile,
   initEvents,
@@ -193,7 +193,7 @@ const MorpheusApp = ({
   return (
     <>
       <PageLayout
-        renderAppBarMenu={() => <SidebarRouter />}
+        renderAppBarMenu={() => <AppBarRouter />}
         renderSideBarMenu={() => (
           <MenuUsers
             users={users}
