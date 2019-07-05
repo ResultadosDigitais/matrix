@@ -17,12 +17,12 @@ import {
   initEvents,
   getCurrentUser,
   emitEnterInRoom,
-  isCurrentUserInMeeting,
   emitInviteUser,
-  getCurrentRoom
+  getCurrentRoomId
 } from "./socket";
 import {
   setCurrentUser,
+  setCurrentRoom,
   addRooms,
   syncOffice,
   changeUsersFilter,
@@ -36,13 +36,15 @@ import {
   selectRooms,
   selectCurrentUser,
   selectUsers,
-  selectUsersFilter
+  selectUsersFilter,
+  selectCurrentRoom
 } from "./store/selectors";
 
 const useSocket = (
   toggleLoading,
   setLoggedIn,
   onSetCurrentUser,
+  onSetCurrentRoom,
   onAddRooms,
   onAddError
 ) => {
@@ -55,7 +57,17 @@ const useSocket = (
       axios
         .get("/rooms")
         .then(response => {
-          onAddRooms(response.data);
+          const rooms = response.data;
+          const savedRoomId = getCurrentRoomId();
+          let currentRoom = rooms.find(r => r.id === savedRoomId);
+
+          if (!currentRoom) {
+            [currentRoom] = rooms;
+            emitEnterInRoom(currentRoom.id);
+          }
+
+          onAddRooms(rooms);
+          onSetCurrentRoom(currentRoom);
           setLoggedIn(true);
           toggleLoading(false);
         })
@@ -66,7 +78,14 @@ const useSocket = (
     } else {
       window.location.href = "./";
     }
-  }, [toggleLoading, setLoggedIn, onSetCurrentUser, onAddRooms, onAddError]);
+  }, [
+    toggleLoading,
+    setLoggedIn,
+    onSetCurrentUser,
+    onAddRooms,
+    onAddError,
+    onSetCurrentRoom
+  ]);
 };
 
 const useEvents = (
@@ -144,6 +163,7 @@ const useEvents = (
 const MorpheusApp = ({
   onChangeUsersFilter,
   onSetCurrentUser,
+  onSetCurrentRoom,
   onAddRooms,
   onSyncOffice,
   onAddUser,
@@ -152,6 +172,7 @@ const MorpheusApp = ({
   onUserEnterMeeting,
   onUserLeftMeeting,
   history,
+  currentRoom,
   rooms,
   currentUser,
   users,
@@ -169,6 +190,7 @@ const MorpheusApp = ({
     toggleLoading,
     setLoggedIn,
     onSetCurrentUser,
+    onSetCurrentRoom,
     onAddRooms,
     onAddError
   );
@@ -187,9 +209,6 @@ const MorpheusApp = ({
     setInvitation
   );
 
-  const currentRoomId = getCurrentRoom();
-  const currentRoom = rooms.find(r => r.id === currentRoomId);
-
   return (
     <>
       <PageLayout
@@ -198,8 +217,8 @@ const MorpheusApp = ({
           <MenuUsers
             users={users}
             filter={usersFilter}
-            currentUserId={currentUser.id}
-            showInviteAction={isCurrentUserInMeeting()}
+            currentUser={currentUser}
+            currentRoom={currentRoom}
             onChangeFilter={(key, value) => {
               onChangeUsersFilter(key, value);
             }}
@@ -215,7 +234,7 @@ const MorpheusApp = ({
       <InviteToMeetingDialog
         open={isInviteModalOpen}
         user={userToInvite}
-        currentRoomName={currentRoom && currentRoom.name}
+        currentRoomName={currentRoom.name}
         onClose={() => {
           setInviteModalOpen(false);
         }}
@@ -241,6 +260,7 @@ const MorpheusApp = ({
 MorpheusApp.propTypes = {
   onChangeUsersFilter: PropTypes.func,
   onSetCurrentUser: PropTypes.func,
+  onSetCurrentRoom: PropTypes.func,
   onAddRooms: PropTypes.func,
   onSyncOffice: PropTypes.func,
   onAddUser: PropTypes.func,
@@ -249,6 +269,7 @@ MorpheusApp.propTypes = {
   onUserEnterMeeting: PropTypes.func,
   onUserLeftMeeting: PropTypes.func,
   history: PropTypes.object.isRequired,
+  currentRoom: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
@@ -258,6 +279,7 @@ MorpheusApp.propTypes = {
 MorpheusApp.defaultProps = {
   onChangeUsersFilter: () => {},
   onSetCurrentUser: () => {},
+  onSetCurrentRoom: () => {},
   onAddRooms: () => {},
   onSyncOffice: () => {},
   onAddUser: () => {},
@@ -268,6 +290,7 @@ MorpheusApp.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  currentRoom: selectCurrentRoom(state),
   rooms: selectRooms(state),
   currentUser: selectCurrentUser(state),
   users: selectUsers(state),
@@ -277,6 +300,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   onChangeUsersFilter: changeUsersFilter,
   onSetCurrentUser: setCurrentUser,
+  onSetCurrentRoom: setCurrentRoom,
   onAddRooms: addRooms,
   onSyncOffice: syncOffice,
   onAddUser: addUser,

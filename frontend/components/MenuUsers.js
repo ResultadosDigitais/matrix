@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -13,6 +14,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import PhoneForwardedIcon from "@material-ui/icons/PhoneForwarded";
 import debounce from "lodash.debounce";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -41,15 +43,29 @@ const useStyles = makeStyles(theme => ({
         width: 200
       }
     }
+  },
+  avatarInMeeting: {
+    position: "relative",
+    "&:after": {
+      content: "''",
+      position: "absolute",
+      top: -2,
+      left: -3,
+      width: 46,
+      height: 40,
+      background: "url('/images/headset.svg')",
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat"
+    }
   }
 }));
 
 const MenuUsers = ({
-  currentUserId,
-  users,
   onChangeFilter,
   onInviteUser,
-  showInviteAction
+  currentUser,
+  currentRoom,
+  users
 }) => {
   const classes = useStyles();
   const commitSearch = debounce(onChangeFilter, 300);
@@ -72,46 +88,58 @@ const MenuUsers = ({
           }}
         />
       </div>
+      {users.map(user => {
+        const showInviteAction =
+          currentUser.inMeet &&
+          user.id !== currentUser.id &&
+          !(user.inMeet && user.roomId === currentRoom.id);
 
-      {users.map(user => (
-        <ListItem key={user.id}>
-          <ListItemAvatar>
-            <Avatar alt={user.name} src={user.avatar} />
-          </ListItemAvatar>
-          <ListItemText primary={user.name} secondary={user.roomName} />
-          {showInviteAction && user.id !== currentUserId && (
-            <ListItemSecondaryAction>
-              <IconButton
-                edge="end"
-                aria-label="Comments"
-                onClick={() => {
-                  onInviteUser(user);
-                }}
+        return (
+          <ListItem key={user.id}>
+            <ListItemAvatar>
+              <div
+                className={clsx({
+                  [classes.avatarInMeeting]: user.inMeet
+                })}
               >
-                <PhoneForwardedIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          )}
-        </ListItem>
-      ))}
+                <Avatar alt={user.name} src={user.avatar} />
+              </div>
+            </ListItemAvatar>
+            <ListItemText primary={user.name} secondary={user.roomName} />
+            {showInviteAction && (
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  aria-label="Comments"
+                  onClick={() => {
+                    onInviteUser(user);
+                  }}
+                >
+                  <PhoneForwardedIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            )}
+          </ListItem>
+        );
+      })}
     </List>
   );
 };
 
 MenuUsers.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.object),
   onChangeFilter: PropTypes.func,
   onInviteUser: PropTypes.func,
-  showInviteAction: PropTypes.bool,
-  currentUserId: PropTypes.string
+  currentUser: PropTypes.object,
+  currentRoom: PropTypes.object,
+  users: PropTypes.arrayOf(PropTypes.object)
 };
 
 MenuUsers.defaultProps = {
-  users: [],
   onChangeFilter: () => {},
   onInviteUser: () => {},
-  showInviteAction: false,
-  currentUserId: undefined
+  currentUser: {},
+  currentRoom: {},
+  users: []
 };
 
-export default MenuUsers;
+export default withRouter(MenuUsers);

@@ -7,13 +7,9 @@ import { connect } from "react-redux";
 
 import EnterMeetingDialog from "../../components/EnterMeetingDialog";
 import Loading from "../../components/Loading";
-import { selectRooms } from "../store/selectors";
-import {
-  getCurrentRoom,
-  emitEnterInRoom,
-  emitStartMeeting,
-  emitLeftMeeting
-} from "../socket";
+import { selectRooms, selectCurrentRoom } from "../store/selectors";
+import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting } from "../socket";
+import { setCurrentRoom } from "../store/actions";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -70,32 +66,34 @@ const getMeetingOptions = (roomId, parentNode, config) => {
   };
 };
 
-const RoomPage = ({ history, match, rooms }) => {
+const RoomPage = ({ onSetCurrentRoom, history, match, rooms, currentRoom }) => {
   const [isLoading, setLoading] = useState(true);
   const [isMeetingDialogOpen, setMeetingDialogOpen] = useState(false);
-  const [room, setRoom] = useState();
   const meetRef = useRef(null);
   const classes = useStyles();
 
   useEffect(() => {
     if (rooms && rooms.length > 0) {
-      const findResult = rooms.find(r => r.id === match.params.roomId);
-      if (findResult) {
-        setRoom(findResult);
+      if (currentRoom.id !== match.params.roomId) {
+        const findResult = rooms.find(r => r.id === match.params.roomId);
+
+        if (findResult) {
+          emitEnterInRoom(findResult.id);
+          onSetCurrentRoom(findResult);
+        } else {
+          history.push("/morpheus");
+        }
+      } else {
         setLoading(false);
         setMeetingDialogOpen(true);
       }
     }
-  }, [rooms, match.params.roomId, room]);
+  }, [rooms, currentRoom, match.params.roomId, onSetCurrentRoom, history]);
 
   const enterMeeting = config => {
     const { roomId } = match.params;
     const domain = "meet.jit.si";
     const options = getMeetingOptions(roomId, meetRef.current, config);
-
-    if (getCurrentRoom() !== roomId) {
-      emitEnterInRoom(roomId);
-    }
 
     emitStartMeeting();
 
@@ -115,7 +113,7 @@ const RoomPage = ({ history, match, rooms }) => {
     <div className={classes.root}>
       <div className={classes.frame} ref={meetRef} />
       <EnterMeetingDialog
-        title={room.name}
+        title={currentRoom.name}
         open={isMeetingDialogOpen}
         onClose={() => {
           setMeetingDialogOpen(false);
@@ -131,17 +129,29 @@ const RoomPage = ({ history, match, rooms }) => {
 };
 
 RoomPage.propTypes = {
+  onSetCurrentRoom: PropTypes.func,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  rooms: PropTypes.array
+  rooms: PropTypes.array,
+  currentRoom: PropTypes.object
 };
 
 RoomPage.defaultProps = {
-  rooms: []
+  onSetCurrentRoom: () => {},
+  rooms: [],
+  currentRoom: {}
 };
 
 const mapStateToProps = state => ({
-  rooms: selectRooms(state)
+  rooms: selectRooms(state),
+  currentRoom: selectCurrentRoom(state)
 });
 
-export default connect(mapStateToProps)(RoomPage);
+const mapDispatchToProps = {
+  onSetCurrentRoom: setCurrentRoom
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RoomPage);

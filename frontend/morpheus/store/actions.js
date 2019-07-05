@@ -1,5 +1,6 @@
 export const ADD_ERROR = "ADD_ERROR";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const SET_CURRENT_ROOM = "SET_CURRENT_ROOM";
 export const ADD_ROOMS = "ADD_ROOMS";
 export const SYNC_OFFICE = "SYNC_OFFICE";
 export const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
@@ -12,6 +13,11 @@ export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
   user
+});
+
+export const setCurrentRoom = room => ({
+  type: SET_CURRENT_ROOM,
+  room
 });
 
 export const addRooms = rooms => ({

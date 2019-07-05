@@ -1,6 +1,7 @@
 import {
   ADD_ERROR,
   SET_CURRENT_USER,
+  SET_CURRENT_ROOM,
   ADD_ROOMS,
   SYNC_OFFICE,
   CHANGE_OFFICE_FILTER,
@@ -13,6 +14,7 @@ import {
 
 export const initialState = {
   currentUser: {},
+  currentRoom: {},
   rooms: [],
   usersInRoom: [],
   users: [],
@@ -63,6 +65,7 @@ const buildUsersState = state => {
       name: u.user.name,
       avatar: u.user.imageUrl,
       inMeet: !!u.user.inMeet,
+      roomId: room ? room.id : "",
       roomName: room ? room.name : ""
     };
   });
@@ -80,6 +83,11 @@ const buildUsersState = state => {
 
 const buildInMeetState = (state, action, inMeet) => {
   const { id } = action.user;
+  const currentUser = { ...state.currentUser };
+
+  if (currentUser.id === id) {
+    currentUser.inMeet = inMeet;
+  }
 
   const usersInRoom = state.usersInRoom.map(item => {
     if (item.user.id === id) {
@@ -98,6 +106,7 @@ const buildInMeetState = (state, action, inMeet) => {
   return buildUsersState(
     buildOfficeState({
       ...state,
+      currentUser,
       usersInRoom
     })
   );
@@ -109,6 +118,11 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.user
+      };
+    case SET_CURRENT_ROOM:
+      return {
+        ...state,
+        currentRoom: action.room
       };
     case ADD_ROOMS:
       return buildOfficeState({

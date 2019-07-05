@@ -1,3 +1,5 @@
+export const selectCurrentRoom = state => state.currentRoom;
+
 export const selectRooms = state => state.rooms;
 
 export const selectCurrentUser = state => state.currentUser;

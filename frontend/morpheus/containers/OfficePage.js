@@ -7,6 +7,7 @@ import Grid from "../../components/Grid";
 import RoomCard from "../../components/RoomCard";
 import { selectOffice } from "../store/selectors";
 import { emitEnterInRoom } from "../socket";
+import { setCurrentRoom } from "../store/actions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OfficePage = ({ office, history }) => {
+const OfficePage = ({ onSetCurrentRoom, office, history }) => {
   const classes = useStyles();
 
   return (
@@ -26,6 +27,7 @@ const OfficePage = ({ office, history }) => {
             key={room.id}
             onEnterRoom={() => {
               emitEnterInRoom(room.id);
+              onSetCurrentRoom(room);
             }}
             onEnterMeeting={() => {
               history.push(`/morpheus/room/${room.id}`);
@@ -38,11 +40,13 @@ const OfficePage = ({ office, history }) => {
 };
 
 OfficePage.propTypes = {
+  onSetCurrentRoom: PropTypes.func,
   office: PropTypes.arrayOf(PropTypes.object),
   history: PropTypes.object
 };
 
 OfficePage.defaultProps = {
+  onSetCurrentRoom: () => {},
   office: [],
   history: undefined
 };
@@ -51,4 +55,11 @@ const mapStateToProps = state => ({
   office: selectOffice(state)
 });
 
-export default connect(mapStateToProps)(OfficePage);
+const mapDispatchToProps = {
+  onSetCurrentRoom: setCurrentRoom
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OfficePage);
