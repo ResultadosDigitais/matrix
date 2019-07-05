@@ -6,7 +6,7 @@ import AppBarTitle from "../../components/AppBarTitle";
 import MenuRoom from "../../components/MenuRoom";
 import ShareModal from "../../components/ShareModal";
 import { selectRooms } from "../store/selectors";
-import { emitLeftMeet } from "../socket";
+import { emitLeftMeeting } from "../socket";
 
 const RoomSidebar = ({ history, match, rooms }) => {
   const [isShareModalOpen, setShareModalOpen] = useState(false);
@@ -19,7 +19,7 @@ const RoomSidebar = ({ history, match, rooms }) => {
       <AppBarTitle>{currentRoomName}</AppBarTitle>
       <MenuRoom
         onExitRoom={() => {
-          emitLeftMeet();
+          emitLeftMeeting();
           history.push("/morpheus");
         }}
         onShare={() => {

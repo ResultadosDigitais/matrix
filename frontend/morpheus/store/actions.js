@@ -6,6 +6,8 @@ export const CHANGE_OFFICE_FILTER = "CHANGE_OFFICE_FILTER";
 export const CHANGE_USERS_FILTER = "CHANGE_USERS_FILTER";
 export const ADD_USER = "ADD_USER";
 export const REMOVE_USER = "REMOVE_USER";
+export const USER_ENTER_MEETING = "USER_ENTER_MEETING";
+export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
 
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
@@ -48,4 +50,16 @@ export const removeUser = userId => ({
 export const addError = error => ({
   type: ADD_ERROR,
   message: error ? error.message : "An unknown error has occurred."
+});
+
+export const userEnterMeeting = (user, roomId) => ({
+  type: USER_ENTER_MEETING,
+  user,
+  roomId
+});
+
+export const userLeftMeeting = (user, roomId) => ({
+  type: USER_LEFT_MEETING,
+  user,
+  roomId
 });

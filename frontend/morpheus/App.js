@@ -28,7 +28,9 @@ import {
   changeUsersFilter,
   addUser,
   addError,
-  removeUser
+  removeUser,
+  userEnterMeeting,
+  userLeftMeeting
 } from "./store/actions";
 import {
   selectRooms,
@@ -68,16 +70,18 @@ const useSocket = (
 };
 
 const useEvents = (
+  onSyncOffice,
+  onAddUser,
+  onRemoveUser,
+  onUserEnterMeeting,
+  onUserLeftMeeting,
   enqueueSnackbar,
   closeSnackbar,
   isLoggedIn,
   rooms,
   currentUser,
   setReceiveInviteOpen,
-  setInvitation,
-  onSyncOffice,
-  onAddUser,
-  onRemoveUser
+  setInvitation
 ) => {
   useEffect(() => {
     if (isLoggedIn) {
@@ -106,11 +110,11 @@ const useEvents = (
           showNotification(`${user.name} entered the ${room.name}.`);
         }
       });
-      events.onParticipantStartedMeet((user, room) => {
-        console.log("onParticipantStartedMeet", user, room);
+      events.onParticipantStartedMeet((user, roomId) => {
+        onUserEnterMeeting(user, roomId);
       });
-      events.onParticipantLeftMeet((user, room) => {
-        console.log("onParticipantLeftMeet", user, room);
+      events.onParticipantLeftMeet((user, roomId) => {
+        onUserLeftMeeting(user, roomId);
       });
       events.onDisconnect(userId => {
         onRemoveUser(userId);
@@ -129,6 +133,8 @@ const useEvents = (
     onAddUser,
     onRemoveUser,
     onSyncOffice,
+    onUserEnterMeeting,
+    onUserLeftMeeting,
     rooms,
     setInvitation,
     setReceiveInviteOpen
@@ -143,6 +149,8 @@ const MorpheusApp = ({
   onAddUser,
   onAddError,
   onRemoveUser,
+  onUserEnterMeeting,
+  onUserLeftMeeting,
   history,
   rooms,
   currentUser,
@@ -165,16 +173,18 @@ const MorpheusApp = ({
     onAddError
   );
   useEvents(
+    onSyncOffice,
+    onAddUser,
+    onRemoveUser,
+    onUserEnterMeeting,
+    onUserLeftMeeting,
     enqueueSnackbar,
     closeSnackbar,
     isLoggedIn,
     rooms,
     currentUser,
     setReceiveInviteOpen,
-    setInvitation,
-    onSyncOffice,
-    onAddUser,
-    onRemoveUser
+    setInvitation
   );
 
   const currentRoomId = getCurrentRoom();
@@ -236,6 +246,8 @@ MorpheusApp.propTypes = {
   onAddUser: PropTypes.func,
   onAddError: PropTypes.func,
   onRemoveUser: PropTypes.func,
+  onUserEnterMeeting: PropTypes.func,
+  onUserLeftMeeting: PropTypes.func,
   history: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
@@ -250,7 +262,9 @@ MorpheusApp.defaultProps = {
   onSyncOffice: () => {},
   onAddUser: () => {},
   onAddError: () => {},
-  onRemoveUser: () => {}
+  onRemoveUser: () => {},
+  onUserEnterMeeting: () => {},
+  onUserLeftMeeting: () => {}
 };
 
 const mapStateToProps = state => ({
@@ -267,7 +281,9 @@ const mapDispatchToProps = {
   onSyncOffice: syncOffice,
   onAddUser: addUser,
   onAddError: addError,
-  onRemoveUser: removeUser
+  onRemoveUser: removeUser,
+  onUserEnterMeeting: userEnterMeeting,
+  onUserLeftMeeting: userLeftMeeting
 };
 
 export default withRouter(

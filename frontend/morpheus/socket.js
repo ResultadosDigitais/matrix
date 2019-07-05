@@ -61,11 +61,11 @@ export const emitEnterInRoom = roomId => {
   saveCurrentUserRoom(roomId);
 };
 
-export const emitStartMeet = () => {
+export const emitStartMeeting = () => {
   events.startMeet();
 };
 
-export const emitLeftMeet = () => {
+export const emitLeftMeeting = () => {
   events.leftMeet();
 };
 

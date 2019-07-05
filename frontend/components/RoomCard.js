@@ -9,6 +9,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -31,6 +32,20 @@ const useStyles = makeStyles(() => ({
   },
   emptyUserSpace: {
     height: 0
+  },
+  avatarInMeeting: {
+    position: "relative",
+    "&:after": {
+      content: "''",
+      position: "absolute",
+      top: -2,
+      left: -3,
+      width: 46,
+      height: 40,
+      background: "url('/images/headset.svg')",
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat"
+    }
   }
 }));
 
@@ -39,6 +54,7 @@ const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
+
   return (
     <Card className={classes.root}>
       <CardActionArea
@@ -54,7 +70,13 @@ const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
           <div className={classes.userGrid}>
             {userToShow.map(user => (
               <Tooltip key={user.id} title={user.name}>
-                <Avatar src={user.imageUrl} />
+                <div
+                  className={clsx({
+                    [classes.avatarInMeeting]: user.inMeet
+                  })}
+                >
+                  <Avatar src={user.imageUrl} />
+                </div>
               </Tooltip>
             ))}
             {totalUsersHidden > 0 && (

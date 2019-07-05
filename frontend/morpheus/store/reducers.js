@@ -6,7 +6,9 @@ import {
   CHANGE_OFFICE_FILTER,
   CHANGE_USERS_FILTER,
   ADD_USER,
-  REMOVE_USER
+  REMOVE_USER,
+  USER_ENTER_MEETING,
+  USER_LEFT_MEETING
 } from "./actions";
 
 export const initialState = {
@@ -60,6 +62,7 @@ const buildUsersState = state => {
       id: u.user.id,
       name: u.user.name,
       avatar: u.user.imageUrl,
+      inMeet: !!u.user.inMeet,
       roomName: room ? room.name : ""
     };
   });
@@ -73,6 +76,31 @@ const buildUsersState = state => {
     ...state,
     users
   };
+};
+
+const buildInMeetState = (state, action, inMeet) => {
+  const { id } = action.user;
+
+  const usersInRoom = state.usersInRoom.map(item => {
+    if (item.user.id === id) {
+      return {
+        ...item,
+        user: {
+          ...item.user,
+          inMeet
+        }
+      };
+    }
+
+    return item;
+  });
+
+  return buildUsersState(
+    buildOfficeState({
+      ...state,
+      usersInRoom
+    })
+  );
 };
 
 const reducers = (state = initialState, action) => {
@@ -142,6 +170,10 @@ const reducers = (state = initialState, action) => {
           )
         })
       );
+    case USER_ENTER_MEETING:
+      return buildInMeetState(state, action, true);
+    case USER_LEFT_MEETING:
+      return buildInMeetState(state, action, false);
     case ADD_ERROR:
       return {
         hasError: true,

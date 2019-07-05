@@ -11,8 +11,8 @@ import { selectRooms } from "../store/selectors";
 import {
   getCurrentRoom,
   emitEnterInRoom,
-  emitStartMeet,
-  emitLeftMeet
+  emitStartMeeting,
+  emitLeftMeeting
 } from "../socket";
 
 const useStyles = makeStyles(() => ({
@@ -97,12 +97,12 @@ const RoomPage = ({ history, match, rooms }) => {
       emitEnterInRoom(roomId);
     }
 
-    emitStartMeet();
+    emitStartMeeting();
 
     const api = new JitsiMeetExternalAPI(domain, options);
 
     api.addEventListener("videoConferenceLeft", () => {
-      emitLeftMeet();
+      emitLeftMeeting();
       history.push("/morpheus/");
     });
   };
