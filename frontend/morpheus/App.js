@@ -11,6 +11,7 @@ import MenuUsers from "../components/MenuUsers";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
 import SnackbarActions from "../components/SnackbarActions";
+import Error500 from "../components/Error500";
 import PageRoutes, { AppBarRouter } from "./Routes";
 import {
   initProfile,
@@ -37,7 +38,8 @@ import {
   selectCurrentUser,
   selectUsers,
   selectUsersFilter,
-  selectCurrentRoom
+  selectCurrentRoom,
+  selectError
 } from "./store/selectors";
 
 const useSocket = (
@@ -176,7 +178,8 @@ const MorpheusApp = ({
   rooms,
   currentUser,
   users,
-  usersFilter
+  usersFilter,
+  error
 }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoading, toggleLoading] = useState(true);
@@ -208,6 +211,16 @@ const MorpheusApp = ({
     setReceiveInviteOpen,
     setInvitation
   );
+
+  if (error) {
+    return (
+      <Error500
+        onReload={() => {
+          window.location.reload();
+        }}
+      />
+    );
+  }
 
   return (
     <>
@@ -273,7 +286,8 @@ MorpheusApp.propTypes = {
   rooms: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
-  usersFilter: PropTypes.object.isRequired
+  usersFilter: PropTypes.object.isRequired,
+  error: PropTypes.object
 };
 
 MorpheusApp.defaultProps = {
@@ -286,7 +300,8 @@ MorpheusApp.defaultProps = {
   onAddError: () => {},
   onRemoveUser: () => {},
   onUserEnterMeeting: () => {},
-  onUserLeftMeeting: () => {}
+  onUserLeftMeeting: () => {},
+  error: undefined
 };
 
 const mapStateToProps = state => ({
@@ -294,7 +309,8 @@ const mapStateToProps = state => ({
   rooms: selectRooms(state),
   currentUser: selectCurrentUser(state),
   users: selectUsers(state),
-  usersFilter: selectUsersFilter(state)
+  usersFilter: selectUsersFilter(state),
+  error: selectError(state)
 });
 
 const mapDispatchToProps = {

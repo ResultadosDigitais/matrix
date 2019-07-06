@@ -26,8 +26,7 @@ export const initialState = {
     onlyFullRoom: false,
     search: ""
   },
-  hasError: false,
-  errorMessage: ""
+  error: null
 };
 
 const buildOfficeState = state => {
@@ -190,8 +189,10 @@ const reducers = (state = initialState, action) => {
       return buildInMeetState(state, action, false);
     case ADD_ERROR:
       return {
-        hasError: true,
-        errorMessage: action.message
+        ...state,
+        error: {
+          message: action.message
+        }
       };
     default:
       return state;

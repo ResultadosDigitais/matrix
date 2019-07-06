@@ -5,6 +5,7 @@ import OfficePage from "./containers/OfficePage";
 import OfficeAppBar from "./containers/OfficeAppBar";
 import RoomPage from "./containers/RoomPage";
 import RoomAppBar from "./containers/RoomAppBar";
+import PageNoFound from "./containers/PageNotFound";
 
 const routesEntity = [
   {
@@ -37,6 +38,7 @@ const PageRoutes = () => (
     {routesEntity.map(route => (
       <Route key={route.path} path={route.path} component={route.page} exact />
     ))}
+    <Route component={PageNoFound} />
   </Switch>
 );
 
