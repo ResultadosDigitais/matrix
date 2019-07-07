@@ -13,10 +13,19 @@
     "build-frontend": "webpack --mode production --config webpack.production.js",
     "start-backend": "NODE_ENV=production node ./dist/index.js",
     "start": "npm-run-all -p start-backend-development-server start-frontend-development-server",
-    "test": "nyc --reporter=text mocha --require @babel/register './test/**/*.test.js' --exit",
-    "watch-test": "npm run test -- --watch --recursive",
+    "test-mocha": "nyc --reporter=text mocha --require @babel/register './test/**/*.test.js' --exit",
+    "test-jest": "jest",
+    "test": "npm-run-all test-mocha test-jest",
+    "watch-test-mocha": "npm run test-mocha -- --watch --recursive",
+    "watch-test-jest": "npm run test-jest -- --watch",
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;",
     "lint": "eslint './**/*.js'"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/testReact/"
+    ],
+    "verbose": true
   },
   "author": "Juliemar Berri",
   "license": "ISC",
@@ -54,10 +63,12 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
+    "@testing-library/react": "^8.0.4",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "css-loader": "^2.1.1",
+    "deep-freeze": "0.0.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^6.0.0",
@@ -68,6 +79,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-react-hooks": "^1.6.1",
+    "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.7.0",
     "mocha": "^6.1.4",
     "mock-local-storage": "^1.1.8",

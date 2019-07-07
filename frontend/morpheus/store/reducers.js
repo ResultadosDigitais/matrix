@@ -32,10 +32,9 @@ export const initialState = {
 const buildOfficeState = state => {
   const { rooms, usersInRoom, officeFilter } = state;
 
-  let office = rooms.map((room, index) => ({
+  let office = rooms.map(room => ({
     id: room.id,
     name: room.name,
-    isDefault: index === 0,
     users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
   }));
 
