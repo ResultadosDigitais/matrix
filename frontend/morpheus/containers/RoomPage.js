@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
   frame: {
     position: "relative",
-    height: "100%"
+    height: "calc(100% - 3px)"
   }
 }));
 
