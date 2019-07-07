@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "../../components/Grid";
 import RoomCard from "../../components/RoomCard";
-import { selectOffice } from "../store/selectors";
+import {
+  selectOffice,
+  selectCurrentRoom,
+  selectRooms
+} from "../store/selectors";
 import { emitEnterInRoom } from "../socket";
 import { setCurrentRoom } from "../store/actions";
 
@@ -15,8 +19,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OfficePage = ({ onSetCurrentRoom, office, history }) => {
+const OfficePage = ({
+  onSetCurrentRoom,
+  history,
+  match,
+  office,
+  rooms,
+  currentRoom
+}) => {
   const classes = useStyles();
+  useState(() => {
+    if (currentRoom && match.params.roomId !== currentRoom.id) {
+      const findResult = rooms.find(r => r.id === match.params.roomId);
+      if (findResult) {
+        emitEnterInRoom(findResult.id);
+        onSetCurrentRoom(findResult);
+      } else {
+        history.push("/morpheus/");
+      }
+    }
+  }, [match.params.roomId]);
 
   return (
     <div className={classes.root}>
@@ -28,6 +50,7 @@ const OfficePage = ({ onSetCurrentRoom, office, history }) => {
             onEnterRoom={() => {
               emitEnterInRoom(room.id);
               onSetCurrentRoom(room);
+              history.replace(`/morpheus/office/${room.id}`);
             }}
             onEnterMeeting={() => {
               history.push(`/morpheus/room/${room.id}`);
@@ -42,17 +65,25 @@ const OfficePage = ({ onSetCurrentRoom, office, history }) => {
 OfficePage.propTypes = {
   onSetCurrentRoom: PropTypes.func,
   office: PropTypes.arrayOf(PropTypes.object),
-  history: PropTypes.object
+  rooms: PropTypes.arrayOf(PropTypes.object),
+  history: PropTypes.object,
+  match: PropTypes.object,
+  currentRoom: PropTypes.object
 };
 
 OfficePage.defaultProps = {
   onSetCurrentRoom: () => {},
   office: [],
-  history: undefined
+  rooms: [],
+  history: {},
+  match: {},
+  currentRoom: {}
 };
 
 const mapStateToProps = state => ({
-  office: selectOffice(state)
+  office: selectOffice(state),
+  rooms: selectRooms(state),
+  currentRoom: selectCurrentRoom(state)
 });
 
 const mapDispatchToProps = {

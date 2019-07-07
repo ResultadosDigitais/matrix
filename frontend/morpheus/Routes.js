@@ -3,6 +3,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 
 import OfficePage from "./containers/OfficePage";
 import OfficeAppBar from "./containers/OfficeAppBar";
+import OfficeRedirect from "./containers/OfficeRedirect";
 import RoomPage from "./containers/RoomPage";
 import RoomAppBar from "./containers/RoomAppBar";
 import PageNoFound from "./containers/PageNotFound";
@@ -10,6 +11,10 @@ import PageNoFound from "./containers/PageNotFound";
 const routesEntity = [
   {
     path: "/morpheus",
+    page: OfficeRedirect
+  },
+  {
+    path: "/morpheus/office/:roomId",
     page: OfficePage,
     appBar: OfficeAppBar
   },
