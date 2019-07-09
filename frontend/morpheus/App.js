@@ -78,7 +78,7 @@ const useSocket = (
           toggleLoading(false);
         });
     } else {
-      window.location.href = "./";
+      window.location.href = "/";
     }
   }, [
     toggleLoading,
