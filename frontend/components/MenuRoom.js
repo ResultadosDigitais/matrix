@@ -5,8 +5,16 @@ import ExitToApp from "@material-ui/icons/ExitToApp";
 import Share from "@material-ui/icons/Share";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const MenuRoom = ({ onExitRoom, onShare }) => (
+import NotificationCheckbox from "./NotificationCheckbox";
+
+const MenuRoom = ({ onExitRoom, onShare, onChangeSettings, settings }) => (
   <>
+    <NotificationCheckbox
+      isDisabled={settings.notificationDisabled}
+      onChange={event => {
+        onChangeSettings("notificationDisabled", event.target.checked);
+      }}
+    />
     <Tooltip title="Share room link">
       <IconButton
         aria-label="Share room link"
@@ -32,7 +40,9 @@ const MenuRoom = ({ onExitRoom, onShare }) => (
 
 MenuRoom.propTypes = {
   onExitRoom: PropTypes.func.isRequired,
-  onShare: PropTypes.func.isRequired
+  onShare: PropTypes.func.isRequired,
+  onChangeSettings: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
 export default MenuRoom;

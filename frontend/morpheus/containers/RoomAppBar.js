@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import AppBarTitle from "../../components/AppBarTitle";
 import MenuRoom from "../../components/MenuRoom";
 import ShareModal from "../../components/ShareModal";
-import { selectRooms } from "../store/selectors";
+import { selectRooms, selectSettings } from "../store/selectors";
 import { emitLeftMeeting } from "../socket";
+import { changeSettings } from "../store/actions";
 
-const RoomAppBar = ({ history, match, rooms }) => {
+const RoomAppBar = ({ onChangeSettings, history, match, rooms, settings }) => {
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const { roomId } = match.params;
   const findRoomResult = rooms.find(r => r.id === roomId);
@@ -25,6 +26,8 @@ const RoomAppBar = ({ history, match, rooms }) => {
         onShare={() => {
           setShareModalOpen(true);
         }}
+        onChangeSettings={onChangeSettings}
+        settings={settings}
       />
       <ShareModal
         open={isShareModalOpen}
@@ -37,8 +40,10 @@ const RoomAppBar = ({ history, match, rooms }) => {
 };
 
 RoomAppBar.propTypes = {
+  onChangeSettings: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   rooms: PropTypes.array
 };
 
@@ -47,7 +52,15 @@ RoomAppBar.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  rooms: selectRooms(state)
+  rooms: selectRooms(state),
+  settings: selectSettings(state)
 });
 
-export default connect(mapStateToProps)(RoomAppBar);
+const mapDispatchToProps = {
+  onChangeSettings: changeSettings
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RoomAppBar);

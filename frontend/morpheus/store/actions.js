@@ -9,6 +9,7 @@ export const ADD_USER = "ADD_USER";
 export const REMOVE_USER = "REMOVE_USER";
 export const USER_ENTER_MEETING = "USER_ENTER_MEETING";
 export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
+export const CHANGE_SETTINGS = "CHANGE_SETTINGS";
 
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
@@ -68,4 +69,10 @@ export const userLeftMeeting = (user, roomId) => ({
   type: USER_LEFT_MEETING,
   user,
   roomId
+});
+
+export const changeSettings = (key, value) => ({
+  type: CHANGE_SETTINGS,
+  key,
+  value
 });

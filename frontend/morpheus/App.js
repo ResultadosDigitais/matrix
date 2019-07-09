@@ -41,7 +41,8 @@ import {
   selectUsers,
   selectUsersFilter,
   selectCurrentRoom,
-  selectError
+  selectError,
+  selectSettings
 } from "./store/selectors";
 
 const useSocket = (
@@ -100,28 +101,31 @@ const useEvents = (
   onUserLeftMeeting,
   enqueueSnackbar,
   closeSnackbar,
+  setReceiveInviteOpen,
+  setInvitation,
   isLoggedIn,
   rooms,
+  settings,
   currentUser,
-  currentRoom,
-  setReceiveInviteOpen,
-  setInvitation
+  currentRoom
 ) => {
   useEffect(() => {
     if (isLoggedIn) {
       const events = initEvents(rooms);
 
       const showNotification = debounce(message => {
-        enqueueSnackbar(message, {
-          action: key => (
-            <SnackbarActions
-              onDismiss={() => {
-                closeSnackbar(key);
-              }}
-            />
-          )
-        });
-        new Notification(message);
+        if (!settings.notificationDisabled) {
+          enqueueSnackbar(message, {
+            action: key => (
+              <SnackbarActions
+                onDismiss={() => {
+                  closeSnackbar(key);
+                }}
+              />
+            )
+          });
+          new Notification(message);
+        }
       }, 500);
 
       events.onSyncOffice(usersInRoom => {
@@ -147,6 +151,9 @@ const useEvents = (
         const room = rooms.find(r => r.id === roomId);
         setReceiveInviteOpen(true);
         setInvitation({ user, room });
+        if (!settings.notificationDisabled) {
+          new Notification(`${user.name} is inviting you to ${room.name}`);
+        }
       });
     }
 
@@ -166,7 +173,8 @@ const useEvents = (
     onUserLeftMeeting,
     rooms,
     setInvitation,
-    setReceiveInviteOpen
+    setReceiveInviteOpen,
+    settings.notificationDisabled
   ]);
 };
 
@@ -183,6 +191,7 @@ const MorpheusApp = ({
   onUserLeftMeeting,
   history,
   currentRoom,
+  settings,
   rooms,
   currentUser,
   users,
@@ -213,12 +222,13 @@ const MorpheusApp = ({
     onUserLeftMeeting,
     enqueueSnackbar,
     closeSnackbar,
+    setReceiveInviteOpen,
+    setInvitation,
     isLoggedIn,
     rooms,
+    settings,
     currentUser,
-    currentRoom,
-    setReceiveInviteOpen,
-    setInvitation
+    currentRoom
   );
 
   if (error) {
@@ -296,6 +306,7 @@ MorpheusApp.propTypes = {
   currentUser: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
   usersFilter: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   error: PropTypes.object
 };
 
@@ -319,6 +330,7 @@ const mapStateToProps = state => ({
   currentUser: selectCurrentUser(state),
   users: selectUsers(state),
   usersFilter: selectUsersFilter(state),
+  settings: selectSettings(state),
   error: selectError(state)
 });
 

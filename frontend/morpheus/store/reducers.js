@@ -9,7 +9,8 @@ import {
   ADD_USER,
   REMOVE_USER,
   USER_ENTER_MEETING,
-  USER_LEFT_MEETING
+  USER_LEFT_MEETING,
+  CHANGE_SETTINGS
 } from "./actions";
 
 export const initialState = {
@@ -25,6 +26,9 @@ export const initialState = {
   officeFilter: {
     onlyFullRoom: false,
     search: ""
+  },
+  settings: {
+    notificationDisabled: false
   },
   error: null
 };
@@ -150,6 +154,14 @@ const reducers = (state = initialState, action) => {
           [action.key]: action.value
         }
       });
+    case CHANGE_SETTINGS:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          [action.key]: action.value
+        }
+      };
     case ADD_USER: {
       const index = state.usersInRoom.findIndex(
         u => u.user.id === action.user.id

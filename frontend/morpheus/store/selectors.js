@@ -13,3 +13,5 @@ export const selectUsers = state => state.users;
 export const selectUsersFilter = state => state.usersFilter;
 
 export const selectError = state => state.error;
+
+export const selectSettings = state => state.settings;
