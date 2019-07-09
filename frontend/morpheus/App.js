@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
 import axios from "axios";
+import debounce from "lodash.debounce";
 
 import Loading from "../components/Loading";
 import PageLayout from "../components/PageLayout";
@@ -101,6 +102,7 @@ const useEvents = (
   isLoggedIn,
   rooms,
   currentUser,
+  currentRoom,
   setReceiveInviteOpen,
   setInvitation
 ) => {
@@ -108,7 +110,7 @@ const useEvents = (
     if (isLoggedIn) {
       const events = initEvents(rooms);
 
-      const showNotification = message => {
+      const showNotification = debounce(message => {
         enqueueSnackbar(message, {
           action: key => (
             <SnackbarActions
@@ -119,14 +121,14 @@ const useEvents = (
           )
         });
         new Notification(message);
-      };
+      }, 500);
 
       events.onSyncOffice(usersInRoom => {
         onSyncOffice(usersInRoom);
       });
       events.onParticipantJoined((user, roomId) => {
         onAddUser(user, roomId);
-        if (currentUser.id !== user.id) {
+        if (currentUser.id !== user.id && currentRoom.id === roomId) {
           const room = rooms.find(r => r.id === roomId);
           showNotification(`${user.name} entered the ${room.name}.`);
         }
@@ -148,6 +150,7 @@ const useEvents = (
     }
   }, [
     closeSnackbar,
+    currentRoom.id,
     currentUser.id,
     enqueueSnackbar,
     isLoggedIn,
@@ -208,6 +211,7 @@ const MorpheusApp = ({
     isLoggedIn,
     rooms,
     currentUser,
+    currentRoom,
     setReceiveInviteOpen,
     setInvitation
   );

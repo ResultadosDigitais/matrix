@@ -57,7 +57,9 @@ export const getCurrentRoomId = () => {
 };
 
 export const emitEnterInRoom = roomId => {
-  events.enterInRoom(roomId);
+  if (events) {
+    events.enterInRoom(roomId);
+  }
   saveCurrentUserRoom(roomId);
 };
 

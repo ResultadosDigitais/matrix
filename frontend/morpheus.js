@@ -22,17 +22,21 @@ window.onload = () => {
     gapi.auth2.init().then(
       auth2 => {
         if (auth2.isSignedIn.get()) {
-          const currentUser = auth2.currentUser.get();
-          const basicProfile = currentUser.getBasicProfile();
+          const matrixProfile = new MatrixProfile();
 
-          const profileData = {
-            id: basicProfile.getId(),
-            name: basicProfile.getName(),
-            imageUrl: basicProfile.getImageUrl(),
-            email: basicProfile.getEmail()
-          };
+          if (!matrixProfile.isProfileStored()) {
+            const currentUser = auth2.currentUser.get();
+            const basicProfile = currentUser.getBasicProfile();
 
-          new MatrixProfile().storeProfileData(profileData);
+            const profileData = {
+              id: basicProfile.getId(),
+              name: basicProfile.getName(),
+              imageUrl: basicProfile.getImageUrl(),
+              email: basicProfile.getEmail()
+            };
+
+            matrixProfile.storeProfileData(profileData);
+          }
 
           renderApp();
         } else {
