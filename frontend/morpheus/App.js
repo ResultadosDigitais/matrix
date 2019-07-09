@@ -17,6 +17,7 @@ import PageRoutes, { AppBarRouter } from "./Routes";
 import {
   initProfile,
   initEvents,
+  closeConnection,
   getCurrentUser,
   emitEnterInRoom,
   emitInviteUser,
@@ -148,6 +149,10 @@ const useEvents = (
         setInvitation({ user, room });
       });
     }
+
+    return () => {
+      closeConnection();
+    };
   }, [
     closeSnackbar,
     currentRoom.id,

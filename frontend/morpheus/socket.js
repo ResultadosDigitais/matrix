@@ -36,6 +36,12 @@ export const initEvents = rooms => {
   return events;
 };
 
+export const closeConnection = () => {
+  if (events) {
+    events.closeConnection();
+  }
+};
+
 export const getCurrentUser = () => {
   if (!profile) {
     return undefined;
