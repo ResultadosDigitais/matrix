@@ -11,9 +11,11 @@ import PageLayout from "../components/PageLayout";
 import MenuUsers from "../components/MenuUsers";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
+import MessageDialog from "../components/MessageDialog";
 import SnackbarActions from "../components/SnackbarActions";
 import Error500 from "../components/Error500";
 import PageRoutes, { AppBarRouter } from "./Routes";
+import { showBrowserNotification } from "../notification";
 import {
   initProfile,
   initEvents,
@@ -124,7 +126,7 @@ const useEvents = (
               />
             )
           });
-          new Notification(message);
+          showBrowserNotification(message);
         }
       }, 500);
 
@@ -152,7 +154,9 @@ const useEvents = (
         setReceiveInviteOpen(true);
         setInvitation({ user, room });
         if (!settings.notificationDisabled) {
-          new Notification(`${user.name} is inviting you to ${room.name}`);
+          showBrowserNotification(
+            `${user.name} is inviting you to ${room.name}`
+          );
         }
       });
     }
@@ -285,6 +289,7 @@ const MorpheusApp = ({
           history.push(`/morpheus/room/${invitation.room.id}`);
         }}
       />
+      <MessageDialog />
     </>
   );
 };

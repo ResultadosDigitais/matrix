@@ -10,6 +10,7 @@ export const REMOVE_USER = "REMOVE_USER";
 export const USER_ENTER_MEETING = "USER_ENTER_MEETING";
 export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
 export const CHANGE_SETTINGS = "CHANGE_SETTINGS";
+export const TOGGLE_MESSAGE_DIALOG = "TOGGLE_MESSAGE_DIALOG";
 
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
@@ -75,4 +76,22 @@ export const changeSettings = (key, value) => ({
   type: CHANGE_SETTINGS,
   key,
   value
+});
+
+export const showMessageDialog = (title, message) => ({
+  type: TOGGLE_MESSAGE_DIALOG,
+  props: {
+    isOpen: true,
+    title,
+    message
+  }
+});
+
+export const closeMessageDialog = () => ({
+  type: TOGGLE_MESSAGE_DIALOG,
+  props: {
+    isOpen: false,
+    title: undefined,
+    message: undefined
+  }
 });

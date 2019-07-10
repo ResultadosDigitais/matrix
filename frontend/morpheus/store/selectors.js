@@ -15,3 +15,5 @@ export const selectUsersFilter = state => state.usersFilter;
 export const selectError = state => state.error;
 
 export const selectSettings = state => state.settings;
+
+export const selectMessageDialog = state => state.messageDialog;

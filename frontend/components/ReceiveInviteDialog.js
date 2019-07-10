@@ -9,9 +9,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 const ReceiveInviteDialog = ({ open, onClose, onConfirm, invitation }) => (
   <Dialog open={open} onClose={onClose}>
-    <DialogTitle id="alert-dialog-title">You have an invitation</DialogTitle>
+    <DialogTitle>You have an invitation</DialogTitle>
     <DialogContent>
-      <DialogContentText id="alert-dialog-description">
+      <DialogContentText>
         {invitation.user && invitation.user.name} invited you to{" "}
         {invitation.room && invitation.room.name}. Do you want to accept it?
       </DialogContentText>

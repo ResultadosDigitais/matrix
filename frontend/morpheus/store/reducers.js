@@ -10,7 +10,8 @@ import {
   REMOVE_USER,
   USER_ENTER_MEETING,
   USER_LEFT_MEETING,
-  CHANGE_SETTINGS
+  CHANGE_SETTINGS,
+  TOGGLE_MESSAGE_DIALOG
 } from "./actions";
 
 export const initialState = {
@@ -30,7 +31,12 @@ export const initialState = {
   settings: {
     notificationDisabled: false
   },
-  error: null
+  error: null,
+  messageDialog: {
+    isOpen: false,
+    title: undefined,
+    message: undefined
+  }
 };
 
 const buildOfficeState = state => {
@@ -204,6 +210,11 @@ const reducers = (state = initialState, action) => {
         error: {
           message: action.message
         }
+      };
+    case TOGGLE_MESSAGE_DIALOG:
+      return {
+        ...state,
+        messageDialog: action.props
       };
     default:
       return state;
