@@ -4,21 +4,15 @@ import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Avatar from "@material-ui/core/Avatar";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "@material-ui/core/IconButton";
-import PhoneForwardedIcon from "@material-ui/icons/PhoneForwarded";
 import debounce from "lodash.debounce";
-import clsx from "clsx";
+
 import {
   CurrentUserPropType,
   CurrentRoomPropType
 } from "../morpheus/store/models";
+import MenuUsersItem from "./MenuUsersItem";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -46,20 +40,6 @@ const useStyles = makeStyles(theme => ({
       "&:focus": {
         width: 200
       }
-    }
-  },
-  avatarInMeeting: {
-    position: "relative",
-    "&:after": {
-      content: "''",
-      position: "absolute",
-      top: -2,
-      left: -3,
-      width: 46,
-      height: 40,
-      background: "url('/images/headset.svg')",
-      backgroundSize: "contain",
-      backgroundRepeat: "no-repeat"
     }
   }
 }));
@@ -99,31 +79,18 @@ const MenuUsers = ({
           !(user.inMeet && user.roomId === currentRoom.id);
 
         return (
-          <ListItem key={user.id}>
-            <ListItemAvatar>
-              <div
-                className={clsx({
-                  [classes.avatarInMeeting]: user.inMeet
-                })}
-              >
-                <Avatar alt={user.name} src={user.avatar} />
-              </div>
-            </ListItemAvatar>
-            <ListItemText primary={user.name} secondary={user.roomName} />
-            {showInviteAction && (
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  aria-label="Comments"
-                  onClick={() => {
-                    onInviteUser(user);
-                  }}
-                >
-                  <PhoneForwardedIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            )}
-          </ListItem>
+          <MenuUsersItem
+            onInviteUser={() => {
+              onInviteUser(user);
+            }}
+            showInviteAction={showInviteAction}
+            key={user.id}
+            inMeeting={user.inMeet}
+            id={user.id}
+            name={user.name}
+            avatar={user.avatar}
+            roomName={user.roomName}
+          />
         );
       })}
     </List>
