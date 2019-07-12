@@ -31,7 +31,11 @@ const Providers = ({ store, children }) => (
 );
 
 Providers.propTypes = {
-  store: PropTypes.object.isRequired,
+  store: PropTypes.shape({
+    subscribe: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired
+  }).isRequired,
   children: PropTypes.node.isRequired
 };
 

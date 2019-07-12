@@ -46,6 +46,15 @@ import {
   selectError,
   selectSettings
 } from "./store/selectors";
+import {
+  CurrentRoomPropType,
+  RoomsPropType,
+  CurrentUserPropType,
+  SettingsPropType,
+  UsersPropType,
+  UsersFilterPropType,
+  ErrorPropType
+} from "./store/models";
 
 const useSocket = (
   toggleLoading,
@@ -305,14 +314,16 @@ MorpheusApp.propTypes = {
   onRemoveUser: PropTypes.func,
   onUserEnterMeeting: PropTypes.func,
   onUserLeftMeeting: PropTypes.func,
-  history: PropTypes.object.isRequired,
-  currentRoom: PropTypes.object.isRequired,
-  rooms: PropTypes.array.isRequired,
-  currentUser: PropTypes.object.isRequired,
-  users: PropTypes.array.isRequired,
-  usersFilter: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
-  error: PropTypes.object
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  currentRoom: CurrentRoomPropType.isRequired,
+  rooms: RoomsPropType.isRequired,
+  currentUser: CurrentUserPropType.isRequired,
+  users: UsersPropType.isRequired,
+  usersFilter: UsersFilterPropType.isRequired,
+  settings: SettingsPropType.isRequired,
+  error: ErrorPropType
 };
 
 MorpheusApp.defaultProps = {

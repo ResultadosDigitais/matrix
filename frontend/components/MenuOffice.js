@@ -95,8 +95,12 @@ const MenuOffice = ({ onChangeFilter, onChangeSettings, filter, settings }) => {
 MenuOffice.propTypes = {
   onChangeFilter: PropTypes.func,
   onChangeSettings: PropTypes.func,
-  filter: PropTypes.object,
-  settings: PropTypes.object
+  filter: PropTypes.shape({
+    onlyFullRoom: PropTypes.bool
+  }),
+  settings: PropTypes.shape({
+    notificationDisabled: PropTypes.bool
+  })
 };
 
 MenuOffice.defaultProps = {

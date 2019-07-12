@@ -12,6 +12,7 @@ import {
 } from "../store/selectors";
 import { emitEnterInRoom } from "../socket";
 import { setCurrentRoom } from "../store/actions";
+import { CurrentRoomPropType } from "../store/models";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,17 +67,22 @@ OfficePage.propTypes = {
   onSetCurrentRoom: PropTypes.func,
   office: PropTypes.arrayOf(PropTypes.object),
   rooms: PropTypes.arrayOf(PropTypes.object),
-  history: PropTypes.object,
-  match: PropTypes.object,
-  currentRoom: PropTypes.object
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      roomId: PropTypes.string
+    }).isRequired
+  }).isRequired,
+  currentRoom: CurrentRoomPropType
 };
 
 OfficePage.defaultProps = {
   onSetCurrentRoom: () => {},
   office: [],
   rooms: [],
-  history: {},
-  match: {},
   currentRoom: {}
 };
 

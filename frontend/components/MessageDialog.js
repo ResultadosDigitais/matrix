@@ -33,7 +33,11 @@ const MessageDialog = ({ onClose, modalData }) => (
 
 MessageDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
-  modalData: PropTypes.object.isRequired
+  modalData: PropTypes.shape({
+    isOpen: PropTypes.bool.isRequired,
+    title: PropTypes.string,
+    message: PropTypes.string
+  }).isRequired
 };
 
 const mapStateToProps = state => ({

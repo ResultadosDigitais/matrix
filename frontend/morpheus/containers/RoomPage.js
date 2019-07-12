@@ -10,6 +10,7 @@ import Loading from "../../components/Loading";
 import { selectRooms, selectCurrentRoom } from "../store/selectors";
 import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting } from "../socket";
 import { setCurrentRoom } from "../store/actions";
+import { RoomsPropType, CurrentRoomPropType } from "../store/models";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -130,10 +131,16 @@ const RoomPage = ({ onSetCurrentRoom, history, match, rooms, currentRoom }) => {
 
 RoomPage.propTypes = {
   onSetCurrentRoom: PropTypes.func,
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  rooms: PropTypes.array,
-  currentRoom: PropTypes.object
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      roomId: PropTypes.string
+    }).isRequired
+  }).isRequired,
+  rooms: RoomsPropType,
+  currentRoom: CurrentRoomPropType
 };
 
 RoomPage.defaultProps = {

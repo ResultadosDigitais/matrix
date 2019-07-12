@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import Loading from "../../components/Loading";
 import { selectRooms, selectCurrentRoom } from "../store/selectors";
+import { CurrentRoomPropType } from "../store/models";
 
 const OfficeRedirect = ({ rooms, currentRoom }) => {
   const [roomId, setRoomId] = useState(null);
@@ -26,7 +27,7 @@ const OfficeRedirect = ({ rooms, currentRoom }) => {
 
 OfficeRedirect.propTypes = {
   rooms: PropTypes.arrayOf(PropTypes.object),
-  currentRoom: PropTypes.object
+  currentRoom: CurrentRoomPropType
 };
 
 OfficeRedirect.defaultProps = {

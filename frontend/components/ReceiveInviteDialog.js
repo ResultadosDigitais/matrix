@@ -35,7 +35,14 @@ const ReceiveInviteDialog = ({ open, onClose, onConfirm, invitation }) => (
 );
 
 ReceiveInviteDialog.propTypes = {
-  invitation: PropTypes.object,
+  invitation: PropTypes.shape({
+    user: PropTypes.shape({
+      name: PropTypes.string
+    }),
+    room: PropTypes.shape({
+      name: PropTypes.string
+    })
+  }),
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onConfirm: PropTypes.func

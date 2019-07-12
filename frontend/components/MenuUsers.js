@@ -15,6 +15,10 @@ import IconButton from "@material-ui/core/IconButton";
 import PhoneForwardedIcon from "@material-ui/icons/PhoneForwarded";
 import debounce from "lodash.debounce";
 import clsx from "clsx";
+import {
+  CurrentUserPropType,
+  CurrentRoomPropType
+} from "../morpheus/store/models";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -129,8 +133,8 @@ const MenuUsers = ({
 MenuUsers.propTypes = {
   onChangeFilter: PropTypes.func,
   onInviteUser: PropTypes.func,
-  currentUser: PropTypes.object,
-  currentRoom: PropTypes.object,
+  currentUser: CurrentUserPropType,
+  currentRoom: CurrentRoomPropType,
   users: PropTypes.arrayOf(PropTypes.object)
 };
 

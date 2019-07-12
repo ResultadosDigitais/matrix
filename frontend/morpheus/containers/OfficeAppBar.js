@@ -11,6 +11,11 @@ import {
   selectCurrentUser,
   selectSettings
 } from "../store/selectors";
+import {
+  OfficeFilterPropType,
+  SettingsPropType,
+  CurrentUserPropType
+} from "../store/models";
 
 const OfficeAppBar = ({
   onChangeOfficeFilter,
@@ -34,9 +39,9 @@ const OfficeAppBar = ({
 OfficeAppBar.propTypes = {
   onChangeOfficeFilter: PropTypes.func,
   onChangeSettings: PropTypes.func,
-  officeFilter: PropTypes.object,
-  settings: PropTypes.object,
-  currentUser: PropTypes.object
+  officeFilter: OfficeFilterPropType,
+  settings: SettingsPropType,
+  currentUser: CurrentUserPropType
 };
 
 OfficeAppBar.defaultProps = {

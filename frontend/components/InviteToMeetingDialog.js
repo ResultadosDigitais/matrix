@@ -40,7 +40,9 @@ const InviteToMeetingDialog = ({
 );
 
 InviteToMeetingDialog.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.shape({
+    name: PropTypes.string
+  }),
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onConfirm: PropTypes.func,

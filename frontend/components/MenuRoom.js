@@ -6,6 +6,7 @@ import Share from "@material-ui/icons/Share";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import NotificationCheckbox from "./NotificationCheckbox";
+import { SettingsPropType } from "../morpheus/store/models";
 
 const MenuRoom = ({ onExitRoom, onShare, onChangeSettings, settings }) => (
   <>
@@ -42,7 +43,7 @@ MenuRoom.propTypes = {
   onExitRoom: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onChangeSettings: PropTypes.func.isRequired,
-  settings: PropTypes.object.isRequired
+  settings: SettingsPropType.isRequired
 };
 
 export default MenuRoom;

@@ -8,6 +8,7 @@ import ShareModal from "../../components/ShareModal";
 import { selectRooms, selectSettings } from "../store/selectors";
 import { emitLeftMeeting } from "../socket";
 import { changeSettings } from "../store/actions";
+import { RoomsPropType, SettingsPropType } from "../store/models";
 
 const RoomAppBar = ({ onChangeSettings, history, match, rooms, settings }) => {
   const [isShareModalOpen, setShareModalOpen] = useState(false);
@@ -41,10 +42,16 @@ const RoomAppBar = ({ onChangeSettings, history, match, rooms, settings }) => {
 
 RoomAppBar.propTypes = {
   onChangeSettings: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
-  rooms: PropTypes.array
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      roomId: PropTypes.string
+    }).isRequired
+  }).isRequired,
+  settings: SettingsPropType.isRequired,
+  rooms: RoomsPropType
 };
 
 RoomAppBar.defaultProps = {
