@@ -21,27 +21,28 @@ window.onload = () => {
   gapi.load("auth2", () => {
     gapi.auth2.init().then(
       auth2 => {
-        if (auth2.isSignedIn.get()) {
-          const matrixProfile = new MatrixProfile();
-
-          if (!matrixProfile.isProfileStored()) {
-            const currentUser = auth2.currentUser.get();
-            const basicProfile = currentUser.getBasicProfile();
-
-            const profileData = {
-              id: basicProfile.getId(),
-              name: basicProfile.getName(),
-              imageUrl: basicProfile.getImageUrl(),
-              email: basicProfile.getEmail()
-            };
-
-            matrixProfile.storeProfileData(profileData);
-          }
-
-          renderApp();
-        } else {
+        if (!auth2.isSignedIn.get()) {
           window.location.href = "/";
+          return;
         }
+
+        const matrixProfile = new MatrixProfile();
+
+        if (!matrixProfile.isProfileStored()) {
+          const currentUser = auth2.currentUser.get();
+          const basicProfile = currentUser.getBasicProfile();
+
+          const profileData = {
+            id: basicProfile.getId(),
+            name: basicProfile.getName(),
+            imageUrl: basicProfile.getImageUrl(),
+            email: basicProfile.getEmail()
+          };
+
+          matrixProfile.storeProfileData(profileData);
+        }
+
+        renderApp();
       },
       () => {
         window.location.href = "/";
