@@ -40,9 +40,7 @@ const useEvents = (
         }
       }, 500);
 
-      events.onSyncOffice(usersInRoom => {
-        onSyncOffice(usersInRoom);
-      });
+      events.onSyncOffice(onSyncOffice);
       events.onParticipantJoined((user, roomId) => {
         onAddUser(user, roomId);
         if (currentUser.id !== user.id && currentRoom.id === roomId) {
