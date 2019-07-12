@@ -1,4 +1,3 @@
-require("mock-local-storage");
 const assert = require("assert");
 const MatrixProfile = require("../../frontend/profile").default;
 
@@ -7,7 +6,7 @@ function getProfileDataSample() {
     id: "111",
     name: "Nome do fulano",
     imageUrl: "http://localhost/img.jpg",
-    email: "Mail@mail.com",
+    email: "Mail@mail.com"
   };
 }
 

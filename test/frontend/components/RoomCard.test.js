@@ -1,36 +1,38 @@
 import React from "react";
 import { cleanup, render, fireEvent } from "@testing-library/react";
+import { assert } from "chai";
+import sinon from "sinon";
 
-import RoomCard from "../../frontend/components/RoomCard";
+import RoomCard from "../../../frontend/components/RoomCard";
 
 describe("components/Roomcard", () => {
   afterEach(cleanup);
 
-  test("should render without props defined", () => {
+  it("should render without props defined", () => {
     render(<RoomCard />);
   });
 
-  test("should render button enter room", () => {
-    const onEnterRoom = jest.fn();
+  it("should render button enter room", () => {
+    const onEnterRoom = sinon.fake();
     const { getByText } = render(<RoomCard onEnterRoom={onEnterRoom} />);
 
     fireEvent.click(getByText(/enter room/i));
 
-    expect(onEnterRoom.mock.calls.length).toBe(1);
+    assert(onEnterRoom.calledOnce);
   });
 
-  test("should render button enter meeting", () => {
-    const onEnterMeeting = jest.fn();
+  it("should render button enter meeting", () => {
+    const onEnterMeeting = sinon.fake();
     const { getByText } = render(<RoomCard onEnterMeeting={onEnterMeeting} />);
 
     fireEvent.click(getByText(/enter meeting/i));
 
-    expect(onEnterMeeting.mock.calls.length).toBe(1);
+    assert(onEnterMeeting.calledOnce);
   });
 
-  test("should render room name", () => {
+  it("should render room name", () => {
     const { getByText } = render(<RoomCard name="Room test" />);
 
-    expect(getByText("Room test")).toBeTruthy();
+    assert(getByText("Room test"));
   });
 });

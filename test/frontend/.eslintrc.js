@@ -2,9 +2,11 @@ module.exports = {
   extends: ["airbnb", "prettier", "prettier/react"],
   plugins: ["babel", "react", "prettier", "react-hooks"],
   env: {
+    browser: true,
     commonjs: true,
     es6: true,
-    jest: true
+    jquery: true,
+    mocha: true
   },
   rules: {
     quotes: ["error", "double"],
