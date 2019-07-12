@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
-import axios from "axios";
-import debounce from "lodash.debounce";
 
 import Loading from "../components/Loading";
 import PageLayout from "../components/PageLayout";
@@ -12,19 +10,10 @@ import MenuUsers from "../components/MenuUsers";
 import InviteToMeetingDialog from "../components/InviteToMeetingDialog";
 import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
 import MessageDialog from "../components/MessageDialog";
-import SnackbarActions from "../components/SnackbarActions";
 import Error500 from "../components/Error500";
 import PageRoutes, { AppBarRouter } from "./Routes";
-import { showBrowserNotification } from "../notification";
-import {
-  initProfile,
-  initEvents,
-  closeConnection,
-  getCurrentUser,
-  emitEnterInRoom,
-  emitInviteUser,
-  getCurrentRoomId
-} from "./socket";
+
+import { emitEnterInRoom, emitInviteUser } from "./socket";
 import {
   setCurrentUser,
   setCurrentRoom,
@@ -55,141 +44,8 @@ import {
   UsersFilterPropType,
   ErrorPropType
 } from "./store/models";
-
-const useSocket = (
-  toggleLoading,
-  setLoggedIn,
-  onSetCurrentUser,
-  onSetCurrentRoom,
-  onAddRooms,
-  onAddError
-) => {
-  useEffect(() => {
-    const profile = initProfile();
-
-    if (profile.isProfileStored()) {
-      onSetCurrentUser(getCurrentUser());
-
-      axios
-        .get("/rooms")
-        .then(response => {
-          const rooms = response.data;
-          const savedRoomId = getCurrentRoomId();
-          let currentRoom = rooms.find(r => r.id === savedRoomId);
-
-          if (!currentRoom) {
-            [currentRoom] = rooms;
-            emitEnterInRoom(currentRoom.id);
-          }
-
-          onAddRooms(rooms);
-          onSetCurrentRoom(currentRoom);
-          setLoggedIn(true);
-          toggleLoading(false);
-        })
-        .catch(error => {
-          onAddError(error);
-          toggleLoading(false);
-        });
-    } else {
-      window.location.href = "/";
-    }
-  }, [
-    toggleLoading,
-    setLoggedIn,
-    onSetCurrentUser,
-    onAddRooms,
-    onAddError,
-    onSetCurrentRoom
-  ]);
-};
-
-const useEvents = (
-  onSyncOffice,
-  onAddUser,
-  onRemoveUser,
-  onUserEnterMeeting,
-  onUserLeftMeeting,
-  enqueueSnackbar,
-  closeSnackbar,
-  setReceiveInviteOpen,
-  setInvitation,
-  isLoggedIn,
-  rooms,
-  settings,
-  currentUser,
-  currentRoom
-) => {
-  useEffect(() => {
-    if (isLoggedIn) {
-      const events = initEvents(rooms);
-
-      const showNotification = debounce(message => {
-        if (!settings.notificationDisabled) {
-          enqueueSnackbar(message, {
-            action: key => (
-              <SnackbarActions
-                onDismiss={() => {
-                  closeSnackbar(key);
-                }}
-              />
-            )
-          });
-          showBrowserNotification(message);
-        }
-      }, 500);
-
-      events.onSyncOffice(usersInRoom => {
-        onSyncOffice(usersInRoom);
-      });
-      events.onParticipantJoined((user, roomId) => {
-        onAddUser(user, roomId);
-        if (currentUser.id !== user.id && currentRoom.id === roomId) {
-          const room = rooms.find(r => r.id === roomId);
-          showNotification(`${user.name} entered the ${room.name}.`);
-        }
-      });
-      events.onParticipantStartedMeet((user, roomId) => {
-        onUserEnterMeeting(user, roomId);
-      });
-      events.onParticipantLeftMeet((user, roomId) => {
-        onUserLeftMeeting(user, roomId);
-      });
-      events.onDisconnect(userId => {
-        onRemoveUser(userId);
-      });
-      events.onParticipantIsCalled((user, roomId) => {
-        const room = rooms.find(r => r.id === roomId);
-        setReceiveInviteOpen(true);
-        setInvitation({ user, room });
-        if (!settings.notificationDisabled) {
-          showBrowserNotification(
-            `${user.name} is inviting you to ${room.name}`
-          );
-        }
-      });
-    }
-
-    return () => {
-      closeConnection();
-    };
-  }, [
-    closeSnackbar,
-    currentRoom.id,
-    currentUser.id,
-    enqueueSnackbar,
-    isLoggedIn,
-    onAddUser,
-    onRemoveUser,
-    onSyncOffice,
-    onUserEnterMeeting,
-    onUserLeftMeeting,
-    rooms,
-    setInvitation,
-    setReceiveInviteOpen,
-    settings.notificationDisabled
-  ]);
-};
+import useSocket from "./hooks/useSocket";
+import useEvents from "./hooks/useEvents";
 
 const MorpheusApp = ({
   onChangeUsersFilter,
