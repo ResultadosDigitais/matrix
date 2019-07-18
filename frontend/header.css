@@ -32,3 +32,13 @@
 .dropdown-menu button:hover {
   color: #0061c3;
 }
+
+.navbar-menu-right {
+  display: flex;
+  align-items: center;
+}
+
+.icon-rabbit {
+  height: 24px;
+  margin-right: 30px;
+}

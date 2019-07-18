@@ -5,7 +5,8 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
-    jquery: true
+    jquery: true,
+    mocha: true
   },
   rules: {
     quotes: ["error", "double"],

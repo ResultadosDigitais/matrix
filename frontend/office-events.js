@@ -4,12 +4,16 @@ function OfficeEvents(config) {
   this.config = config;
   const user = JSON.stringify(config.currentUser);
   this.socketIO = io.connect(config.domain, {
-    query: `user=${user}&room=${config.currentRoom}`,
+    query: `user=${user}&room=${config.currentRoom}`
   });
 }
 
+OfficeEvents.prototype.closeConnection = function closeConnection() {
+  this.socketIO.close();
+};
+
 OfficeEvents.prototype.listenEvent = function listenEvent(event, callback) {
-  this.socketIO.on(event, (data) => {
+  this.socketIO.on(event, data => {
     if (data.user) {
       callback(data.user, data.room);
     } else {
@@ -36,25 +40,25 @@ OfficeEvents.prototype.leftMeet = function leftMeet() {
 
 OfficeEvents.prototype.callUserForMyRoom = function callUserForMyRoom(
   userId,
-  roomId,
+  roomId
 ) {
   this.emitEvent("get-user-to-room", { room: roomId, user: userId });
 };
 
 OfficeEvents.prototype.onParticipantJoined = function onParticipantJoined(
-  callback,
+  callback
 ) {
   this.listenEvent("enter-room", callback);
 };
 
 OfficeEvents.prototype.onParticipantStartedMeet = function onParticipantStartedMeet(
-  callback,
+  callback
 ) {
   this.listenEvent("start-meet", callback);
 };
 
 OfficeEvents.prototype.onParticipantLeftMeet = function onParticipantLeftMeet(
-  callback,
+  callback
 ) {
   this.listenEvent("left-meet", callback);
 };
@@ -64,7 +68,7 @@ OfficeEvents.prototype.onSyncOffice = function onSyncOffice(callback) {
 };
 
 OfficeEvents.prototype.onParticipantIsCalled = function onParticipantIsCalled(
-  callback,
+  callback
 ) {
   this.listenEvent("get-user-to-room", callback);
 };

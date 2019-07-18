@@ -18,7 +18,7 @@ MatrixProfile.prototype.loadStoredProfileAsString = function loadStoredProfileAs
 };
 
 MatrixProfile.prototype.storeProfileData = function storeProfileData(
-  profileData,
+  profileData
 ) {
   localStorage.setItem("user", JSON.stringify(profileData));
 };
@@ -32,13 +32,7 @@ MatrixProfile.prototype.loadStoredRoom = function loadStoredRoom() {
 };
 
 MatrixProfile.prototype.isProfileStored = function isProfileStored() {
-  if (
-    localStorage.getItem("user") != ""
-    && localStorage.getItem("user") != null
-  ) {
-    return true;
-  }
-  return false;
+  return !!localStorage.getItem("user");
 };
 
 MatrixProfile.prototype.terminate = function terminate() {
