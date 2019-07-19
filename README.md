@@ -22,9 +22,10 @@ In this moment is possible:
 
 Next priority steps:
 
-- Implement socket.io tests
 - Configure code coverage codeclimate
-- Refactoring before start refactor please read [[this article](https://martinfowler.com/articles/refactoring-document-load.html)]
+- Elevate Maintainability from B to A
+- Write project WIKI with main functionalities
+
 
 Next cool steps:
 
