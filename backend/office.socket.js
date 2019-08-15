@@ -11,12 +11,21 @@ class Office {
 
   start() {
     this.io.use((socket, next) => {
-      socket.user = JSON.parse(socket.handshake.query.user);
-      console.log("socket.id:", socket.id);
-      return next();
+      const serializedUser = socket.handshake.query.user;
+
+      try {
+        socket.user = JSON.parse(serializedUser);
+
+        console.log("socket.id:", socket.id);
+        next();
+      } catch (err) {
+        console.error(`Error on parse user: '${serializedUser}'`, err);
+
+        next(new Error("Invalid user"));
+      }
     });
 
-    this.io.on("connection", (socket) => {
+    this.io.on("connection", socket => {
       const currentUser = socket.user;
       currentUser.socketId = socket.id;
 
@@ -29,7 +38,7 @@ class Office {
 
       socket.emit("sync-office", this.officeController.getUsersInOfficeByMap());
 
-      socket.on("disconnect", (socket) => {
+      socket.on("disconnect", socket => {
         if (this.canDisconnectUser(currentUser.id)) {
           console.log("disconect:", currentUser.id);
           this.io.sockets.emit("disconnect", currentUser.id);
@@ -37,19 +46,19 @@ class Office {
         }
       });
 
-      socket.on("enter-room", (data) => {
+      socket.on("enter-room", data => {
         this.addUserInRoom(currentUser, data.room);
       });
 
-      socket.on("start-meet", (userId) => {
+      socket.on("start-meet", userId => {
         this.updateUserMeetInformation(userId, "start-meet", true);
       });
 
-      socket.on("left-meet", (userId) => {
+      socket.on("left-meet", userId => {
         this.updateUserMeetInformation(userId, "left-meet", false);
       });
 
-      socket.on("get-user-to-room", (data) => {
+      socket.on("get-user-to-room", data => {
         const userInRoom = this.officeController.getUserInRoom(data.user);
         if (userInRoom) {
           this.io
