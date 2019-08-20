@@ -75,7 +75,7 @@ const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
                     [classes.avatarInMeeting]: user.inMeet
                   })}
                 >
-                  <Avatar src={user.imageUrl} />
+                  <Avatar src={decodeURIComponent(user.imageUrl)} />
                 </div>
               </Tooltip>
             ))}
