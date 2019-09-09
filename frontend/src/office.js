@@ -42,7 +42,7 @@ $(() => {
           user.id
         }" class="thumbnail user-room rounded-circle" user-presence><img class="rounded-circle" style="margin:2px;display:flex;" user-id="${
           user.id
-        }" title="${user.name}" width="50px" src="${user.imageUrl}"></div>`,
+        }" title="${user.name}" width="50px" src="${decodeURIComponent(user.imageUrl)}"></div>`,
       );
     }
 
