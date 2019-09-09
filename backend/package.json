@@ -1,6 +1,7 @@
 {
   "name": "matrix-backend",
   "scripts": {
+    "build-backend": "babel ./ -d dist",
     "start": "nodemon --exec babel-node index.js",
     "test": "nyc --reporter=text mocha './test/**/*.test.js'",
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;"
