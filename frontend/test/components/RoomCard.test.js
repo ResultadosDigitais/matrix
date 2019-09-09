@@ -3,7 +3,7 @@ import { cleanup, render, fireEvent } from "@testing-library/react";
 import { assert } from "chai";
 import sinon from "sinon";
 
-import RoomCard from "../../../frontend/components/RoomCard";
+import RoomCard from "../../src/components/RoomCard";
 
 describe("components/Roomcard", () => {
   afterEach(cleanup);

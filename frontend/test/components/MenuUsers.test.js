@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { assert } from "chai";
 import sinon from "sinon";
 
-import MenuUsers from "../../../frontend/components/MenuUsers";
+import MenuUsers from "../../src/components/MenuUsers";
 
 const waitFor = milliseconds =>
   new Promise(resolve => {

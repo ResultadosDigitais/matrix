@@ -4,10 +4,10 @@ import deepFreeze from "deep-freeze";
 import {
   addRooms,
   syncOffice,
-} from "../../../../frontend/morpheus/store/actions";
+} from "../../../src/morpheus/store/actions";
 import reducers, {
   initialState,
-} from "../../../../frontend/morpheus/store/reducers";
+} from "../../../src/morpheus/store/reducers";
 
 describe("morpheus/store/reducers", () => {
   it("should reduce action ADD_ROOMS", () => {

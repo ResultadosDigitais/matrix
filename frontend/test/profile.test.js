@@ -1,5 +1,5 @@
 const assert = require("assert");
-const MatrixProfile = require("../../frontend/profile").default;
+const MatrixProfile = require("../src/profile").default;
 
 function getProfileDataSample() {
   return {
