@@ -12,7 +12,8 @@
     "cover": "env CI=true lerna run cover --stream",
     "build-backend": "lerna run build-backend --stream",
     "build-frontend": "lerna run build-frontend --stream",
-    "start": "lerna run start --stream"
+    "start": "lerna run start --stream",
+    "start-backend": "lerna run start-backend --stream"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
