@@ -1,0 +1,18 @@
+{
+  "name": "matrix-backend",
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "hashmap": "^2.3.0",
+    "nodemon": "^1.19.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.6.0"
+  }
+}
