@@ -1,7 +1,9 @@
 {
   "name": "matrix-backend",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node index.js",
+    "test": "nyc --reporter=text mocha './test/**/*.test.js'",
+    "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;"
   },
   "dependencies": {
     "@babel/core": "^7.4.3",
@@ -13,6 +15,8 @@
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.6.0"
+    "@babel/preset-env": "^7.6.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1"
   }
 }

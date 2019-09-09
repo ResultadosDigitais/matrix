@@ -1,4 +1,4 @@
-import GoogleCredentialController from "../../backend/controllers/google.credentials.controller";
+import GoogleCredentialController from "../../controllers/google.credentials.controller";
 
 const assert = require("assert");
 

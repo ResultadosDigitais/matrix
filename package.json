@@ -8,6 +8,7 @@
     "postinstall": "npm run bootstrap",
     "list": "lerna list",
     "test": "env CI=true lerna run test --stream",
+    "cover": "env CI=true lerna run cover --stream",
     "start": "lerna run start --stream"
   },
   "devDependencies": {
