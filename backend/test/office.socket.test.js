@@ -2,8 +2,8 @@ const assert = require("assert");
 const io = require("socket.io-client");
 const sinon = require("sinon");
 
-const app = require("../app.server");
-const Office = require("../office.socket");
+const app = require("../app/app.server");
+const Office = require("../app/office.socket");
 
 const SOCKET_HOST = "0.0.0.0";
 const SOCKET_PORT = "3003";
