@@ -286,12 +286,14 @@ $(() => {
     enterRoom.on("click", (e) => {
       const roomId = $(e.target).attr("room-id");
       const disableMeeting = new Boolean(
-        $(e.target).attr("room-disable-meeting"),
+        $(e.target).attr("room-disable-meeting")=="true",
       );
+
+      console.log($(e.target).attr("room-disable-meeting"));  
 
       officeEvents.enterInRoom(roomId);
       matrixProfile.storeRoom(roomId);
-
+      console.log("disableMeeting:",disableMeeting);
       if (disableMeeting == true) return;
 
       startVideoConference(roomId, getRoomName(roomId), officeEvents);
