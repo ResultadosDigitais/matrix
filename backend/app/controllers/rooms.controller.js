@@ -2,7 +2,7 @@ import fs from "fs";
 import uuid from "uuid/v4";
 import path from "path";
 
-const roomFilePath = "./file/matrix.room.web.json";
+const roomFilePath = "../file/matrix.room.web.json";
 
 const fetchFromFile = () => {
   const roomFileExists = fs.existsSync(roomFilePath);

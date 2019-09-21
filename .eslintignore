@@ -1,2 +1,3 @@
 /public/dist/*
 /frontend/initialize/jquery.initialize.js
+node_modules/

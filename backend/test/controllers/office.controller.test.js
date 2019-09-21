@@ -1,4 +1,4 @@
-import OfficeController from "../../backend/controllers/office.controller";
+import OfficeController from "../../app/controllers/office.controller";
 
 const assert = require("assert");
 

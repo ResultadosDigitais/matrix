@@ -1,7 +1,7 @@
 const assert = require("assert");
 const { expect } = require("chai");
 const request = require("supertest");
-const app = require("../backend/app.server");
+const app = require("../app/app.server");
 
 describe("Unit testing the / route", () => {
   it("should return OK status", () => request(app)

@@ -9,8 +9,8 @@ const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const sourcePath = path.join(__dirname, "frontend");
-const buildPath = path.join(__dirname, "public", "dist");
+const sourcePath = path.join(__dirname, "src");
+const buildPath = path.join(__dirname, "..", "public", "dist");
 
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
