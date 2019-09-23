@@ -286,7 +286,7 @@ $(() => {
     enterRoom.on("click", (e) => {
       const roomId = $(e.target).attr("room-id");
       const disableMeeting = new Boolean(
-        $(e.target).attr("room-disable-meeting"),
+        $(e.target).attr("room-disable-meeting")=="true",
       );
 
       officeEvents.enterInRoom(roomId);

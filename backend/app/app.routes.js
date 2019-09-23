@@ -22,7 +22,7 @@ router.get("/new", (req, res) => {
     req.app.locals.roomsDetail.splice(1, 0, newRoom);
   }
 
-  res.redirect(`/office#${req.query.roomId}`);
+  res.redirect(`/morpheus/room/${req.query.roomId}`);
 });
 
 router.get("/remove", (req, res) => {
