@@ -1,9 +1,9 @@
 {
   "name": "matrix-backend",
   "scripts": {
-    "build-backend": "babel ./app -d ../dist",
+    "build-backend": "babel ./app -d ./dist",
     "start": "nodemon --exec babel-node ./app/index.js",
-    "start-backend": "NODE_ENV=production node ../dist/index.js",
+    "start-backend": "NODE_ENV=production node ./dist/index.js",
     "test": "nyc --reporter=text mocha './test/**/*.test.js'",
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;"
   },

@@ -65,7 +65,7 @@ typings/
 public/dist
 
 # backend build output
-dist
+backend/dist
 
 # Generated random room config
 file/matrix.room.web.json
