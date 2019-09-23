@@ -8,9 +8,11 @@ COPY . /var/app
 
 EXPOSE 8080
 
-RUN npm install
+RUN npm install --ignore-scripts
+RUN npm run bootstrap
 RUN npm run build-backend
 RUN npm run build-frontend
 
 ENTRYPOINT ["sh","/docker-entrypoint.sh"]
-CMD ["npm" , "run", "start-backend"]
+CMD ["npm" ,  "--prefix", "backend/", "run", "start-backend"]
+
