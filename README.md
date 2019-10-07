@@ -48,7 +48,7 @@ The Matrix project has some environments that important to define.
 
 			ROOMS_SOURCE=environment
 
-4. There is a config that define the rooms of The Matrix, if you prefer you can generate [here] (https://www.uuidgenerator.net), to define this:
+4. There is a config that define the rooms of The Matrix, if you prefer you can generate [here](https://www.uuidgenerator.net), to define this:
 
 
 		ROOMS_DATA=[
