@@ -15,11 +15,10 @@ const theme = createMuiTheme({
   }
 })
 
-const useStyles = makeStyles(theme => (
-  return {
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    backgroundColor: "#e1f5fe",
+    // backgroundColor: "#e1f5fe",
     minHeight: "100vh"
   },
   main: {
