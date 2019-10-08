@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+
+import { CssBaseline } from "@material-ui/core";
+import { MuiThemeProvider, makeStyles, createMuiTheme } from "@material-ui/core/styles";
+
 
 import AppBar from "./AppBar";
 import Drawer, { drawerWidth, drawerHeader } from "./Drawer";
 
-const useStyles = makeStyles(theme => ({
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark'
+  }
+})
+
+const useStyles = makeStyles(theme => (
+  return {
   root: {
     display: "flex",
     backgroundColor: "#e1f5fe",
@@ -41,10 +51,12 @@ const PageLayout = ({
   renderSideBarMenu,
   children
 }) => {
-  const [isDrawerOpen, toggleDrawer] = useState(false);
+  const [isDrawerOpen, toggleDrawer] = useState();
   const classes = useStyles();
 
   return (
+        <MuiThemeProvider theme={theme}>
+        <CssBaseline />
     <div className={classes.root}>
       <AppBar
         isDrawerOpen={isDrawerOpen}
@@ -72,6 +84,7 @@ const PageLayout = ({
         <div className={classes.container}>{children}</div>
       </main>
     </div>
+  </MuiThemeProvider>
   );
 };
 
