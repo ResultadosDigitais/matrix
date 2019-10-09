@@ -36,7 +36,7 @@ ConfirmDialog.propTypes = {
   onClose: PropTypes.func,
   onConfirm: PropTypes.func,
   title: PropTypes.string,
-  message: PropTypes.oneOf(PropTypes.string, PropTypes.node)
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
 ConfirmDialog.defaultProps = {

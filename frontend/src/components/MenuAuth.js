@@ -12,12 +12,10 @@ const MenuAuth = ({ onLogout, userName }) => {
   };
 
   return (
-    <div>
+    <>
       <Button
         color="inherit"
-        onClick={event => {
-          setAnchorEl(event.currentTarget);
-        }}
+        onClick={event => setAnchorEl(event.currentTarget)}
       >
         {userName}
       </Button>
@@ -44,7 +42,7 @@ const MenuAuth = ({ onLogout, userName }) => {
           Logout
         </MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
 
