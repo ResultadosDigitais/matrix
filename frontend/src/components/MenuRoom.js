@@ -5,6 +5,7 @@ import ExitToApp from "@material-ui/icons/ExitToApp";
 import Share from "@material-ui/icons/Share";
 import Tooltip from "@material-ui/core/Tooltip";
 
+import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
 import { SettingsPropType } from "../morpheus/store/models";
 
@@ -16,7 +17,7 @@ const MenuRoom = ({ onExitRoom, onShare, onChangeSettings, settings }) => (
         onChangeSettings("notificationDisabled", event.target.checked);
       }}
     />
-    <ThemeCheckbox onChange={onChangeTheme} />
+    <ThemeCheckbox />
     <Tooltip title="Share room link">
       <IconButton
         aria-label="Share room link"
