@@ -20,6 +20,7 @@ import {
 const OfficeAppBar = ({
   onChangeOfficeFilter,
   onChangeSettings,
+  onChangeTheme,
   officeFilter,
   settings,
   currentUser
@@ -30,6 +31,7 @@ const OfficeAppBar = ({
       filter={officeFilter}
       onChangeFilter={onChangeOfficeFilter}
       onChangeSettings={onChangeSettings}
+      onChangeTheme={onChangeTheme}
       settings={settings}
     />
     <MenuAuth userName={currentUser.name} />

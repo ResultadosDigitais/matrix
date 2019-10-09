@@ -16,6 +16,7 @@ const MenuRoom = ({ onExitRoom, onShare, onChangeSettings, settings }) => (
         onChangeSettings("notificationDisabled", event.target.checked);
       }}
     />
+    <ThemeCheckbox onChange={onChangeTheme} />
     <Tooltip title="Share room link">
       <IconButton
         aria-label="Share room link"
@@ -43,6 +44,7 @@ MenuRoom.propTypes = {
   onExitRoom: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onChangeSettings: PropTypes.func.isRequired,
+  onChangeTheme: PropTypes.func.isRequired,
   settings: SettingsPropType.isRequired
 };
 

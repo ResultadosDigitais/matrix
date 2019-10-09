@@ -8,6 +8,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Tooltip from "@material-ui/core/Tooltip";
 import debounce from "lodash.debounce";
 
+import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +51,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MenuOffice = ({ onChangeFilter, onChangeSettings, filter, settings }) => {
+const MenuOffice = ({
+  onChangeFilter,
+  onChangeSettings,
+  onChangeTheme,
+  filter,
+  settings
+}) => {
   const classes = useStyles();
   const commitSearch = debounce(onChangeFilter, 300);
 
@@ -82,6 +89,7 @@ const MenuOffice = ({ onChangeFilter, onChangeSettings, filter, settings }) => {
           }}
         />
       </Tooltip>
+      <ThemeCheckbox onChange={onChangeTheme} />
       <NotificationCheckbox
         isDisabled={settings.notificationDisabled}
         onChange={event => {
@@ -95,6 +103,7 @@ const MenuOffice = ({ onChangeFilter, onChangeSettings, filter, settings }) => {
 MenuOffice.propTypes = {
   onChangeFilter: PropTypes.func,
   onChangeSettings: PropTypes.func,
+  onChangeTheme: PropTypes.func,
   filter: PropTypes.shape({
     onlyFullRoom: PropTypes.bool
   }),

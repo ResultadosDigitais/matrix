@@ -16,9 +16,6 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen
     })
   },
-  colorDefault: {
-    // backgroundColor: "#fff"
-  },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
@@ -48,9 +45,6 @@ const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: isDrawerOpen
         })}
-        classes={{
-          colorDefault: classes.colorDefault
-        }}
         color="default"
       >
         <Toolbar>
