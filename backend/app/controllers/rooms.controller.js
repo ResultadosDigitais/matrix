@@ -41,6 +41,7 @@ const createRoomFileSync = () => {
     roomsData.push({
       id: uuid(),
       name: niceName,
+      externalMeetUrl: "https://matrix-zoom-poc.herokuapp.com/?meetId=563847523"
     });
   }
 

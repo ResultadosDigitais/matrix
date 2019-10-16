@@ -23,7 +23,10 @@
             </button>
           </div>
           <div class="modal-body">
-               <div id="meet" class="meet-frame"></div>
+               <div id="meet" class="meet-frame">
+                 
+                  <iframe allow="camera; microphone" src="" name="externalMeeting" id="externalMeeting" allowfullscreen="true" style="height: 100%; width: 100%; border: 0px;display: none;"></iframe>    
+               </div>
           </div>
         </div>
       </div>
@@ -45,7 +48,7 @@
             </div>
           </div>
           <div class="card-footer text-muted room-footer ">
-            <a id="room_btn_enter-<%= roomsDetail[i].id %>" href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=[i].externalMeetUrl%>" enter-room room-name="<%= roomsDetail[i].name%>" room-disable-meeting="<%= roomsDetail[i].disableMeeting %>" room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
+            <a id="room_btn_enter-<%= roomsDetail[i].id %>" href="#<%= roomsDetail[i].id%>" class="card-link btn-enter-in-room float-left" external-meet-url="<%=roomsDetail[i].externalMeetUrl%>" enter-room room-name="<%= roomsDetail[i].name%>" room-disable-meeting="<%= roomsDetail[i].disableMeeting %>" room-id="<%= roomsDetail[i].id%>" >Enter this room</a>
           </div>
         </div>
       </div>
