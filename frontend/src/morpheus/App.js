@@ -12,6 +12,7 @@ import ReceiveInviteDialog from "../components/ReceiveInviteDialog";
 import MessageDialog from "../components/MessageDialog";
 import Error500 from "../components/Error500";
 import PageRoutes, { AppBarRouter } from "./Routes";
+import ConfirmLogoutDialog from "./containers/ConfirmLogoutDialog";
 
 import { emitEnterInRoom, emitInviteUser } from "./socket";
 import {
@@ -155,6 +156,7 @@ const MorpheusApp = ({
         }}
       />
       <MessageDialog />
+      <ConfirmLogoutDialog />
     </>
   );
 };

@@ -11,7 +11,9 @@ import {
   USER_ENTER_MEETING,
   USER_LEFT_MEETING,
   CHANGE_SETTINGS,
-  TOGGLE_MESSAGE_DIALOG
+  TOGGLE_MESSAGE_DIALOG,
+  OPEN_LOGOUT_CONFIRM_DIALOG,
+  CLOSE_LOGOUT_CONFIRM_DIALOG
 } from "./actions";
 
 export const initialState = {
@@ -36,6 +38,9 @@ export const initialState = {
     isOpen: false,
     title: undefined,
     message: undefined
+  },
+  logoutDialog: {
+    isOpen: false
   }
 };
 
@@ -215,6 +220,20 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         messageDialog: action.props
+      };
+    case OPEN_LOGOUT_CONFIRM_DIALOG:
+      return {
+        ...state,
+        logoutDialog: {
+          isOpen: true
+        }
+      };
+    case CLOSE_LOGOUT_CONFIRM_DIALOG:
+      return {
+        ...state,
+        logoutDialog: {
+          isOpen: false
+        }
       };
     default:
       return state;

@@ -46,7 +46,7 @@ The Matrix project has some environments that important to define.
 
 3. The Matrix needs to know, where it get rooms definitions:
 
-			ROOMS_SOURCE=environment
+		ROOMS_SOURCE=environment
 
 4. There is a config that define the rooms of The Matrix, if you prefer you can generate [here](https://www.uuidgenerator.net), to define this:
 
