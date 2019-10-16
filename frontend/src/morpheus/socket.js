@@ -1,3 +1,5 @@
+/* global gapi */
+
 import MatrixProfile from "../profile";
 import OfficeEvents from "../office-events";
 
@@ -80,4 +82,16 @@ export const emitLeftMeeting = () => {
 export const emitInviteUser = userId => {
   const roomId = profile.loadStoredRoom();
   events.callUserForMyRoom(userId, roomId);
+};
+
+export const signOut = () => {
+  closeConnection();
+
+  const auth2 = gapi.auth2.getAuthInstance();
+
+  auth2.signOut().then(() => {
+    profile.terminate();
+    auth2.disconnect();
+    window.location.href = "./";
+  });
 };

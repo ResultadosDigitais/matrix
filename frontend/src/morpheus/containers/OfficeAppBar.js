@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 import AppBarTitle from "../../components/AppBarTitle";
 import MenuOffice from "../../components/MenuOffice";
 import MenuAuth from "../../components/MenuAuth";
-import { changeOfficeFilter, changeSettings } from "../store/actions";
+import {
+  changeOfficeFilter,
+  changeSettings,
+  openLogoutConfirmDialog
+} from "../store/actions";
 import {
   selectOfficeFilter,
   selectCurrentUser,
@@ -20,6 +24,7 @@ import {
 const OfficeAppBar = ({
   onChangeOfficeFilter,
   onChangeSettings,
+  onLogout,
   officeFilter,
   settings,
   currentUser
@@ -32,13 +37,14 @@ const OfficeAppBar = ({
       onChangeSettings={onChangeSettings}
       settings={settings}
     />
-    <MenuAuth userName={currentUser.name} />
+    <MenuAuth onLogout={onLogout} userName={currentUser.name} />
   </>
 );
 
 OfficeAppBar.propTypes = {
   onChangeOfficeFilter: PropTypes.func,
   onChangeSettings: PropTypes.func,
+  onLogout: PropTypes.func,
   officeFilter: OfficeFilterPropType,
   settings: SettingsPropType,
   currentUser: CurrentUserPropType
@@ -47,6 +53,7 @@ OfficeAppBar.propTypes = {
 OfficeAppBar.defaultProps = {
   onChangeOfficeFilter: () => {},
   onChangeSettings: () => {},
+  onLogout: () => {},
   officeFilter: {},
   settings: {},
   currentUser: {}
@@ -60,7 +67,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onChangeOfficeFilter: changeOfficeFilter,
-  onChangeSettings: changeSettings
+  onChangeSettings: changeSettings,
+  onLogout: openLogoutConfirmDialog
 };
 
 export default connect(
