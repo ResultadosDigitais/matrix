@@ -187,7 +187,7 @@ $(() => {
 
   function startExternalMeet(externalMeetURL){
       const externalMeetFrame = $("#externalMeeting");
-      externalMeetFrame.attr("src",externalMeetURL);
+      externalMeetFrame.attr("src",externalMeetURL+"&userName="+matrixProfile.loadStoredProfile().name);
       externalMeetFrame.show();
 
       return {
