@@ -4,9 +4,9 @@
 
 ## What's Matrix
 
-The objective of Matrix project is offers a virtual environment office, as nice as fisical offices. When we are working in a fisical office is common enter in discussion threads in many diferents environments, for example: On coffe, On lunch and others.
+The objective of Matrix project is to offer a virtual environment office, as nice as fisical offices. When we are working in a fisical office is very common entering in discussion threads in many diferents environments, for example: On coffe, On lunch and others.
 
-When we are working remotely there is no talks like a fisical office. The Matrix project was born how a proposal to better that experiênce. The idea is create a lot of virtual rooms where the people can see and enter in that rooms to participate.
+When we are working remotely there are no conversations like in a fisical office. The Matrix project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
 
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more [here](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75)
 
