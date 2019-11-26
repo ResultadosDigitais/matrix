@@ -21,7 +21,7 @@ export class Login extends Component {
   }
 
   goToOffice() {
-    window.location.href = "./office";
+    window.location.href = "./morpheus";
   }
 
   onSignIn(profile) {

@@ -30,40 +30,21 @@ const getMeetingOptions = (roomId, parentNode, config) => {
     height: "100%",
     parentNode,
     configOverwrite: {
-      preferH264: true,
-      resolution: 360,
-      constraints: {
-        video: {
-          ideal: 360,
-          max: 360
-        }
-      },
-      ...config
-    },
+                    resolution: 180,
+                    constraints: {
+                        video: {
+                            aspectRatio: 16 / 9,
+                            height: {
+                                ideal: 180,
+                                max: 180,
+                                min: 180
+                            }
+                        }
+                    },
+                 },
     interfaceConfigOverwrite: {
-      DISABLE_VIDEO_BACKGROUND: true,
-      TOOLBAR_BUTTONS: [
-        "microphone",
-        "camera",
-        "closedcaptions",
-        "desktop",
-        "fullscreen",
-        "fodeviceselection",
-        "hangup",
-        "profile",
-        "etherpad",
-        "sharedvideo",
-        "settings",
-        "raisehand",
-        "videoquality",
-        "filmstrip",
-        "stats",
-        "shortcuts",
-        "tileview",
-        "chat"
-        // 'recording', 'livestreaming', 'invite', 'feedback',
-      ]
-    }
+      filmStripOnly: false,
+    },
   };
 };
 
