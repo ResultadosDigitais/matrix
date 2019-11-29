@@ -8,11 +8,11 @@
     "HOST": "http://localhost",
     "GOOGLE_CREDENTIAL": {
       "description": "Google Application Credential",
-      "value": "870727824809-kkvm1j67vpqoat4ukdd515ea37cpo1c4.apps.googleusercontent.com"
+      "value": "xxxxxxx.apps.googleusercontent.com"
     },
     "ROOMS_DATA": {
       "description": "List of avaliable rooms office. Read more in SETUP.md",
-      "value": "test-1"
+      "value": ""
     },
     "ENFORCE_SSL": {
       "description": "If you running in HTTPS this variable forces redirect to HTTPS when user access with HTTP",

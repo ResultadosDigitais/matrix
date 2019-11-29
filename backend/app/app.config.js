@@ -1,5 +1,3 @@
-console.log(process.env.HOST);
-
 module.exports = {
   ROOMS_SOURCE: process.env.ROOMS_SOURCE,
   ENVIRONMENT: process.env.NODE_ENV,
