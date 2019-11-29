@@ -5,13 +5,14 @@
   "keywords": ["online workspace", "virtual office", "remote teams"],
   "stack": "container",
   "env": {
+    "HOST": "http://localhost",
     "GOOGLE_CREDENTIAL": {
       "description": "Google Application Credential",
-      "value": "xxxxxxx.apps.googleusercontent.com"
+      "value": "870727824809-kkvm1j67vpqoat4ukdd515ea37cpo1c4.apps.googleusercontent.com"
     },
     "ROOMS_DATA": {
       "description": "List of avaliable rooms office. Read more in SETUP.md",
-      "value": ""
+      "value": "test-1"
     },
     "ENFORCE_SSL": {
       "description": "If you running in HTTPS this variable forces redirect to HTTPS when user access with HTTP",

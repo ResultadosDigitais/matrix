@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
+import IconButton from "@material-ui/core/IconButton";
 import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import EventIcon from '@material-ui/icons/Event';
 import Tooltip from "@material-ui/core/Tooltip";
 import debounce from "lodash.debounce";
 
@@ -63,6 +65,16 @@ const MenuOffice = ({
 
   return (
     <>
+
+      <Tooltip title="Schedule a meeting in Google Calendar">
+        <IconButton
+          onClick={event => {
+            open('/event', '_blank');
+          }}
+        >
+          <EventIcon />
+        </IconButton>
+      </Tooltip>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />

@@ -1,4 +1,5 @@
 import express from "express";
+import eventGenerator from "./business/event.generator";
 
 const router = express.Router();
 
@@ -24,6 +25,12 @@ router.get("/new", (req, res) => {
 
   res.redirect(`/morpheus/room/${req.query.roomId}`);
 });
+
+router.get("/event", (req, res) => {
+  const eventDetails = eventGenerator.getEventDetailsText();
+  res.redirect(`https://www.google.com/calendar/render?action=TEMPLATE&text=Meeting in Matrix&details=${eventDetails}`);
+});
+
 
 router.get("/remove", (req, res) => {
   req.app.locals.roomsDetail = req.app.locals.roomsDetail.filter(
