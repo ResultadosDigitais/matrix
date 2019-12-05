@@ -32,7 +32,19 @@ MatrixProfile.prototype.loadStoredRoom = function loadStoredRoom() {
 };
 
 MatrixProfile.prototype.isProfileStored = function isProfileStored() {
-  return !!localStorage.getItem("user");
+  const item = localStorage.getItem("user");
+
+  if (item) {
+    const user = JSON.parse(item);
+
+    if (user.id && user.name && user.email) {
+      return true;
+    }
+
+    this.terminate();
+  }
+
+  return false;
 };
 
 MatrixProfile.prototype.terminate = function terminate() {
