@@ -33,7 +33,8 @@ import {
   selectUsersFilter,
   selectCurrentRoom,
   selectError,
-  selectSettings
+  selectSettings,
+  selectTheme
 } from "./store/selectors";
 import {
   CurrentRoomPropType,
@@ -46,10 +47,6 @@ import {
 } from "./store/models";
 import useSocket from "./hooks/useSocket";
 import useEvents from "./hooks/useEvents";
-import useTheme from "./hooks/useTheme";
-
-import { CssBaseline } from "@material-ui/core";
-import { MuiThemeProvider } from "@material-ui/core/styles";
 
 const MorpheusApp = ({
   onChangeUsersFilter,
@@ -78,7 +75,6 @@ const MorpheusApp = ({
   const [isReceiveInviteOpen, setReceiveInviteOpen] = useState(false);
   const [invitation, setInvitation] = useState();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const [theme, toggleTheme] = useTheme();
 
   useSocket(
     toggleLoading,
@@ -116,8 +112,7 @@ const MorpheusApp = ({
   }
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <PageLayout
         renderAppBarMenu={() => <AppBarRouter />}
         renderSideBarMenu={() => (
@@ -161,7 +156,7 @@ const MorpheusApp = ({
         }}
       />
       <MessageDialog />
-    </MuiThemeProvider>
+    </>
   );
 };
 
@@ -203,6 +198,7 @@ MorpheusApp.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  theme: selectTheme(state),
   currentRoom: selectCurrentRoom(state),
   rooms: selectRooms(state),
   currentUser: selectCurrentUser(state),
@@ -226,8 +222,5 @@ const mapDispatchToProps = {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MorpheusApp)
+  connect(mapStateToProps, mapDispatchToProps)(MorpheusApp)
 );
