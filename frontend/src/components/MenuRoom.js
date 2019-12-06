@@ -9,15 +9,21 @@ import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
 import { SettingsPropType } from "../morpheus/store/models";
 
-const MenuRoom = ({ onExitRoom, onShare, onChangeSettings, settings }) => (
+const MenuRoom = ({
+  onExitRoom,
+  onShare,
+  onChangeSettings,
+  onChangeTheme,
+  settings
+}) => (
   <>
+    <ThemeCheckbox onChange={onChangeTheme} />
     <NotificationCheckbox
       isDisabled={settings.notificationDisabled}
       onChange={event => {
         onChangeSettings("notificationDisabled", event.target.checked);
       }}
     />
-    <ThemeCheckbox />
     <Tooltip title="Share room link">
       <IconButton
         aria-label="Share room link"
