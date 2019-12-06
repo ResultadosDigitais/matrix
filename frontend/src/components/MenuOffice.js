@@ -115,6 +115,7 @@ MenuOffice.propTypes = {
 MenuOffice.defaultProps = {
   onChangeFilter: () => {},
   onChangeSettings: () => {},
+  onChangeTheme: () => {},
   filter: {},
   settings: {}
 };
