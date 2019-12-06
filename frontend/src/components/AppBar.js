@@ -45,7 +45,7 @@ const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: isDrawerOpen
         })}
-        color="default"
+        color="inherit"
       >
         <Toolbar>
           <IconButton
