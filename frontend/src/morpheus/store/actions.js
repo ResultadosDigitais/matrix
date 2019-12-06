@@ -11,6 +11,7 @@ export const USER_ENTER_MEETING = "USER_ENTER_MEETING";
 export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
 export const CHANGE_SETTINGS = "CHANGE_SETTINGS";
 export const TOGGLE_MESSAGE_DIALOG = "TOGGLE_MESSAGE_DIALOG";
+export const TOGGLE_THEME = "CHANGE_THEME";
 
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
@@ -94,4 +95,8 @@ export const closeMessageDialog = () => ({
     title: undefined,
     message: undefined
   }
+});
+
+export const changeTheme = () => ({
+  type: TOGGLE_THEME
 });

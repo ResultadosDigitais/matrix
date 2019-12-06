@@ -11,10 +11,14 @@ import {
   USER_ENTER_MEETING,
   USER_LEFT_MEETING,
   CHANGE_SETTINGS,
-  TOGGLE_MESSAGE_DIALOG
+  TOGGLE_MESSAGE_DIALOG,
+  TOGGLE_THEME
 } from "./actions";
+import storage from "./storage";
+import { getDefaultTheme, toggleTheme } from "../Themes";
 
 export const initialState = {
+  theme: storage.getTheme(getDefaultTheme()),
   currentUser: {},
   currentRoom: {},
   rooms: [],
@@ -216,6 +220,16 @@ const reducers = (state = initialState, action) => {
         ...state,
         messageDialog: action.props
       };
+    case TOGGLE_THEME: {
+      const theme = toggleTheme(state.theme);
+
+      storage.setTheme(theme);
+
+      return {
+        ...state,
+        theme
+      };
+    }
     default:
       return state;
   }
