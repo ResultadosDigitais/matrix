@@ -1,6 +1,8 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import { pink, blue } from "@material-ui/core/colors";
 
+import storage from "./store/storage";
+
 export const THEMES = {
   light: "light",
   dark: "dark"
@@ -23,6 +25,23 @@ export const getDefaultTheme = () => {
   } catch (e) {
     return light;
   }
+};
+
+/**
+ * @deprecated This function is temporary while login is isolated.
+ */
+export const isDarkTheme = () => {
+  let theme;
+  try {
+    theme = storage.getTheme();
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
+
+  if (!theme) {
+    theme = getDefaultTheme();
+  }
+
+  return theme === THEMES.dark;
 };
 
 export default {

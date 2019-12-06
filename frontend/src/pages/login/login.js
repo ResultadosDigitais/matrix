@@ -1,5 +1,6 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from "react";
-import { render } from "react-dom";
+import clsx from "clsx";
 
 import { Footer } from "./footer";
 import { LoginButton } from "./login-button";
@@ -7,9 +8,9 @@ import { Logo } from "./logo";
 import { Title } from "./title";
 
 import MatrixProfile from "../../profile";
+import { isDarkTheme } from "../../morpheus/Themes";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "./global.css";
 
 import styles from "./login.module.css";
 
@@ -17,11 +18,11 @@ export class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.matrixProfile = new MatrixProfile();
-  }
+    this.state = {
+      isDark: isDarkTheme()
+    };
 
-  goToOffice() {
-    window.location.href = "./morpheus";
+    this.matrixProfile = new MatrixProfile();
   }
 
   onSignIn(profile) {
@@ -29,19 +30,38 @@ export class Login extends Component {
     this.goToOffice();
   }
 
-  render() {
-    return (
-      <div className="container-fluid">
-        <div className="row h-100">
-          <div className={`col-md-3 ${styles.login_panel}`}>
-            <div className="row h-100 justify-content-center align-items-center">
-              <div className="col">
-                <Logo />
-                <Title />
-                <LoginButton onSignIn={profile => this.onSignIn(profile)} />
-              </div>
+  getBackgroundImage(isDark) {
+    const imageName = isDark ? "bg-dark.png" : "bg.png";
+    return `url(/images/${imageName})`;
+  }
 
-              <Footer />
+  goToOffice() {
+    window.location.href = "./morpheus";
+  }
+
+  render() {
+    const { isDark } = this.state;
+
+    return (
+      <div
+        className={styles.auth_background}
+        style={{ backgroundImage: this.getBackgroundImage(isDark) }}
+      >
+        <div className="container-fluid">
+          <div className="row h-100">
+            <div
+              className={clsx("col-auto", "", styles.auth_panel, {
+                [styles.auth_panel_dark]: isDark
+              })}
+            >
+              <div className="row h-100 justify-content-center align-items-center">
+                <div className="col px-5">
+                  <Logo />
+                  <Title />
+                  <LoginButton onSignIn={profile => this.onSignIn(profile)} />
+                </div>
+                <Footer />
+              </div>
             </div>
           </div>
         </div>
