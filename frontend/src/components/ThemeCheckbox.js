@@ -1,21 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import IconButton from "@material-ui/core/IconButton";
+import Checkbox from "@material-ui/core/Checkbox";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
 import Tooltip from "@material-ui/core/Tooltip";
 
 function ThemeCheckbox({ onChange }) {
   return (
     <Tooltip title="Toggle light/dark theme">
-      <IconButton
-        aria-label="Exit room"
-        aria-controls="menu-appbar"
-        onClick={onChange}
+      <Checkbox
+        icon={<EmojiObjectsIcon />}
+        checkedIcon={<EmojiObjectsIcon />}
+        checked={false}
+        onChange={onChange}
         color="inherit"
-      >
-        <EmojiObjectsIcon />
-      </IconButton>
+      />
     </Tooltip>
   );
 }
