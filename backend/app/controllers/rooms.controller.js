@@ -40,7 +40,7 @@ const createRoomFileSync = () => {
   for (const niceName of niceNames) {
     roomsData.push({
       id: uuid(),
-      name: niceName,
+      name: niceName
     });
   }
 

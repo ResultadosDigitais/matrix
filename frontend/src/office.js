@@ -120,38 +120,20 @@ $(() => {
       height: "100%",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
-        preferH264: true,
-        resolution: 360,
-        constraints: {
-          video: {
-            ideal: 360,
-            max: 360,
-          },
-        },
-      },
+                    resolution: 180,
+                    constraints: {
+                        video: {
+                            aspectRatio: 16 / 9,
+                            height: {
+                                ideal: 180,
+                                max: 180,
+                                min: 180
+                            }
+                        }
+                    },
+                 },
       interfaceConfigOverwrite: {
-        DISABLE_VIDEO_BACKGROUND: true,
-        TOOLBAR_BUTTONS: [
-          "microphone",
-          "camera",
-          "closedcaptions",
-          "desktop",
-          "fullscreen",
-          "fodeviceselection",
-          "hangup",
-          "profile",
-          "etherpad",
-          "sharedvideo",
-          "settings",
-          "raisehand",
-          "videoquality",
-          "filmstrip",
-          "stats",
-          "shortcuts",
-          "tileview",
-          "chat",
-          // 'recording', 'livestreaming', 'invite', 'feedback',
-        ],
+        filmStripOnly: false,
       },
     };
   }
@@ -166,12 +148,8 @@ $(() => {
     return false;
   }
 
-  function startVideoConference(roomId, name, officeEvents) {
-    setTimeout(() => {
-      const meetModal = $("#meetModal");
-
-      meetModal.modal("hide");
-      meetModal.modal("dispose");
+  function startJitsiMeet(roomId){
+      console.log("startJitsiMeet");
       const domain = "meet.jit.si";
       const options = getMeetingOptions(roomId);
       const api = new JitsiMeetExternalAPI(domain, options);
@@ -181,12 +159,48 @@ $(() => {
         matrixProfile.loadStoredProfile().imageUrl,
       );
 
+      return {
+        dispose:function(){
+          api.dispose();
+        }
+      }
+
+  }
+
+  function startExternalMeet(externalMeetURL){
+      const externalMeetFrame = $("#externalMeeting");
+      externalMeetFrame.attr("src",externalMeetURL+"&userName="+matrixProfile.loadStoredProfile().name);
+      externalMeetFrame.show();
+
+      return {
+        dispose:function(){
+          externalMeetFrame.attr("src","");
+          externalMeetFrame.hide();
+        }
+      }
+  }
+
+  function startVideoConference(roomId, name, officeEvents) {
+    setTimeout(() => {
+      const meetModal = $("#meetModal");
+
+      meetModal.modal("hide");
+      meetModal.modal("dispose");
+    
+      var meet = null;
+      const externalMeetURL = getExternalMeetUrl(roomId);
+      console.log(externalMeetURL);
+      if(externalMeetURL!=""){
+        meet = startExternalMeet(externalMeetURL);
+      }else{
+        meet = startJitsiMeet(roomId);
+      }
       officeEvents.startMeet();
 
       meetModal.modal("show");
       meetModal.on("hidden.bs.modal", () => {
         officeEvents.leftMeet();
-        api.dispose();
+        meet.dispose();
       });
 
       meetModal.on("shown.bs.modal", function () {
@@ -221,6 +235,10 @@ $(() => {
 
   function getRoomName(roomId) {
     return $(`[room-id="${roomId}"]`).attr("room-name");
+  }
+
+  function getExternalMeetUrl(roomId) {
+    return $(`[room-id="${roomId}"]`).attr("external-meet-url");
   }
 
   function getLastRoom(matrixProfile) {

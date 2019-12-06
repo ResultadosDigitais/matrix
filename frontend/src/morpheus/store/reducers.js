@@ -12,7 +12,9 @@ import {
   USER_LEFT_MEETING,
   CHANGE_SETTINGS,
   TOGGLE_MESSAGE_DIALOG,
-  TOGGLE_THEME
+  TOGGLE_THEME,
+  OPEN_LOGOUT_CONFIRM_DIALOG,
+  CLOSE_LOGOUT_CONFIRM_DIALOG
 } from "./actions";
 import storage from "./storage";
 import { getDefaultTheme, toggleTheme } from "../Themes";
@@ -40,6 +42,9 @@ export const initialState = {
     isOpen: false,
     title: undefined,
     message: undefined
+  },
+  logoutDialog: {
+    isOpen: false
   }
 };
 
@@ -230,6 +235,20 @@ const reducers = (state = initialState, action) => {
         theme
       };
     }
+    case OPEN_LOGOUT_CONFIRM_DIALOG:
+      return {
+        ...state,
+        logoutDialog: {
+          isOpen: true
+        }
+      };
+    case CLOSE_LOGOUT_CONFIRM_DIALOG:
+      return {
+        ...state,
+        logoutDialog: {
+          isOpen: false
+        }
+      };
     default:
       return state;
   }

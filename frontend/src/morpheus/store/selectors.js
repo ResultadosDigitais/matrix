@@ -19,3 +19,5 @@ export const selectSettings = state => state.settings;
 export const selectMessageDialog = state => state.messageDialog;
 
 export const selectTheme = state => state.theme;
+
+export const selectIsLogoutDialogOpen = state => state.logoutDialog.isOpen;
