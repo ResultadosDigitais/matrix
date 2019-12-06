@@ -41,7 +41,6 @@ export class Login extends Component {
 
   render() {
     const { isDark } = this.state;
-
     return (
       <div
         className={styles.auth_background}
