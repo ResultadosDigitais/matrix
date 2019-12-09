@@ -30,21 +30,22 @@ const getMeetingOptions = (roomId, parentNode, config) => {
     height: "100%",
     parentNode,
     configOverwrite: {
-                    resolution: 180,
-                    constraints: {
-                        video: {
-                            aspectRatio: 16 / 9,
-                            height: {
-                                ideal: 180,
-                                max: 180,
-                                min: 180
-                            }
-                        }
-                    },
-                 },
-    interfaceConfigOverwrite: {
-      filmStripOnly: false,
+      ...config,
+      resolution: 180,
+      constraints: {
+        video: {
+          aspectRatio: 16 / 9,
+          height: {
+            ideal: 180,
+            max: 180,
+            min: 180
+          }
+        }
+      }
     },
+    interfaceConfigOverwrite: {
+      filmStripOnly: false
+    }
   };
 };
 
@@ -139,7 +140,4 @@ const mapDispatchToProps = {
   onSetCurrentRoom: setCurrentRoom
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RoomPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
