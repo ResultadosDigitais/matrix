@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Checkbox from "@material-ui/core/Checkbox";
-import Mic from "@material-ui/icons/Mic";
-import MicOff from "@material-ui/icons/MicOff";
-import Videocam from "@material-ui/icons/Videocam";
-import VideocamOff from "@material-ui/icons/VideocamOff";
-import Tooltip from "@material-ui/core/Tooltip";
+import Divider from "@material-ui/core/Divider";
+
+import BaseMeetingSettings from "./MeetingSettings/BaseMeetingSettings";
+import AdvancedMeetingPanel from "./MeetingSettings/AdvancedMeetingPanel";
+import AdvancedMeetingSettings from "./MeetingSettings/AdvancedMeetingSettings";
 
 const useStyles = makeStyles(() => ({
-  toolbar: {
-    textAlign: "center",
-    minWidth: 260
-  },
-  sideMargin: {
-    marginRight: 8
+  content: {
+    minHeight: 110 // to avoid generating scrollbar
   }
 }));
 
@@ -30,36 +26,30 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
   const classes = useStyles();
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-      <DialogContent>
+      <Divider />
+      <DialogContent className={classes.content}>
         <DialogContentText id="alert-dialog-description">
-          Enter the Matrix with:
+          Enter the meeting with:
         </DialogContentText>
-        <div className={classes.toolbar}>
-          <Tooltip title={`${micEnabled ? "Disable" : "Enable"} MIC`}>
-            <Checkbox
-              className={classes.sideMargin}
-              icon={<MicOff fontSize="large" />}
-              checkedIcon={<Mic fontSize="large" />}
-              checked={micEnabled}
-              onChange={event => {
-                setMicEnabled(event.target.checked);
-              }}
-            />
-          </Tooltip>
-          <Tooltip title={`${videoEnabled ? "Disable" : "Enable"} Video`}>
-            <Checkbox
-              icon={<VideocamOff fontSize="large" />}
-              checkedIcon={<Videocam fontSize="large" />}
-              checked={videoEnabled}
-              onChange={event => {
-                setVideoEnabled(event.target.checked);
-              }}
-            />
-          </Tooltip>
-        </div>
+        <Grid justify="center" spacing={3} container>
+          <BaseMeetingSettings
+            micEnabled={micEnabled}
+            onMicEnabledChange={event => {
+              setMicEnabled(event.target.checked);
+            }}
+            videoEnabled={videoEnabled}
+            onVideoEnabledChange={event => {
+              setVideoEnabled(event.target.checked);
+            }}
+          />
+        </Grid>
       </DialogContent>
+      <AdvancedMeetingPanel>
+        <AdvancedMeetingSettings />
+      </AdvancedMeetingPanel>
+      <Divider />
       <DialogActions>
         <Button onClick={onClose} color="primary">
           Cancel
