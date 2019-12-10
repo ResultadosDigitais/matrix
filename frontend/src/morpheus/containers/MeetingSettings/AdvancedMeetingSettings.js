@@ -37,7 +37,6 @@ const AdvancedMeetingSettings = ({
           />
         }
         label="Simulcast support on Firefox (Experimental)"
-        fullWidth
       />
     </Grid>
   </Grid>

@@ -16,8 +16,10 @@ export const selectError = state => state.error;
 
 export const selectSystemSettings = state => state.systemSettings;
 
+export const selectMeetingSettings = state => state.meetingSettings;
+
 export const selectMeetingSettingByKey = (state, key) =>
-  state.meetingSettings[key];
+  selectMeetingSettings(state)[key];
 
 export const selectMessageDialog = state => state.messageDialog;
 
