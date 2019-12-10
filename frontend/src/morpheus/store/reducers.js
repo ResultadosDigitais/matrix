@@ -1,3 +1,4 @@
+import storage from "./storage";
 import {
   ADD_ERROR,
   SET_CURRENT_USER,
@@ -34,12 +35,12 @@ export const initialState = {
   systemSettings: {
     notificationDisabled: false
   },
-  meetingSettings: {
+  meetingSettings: storage.getMeetingSettings({
     micEnabled: true,
     videoEnabled: true,
     videoQuality: "180",
     enableFirefoxSimulcast: false
-  },
+  }),
   error: null,
   messageDialog: {
     isOpen: false,
@@ -180,14 +181,16 @@ const reducers = (state = initialState, action) => {
           [action.key]: action.value
         }
       };
-    case CHANGE_MEETING_SETTING:
-      return {
-        ...state,
-        meetingSettings: {
-          ...state.meetingSettings,
-          [action.key]: action.value
-        }
+    case CHANGE_MEETING_SETTING: {
+      const meetingSettings = {
+        ...state.meetingSettings,
+        [action.key]: action.value
       };
+
+      storage.setMeetingSettings(meetingSettings);
+
+      return { ...state, meetingSettings };
+    }
     case ADD_USER: {
       const index = state.usersInRoom.findIndex(
         u => u.user.id === action.user.id
