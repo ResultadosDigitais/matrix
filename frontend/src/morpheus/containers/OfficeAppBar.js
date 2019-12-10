@@ -7,13 +7,13 @@ import MenuOffice from "../../components/MenuOffice";
 import MenuAuth from "../../components/MenuAuth";
 import {
   changeOfficeFilter,
-  changeSettings,
+  changeSystemSetting,
   openLogoutConfirmDialog
 } from "../store/actions";
 import {
   selectOfficeFilter,
   selectCurrentUser,
-  selectSettings
+  selectSystemSettings
 } from "../store/selectors";
 import {
   OfficeFilterPropType,
@@ -62,16 +62,13 @@ OfficeAppBar.defaultProps = {
 const mapStateToProps = state => ({
   officeFilter: selectOfficeFilter(state),
   currentUser: selectCurrentUser(state),
-  settings: selectSettings(state)
+  settings: selectSystemSettings(state)
 });
 
 const mapDispatchToProps = {
   onChangeOfficeFilter: changeOfficeFilter,
-  onChangeSettings: changeSettings,
+  onChangeSettings: changeSystemSetting,
   onLogout: openLogoutConfirmDialog
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OfficeAppBar);
+export default connect(mapStateToProps, mapDispatchToProps)(OfficeAppBar);

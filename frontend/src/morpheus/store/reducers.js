@@ -10,7 +10,8 @@ import {
   REMOVE_USER,
   USER_ENTER_MEETING,
   USER_LEFT_MEETING,
-  CHANGE_SETTINGS,
+  CHANGE_SYSTEM_SETTING,
+  CHANGE_MEETING_SETTING,
   TOGGLE_MESSAGE_DIALOG,
   OPEN_LOGOUT_CONFIRM_DIALOG,
   CLOSE_LOGOUT_CONFIRM_DIALOG
@@ -30,8 +31,14 @@ export const initialState = {
     onlyFullRoom: false,
     search: ""
   },
-  settings: {
+  systemSettings: {
     notificationDisabled: false
+  },
+  meetingSettings: {
+    micEnabled: true,
+    videoEnabled: true,
+    videoQuality: "180",
+    enableFirefoxSimulcast: false
   },
   error: null,
   messageDialog: {
@@ -165,11 +172,19 @@ const reducers = (state = initialState, action) => {
           [action.key]: action.value
         }
       });
-    case CHANGE_SETTINGS:
+    case CHANGE_SYSTEM_SETTING:
       return {
         ...state,
-        settings: {
-          ...state.settings,
+        systemSettings: {
+          ...state.systemSettings,
+          [action.key]: action.value
+        }
+      };
+    case CHANGE_MEETING_SETTING:
+      return {
+        ...state,
+        meetingSettings: {
+          ...state.meetingSettings,
           [action.key]: action.value
         }
       };
