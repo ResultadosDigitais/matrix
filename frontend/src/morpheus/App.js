@@ -34,7 +34,8 @@ import {
   selectUsersFilter,
   selectCurrentRoom,
   selectError,
-  selectSettings
+  selectSettings,
+  selectTheme
 } from "./store/selectors";
 import {
   CurrentRoomPropType,
@@ -199,6 +200,7 @@ MorpheusApp.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  theme: selectTheme(state),
   currentRoom: selectCurrentRoom(state),
   rooms: selectRooms(state),
   currentUser: selectCurrentUser(state),
@@ -222,8 +224,5 @@ const mapDispatchToProps = {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MorpheusApp)
+  connect(mapStateToProps, mapDispatchToProps)(MorpheusApp)
 );

@@ -11,6 +11,7 @@ export const USER_ENTER_MEETING = "USER_ENTER_MEETING";
 export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
 export const CHANGE_SETTINGS = "CHANGE_SETTINGS";
 export const TOGGLE_MESSAGE_DIALOG = "TOGGLE_MESSAGE_DIALOG";
+export const TOGGLE_THEME = "TOGGLE_THEME";
 export const OPEN_LOGOUT_CONFIRM_DIALOG = "OPEN_LOGOUT_CONFIRM_DIALOG";
 export const CLOSE_LOGOUT_CONFIRM_DIALOG = "CLOSE_LOGOUT_CONFIRM_DIALOG";
 
@@ -96,6 +97,10 @@ export const closeMessageDialog = () => ({
     title: undefined,
     message: undefined
   }
+});
+
+export const toggleTheme = () => ({
+  type: TOGGLE_THEME
 });
 
 export const openLogoutConfirmDialog = () => ({

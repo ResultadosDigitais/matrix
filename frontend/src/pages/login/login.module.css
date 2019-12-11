@@ -1,6 +1,22 @@
-.login_panel {
-  background-color: white;
+.auth_background {
+  /* background: url(/images/bg.png) no-repeat ; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  font-family: "Lato" !important;
+}
+
+.auth_panel {
+  background-color: #fff;
   height: 100%;
   font-size: 18px;
   color: #575757;
+}
+
+.auth_panel_dark {
+  background-color: #424242;
+  color: #fff;
 }

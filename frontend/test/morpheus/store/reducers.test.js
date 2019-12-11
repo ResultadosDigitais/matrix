@@ -1,36 +1,40 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
+import sinon from "sinon";
 
 import {
   addRooms,
   syncOffice,
+  toggleTheme
 } from "../../../src/morpheus/store/actions";
-import reducers, {
-  initialState,
-} from "../../../src/morpheus/store/reducers";
+import reducers, { initialState } from "../../../src/morpheus/store/reducers";
+import storage from "../../../src/morpheus/store/storage";
 
 describe("morpheus/store/reducers", () => {
   it("should reduce action ADD_ROOMS", () => {
     const stateBefore = { ...initialState };
     const stateAfter = {
       ...initialState,
-      rooms: [{ id: 1, name: "room 1" }, { id: 2, name: "room 2" }],
+      rooms: [
+        { id: 1, name: "room 1" },
+        { id: 2, name: "room 2" }
+      ],
       office: [
         {
           id: 1,
           name: "room 1",
-          users: [],
+          users: []
         },
         {
           id: 2,
           name: "room 2",
-          users: [],
-        },
-      ],
+          users: []
+        }
+      ]
     };
     const action = addRooms([
       { id: 1, name: "room 1" },
-      { id: 2, name: "room 2" },
+      { id: 2, name: "room 2" }
     ]);
 
     deepFreeze(stateBefore);
@@ -50,9 +54,9 @@ describe("morpheus/store/reducers", () => {
             id: 200,
             name: "user 2",
             imageUrl: "image-url-2",
-            inMeet: true,
-          },
-        },
+            inMeet: true
+          }
+        }
       ],
       users: [
         {
@@ -61,7 +65,7 @@ describe("morpheus/store/reducers", () => {
           avatar: "image-url-1",
           inMeet: false,
           roomId: "",
-          roomName: "",
+          roomName: ""
         },
         {
           id: 200,
@@ -69,9 +73,9 @@ describe("morpheus/store/reducers", () => {
           avatar: "image-url-2",
           inMeet: true,
           roomId: "",
-          roomName: "",
-        },
-      ],
+          roomName: ""
+        }
+      ]
     };
     const action = syncOffice([
       { user: { id: 100, name: "user 1", imageUrl: "image-url-1" } },
@@ -80,9 +84,9 @@ describe("morpheus/store/reducers", () => {
           id: 200,
           name: "user 2",
           imageUrl: "image-url-2",
-          inMeet: true,
-        },
-      },
+          inMeet: true
+        }
+      }
     ]);
 
     deepFreeze(stateBefore);
@@ -96,8 +100,8 @@ describe("morpheus/store/reducers", () => {
       ...initialState,
       rooms: [
         { id: "1", name: "room 1", users: [] },
-        { id: "2", name: "room 2", users: [] },
-      ],
+        { id: "2", name: "room 2", users: [] }
+      ]
     };
     const stateAfter = {
       ...initialState,
@@ -105,18 +109,18 @@ describe("morpheus/store/reducers", () => {
         {
           id: "1",
           name: "room 1",
-          users: [],
+          users: []
         },
         {
           id: "2",
           name: "room 2",
-          users: [],
-        },
+          users: []
+        }
       ],
       usersInRoom: [
         {
           room: "1",
-          user: { id: 100, name: "user 1", imageUrl: "image-url-1" },
+          user: { id: 100, name: "user 1", imageUrl: "image-url-1" }
         },
         {
           room: "2",
@@ -124,9 +128,9 @@ describe("morpheus/store/reducers", () => {
             id: 200,
             name: "user 2",
             imageUrl: "image-url-2",
-            inMeet: true,
-          },
-        },
+            inMeet: true
+          }
+        }
       ],
       office: [
         {
@@ -136,9 +140,9 @@ describe("morpheus/store/reducers", () => {
             {
               id: 100,
               name: "user 1",
-              imageUrl: "image-url-1",
-            },
-          ],
+              imageUrl: "image-url-1"
+            }
+          ]
         },
         {
           id: "2",
@@ -148,10 +152,10 @@ describe("morpheus/store/reducers", () => {
               id: 200,
               name: "user 2",
               imageUrl: "image-url-2",
-              inMeet: true,
-            },
-          ],
-        },
+              inMeet: true
+            }
+          ]
+        }
       ],
       users: [
         {
@@ -160,7 +164,7 @@ describe("morpheus/store/reducers", () => {
           avatar: "image-url-1",
           inMeet: false,
           roomId: "1",
-          roomName: "room 1",
+          roomName: "room 1"
         },
         {
           id: 200,
@@ -168,14 +172,14 @@ describe("morpheus/store/reducers", () => {
           avatar: "image-url-2",
           inMeet: true,
           roomId: "2",
-          roomName: "room 2",
-        },
-      ],
+          roomName: "room 2"
+        }
+      ]
     };
     const action = syncOffice({
       111: {
         room: "1",
-        user: { id: 100, name: "user 1", imageUrl: "image-url-1" },
+        user: { id: 100, name: "user 1", imageUrl: "image-url-1" }
       },
       222: {
         room: "2",
@@ -183,14 +187,50 @@ describe("morpheus/store/reducers", () => {
           id: 200,
           name: "user 2",
           imageUrl: "image-url-2",
-          inMeet: true,
-        },
-      },
+          inMeet: true
+        }
+      }
     });
 
     deepFreeze(stateBefore);
     deepFreeze(action);
 
     expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+  });
+
+  describe("action TOGGLE_THEME", () => {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("should toggle theme from dark to light", () => {
+      const stateBefore = { ...initialState, theme: "dark" };
+      const stateAfter = { ...initialState, theme: "light" };
+      const action = toggleTheme();
+
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+
+      sinon.replace(storage, "setTheme", sinon.fake());
+
+      expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+
+      expect(storage.setTheme.calledWithMatch("light")).to.equal(true);
+    });
+
+    it("should toggle theme from light to dark", () => {
+      const stateBefore = { ...initialState };
+      const stateAfter = { ...initialState, theme: "dark" };
+      const action = toggleTheme();
+
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+
+      sinon.replace(storage, "setTheme", sinon.fake());
+
+      expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+
+      expect(storage.setTheme.calledWithMatch("dark")).to.equal(true);
+    });
   });
 });
