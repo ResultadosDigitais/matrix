@@ -9,7 +9,7 @@ import { selectMeetingSettingByKey } from "../../store/selectors";
 import { changeMeetingSetting } from "../../store/actions";
 import SettingKeys from "../../../constants/MeetingSettingKeys";
 import Select from "../../../components/Select";
-import { getVideoQualityLevelsOptions } from "../../../constants/VideoQualityLevels";
+import { getResolutionLevelsOptions } from "../../../constants/ResolutionLevels";
 
 const AdvancedMeetingSettings = ({
   videoQualityOptions,
@@ -21,7 +21,7 @@ const AdvancedMeetingSettings = ({
   <Grid container spacing={3}>
     <Grid item xs={12} sm={6}>
       <Select
-        label="Video Quality"
+        label="Resolution"
         options={videoQualityOptions}
         value={videoQualityValue}
         onChange={onVideoQualityChange}
@@ -56,8 +56,8 @@ AdvancedMeetingSettings.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  videoQualityOptions: getVideoQualityLevelsOptions(),
-  videoQualityValue: selectMeetingSettingByKey(state, SettingKeys.videoQuality),
+  videoQualityOptions: getResolutionLevelsOptions(),
+  videoQualityValue: selectMeetingSettingByKey(state, SettingKeys.resolution),
   enableFirefoxSimulcast: selectMeetingSettingByKey(
     state,
     SettingKeys.enableFirefoxSimulcast
@@ -66,9 +66,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onVideoQualityChange: event =>
-    dispatch(
-      changeMeetingSetting(SettingKeys.videoQuality, event.target.value)
-    ),
+    dispatch(changeMeetingSetting(SettingKeys.resolution, event.target.value)),
   onEnableFirefoxSimulcastChange: event =>
     dispatch(
       changeMeetingSetting(

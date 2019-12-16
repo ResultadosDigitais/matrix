@@ -6,7 +6,10 @@ const storage = {
     const item = localStorage.getItem(STORAGE_KEY_MEETING_SETTINGS);
 
     if (item) {
-      return JSON.parse(item);
+      return {
+        ...defaultValue,
+        ...JSON.parse(item)
+      };
     }
 
     return defaultValue;

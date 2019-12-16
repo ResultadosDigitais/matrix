@@ -19,6 +19,7 @@ import {
 } from "./actions";
 import storage from "./storage";
 import { getDefaultTheme, toggleTheme } from "../Themes";
+import ResolutionLevels from "../../constants/ResolutionLevels";
 
 export const initialState = {
   theme: storage.getTheme(getDefaultTheme()),
@@ -41,7 +42,7 @@ export const initialState = {
   meetingSettings: storage.getMeetingSettings({
     micEnabled: true,
     videoEnabled: true,
-    videoQuality: "180",
+    resolution: `${ResolutionLevels.sd}`,
     enableFirefoxSimulcast: false
   }),
   error: null,

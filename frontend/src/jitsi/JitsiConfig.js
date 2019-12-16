@@ -1,7 +1,7 @@
-import VideoQualityLevels from "../constants/VideoQualityLevels";
+import { getVideoHeight } from "../constants/ResolutionLevels";
 
 export const adaptJitsiConfig = (roomId, parentNode, meetingSettings) => {
-  const videoQuality = parseInt(meetingSettings.videoQuality, 10);
+  const resolution = parseInt(meetingSettings.resolution, 10);
 
   const config = {
     roomName: `${roomId}-${window.location.hostname}`,
@@ -11,15 +11,11 @@ export const adaptJitsiConfig = (roomId, parentNode, meetingSettings) => {
     configOverwrite: {
       startWithAudioMuted: !meetingSettings.micEnabled,
       startWithVideoMuted: !meetingSettings.videoEnabled,
-      resolution: videoQuality,
+      resolution,
       constraints: {
         video: {
           aspectRatio: 16 / 9,
-          height: {
-            ideal: videoQuality,
-            max: VideoQualityLevels.high,
-            min: VideoQualityLevels.low
-          }
+          height: getVideoHeight(resolution)
         }
       },
       testing: {
@@ -28,9 +24,11 @@ export const adaptJitsiConfig = (roomId, parentNode, meetingSettings) => {
       }
     },
     interfaceConfigOverwrite: {
-      filmStripOnly: false
+      SHOW_JITSI_WATERMARK: false,
+      SHOW_WATERMARK_FOR_GUESTS: false,
+      SHOW_BRAND_WATERMARK: false
     }
   };
-  console.log(meetingSettings, config);
+
   return config;
 };

@@ -1,7 +1,7 @@
 const MeetingSettingKeys = {
   micEnabled: "micEnabled",
   videoEnabled: "videoEnabled",
-  videoQuality: "videoQuality",
+  resolution: "resolution",
   enableFirefoxSimulcast: "enableFirefoxSimulcast"
 };
 
