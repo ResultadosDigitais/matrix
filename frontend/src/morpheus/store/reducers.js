@@ -1,4 +1,3 @@
-import storage from "./storage";
 import {
   ADD_ERROR,
   SET_CURRENT_USER,
@@ -14,11 +13,15 @@ import {
   CHANGE_SYSTEM_SETTING,
   CHANGE_MEETING_SETTING,
   TOGGLE_MESSAGE_DIALOG,
+  TOGGLE_THEME,
   OPEN_LOGOUT_CONFIRM_DIALOG,
   CLOSE_LOGOUT_CONFIRM_DIALOG
 } from "./actions";
+import storage from "./storage";
+import { getDefaultTheme, toggleTheme } from "../Themes";
 
 export const initialState = {
+  theme: storage.getTheme(getDefaultTheme()),
   currentUser: {},
   currentRoom: {},
   rooms: [],
@@ -239,6 +242,16 @@ const reducers = (state = initialState, action) => {
         ...state,
         messageDialog: action.props
       };
+    case TOGGLE_THEME: {
+      const theme = toggleTheme(state.theme);
+
+      storage.setTheme(theme);
+
+      return {
+        ...state,
+        theme
+      };
+    }
     case OPEN_LOGOUT_CONFIRM_DIALOG:
       return {
         ...state,

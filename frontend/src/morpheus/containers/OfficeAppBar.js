@@ -8,6 +8,7 @@ import MenuAuth from "../../components/MenuAuth";
 import {
   changeOfficeFilter,
   changeSystemSetting,
+  toggleTheme,
   openLogoutConfirmDialog
 } from "../store/actions";
 import {
@@ -24,6 +25,7 @@ import {
 const OfficeAppBar = ({
   onChangeOfficeFilter,
   onChangeSettings,
+  onChangeTheme,
   onLogout,
   officeFilter,
   settings,
@@ -35,6 +37,7 @@ const OfficeAppBar = ({
       filter={officeFilter}
       onChangeFilter={onChangeOfficeFilter}
       onChangeSettings={onChangeSettings}
+      onChangeTheme={onChangeTheme}
       settings={settings}
     />
     <MenuAuth onLogout={onLogout} userName={currentUser.name} />
@@ -44,6 +47,7 @@ const OfficeAppBar = ({
 OfficeAppBar.propTypes = {
   onChangeOfficeFilter: PropTypes.func,
   onChangeSettings: PropTypes.func,
+  onChangeTheme: PropTypes.func,
   onLogout: PropTypes.func,
   officeFilter: OfficeFilterPropType,
   settings: SettingsPropType,
@@ -53,6 +57,7 @@ OfficeAppBar.propTypes = {
 OfficeAppBar.defaultProps = {
   onChangeOfficeFilter: () => {},
   onChangeSettings: () => {},
+  onChangeTheme: () => {},
   onLogout: () => {},
   officeFilter: {},
   settings: {},
@@ -68,6 +73,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   onChangeOfficeFilter: changeOfficeFilter,
   onChangeSettings: changeSystemSetting,
+  onChangeTheme: toggleTheme,
   onLogout: openLogoutConfirmDialog
 };
 

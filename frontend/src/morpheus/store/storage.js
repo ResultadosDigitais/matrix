@@ -1,6 +1,7 @@
 const STORAGE_KEY_MEETING_SETTINGS = "meetingSettings";
+const STORAGE_KEY_THEME = "color-scheme";
 
-export default {
+const storage = {
   getMeetingSettings: defaultValue => {
     const item = localStorage.getItem(STORAGE_KEY_MEETING_SETTINGS);
 
@@ -16,5 +17,12 @@ export default {
       STORAGE_KEY_MEETING_SETTINGS,
       JSON.stringify(settings)
     );
-  }
+  },
+
+  getTheme: defaultTheme =>
+    localStorage.getItem(STORAGE_KEY_THEME) || defaultTheme,
+
+  setTheme: theme => localStorage.setItem(STORAGE_KEY_THEME, theme)
 };
+
+export default storage;

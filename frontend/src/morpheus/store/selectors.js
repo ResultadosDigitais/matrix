@@ -23,4 +23,6 @@ export const selectMeetingSettingByKey = (state, key) =>
 
 export const selectMessageDialog = state => state.messageDialog;
 
+export const selectTheme = state => state.theme;
+
 export const selectIsLogoutDialogOpen = state => state.logoutDialog.isOpen;

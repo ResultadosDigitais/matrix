@@ -5,11 +5,19 @@ import ExitToApp from "@material-ui/icons/ExitToApp";
 import Share from "@material-ui/icons/Share";
 import Tooltip from "@material-ui/core/Tooltip";
 
+import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
 import { SettingsPropType } from "../morpheus/store/models";
 
-const MenuRoom = ({ onExitRoom, onShare, onChangeSettings, settings }) => (
+const MenuRoom = ({
+  onExitRoom,
+  onShare,
+  onChangeSettings,
+  onChangeTheme,
+  settings
+}) => (
   <>
+    <ThemeCheckbox onChange={onChangeTheme} />
     <NotificationCheckbox
       isDisabled={settings.notificationDisabled}
       onChange={event => {
@@ -43,6 +51,7 @@ MenuRoom.propTypes = {
   onExitRoom: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onChangeSettings: PropTypes.func.isRequired,
+  onChangeTheme: PropTypes.func.isRequired,
   settings: SettingsPropType.isRequired
 };
 

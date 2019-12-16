@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "./AppBar";
@@ -9,7 +10,6 @@ import Drawer, { drawerWidth, drawerHeader } from "./Drawer";
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    backgroundColor: "#e1f5fe",
     minHeight: "100vh"
   },
   main: {

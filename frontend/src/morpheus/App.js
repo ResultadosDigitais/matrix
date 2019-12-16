@@ -34,7 +34,8 @@ import {
   selectUsersFilter,
   selectCurrentRoom,
   selectError,
-  selectSystemSettings
+  selectSystemSettings,
+  selectTheme
 } from "./store/selectors";
 import {
   CurrentRoomPropType,
@@ -199,6 +200,7 @@ MorpheusApp.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  theme: selectTheme(state),
   currentRoom: selectCurrentRoom(state),
   rooms: selectRooms(state),
   currentUser: selectCurrentUser(state),

@@ -7,10 +7,17 @@ import MenuRoom from "../../components/MenuRoom";
 import ShareModal from "../../components/ShareModal";
 import { selectRooms, selectSystemSettings } from "../store/selectors";
 import { emitLeftMeeting } from "../socket";
-import { changeSystemSetting } from "../store/actions";
+import { changeSystemSetting, toggleTheme } from "../store/actions";
 import { RoomsPropType, SettingsPropType } from "../store/models";
 
-const RoomAppBar = ({ onChangeSettings, history, match, rooms, settings }) => {
+const RoomAppBar = ({
+  onChangeSettings,
+  onChangeTheme,
+  history,
+  match,
+  rooms,
+  settings
+}) => {
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const { roomId } = match.params;
   const findRoomResult = rooms.find(r => r.id === roomId);
@@ -28,6 +35,7 @@ const RoomAppBar = ({ onChangeSettings, history, match, rooms, settings }) => {
           setShareModalOpen(true);
         }}
         onChangeSettings={onChangeSettings}
+        onChangeTheme={onChangeTheme}
         settings={settings}
       />
       <ShareModal
@@ -42,6 +50,7 @@ const RoomAppBar = ({ onChangeSettings, history, match, rooms, settings }) => {
 
 RoomAppBar.propTypes = {
   onChangeSettings: PropTypes.func.isRequired,
+  onChangeTheme: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
@@ -64,7 +73,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onChangeSettings: changeSystemSetting
+  onChangeSettings: changeSystemSetting,
+  onChangeTheme: toggleTheme
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomAppBar);
