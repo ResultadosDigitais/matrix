@@ -9,7 +9,8 @@ export const ADD_USER = "ADD_USER";
 export const REMOVE_USER = "REMOVE_USER";
 export const USER_ENTER_MEETING = "USER_ENTER_MEETING";
 export const USER_LEFT_MEETING = "USER_LEFT_MEETING";
-export const CHANGE_SETTINGS = "CHANGE_SETTINGS";
+export const CHANGE_SYSTEM_SETTING = "CHANGE_SYSTEM_SETTING";
+export const CHANGE_MEETING_SETTING = "CHANGE_MEETING_SETTING";
 export const TOGGLE_MESSAGE_DIALOG = "TOGGLE_MESSAGE_DIALOG";
 export const TOGGLE_THEME = "TOGGLE_THEME";
 export const OPEN_LOGOUT_CONFIRM_DIALOG = "OPEN_LOGOUT_CONFIRM_DIALOG";
@@ -75,8 +76,14 @@ export const userLeftMeeting = (user, roomId) => ({
   roomId
 });
 
-export const changeSettings = (key, value) => ({
-  type: CHANGE_SETTINGS,
+export const changeSystemSetting = (key, value) => ({
+  type: CHANGE_SYSTEM_SETTING,
+  key,
+  value
+});
+
+export const changeMeetingSetting = (key, value) => ({
+  type: CHANGE_MEETING_SETTING,
   key,
   value
 });

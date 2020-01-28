@@ -14,7 +14,12 @@ export const selectUsersFilter = state => state.usersFilter;
 
 export const selectError = state => state.error;
 
-export const selectSettings = state => state.settings;
+export const selectSystemSettings = state => state.systemSettings;
+
+export const selectMeetingSettings = state => state.meetingSettings;
+
+export const selectMeetingSettingByKey = (state, key) =>
+  selectMeetingSettings(state)[key];
 
 export const selectMessageDialog = state => state.messageDialog;
 

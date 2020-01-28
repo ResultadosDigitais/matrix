@@ -10,7 +10,8 @@ import {
   REMOVE_USER,
   USER_ENTER_MEETING,
   USER_LEFT_MEETING,
-  CHANGE_SETTINGS,
+  CHANGE_SYSTEM_SETTING,
+  CHANGE_MEETING_SETTING,
   TOGGLE_MESSAGE_DIALOG,
   TOGGLE_THEME,
   OPEN_LOGOUT_CONFIRM_DIALOG,
@@ -18,6 +19,7 @@ import {
 } from "./actions";
 import storage from "./storage";
 import { getDefaultTheme, toggleTheme } from "../Themes";
+import ResolutionLevels from "../../constants/ResolutionLevels";
 
 export const initialState = {
   theme: storage.getTheme(getDefaultTheme()),
@@ -34,9 +36,15 @@ export const initialState = {
     onlyFullRoom: false,
     search: ""
   },
-  settings: {
+  systemSettings: {
     notificationDisabled: false
   },
+  meetingSettings: storage.getMeetingSettings({
+    micEnabled: true,
+    videoEnabled: true,
+    resolution: `${ResolutionLevels.sd}`,
+    enableFirefoxSimulcast: false
+  }),
   error: null,
   messageDialog: {
     isOpen: false,
@@ -169,14 +177,24 @@ const reducers = (state = initialState, action) => {
           [action.key]: action.value
         }
       });
-    case CHANGE_SETTINGS:
+    case CHANGE_SYSTEM_SETTING:
       return {
         ...state,
-        settings: {
-          ...state.settings,
+        systemSettings: {
+          ...state.systemSettings,
           [action.key]: action.value
         }
       };
+    case CHANGE_MEETING_SETTING: {
+      const meetingSettings = {
+        ...state.meetingSettings,
+        [action.key]: action.value
+      };
+
+      storage.setMeetingSettings(meetingSettings);
+
+      return { ...state, meetingSettings };
+    }
     case ADD_USER: {
       const index = state.usersInRoom.findIndex(
         u => u.user.id === action.user.id

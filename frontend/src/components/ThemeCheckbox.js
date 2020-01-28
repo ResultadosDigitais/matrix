@@ -13,7 +13,6 @@ function ThemeCheckbox({ onChange }) {
         checkedIcon={<EmojiObjectsIcon />}
         checked={false}
         onChange={onChange}
-        color="inherit"
       />
     </Tooltip>
   );

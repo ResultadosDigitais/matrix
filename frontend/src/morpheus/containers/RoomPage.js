@@ -5,12 +5,17 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
-import EnterMeetingDialog from "../../components/EnterMeetingDialog";
 import Loading from "../../components/Loading";
-import { selectRooms, selectCurrentRoom } from "../store/selectors";
+import {
+  selectRooms,
+  selectCurrentRoom,
+  selectMeetingSettings
+} from "../store/selectors";
 import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting } from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { RoomsPropType, CurrentRoomPropType } from "../store/models";
+import EnterMeetingDialog from "./EnterMeetingDialog";
+import { adaptJitsiConfig } from "../../jitsi/JitsiConfig";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,32 +28,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const getMeetingOptions = (roomId, parentNode, config) => {
-  return {
-    roomName: `${roomId}-${window.location.hostname}`,
-    width: "100%",
-    height: "100%",
-    parentNode,
-    configOverwrite: {
-                    resolution: 180,
-                    constraints: {
-                        video: {
-                            aspectRatio: 16 / 9,
-                            height: {
-                                ideal: 180,
-                                max: 180,
-                                min: 180
-                            }
-                        }
-                    },
-                 },
-    interfaceConfigOverwrite: {
-      filmStripOnly: false,
-    },
-  };
-};
-
-const RoomPage = ({ onSetCurrentRoom, history, match, rooms, currentRoom }) => {
+const RoomPage = ({
+  onSetCurrentRoom,
+  history,
+  match,
+  rooms,
+  currentRoom,
+  meetingSettings
+}) => {
   const [isLoading, setLoading] = useState(true);
   const [isMeetingDialogOpen, setMeetingDialogOpen] = useState(false);
   const meetRef = useRef(null);
@@ -72,10 +59,10 @@ const RoomPage = ({ onSetCurrentRoom, history, match, rooms, currentRoom }) => {
     }
   }, [rooms, currentRoom, match.params.roomId, onSetCurrentRoom, history]);
 
-  const enterMeeting = config => {
+  const enterMeeting = () => {
     const { roomId } = match.params;
     const domain = "meet.jit.si";
-    const options = getMeetingOptions(roomId, meetRef.current, config);
+    const options = adaptJitsiConfig(roomId, meetRef.current, meetingSettings);
 
     emitStartMeeting();
 
@@ -101,9 +88,9 @@ const RoomPage = ({ onSetCurrentRoom, history, match, rooms, currentRoom }) => {
           setMeetingDialogOpen(false);
           history.push("/morpheus/");
         }}
-        onConfirm={config => {
+        onConfirm={() => {
           setMeetingDialogOpen(false);
-          enterMeeting(config);
+          enterMeeting();
         }}
       />
     </div>
@@ -121,25 +108,25 @@ RoomPage.propTypes = {
     }).isRequired
   }).isRequired,
   rooms: RoomsPropType,
-  currentRoom: CurrentRoomPropType
+  currentRoom: CurrentRoomPropType,
+  meetingSettings: PropTypes.shape()
 };
 
 RoomPage.defaultProps = {
   onSetCurrentRoom: () => {},
   rooms: [],
-  currentRoom: {}
+  currentRoom: {},
+  meetingSettings: {}
 };
 
 const mapStateToProps = state => ({
   rooms: selectRooms(state),
-  currentRoom: selectCurrentRoom(state)
+  currentRoom: selectCurrentRoom(state),
+  meetingSettings: selectMeetingSettings(state)
 });
 
 const mapDispatchToProps = {
   onSetCurrentRoom: setCurrentRoom
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RoomPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

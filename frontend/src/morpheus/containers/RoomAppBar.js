@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import AppBarTitle from "../../components/AppBarTitle";
 import MenuRoom from "../../components/MenuRoom";
 import ShareModal from "../../components/ShareModal";
-import { selectRooms, selectSettings } from "../store/selectors";
+import { selectRooms, selectSystemSettings } from "../store/selectors";
 import { emitLeftMeeting } from "../socket";
-import { changeSettings, toggleTheme } from "../store/actions";
+import { changeSystemSetting, toggleTheme } from "../store/actions";
 import { RoomsPropType, SettingsPropType } from "../store/models";
 
 const RoomAppBar = ({
@@ -69,11 +69,11 @@ RoomAppBar.defaultProps = {
 
 const mapStateToProps = state => ({
   rooms: selectRooms(state),
-  settings: selectSettings(state)
+  settings: selectSystemSettings(state)
 });
 
 const mapDispatchToProps = {
-  onChangeSettings: changeSettings,
+  onChangeSettings: changeSystemSetting,
   onChangeTheme: toggleTheme
 };
 

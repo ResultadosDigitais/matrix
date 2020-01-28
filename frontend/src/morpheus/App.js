@@ -34,7 +34,7 @@ import {
   selectUsersFilter,
   selectCurrentRoom,
   selectError,
-  selectSettings,
+  selectSystemSettings,
   selectTheme
 } from "./store/selectors";
 import {
@@ -206,7 +206,7 @@ const mapStateToProps = state => ({
   currentUser: selectCurrentUser(state),
   users: selectUsers(state),
   usersFilter: selectUsersFilter(state),
-  settings: selectSettings(state),
+  settings: selectSystemSettings(state),
   error: selectError(state)
 });
 
