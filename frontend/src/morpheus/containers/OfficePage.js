@@ -54,6 +54,8 @@ const OfficePage = ({
               history.replace(`/morpheus/office/${room.id}`);
             }}
             onEnterMeeting={() => {
+              emitEnterInRoom(room.id);
+              onSetCurrentRoom(room);
               console.log(room.externalMeetUrl);
               if(room.externalMeetUrl){
                var externalMeetRoom = window.open(room.externalMeetUrl);
