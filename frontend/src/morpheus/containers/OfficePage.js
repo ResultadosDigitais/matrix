@@ -10,7 +10,7 @@ import {
   selectCurrentRoom,
   selectRooms
 } from "../store/selectors";
-import { emitEnterInRoom } from "../socket";
+import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 
@@ -58,13 +58,15 @@ const OfficePage = ({
               onSetCurrentRoom(room);
               console.log(room.externalMeetUrl);
               if(room.externalMeetUrl){
-               var externalMeetRoom = window.open(room.externalMeetUrl);
+                emitStartMeeting();   
+                var externalMeetRoom = window.open(room.externalMeetUrl);
 
                 var externalMeetRoomMonitoring = function(){
                   window.setTimeout(function() {
                     console.log(externalMeetRoom.closed);
                     if (externalMeetRoom.closed) {
                       console.log('The external meeting has been closed');
+                      emitLeftMeeting();
                     }else{
                       externalMeetRoomMonitoring();
                     }
