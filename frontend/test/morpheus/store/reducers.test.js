@@ -16,25 +16,27 @@ describe("morpheus/store/reducers", () => {
     const stateAfter = {
       ...initialState,
       rooms: [
-        { id: 1, name: "room 1" },
-        { id: 2, name: "room 2" }
+        { id: 1, name: "room 1",externalMeetUrl:"http://externalMeetUrl-1" },
+        { id: 2, name: "room 2",externalMeetUrl:"http://externalMeetUrl-2"}
       ],
       office: [
         {
           id: 1,
           name: "room 1",
+          externalMeetUrl:"http://externalMeetUrl-1",
           users: []
         },
         {
           id: 2,
           name: "room 2",
+          externalMeetUrl:"http://externalMeetUrl-2",
           users: []
         }
       ]
     };
     const action = addRooms([
-      { id: 1, name: "room 1" },
-      { id: 2, name: "room 2" }
+      { id: 1, name: "room 1", externalMeetUrl:"http://externalMeetUrl-1"},
+      { id: 2, name: "room 2", externalMeetUrl:"http://externalMeetUrl-2"}
     ]);
 
     deepFreeze(stateBefore);
@@ -99,8 +101,8 @@ describe("morpheus/store/reducers", () => {
     const stateBefore = {
       ...initialState,
       rooms: [
-        { id: "1", name: "room 1", users: [] },
-        { id: "2", name: "room 2", users: [] }
+        { id: "1", name: "room 1", externalMeetUrl:"http://externalMeetUrl-1", users: [] },
+        { id: "2", name: "room 2", externalMeetUrl:"http://externalMeetUrl-2", users: [] }
       ]
     };
     const stateAfter = {
@@ -109,11 +111,13 @@ describe("morpheus/store/reducers", () => {
         {
           id: "1",
           name: "room 1",
+          externalMeetUrl:"http://externalMeetUrl-1",
           users: []
         },
         {
           id: "2",
           name: "room 2",
+          externalMeetUrl:"http://externalMeetUrl-2",
           users: []
         }
       ],
@@ -136,6 +140,7 @@ describe("morpheus/store/reducers", () => {
         {
           id: "1",
           name: "room 1",
+          externalMeetUrl:"http://externalMeetUrl-1",
           users: [
             {
               id: 100,
@@ -147,6 +152,7 @@ describe("morpheus/store/reducers", () => {
         {
           id: "2",
           name: "room 2",
+          externalMeetUrl:"http://externalMeetUrl-2",
           users: [
             {
               id: 200,
