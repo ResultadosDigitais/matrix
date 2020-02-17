@@ -71,7 +71,8 @@ const MenuOffice = ({
     <ScheduleMeetingDialog 
     open={openScheduleModal}
     onClose={() => setScheduleModal(false)} 
-    title="Schedule a meeting in Google Calendar" />
+    title="Schedule a meeting in Google Calendar"
+    onConfirm={(roomId, roomName) => open(`/event?roomName=${roomName}&roomId=${roomId}`, '_blank')} />
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
@@ -103,7 +104,6 @@ const MenuOffice = ({
         <IconButton
           onClick={() => {
             setScheduleModal(true)
-            // open('/event', '_blank');
           }}
         >
           <EventIcon />

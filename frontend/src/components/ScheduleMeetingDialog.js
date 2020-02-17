@@ -45,6 +45,7 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
   const classes = styles();
   const [typeRoom, setTypeRoom] = useState('old-room');
   const [roomId, setRoomId] = React.useState('');
+  const [roomName, setRoomName] = React.useState('');
 
   const onRoomTypeChange = event => {
     setTypeRoom(event.target.value);
@@ -54,6 +55,9 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
     setRoomId(event.target.value);
   };
   
+  const onRoomNameChange = event => {
+    setRoomName(event.target.value);
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -84,7 +88,7 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
               ))}
             </Select>
             </FormControl> : <FormControl  className={classes.formControl}>
-              <TextField id="filled-basic" label="New Room Name" variant="filled" />
+              <TextField value={roomName} onChange={onRoomNameChange} id="filled-basic" label="New Room Name" variant="filled" />
             </FormControl>}
         </div>
       </DialogContent>
@@ -94,10 +98,7 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
         </Button>
         <Button
           onClick={() => {
-            onConfirm({
-              startWithAudioMuted: !micEnabled,
-              startWithVideoMuted: !videoEnabled
-            });
+            if(onConfirm) onConfirm(typeRoom === 'new-room' ? null : roomId, roomName)
           }}
           color="primary"
           autoFocus

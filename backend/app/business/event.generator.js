@@ -2,13 +2,22 @@ import uuid from "uuid/v4";
 import domainIdentify from "./domain.identify";
 
 
-const getNewRandomMeetingUrl = (baseUrl) => {
-    const roomId = uuid();
-   return `${baseUrl}/new?roomName=meeting-${roomId}&roomId=${roomId}`
+const getNewMeetingUrl = (roomDetails, baseUrl) => {
+    const roomId = roomDetails.id ? roomDetails.id : uuid();
+    
+    const url = [baseUrl];
+    url.push('/new?')
+    url.push(`roomId=${roomId}`)
+    
+    if(roomDetails.name) {
+        url.push(`&roomName=${roomDetails.name}`)
+    }
+    
+   return url.join('');
 }
 
-const getEventDetailsText = () => {
-    const eventUrl = encodeURIComponent(getNewRandomMeetingUrl(domainIdentify()));
+const getEventDetailsText = (roomDetails) => {
+    const eventUrl = encodeURIComponent(getNewMeetingUrl(roomDetails, domainIdentify()));
 
     return `
     
@@ -19,6 +28,6 @@ const getEventDetailsText = () => {
 }
 
 module.exports = {
-    getNewRandomMeetingUrl,
+    getNewMeetingUrl,
     getEventDetailsText
 }

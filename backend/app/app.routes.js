@@ -27,7 +27,12 @@ router.get("/new", (req, res) => {
 });
 
 router.get("/event", (req, res) => {
-  const eventDetails = eventGenerator.getEventDetailsText();
+  const roomDetails = {
+    roomId: req.query.roomId,
+    name: req.query.roomName,
+  }
+
+  const eventDetails = eventGenerator.getEventDetailsText(roomDetails);
   res.redirect(`https://www.google.com/calendar/render?action=TEMPLATE&text=Meeting in Matrix&details=${eventDetails}`);
 });
 
