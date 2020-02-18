@@ -12,11 +12,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import InputLabel from '@material-ui/core/InputLabel';
 import Divider from '@material-ui/core/Divider';
-import { connect } from 'react-redux';
-import { selectRooms } from '../morpheus/store/selectors';
-import Select from './Select';
+import SelectRooms from './SelectRooms';
 
 const styles = makeStyles(() => ({
   formControl: {
@@ -48,20 +45,11 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
     setRoomName(event.target.value);
   };
 
-  const formatOption = (id, label, standard = false) => ({
-    value: `${id}`,
-    label: `${label}`,
-    standard
-  });
-
-  const getRoomOptions = () =>
-    rooms.map((room, index) => formatOption(room.id, room.name, index === 0));
-
   const canSubmit = () => {
-    if(typeRoom === 'new-room' && roomName) return true
-    if (typeRoom === 'old-room' && roomId) return true
+    if (typeRoom === 'new-room' && roomName) return true;
+    if (typeRoom === 'old-room' && roomId) return true;
     return false;
-  }
+  };
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
@@ -94,13 +82,12 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
           <Divider />
           {typeRoom === 'old-room' ? (
             <FormControl className={classes.formControl}>
-              <Select
+              <SelectRooms
                 label="Room"
-                options={getRoomOptions()}
                 value={roomId}
                 onChange={onRoomChange}
                 className={classes.select}
-              ></Select>
+              />
             </FormControl>
           ) : (
             <FormControl className={classes.formControl}>
@@ -123,7 +110,7 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
           onClick={() => {
             if (onConfirm && canSubmit()) {
               onConfirm(typeRoom === 'new-room' ? null : roomId, roomName);
-              onClose()
+              onClose();
             }
           }}
           color="primary"
@@ -137,22 +124,18 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
 };
 
 ScheduleMeetingDialog.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired
 };
 
 ScheduleMeetingDialog.defaultProps = {
-  title: '',
+  title: 'Schedule a meeting in Google Calendar',
   open: false,
   onClose: undefined,
   onConfirm: undefined,
   rooms: []
 };
 
-const mapStateToProps = state => ({
-  rooms: selectRooms(state)
-});
-
-export default connect(mapStateToProps)(ScheduleMeetingDialog);
+export default ScheduleMeetingDialog;
