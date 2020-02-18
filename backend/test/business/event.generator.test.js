@@ -20,7 +20,6 @@ describe('Event Generator', () => {
         };
         const eventText = eventGenerator.getEventDetailsText(roomDetails);
                 
-        // expect(eventText).to.contain(encodeURIComponent(`Link for our Matrix meeting: ${encodeURIComponent('http://0.0.0.0:8080/new?')}`));
         expect(eventText).to.contain(`Link for our Matrix meeting: ${encodeURIComponent('http://0.0.0.0:8080/new?')}`)
         expect(eventText).to.contain(encodeURIComponent('roomName=My New Room'));
         expect(eventText).to.contain(encodeURIComponent('roomId='));

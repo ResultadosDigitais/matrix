@@ -3,7 +3,7 @@ import domainIdentify from "./domain.identify";
 
 
 const getNewMeetingUrl = (roomDetails, baseUrl) => {
-    const roomId = roomDetails.id ? roomDetails.id : uuid();
+    const roomId = roomDetails.roomId ? roomDetails.roomId : uuid();
     
     const url = [baseUrl];
     url.push('/new?')

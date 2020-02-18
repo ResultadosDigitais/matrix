@@ -1,43 +1,32 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import InputBase from "@material-ui/core/InputBase";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Checkbox from "@material-ui/core/Checkbox";
-import Mic from "@material-ui/icons/Mic";
-import MicOff from "@material-ui/icons/MicOff";
-import Videocam from "@material-ui/icons/Videocam";
-import VideocamOff from "@material-ui/icons/VideocamOff";
-import Tooltip from "@material-ui/core/Tooltip";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import Divider from "@material-ui/core/Divider";
-import { connect } from "react-redux";
-import {
-  selectRooms
-} from "../morpheus/store/selectors";
+import Divider from '@material-ui/core/Divider';
+import { connect } from 'react-redux';
+import { selectRooms } from '../morpheus/store/selectors';
+import Select from './Select';
 
 const styles = makeStyles(() => ({
   formControl: {
     margin: 0,
     fullWidth: true,
-    display: "flex",
-    wrap: "nowrap"
+    display: 'flex',
+    wrap: 'nowrap'
   },
   select: {
-    display: "flex"
+    display: 'flex'
   }
 }));
 
@@ -54,42 +43,76 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
   const onRoomChange = event => {
     setRoomId(event.target.value);
   };
-  
+
   const onRoomNameChange = event => {
     setRoomName(event.target.value);
   };
 
+  const formatOption = (id, label, standard = false) => ({
+    value: `${id}`,
+    label: `${label}`,
+    standard
+  });
+
+  const getRoomOptions = () =>
+    rooms.map((room, index) => formatOption(room.id, room.name, index === 0));
+
+  const canSubmit = () => {
+    if(typeRoom === 'new-room' && roomName) return true
+    if (typeRoom === 'old-room' && roomId) return true
+    return false;
+  }
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <div>
-            <FormControl component="fieldset"  className={classes.formControl}>
-              <FormLabel component="legend">What room would you like to use?</FormLabel>
-              <RadioGroup defaultValue="old-room" aria-label="room-scope" name="room-scope" value={typeRoom} onChange={onRoomTypeChange}>
-                <FormControlLabel value="old-room" control={<Radio/>} label="Existent room" />
-                <FormControlLabel value="new-room" control={<Radio/>} label="New room" />
-              </RadioGroup>
-            </FormControl>
-            
-            <Divider />
-            { typeRoom === 'old-room' ? <FormControl  className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Room</InputLabel>
-              
-              <Select
-              value={roomId}
-              className={classes.select}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              onChange={onRoomChange}
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">
+              What room would you like to use?
+            </FormLabel>
+            <RadioGroup
+              defaultValue="old-room"
+              aria-label="room-scope"
+              name="room-scope"
+              value={typeRoom}
+              onChange={onRoomTypeChange}
             >
-              {rooms && rooms.map(room => (
-                <MenuItem value={room.id}>{room.name}</MenuItem>
-              ))}
-            </Select>
-            </FormControl> : <FormControl  className={classes.formControl}>
-              <TextField value={roomName} onChange={onRoomNameChange} id="filled-basic" label="New Room Name" variant="filled" />
-            </FormControl>}
+              <FormControlLabel
+                value="old-room"
+                control={<Radio />}
+                label="Existent room"
+              />
+              <FormControlLabel
+                value="new-room"
+                control={<Radio />}
+                label="New room"
+              />
+            </RadioGroup>
+          </FormControl>
+
+          <Divider />
+          {typeRoom === 'old-room' ? (
+            <FormControl className={classes.formControl}>
+              <Select
+                label="Room"
+                options={getRoomOptions()}
+                value={roomId}
+                onChange={onRoomChange}
+                className={classes.select}
+              ></Select>
+            </FormControl>
+          ) : (
+            <FormControl className={classes.formControl}>
+              <TextField
+                value={roomName}
+                onChange={onRoomNameChange}
+                id="new-room-name"
+                label="New Room Name"
+                variant="filled"
+              />
+            </FormControl>
+          )}
         </div>
       </DialogContent>
       <DialogActions>
@@ -98,7 +121,10 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
         </Button>
         <Button
           onClick={() => {
-            if(onConfirm) onConfirm(typeRoom === 'new-room' ? null : roomId, roomName)
+            if (onConfirm && canSubmit()) {
+              onConfirm(typeRoom === 'new-room' ? null : roomId, roomName);
+              onClose()
+            }
           }}
           color="primary"
           autoFocus
@@ -111,24 +137,22 @@ const ScheduleMeetingDialog = ({ open, onClose, onConfirm, title, rooms }) => {
 };
 
 ScheduleMeetingDialog.propTypes = {
-  title: PropTypes.string,
-  open: PropTypes.bool,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func
+  title: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired
 };
 
 ScheduleMeetingDialog.defaultProps = {
-  title: "",
+  title: '',
   open: false,
   onClose: undefined,
   onConfirm: undefined,
-  rooms: [],
+  rooms: []
 };
 
 const mapStateToProps = state => ({
   rooms: selectRooms(state)
 });
 
-export default connect(
-  mapStateToProps
-)(ScheduleMeetingDialog);
+export default connect(mapStateToProps)(ScheduleMeetingDialog);
