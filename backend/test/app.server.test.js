@@ -22,7 +22,7 @@ describe("Unit testing the / route", () => {
     .get("/")
     .then((response) => {
       expect(response.text).to.contain(
-        "<meta name=\"google-signin-client_id\" content=\"990846956506-bfhbjsu4nl5mvlkngr3tsmfcek24e8t8.apps.googleusercontent.com\">",
+        "<meta name=\"google-signin-client_id\" content=\"\">",
       );
     }));
 
