@@ -4,7 +4,7 @@ RUN mkdir -p /var/app
 WORKDIR /var/app
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-COPY . /var/app
+COPY ./var/app
 
 EXPOSE 8080
 
