@@ -1,4 +1,4 @@
-<h3 align="center">**#matrix**</h3>
+<h3 align="center">#matrix</h3>
 
 <p align="center">Online open-source workplace for distributed teams.</p>
 
