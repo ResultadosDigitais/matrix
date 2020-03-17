@@ -74,7 +74,7 @@ If you prefer, you can run **#matrix** in Heroku:
 
 ## Environments
 
-The**#matrix**project has some environments that important to define.
+The **#matrix** project has some environments that important to define.
 
 1. We are using Google to authorizations, you need create a credential [here](https://developers.google.com/identity/sign-in/web/sign-in) and before define this:
 
@@ -84,7 +84,7 @@ The**#matrix**project has some environments that important to define.
 
 		ENFORCE_SSL=true
 
-3. The**#matrix**needs to know, where it get rooms definitions:
+3. The **#matrix** needs to know, where it get rooms definitions:
 
 		ROOMS_SOURCE=ENVIRONMENT
 
@@ -111,11 +111,11 @@ The**#matrix**project has some environments that important to define.
 ## Contributing
 We encourage you to contribute to The **#matrix**!
 
-Everyone interacting in**#matrix**codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
+Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
 
 
 ## License
-The**#matrix**is released under the [MIT License](docs/LICENSE)
+The **#matrix** is released under the [MIT License](docs/LICENSE)
 
 
 
