@@ -8,11 +8,6 @@
       "description": "Google Application Credential",
       "value": "xxxxxxx.apps.googleusercontent.com"
     },
-    "ROOMS_DATA": {
-      "description": "List of avaliable rooms office. Read more in SETUP.md",
-      "value": "[{\"id\":\"6a7d25ee-c774-43be-be93-2acb2db53d93\",\"name\":\"TheDocks\",\"disableMeeting\":true},{\"id\":\"6c04907e-f402-4b63-8b9e-b6f324e13166\",\"name\":\"Nebuchadnezzar\"},{\"id\":\"17755865-e0a6-4809-b389-eeff5590fd3d\",\"name\":\"Logos\"},{\"id\":\"490693fb-1751-498a-a23a-3785e677530c\",\"name\":\"Osiris\"},{\"id\":\"da5eef6b-9e0c-4c32-81eb-17596114bf5b\",\"name\":\"Icarus\"},{\"id\":\"e8ed1b89-afa9-469f-8108-e527b51c76a1\",\"name\":\"Caduceus\"},{\"id\":\"bab0452c-bbfa-4365-b263-6aa9d26d8e33\",\"name\":\"Brahma\"},{\"id\":\"706e8018-8e4e-40a2-a433-97535db6cc54\",\"name\":\"Novalis\"},{\"id\":\"59008e8f-a961-4ad2-a2e4-b31b3e398a50\",\"name\":\"Vigilant\"},{\"id\":\"2acbea57-64ba-4c55-9d20-042843c6e225\",\"name\":\"Zion\"}]",
-      "required": false
-    },
     "ENFORCE_SSL": {
       "description": "If you running in HTTPS this variable forces redirect to HTTPS when user access with HTTP",
       "value": "true"
