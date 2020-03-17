@@ -1,4 +1,4 @@
-<h3 align="center">Matrix</h3>
+<h3 align="center">**#matrix**</h3>
 
 <p align="center">Online open-source workplace for distributed teams.</p>
 
@@ -7,13 +7,13 @@
   <a href="https://circleci.com/gh/ResultadosDigitais/matrix"><img alt="CircleCI Status" src="https://img.shields.io/circleci/project/github/babel/babel/master.svg?label=CircleCI&maxAge=43200"></a>
 </p>
 
-## Welcome to the Matrix
+## Welcome to the **#matrix**
 
-The objective of Matrix project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
+The objective of **#matrix** project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
 
-When we are working remotely there are no conversations like in a physical office. The Matrix project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
+When we are working remotely there are no conversations like in a physical office. The**#matrix**project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
 
-Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
+**#matrix** produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
 
 ![Matrix Home Screenshot](docs/img/matrix-morpheus.png)
 
@@ -27,7 +27,7 @@ The login is so simple. You only need to create a google client id and configure
 
 ## The rooms Inside of #matrix
  
-The inside of #matrix there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)  
+The inside of **#matrix** there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)  
 
 |                              Office Page                               |                                     With Sidebar                                     |
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
@@ -43,7 +43,7 @@ You can only enter in a room to show for the other that you are available there 
 
 ## Getting Started
 
-If you want run the Matrix, you need follow steps:
+If you want run the **#matrix**, you need follow steps:
 
 1. We are using Google to authorizations, you need create a credential [here](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) you can follow step by step
 
@@ -67,14 +67,14 @@ If you prefer, you can run **#matrix** on GCP:
 
 
 ## On Heroku
-If you prefer, you can run Matrix in Heroku: 
+If you prefer, you can run**#matrix**in Heroku: 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix)
 
 
 ## Environments
 
-The Matrix project has some environments that important to define.
+The**#matrix**project has some environments that important to define.
 
 1. We are using Google to authorizations, you need create a credential [here](https://developers.google.com/identity/sign-in/web/sign-in) and before define this:
 
@@ -84,11 +84,11 @@ The Matrix project has some environments that important to define.
 
 		ENFORCE_SSL=true
 
-3. The Matrix needs to know, where it get rooms definitions:
+3. The**#matrix**needs to know, where it get rooms definitions:
 
 		ROOMS_SOURCE=ENVIRONMENT
 
-4. There is a config that define the rooms of The Matrix, if you prefer you can generate the unique id per room [here](https://www.uuidgenerator.net), to define this:
+4. There is a config that define the rooms of The **#matrix**, if you prefer you can generate the unique id per room [here](https://www.uuidgenerator.net), to define this:
 
 
 		ROOMS_DATA=[
@@ -109,13 +109,13 @@ The Matrix project has some environments that important to define.
 
 
 ## Contributing
-We encourage you to contribute to The Matrix!
+We encourage you to contribute to The **#matrix**!
 
-Everyone interacting in Matrix codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
+Everyone interacting in**#matrix**codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
 
 
 ## License
-The Matrix is released under the [MIT License](docs/LICENSE)
+The**#matrix**is released under the [MIT License](docs/LICENSE)
 
 
 
