@@ -107,8 +107,10 @@ The **#matrix** project has some environments that important to define.
 		   }
 		 ]
 
+# Running in Production
+If you will run in production we strongly recomend to you close your environmen using an internal VPN. In this solution everybody with the link and a valid google credential can enter in your virtual office. Because of this is important to you mantain your environment closed. Or you can help us implementing to define a whitelist domains with environment variable.     
 
-## Contributing
+# Contributing
 We encourage you to contribute to The **#matrix**!
 
 Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
