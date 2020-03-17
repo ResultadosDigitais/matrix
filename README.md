@@ -56,7 +56,7 @@ If you prefer, you can run **#matrix** on Heroku:
 # On GCP 
 If you prefer, you can run **#matrix** on GCP:
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix&revision=add-gcp-button)
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix)
 
 
 ## Environments
