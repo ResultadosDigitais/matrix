@@ -27,7 +27,7 @@ The login is so simple. You only need to create a google client id and configure
 
 ## The rooms Inside of #matrix
  
-The inside of #matrix there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will apear a head set icon. (eg. In the image the guys in the Platform-Email romm are in a meeting)  
+The inside of #matrix there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)  
 
 |                              Office Page                               |                                     With Sidebar                                     |
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
@@ -35,7 +35,7 @@ The inside of #matrix there are some rooms. In this rooms is possible to see oth
 
 ## The meeting room
 
-You can only enter in a room to show for the other that you are avaliable there through the `ENTER ROOM` button or enter in a meeting through the button `ENTER MEETING`. 
+You can only enter in a room to show for the other that you are available there through the `ENTER ROOM` button or enter in a meeting through the button `ENTER MEETING`. 
 
 |                                Meeting Room                                |                                          With Sidebar                                           |
 | :------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
@@ -47,11 +47,11 @@ If you want run the Matrix, you need follow steps:
 
 1. We are using Google to authorizations, you need create a credential [here](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) you can follow step by step
 
-2. Run appplication with docker compose:
+2. Run application with docker compose:
 
 		$ docker-compose up
 
-3. Open your brownser and access: 
+3. Open your browser and access: 
 
 		http://localhost:8080/
 
