@@ -49,7 +49,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
+const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
   const [isExpanded, toggleExpand] = useState(false);
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
@@ -92,9 +92,11 @@ const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
         <Button size="small" color="primary" onClick={onEnterRoom}>
           Enter room
         </Button>
-        <Button size="small" color="primary" onClick={onEnterMeeting}>
-          Enter meeting
-        </Button>
+        {meetingEnabled && (
+          <Button size="small" color="primary" onClick={onEnterMeeting}>
+            Enter meeting
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
@@ -103,6 +105,7 @@ const RoomCard = ({ name, users, onEnterRoom, onEnterMeeting }) => {
 RoomCard.propTypes = {
   onEnterRoom: PropTypes.func,
   onEnterMeeting: PropTypes.func,
+  meetingEnabled: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
   name: PropTypes.string
 };
@@ -110,6 +113,7 @@ RoomCard.propTypes = {
 RoomCard.defaultProps = {
   onEnterRoom: () => {},
   onEnterMeeting: () => {},
+  meetingEnabled: true,
   users: [],
   name: ""
 };
