@@ -49,12 +49,12 @@ If you want run the **#matrix**, you need follow steps:
 		$ docker-compose down
 		
 # On Heroku
-If you prefer, you can run **#matrix** in Heroku: 
+If you prefer, you can run **#matrix** on Heroku: 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix)
 
 # On GCP 
-If you prefer, you can run **#matrix** in GCP:
+If you prefer, you can run **#matrix** on GCP:
 
 [![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix&revision=add-gcp-button)
 
@@ -71,7 +71,7 @@ The **#matrix** project has some environments that important to define.
 
 		ENFORCE_SSL=true
 
-3. The Matrix needs to know, where it get rooms definitions:
+3. The **#matrix** needs to know, where it get rooms definitions:
 
 		ROOMS_SOURCE=ENVIRONMENT
 
