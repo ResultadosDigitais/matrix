@@ -11,24 +11,40 @@ When we are working remotely there are no conversations like in a fisical office
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more [here](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75)
 
 ## login Page
-The login is so simple. You only need to create a google client id and configure the environment variable GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com. Follow [this step by step](/docs/google-credential-step-by-step.md) to configure your own google client key.
+The login is so simple. You only need to create a google client id and configure the environment variable GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com. Follow [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) to configure your own google client key.
 
 ![Login Page](/docs/img/matrix-login.png)
+
+## The rooms Inside of #matrix
+ 
+The inside of #matrix there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will apear a head set icon. (eg. In the image the guys in the Platform-Email romm are in a meeting)  
+
+![Matrix Room](/docs/img/matrix-rooms.png)
+
+![Matrix Online](/docs/img/matrix-online.png)
+
+## The meeting window
+
+You can only enter in a room to show for the other that you are avaliable there through the `ENTER ROOM` button or enter in a meeting through the button `ENTER MEETING`. 
+
+![Matrix Meet](/docs/img/matrix-meet-room.png)
 
 
 ## Getting Started
 
 If you want run the Matrix, you need follow steps:
 
-1. Run appplication with docker compose:
+1. We are using Google to authorizations, you need create a credential [here](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) you can follow step by step
 
-		$ docker-compose up -d
+2. Run appplication with docker compose:
 
-2. Open your brownser and access: 
+		$ docker-compose up
+
+3. Open your brownser and access: 
 
 		http://localhost:8080/
 
-3. When you finish, you can run:
+4. When you finish, you can run:
 
 		$ docker-compose down
 		
@@ -46,15 +62,15 @@ The Matrix project has some environments that important to define.
 
 		GOOGLE_CREDENTIAL=${paste_your_credention_here}
 
-2. It's importante configure SSL, to define this:
+2. If you are running with ssl It's important to configure SSL, to define this:
 
 		ENFORCE_SSL=true
 
 3. The Matrix needs to know, where it get rooms definitions:
 
-		ROOMS_SOURCE=environment
+		ROOMS_SOURCE=ENVIRONMENT
 
-4. There is a config that define the rooms of The Matrix, if you prefer you can generate [here](https://www.uuidgenerator.net), to define this:
+4. There is a config that define the rooms of The Matrix, if you prefer you can generate the unique id per room [here](https://www.uuidgenerator.net), to define this:
 
 
 		ROOMS_DATA=[
@@ -85,4 +101,4 @@ The Matrix is released under the [MIT License](docs/LICENSE)
 
 
 
-[ _"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."_](SETUP.md)
+`"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."`
