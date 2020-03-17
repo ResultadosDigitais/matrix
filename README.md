@@ -119,10 +119,10 @@ ROOMS_DATA=[
 			  "externalMeetUrl": "https://external-url-room/key-room"
 		   }
 		 ]
-		 ```
+```
 
 # Running in Production
-If you will run in production we strongly recomend to you close your environmen using an internal VPN. In this solution everybody with the link and a valid google credential can enter in your virtual office. Because of this is important to you mantain your environment closed. Or you can help us implementing to define a whitelist domains with environment variable.     
+If you will run in production we strongly recomend to you close your environmen using an internal VPN. In this solution everybody with the link and a valid google credential can enter in your virtual office. Because of this is important to you mantain your environment closed. Or you can help us implementing to define a whitelist domains with environment variable. 
 
 
 # Contributing
