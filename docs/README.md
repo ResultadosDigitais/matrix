@@ -10,12 +10,6 @@ When we are working remotely there are no conversations like in a fisical office
 
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more [here](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75)
 
-## login Page
-The login is so simple. You only need to create a google client id and configure the environment variable GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com. Follow [this step by step](/docs/google-credential-step-by-step.md) to configure your own google client key.
-
-![Login Page](/docs/img/matrix-login.png)
-
-
 ## Getting Started
 
 If you want run the Matrix, you need follow steps:
