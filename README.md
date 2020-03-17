@@ -7,11 +7,11 @@
   <a href="https://circleci.com/gh/ResultadosDigitais/matrix"><img alt="CircleCI Status" src="https://img.shields.io/circleci/project/github/babel/babel/master.svg?label=CircleCI&maxAge=43200"></a>
 </p>
 
-## What's Matrix
+## Welcome to the Matrix
 
-The objective of Matrix project is to offer a virtual environment office, as nice as fisical offices. When we are working in a fisical office is very common entering in discussion threads in many diferents environments, for example: On coffe, On lunch and others.
+The objective of Matrix project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
 
-When we are working remotely there are no conversations like in a fisical office. The Matrix project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
+When we are working remotely there are no conversations like in a physical office. The Matrix project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
 
 Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more [here](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75)
 
