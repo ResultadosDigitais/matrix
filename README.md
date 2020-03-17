@@ -17,10 +17,13 @@ Matrix produces a virtual office for remote teams. In this project, you can run 
 
 ![Matrix Home Screenshot](docs/img/matrix-morpheus.png)
 
-## login Page
+## Authentication
+
 The login is so simple. You only need to create a google client id and configure the environment variable GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com. Follow [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) to configure your own google client key.
 
-![Login Page](docs/img/matrix-login.png)
+|                                 Login                                 |                                   Login in Dark Mode                                    |
+| :-------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
+| <img src="docs/img/matrix-login.png" title="Login page" width="100%"> | <img src="docs/img/matrix-dark-login.png" title="Login page in Dark Mode" width="100%"> |
 
 ## The rooms Inside of #matrix
  
