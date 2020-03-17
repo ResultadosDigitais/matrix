@@ -19,7 +19,7 @@ Matrix produces a virtual office for remote teams. In this project, you can run 
 
 ## Authentication
 
-The login is so simple. You only need to create a google client id and configure the environment variable GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com. Follow [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) to configure your own google client key.
+The login is so simple. You only need to create a google client id and configure the environment variable `GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com`. Follow [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) to configure your own google client key.
 
 |                                 Login                                 |                                   Login in Dark Mode                                    |
 | :-------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
@@ -29,9 +29,9 @@ The login is so simple. You only need to create a google client id and configure
  
 The inside of #matrix there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will apear a head set icon. (eg. In the image the guys in the Platform-Email romm are in a meeting)  
 
-![Matrix Room](docs/img/matrix-rooms.png)
-
-![Matrix Online](/docs/img/matrix-online.png)
+|                              Office Page                               |                                     With Sidebar                                     |
+| :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
+| <img src="docs/img/matrix-rooms.png" title="Office page" width="100%"> | <img src="docs/img/matrix-online.png" title="Office page with Sidebar" width="100%"> |
 
 ## The meeting window
 
