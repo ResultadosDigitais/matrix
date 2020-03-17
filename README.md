@@ -103,12 +103,29 @@ The **#matrix** project has some environments that important to define.
 		   },
 		   {
 		      "id":"${UUID}",
-		      "name":"Data Services"
+		      "name":"Data Services",
+			  "externalMeetUrl": "https://external-url-room/key-room"
 		   }
 		 ]
 
+
+### External Meet
+The default video conferencing in meetings is [Jitsi](https://jitsi.org/jitsi-meet/), but you can change that in any room, using [Meet](https://meet.google.com/) or [Zoom](https://zoom.us/). For that, you just need provide the parameter `externalMeetUrl` in your room config:
+```
+ROOMS_DATA=[
+		   {
+		      "id":"${UUID}",
+		      "name":"Meeting External",
+			  "externalMeetUrl": "https://external-url-room/key-room"
+		   }
+		 ]
+		 ```
+
+
+
 # Running in Production
 If you will run in production we strongly recomend to you close your environmen using an internal VPN. In this solution everybody with the link and a valid google credential can enter in your virtual office. Because of this is important to you mantain your environment closed. Or you can help us implementing to define a whitelist domains with environment variable.     
+
 
 # Contributing
 We encourage you to contribute to The **#matrix**!
