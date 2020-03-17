@@ -11,7 +11,7 @@
 
 The objective of **#matrix** project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
 
-When we are working remotely there are no conversations like in a physical office. The**#matrix**project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
+When we are working remotely there are no conversations like in a physical office. The **#matrix** project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
 
 **#matrix** produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
 
@@ -67,7 +67,7 @@ If you prefer, you can run **#matrix** on GCP:
 
 
 ## On Heroku
-If you prefer, you can run**#matrix**in Heroku: 
+If you prefer, you can run **#matrix** in Heroku: 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix)
 
