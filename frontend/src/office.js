@@ -77,7 +77,9 @@ $(() => {
   }
 
   function userInRoomDecorator(user, room) {
-    if (user.id === matrixProfile.loadStoredProfile().id) {
+    const storedUser = matrixProfile.loadStoredProfile();
+
+    if (storedUser && user && user.id === storedUser.id) {
       setDefaultRoomStyles();
       const roomElement = $(`#room_card-${room}`);
       roomElement.attr("class", "card active-room");
@@ -186,7 +188,7 @@ $(() => {
 
       meetModal.modal("hide");
       meetModal.modal("dispose");
-    
+
       var meet = null;
       const externalMeetURL = getExternalMeetUrl(roomId);
       console.log(externalMeetURL);

@@ -1,16 +1,31 @@
 function MatrixProfile() {}
 
+function isUserValidEmail(user) {
+  return user.email.endsWith("@resultadosdigitais.com.br");
+}
+
+function getUserFromStorage() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!isUserValidEmail(user)) {
+    return null;
+  }
+
+  return user;
+}
+
 MatrixProfile.prototype.loadStoredProfile = function loadStoredProfile() {
-  return JSON.parse(localStorage.getItem("user"));
+  return getUserFromStorage();
 };
 
 MatrixProfile.prototype.userName = function userName() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (user) {
-    return user.name.split(" ").pop();
+  const user = getUserFromStorage();
+
+  if (!user) {
+    return null;
   }
 
-  return null;
+  return user.name.split(" ").pop();
 };
 
 MatrixProfile.prototype.loadStoredProfileAsString = function loadStoredProfileAsString() {
@@ -37,7 +52,7 @@ MatrixProfile.prototype.isProfileStored = function isProfileStored() {
   if (item) {
     const user = JSON.parse(item);
 
-    if (user.id && user.name && user.email) {
+    if (user.id && user.name && user.email && isUserValidEmail(user)) {
       return true;
     }
 

@@ -27,6 +27,10 @@ export const initEvents = rooms => {
   const domain = `${window.location.protocol}//${window.location.host}`;
   const currentUser = profile.loadStoredProfile();
 
+  if (!currentUser) {
+    return null;
+  }
+
   defaultRoomId = rooms[0].id;
 
   events = new OfficeEvents({

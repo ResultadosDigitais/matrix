@@ -19,15 +19,23 @@ export class Login extends Component {
     super(props);
 
     this.state = {
-      isDark: isDarkTheme()
+      isDark: isDarkTheme(),
+      error: null
     };
 
     this.matrixProfile = new MatrixProfile();
   }
 
   onSignIn(profile) {
-    this.matrixProfile.storeProfileData(profile);
-    this.goToOffice();
+    if (profile && profile.email) {
+      if (!profile.email.endsWith("@resultadosdigitais.com.br")) {
+        this.setState({ error: "E-mail inválido para este domínio." });
+        return;
+      }
+
+      this.matrixProfile.storeProfileData(profile);
+      this.goToOffice();
+    }
   }
 
   getBackgroundImage(isDark) {
@@ -40,7 +48,7 @@ export class Login extends Component {
   }
 
   render() {
-    const { isDark } = this.state;
+    const { isDark, error } = this.state;
     return (
       <div
         className={styles.auth_background}
@@ -58,6 +66,7 @@ export class Login extends Component {
                   <Logo />
                   <Title />
                   <LoginButton onSignIn={profile => this.onSignIn(profile)} />
+                  {error && <p className="text-danger">{error}</p>}
                 </div>
                 <Footer />
               </div>
