@@ -33,12 +33,13 @@ The inside of #matrix there are some rooms. In this rooms is possible to see oth
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
 | <img src="docs/img/matrix-rooms.png" title="Office page" width="100%"> | <img src="docs/img/matrix-online.png" title="Office page with Sidebar" width="100%"> |
 
-## The meeting window
+## The meeting room
 
 You can only enter in a room to show for the other that you are avaliable there through the `ENTER ROOM` button or enter in a meeting through the button `ENTER MEETING`. 
 
-![Matrix Meet](docs/img/matrix-meet-room.png)
-
+|                                Meeting Room                                |                                          With Sidebar                                           |
+| :------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
+| <img src="docs/img/matrix-meet-room.png" title="Office page" width="100%"> | <img src="docs/img/matrix-meet-room-sidebar.png" title="Office page with Sidebar" width="100%"> |
 
 ## Getting Started
 
