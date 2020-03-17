@@ -1,7 +1,13 @@
 function MatrixProfile() {}
 
 function isUserValidEmail(user) {
-  return user.email.endsWith("@resultadosdigitais.com.br");
+  const validSuffixes = ["@resultadosdigitais.com.br", "@magrathealabs.com"];
+  for (const suffix of validSuffixes) {
+    if(user.email.endsWith(suffix)){
+      return true;
+    }
+  }
+  return false;
 }
 
 function getUserFromStorage() {

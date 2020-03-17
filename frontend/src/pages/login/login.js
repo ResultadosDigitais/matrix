@@ -28,7 +28,7 @@ export class Login extends Component {
 
   onSignIn(profile) {
     if (profile && profile.email) {
-      if (!profile.email.endsWith("@resultadosdigitais.com.br")) {
+      if (!profile.email.endsWith("@resultadosdigitais.com.br") && !profile.email.endsWith("@magrathealabs.com") ) {
         this.setState({ error: "E-mail inválido para este domínio." });
         return;
       }
