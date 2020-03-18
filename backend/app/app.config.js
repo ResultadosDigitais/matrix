@@ -8,5 +8,5 @@ module.exports = {
   CUSTOM_STYLE: process.env.CUSTOM_STYLE || "",
   HOST: "0.0.0.0",
   PORT: process.env.PORT || 8080,
-  WHITELIST_DOMAINS: process.env.WHITELIST_DOMAINS || "",
+  WHITELIST_DOMAINS: process.env.WHITELIST_DOMAINS || [],
 };
