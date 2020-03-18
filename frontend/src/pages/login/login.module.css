@@ -20,3 +20,9 @@
   background-color: #424242;
   color: #fff;
 }
+
+.error {
+  margin-top: 16px;
+  max-width: 270px;
+  text-align: center;
+}
