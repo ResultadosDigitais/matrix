@@ -1,22 +1,8 @@
 function MatrixProfile() {}
 
-function isUserValidEmail(user) {
-  const validSuffixes = ["@resultadosdigitais.com.br", "@magrathealabs.com"];
-  for (const suffix of validSuffixes) {
-    if(user.email.endsWith(suffix)){
-      return true;
-    }
-  }
-  return false;
-}
 
 function getUserFromStorage() {
   const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!isUserValidEmail(user)) {
-    return null;
-  }
-
   return user;
 }
 
@@ -58,7 +44,7 @@ MatrixProfile.prototype.isProfileStored = function isProfileStored() {
   if (item) {
     const user = JSON.parse(item);
 
-    if (user.id && user.name && user.email && isUserValidEmail(user)) {
+    if (user.id && user.name && user.email) {
       return true;
     }
 
