@@ -1,6 +1,6 @@
 class WhiteListDomainController {
   constructor(whiteListDomains) {
-    if(whiteListDomains!=""){
+    if (whiteListDomains.length > 0) {
     	this.whitelistDomains = JSON.parse(whiteListDomains);
     }else{
     	this.whitelistDomains = "";
