@@ -32,7 +32,7 @@ export class Login extends Component {
     var that = this;
 
      axios
-      .get("/checkemail?email="+profile.email)
+      .get(`/checkemail?email=${profile.email}`)
       .then(response => {
         let validateResponse = response.data;
 
