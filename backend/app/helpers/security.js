@@ -1,7 +1,7 @@
 import config from "../app.config";
 
 const security = {
-  hasValidEmailDomain(email) {
+  hasValidEmailDomain: (email) => {
     const whitelistDomains = config.WHITELIST_DOMAINS;
 
     if (whitelistDomains.length === 0) {
@@ -18,6 +18,34 @@ const security = {
     }
 
     return false;
+  },
+
+  adaptGoogleUser: (profile) => {
+    const {
+      id,
+      emails,
+      displayName,
+      photos,
+      provider,
+    } = profile;
+    let currentEmail;
+    let avatar;
+
+    if (emails && emails.length > 0) {
+      currentEmail = emails[0].value;
+    }
+
+    if (photos && photos.length > 0) {
+      avatar = photos[0].value;
+    }
+
+    return {
+      id,
+      avatar,
+      provider,
+      name: displayName,
+      email: currentEmail,
+    };
   },
 };
 

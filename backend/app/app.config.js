@@ -9,6 +9,9 @@ module.exports = {
   GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL
     || "http://localhost:8080/auth/google/callback",
   GOOGLE_CREDENTIAL: process.env.GOOGLE_CREDENTIAL || "",
+  COOKIE_SESSION_SECRET: process.env.COOKIE_SESSION_SECRET || "",
+  COOKIE_SESSION_MAX_AGE: environment.parseVariable(process.env.COOKIE_SESSION_MAX_AGE)
+    || 30 * 24 * 60 * 60 * 1000, // 30 days
   ENFORCE_SSL: process.env.ENFORCE_SSL || "false",
   CUSTOM_STYLE: process.env.CUSTOM_STYLE || "",
   HOST: "0.0.0.0",

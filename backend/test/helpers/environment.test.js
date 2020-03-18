@@ -24,4 +24,9 @@ describe(".parseVariable()", () => {
     expect(environment.parseVariable("[1,2,3]"))
       .to.deep.equal([1, 2, 3]);
   });
+
+  it("should return parsed number", () => {
+    expect(environment.parseVariable("852"))
+      .to.deep.equal(852);
+  });
 });

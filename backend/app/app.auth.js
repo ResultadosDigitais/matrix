@@ -12,18 +12,13 @@ passport.use(
       callbackURL: config.GOOGLE_CALLBACK_URL,
     },
     (accessToken, refreshToken, profile, cb) => {
-      const { emails } = profile;
-      let currentEmail;
+      const user = security.adaptGoogleUser(profile);
 
-      if (emails && emails.length > 0) {
-        currentEmail = emails[0].value;
+      if (!security.hasValidEmailDomain(user.email)) {
+        return cb(new Error(`E-mail "${user.email}" has invalid domain.`));
       }
 
-      if (!security.hasValidEmailDomain(currentEmail)) {
-        return cb(new Error(`E-mail "${currentEmail}" has invalid domain.`));
-      }
-
-      return cb(undefined, profile);
+      return cb(undefined, user);
     },
   ),
 );

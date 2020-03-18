@@ -3,15 +3,12 @@ import passport from "passport";
 
 const router = express.Router();
 
-router.get(
-  "/",
-  (req, res) => {
-    res.render("index", {
-      isAuthenticated: req.isAuthenticated(),
-      error: req.query.error,
-    });
-  },
-);
+router.get("/", (req, res) => {
+  res.render("index", {
+    isAuthenticated: !!req.session.currentUser,
+    error: req.query.error,
+  });
+});
 
 router.get("/new", (req, res) => {
   const newRoom = {
@@ -65,6 +62,8 @@ router.get(
         const message = (err && err.message) || "Unknown error";
         return res.redirect(`/?error=${encodeURIComponent(message)}`);
       }
+
+      req.session.currentUser = profile;
 
       return res.redirect("/");
     })(req, res, next);
