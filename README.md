@@ -125,7 +125,7 @@ The default video conferencing in meetings is [Jitsi](https://jitsi.org/jitsi-me
 If you will run in production we strongly recomend to you close your environmen using an internal VPN. In this solution everybody with the link and a valid google credential can enter in your virtual office. Because of this is important to you mantain your environment closed. Or you can define a whitelist environmet variable with the list of valid domains to enter in your office.
 
 ```
-WHITELIST_DOMAINS: ["@mydomai1.com.br","@mydomai2.com] 
+WHITELIST_DOMAINS: ["@mydomai1.com.br", "@mydomai2.com"] 
 ```
 
 # Contributing
