@@ -8,6 +8,7 @@
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;"
   },
   "dependencies": {
+    "@godaddy/terminus": "^4.3.1",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
