@@ -5,6 +5,7 @@
   "keywords": ["online workspace", "virtual office", "remote teams"],
   "stack": "container", 
   "env": {
+    "HOST": "http://localhost",
     "GOOGLE_CREDENTIAL": {
       "description": "Google Application Credential",
       "value": "xxxxxxx.apps.googleusercontent.com"

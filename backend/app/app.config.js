@@ -6,6 +6,6 @@ module.exports = {
     || "",
   ENFORCE_SSL: process.env.ENFORCE_SSL || "false",
   CUSTOM_STYLE: process.env.CUSTOM_STYLE || "",
-  HOST: "0.0.0.0",
+  HOST: process.env.HOST ||"0.0.0.0",
   PORT: process.env.PORT || 8080,
 };

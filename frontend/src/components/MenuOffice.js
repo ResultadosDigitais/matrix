@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
+import IconButton from "@material-ui/core/IconButton";
 import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import EventIcon from '@material-ui/icons/Event';
 import Tooltip from "@material-ui/core/Tooltip";
 import debounce from "lodash.debounce";
 
 import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
+import ScheduleMeetingDialog from "../components/ScheduleMeetingDialog";
+
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -60,9 +64,14 @@ const MenuOffice = ({
 }) => {
   const classes = useStyles();
   const commitSearch = debounce(onChangeFilter, 300);
+  const [openScheduleModal, setScheduleModal] = useState(false);
 
   return (
     <>
+    <ScheduleMeetingDialog 
+    open={openScheduleModal}
+    onClose={() => setScheduleModal(false)} 
+    onConfirm={(roomId, roomName) => open(`/event?roomName=${roomName}&roomId=${roomId ? roomId : ''}`, '_blank')} />
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
@@ -90,6 +99,16 @@ const MenuOffice = ({
         />
       </Tooltip>
       <ThemeCheckbox onChange={onChangeTheme} />
+      <Tooltip title="Schedule a meeting in Google Calendar">
+        <IconButton
+          onClick={() => {
+            setScheduleModal(true)
+          }}
+        >
+          <EventIcon />
+        </IconButton>
+      </Tooltip>
+      
       <NotificationCheckbox
         isDisabled={settings.notificationDisabled}
         onChange={event => {
