@@ -1,7 +1,5 @@
 import express from "express";
-import cookieParser from "cookie-parser";
 import cookieSession from "cookie-session";
-import session from "express-session";
 import bodyParser from "body-parser";
 import path from "path";
 import GoogleCredentialController from "./controllers/google.credentials.controller";
@@ -15,7 +13,6 @@ import {
   GOOGLE_CREDENTIAL,
   ENFORCE_SSL,
   CUSTOM_STYLE,
-  SESSION_SECRET,
   COOKIE_SESSION_SECRET,
   COOKIE_SESSION_MAX_AGE,
 } from "./app.config";
@@ -24,14 +21,12 @@ const app = express();
 
 app.locals.CUSTOM_STYLE = CUSTOM_STYLE;
 
-app.use(cookieParser());
 app.use(cookieSession({
   name: "matrix-session",
   keys: [COOKIE_SESSION_SECRET],
   maxAge: COOKIE_SESSION_MAX_AGE,
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: SESSION_SECRET }));
 
 // set the template engine ejs
 app.set("view engine", "ejs");
