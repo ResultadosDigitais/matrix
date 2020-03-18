@@ -7,13 +7,14 @@ import MenuOffice from "../../components/MenuOffice";
 import MenuAuth from "../../components/MenuAuth";
 import {
   changeOfficeFilter,
-  changeSettings,
+  changeSystemSetting,
+  toggleTheme,
   openLogoutConfirmDialog
 } from "../store/actions";
 import {
   selectOfficeFilter,
   selectCurrentUser,
-  selectSettings
+  selectSystemSettings
 } from "../store/selectors";
 import {
   OfficeFilterPropType,
@@ -24,6 +25,7 @@ import {
 const OfficeAppBar = ({
   onChangeOfficeFilter,
   onChangeSettings,
+  onChangeTheme,
   onLogout,
   officeFilter,
   settings,
@@ -35,6 +37,7 @@ const OfficeAppBar = ({
       filter={officeFilter}
       onChangeFilter={onChangeOfficeFilter}
       onChangeSettings={onChangeSettings}
+      onChangeTheme={onChangeTheme}
       settings={settings}
     />
     <MenuAuth onLogout={onLogout} userName={currentUser.name} />
@@ -44,6 +47,7 @@ const OfficeAppBar = ({
 OfficeAppBar.propTypes = {
   onChangeOfficeFilter: PropTypes.func,
   onChangeSettings: PropTypes.func,
+  onChangeTheme: PropTypes.func,
   onLogout: PropTypes.func,
   officeFilter: OfficeFilterPropType,
   settings: SettingsPropType,
@@ -53,6 +57,7 @@ OfficeAppBar.propTypes = {
 OfficeAppBar.defaultProps = {
   onChangeOfficeFilter: () => {},
   onChangeSettings: () => {},
+  onChangeTheme: () => {},
   onLogout: () => {},
   officeFilter: {},
   settings: {},
@@ -62,16 +67,14 @@ OfficeAppBar.defaultProps = {
 const mapStateToProps = state => ({
   officeFilter: selectOfficeFilter(state),
   currentUser: selectCurrentUser(state),
-  settings: selectSettings(state)
+  settings: selectSystemSettings(state)
 });
 
 const mapDispatchToProps = {
   onChangeOfficeFilter: changeOfficeFilter,
-  onChangeSettings: changeSettings,
+  onChangeSettings: changeSystemSetting,
+  onChangeTheme: toggleTheme,
   onLogout: openLogoutConfirmDialog
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OfficeAppBar);
+export default connect(mapStateToProps, mapDispatchToProps)(OfficeAppBar);

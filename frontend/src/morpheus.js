@@ -3,7 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Providers from "./morpheus/Providers";
+import Providers from "./morpheus/providers";
 import store from "./morpheus/store";
 import App from "./morpheus/App";
 import MatrixProfile from "./profile";

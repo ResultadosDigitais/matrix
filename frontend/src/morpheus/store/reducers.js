@@ -10,13 +10,19 @@ import {
   REMOVE_USER,
   USER_ENTER_MEETING,
   USER_LEFT_MEETING,
-  CHANGE_SETTINGS,
+  CHANGE_SYSTEM_SETTING,
+  CHANGE_MEETING_SETTING,
   TOGGLE_MESSAGE_DIALOG,
+  TOGGLE_THEME,
   OPEN_LOGOUT_CONFIRM_DIALOG,
   CLOSE_LOGOUT_CONFIRM_DIALOG
 } from "./actions";
+import storage from "./storage";
+import { getDefaultTheme, toggleTheme } from "../Themes";
+import ResolutionLevels from "../../constants/ResolutionLevels";
 
 export const initialState = {
+  theme: storage.getTheme(getDefaultTheme()),
   currentUser: {},
   currentRoom: {},
   rooms: [],
@@ -30,9 +36,15 @@ export const initialState = {
     onlyFullRoom: false,
     search: ""
   },
-  settings: {
+  systemSettings: {
     notificationDisabled: false
   },
+  meetingSettings: storage.getMeetingSettings({
+    micEnabled: true,
+    videoEnabled: true,
+    resolution: `${ResolutionLevels.sd}`,
+    enableFirefoxSimulcast: false
+  }),
   error: null,
   messageDialog: {
     isOpen: false,
@@ -50,6 +62,8 @@ const buildOfficeState = state => {
   let office = rooms.map(room => ({
     id: room.id,
     name: room.name,
+    meetingEnabled: !room.disableMeeting,
+    externalMeetUrl: room.externalMeetUrl,
     users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
   }));
 
@@ -165,14 +179,24 @@ const reducers = (state = initialState, action) => {
           [action.key]: action.value
         }
       });
-    case CHANGE_SETTINGS:
+    case CHANGE_SYSTEM_SETTING:
       return {
         ...state,
-        settings: {
-          ...state.settings,
+        systemSettings: {
+          ...state.systemSettings,
           [action.key]: action.value
         }
       };
+    case CHANGE_MEETING_SETTING: {
+      const meetingSettings = {
+        ...state.meetingSettings,
+        [action.key]: action.value
+      };
+
+      storage.setMeetingSettings(meetingSettings);
+
+      return { ...state, meetingSettings };
+    }
     case ADD_USER: {
       const index = state.usersInRoom.findIndex(
         u => u.user.id === action.user.id
@@ -221,6 +245,16 @@ const reducers = (state = initialState, action) => {
         ...state,
         messageDialog: action.props
       };
+    case TOGGLE_THEME: {
+      const theme = toggleTheme(state.theme);
+
+      storage.setTheme(theme);
+
+      return {
+        ...state,
+        theme
+      };
+    }
     case OPEN_LOGOUT_CONFIRM_DIALOG:
       return {
         ...state,

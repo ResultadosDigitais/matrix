@@ -30,6 +30,12 @@ describe("components/Roomcard", () => {
     assert(onEnterMeeting.calledOnce);
   });
 
+  it("shouldn't render button enter meeting when meeting isn't enabled", () => {
+    const { queryByText } = render(<RoomCard meetingEnabled={false} />);
+
+    assert.isNull(queryByText(/enter meeting/i));
+  });
+
   it("should render room name", () => {
     const { getByText } = render(<RoomCard name="Room test" />);
 
