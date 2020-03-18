@@ -6,7 +6,8 @@ module.exports = {
   SESSION_SECRET: process.env.SESSION_SECRET || "matrix-session",
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || "",
   GOOGLE_SECRET: process.env.GOOGLE_SECRET || "",
-  GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL || "",
+  GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL
+    || "http://localhost:8080/auth/google/callback",
   GOOGLE_CREDENTIAL: process.env.GOOGLE_CREDENTIAL || "",
   ENFORCE_SSL: process.env.ENFORCE_SSL || "false",
   CUSTOM_STYLE: process.env.CUSTOM_STYLE || "",
