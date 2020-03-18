@@ -19,6 +19,8 @@
   </head>
   <body>
     <div id="root"></div>
+    <input type="hidden" id="isAuthenticated" value="<%= isAuthenticated %>" />
+    <input type="hidden" id="user" value="<%= userString %>" />
     <script src="https://meet.jit.si/external_api.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="<%= assets.url('morpheus.js') %>"></script>

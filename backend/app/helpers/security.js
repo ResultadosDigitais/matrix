@@ -29,19 +29,19 @@ const security = {
       provider,
     } = profile;
     let currentEmail;
-    let avatar;
+    let imageUrl;
 
     if (emails && emails.length > 0) {
       currentEmail = emails[0].value;
     }
 
     if (photos && photos.length > 0) {
-      avatar = photos[0].value;
+      imageUrl = photos[0].value;
     }
 
     return {
       id,
-      avatar,
+      imageUrl,
       provider,
       name: displayName,
       email: currentEmail,

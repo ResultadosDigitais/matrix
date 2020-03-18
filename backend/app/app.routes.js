@@ -46,7 +46,18 @@ router.get("/rooms", (req, res) => {
 });
 
 router.get("/morpheus*", (req, res) => {
-  res.render("morpheus");
+  const { currentUser } = req.session;
+  const isAuthenticated = !!currentUser;
+  let userString = "";
+
+  if (isAuthenticated) {
+    userString = JSON.stringify(currentUser);
+  }
+
+  res.render("morpheus", {
+    isAuthenticated,
+    userString,
+  });
 });
 
 router.get(
@@ -70,7 +81,8 @@ router.get(
   },
 );
 
-router.get("/auth/logout", (req, res) => {
+router.post("/auth/logout", (req, res) => {
+  req.session.currentUser = null;
   req.logout();
   res.redirect("/");
 });
