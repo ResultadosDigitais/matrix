@@ -1,6 +1,11 @@
 import SocketIO from "socket.io";
+import WhiteListDomainController from "./controllers/white.list.domain.controller";
+import { WHITELIST_DOMAINS } from "./app.config";
 
 const DEFAULT_ROOM = "room-1";
+const whiteListDomainController = new WhiteListDomainController(WHITELIST_DOMAINS);
+
+
 // Constructor
 class Office {
   constructor(officeController, server) {
@@ -16,8 +21,15 @@ class Office {
       try {
         socket.user = JSON.parse(serializedUser);
 
-        console.log("socket.id:", socket.id);
-        next();
+        if(whiteListDomainController.isValidEmailInWhiteList(socket.user.email)){
+          console.log("socket.id:", socket.id);
+          next();  
+        }else{
+          console.error(`Invalid user email: '${serializedUser}'`, err);
+          next(new Error("Invalid user email"));
+        }
+
+        
       } catch (err) {
         console.error(`Error on parse user: '${serializedUser}'`, err);
 

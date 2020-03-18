@@ -14,6 +14,8 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import styles from "./login.module.css";
 
+import axios from "axios";
+
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -27,15 +29,26 @@ export class Login extends Component {
   }
 
   onSignIn(profile) {
-    if (profile && profile.email) {
-      if (!profile.email.endsWith("@resultadosdigitais.com.br") && !profile.email.endsWith("@magrathealabs.com") ) {
-        this.setState({ error: "E-mail inválido para este domínio." });
-        return;
-      }
+    var that = this;
 
-      this.matrixProfile.storeProfileData(profile);
-      this.goToOffice();
-    }
+     axios
+      .get("/checkemail?email="+profile.email)
+      .then(response => {
+        let validateResponse = response.data;
+
+        if(validateResponse.valid){
+          that.matrixProfile.storeProfileData(profile);
+          that.goToOffice();
+        }else{
+          that.setState({ error: "Invalid email for this office." });
+          return;
+        }
+
+      })
+      .catch(error => {
+        that.setState({ error: "Error on validate email!" });
+        console.log(error)
+      });
   }
 
   getBackgroundImage(isDark) {

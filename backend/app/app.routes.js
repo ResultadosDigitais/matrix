@@ -1,4 +1,6 @@
 import express from "express";
+import WhiteListDomainController from "./controllers/white.list.domain.controller";
+import { WHITELIST_DOMAINS } from "./app.config";
 
 const router = express.Router();
 
@@ -39,6 +41,20 @@ router.get("/office", (req, res) => {
 
 router.get("/rooms", (req, res) => {
   res.json(req.app.locals.roomsDetail);
+});
+
+router.get("/checkemail", (req, res) => {
+
+  let whiteListDomain = new WhiteListDomainController(WHITELIST_DOMAINS);
+
+  let email = req.query.email;
+  let isValid = whiteListDomain.isValidEmailInWhiteList(email);
+
+  const resCheckEmail = {
+    valid: isValid
+  };
+
+  res.json(resCheckEmail);
 });
 
 router.get("/morpheus*", (req, res) => {
