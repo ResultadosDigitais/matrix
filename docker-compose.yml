@@ -4,8 +4,5 @@ services:
     working_dir: /var/app
     ports:
      - '8080:8080'
-    volumes:
-      - .:/var/app
-    # entrypoint: 'sh /docker-entrypoint.sh npm run start'
     build:
       context: ./
