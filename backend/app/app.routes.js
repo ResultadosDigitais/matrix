@@ -1,10 +1,17 @@
 import express from "express";
+import passport from "passport";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("index");
-});
+router.get(
+  "/",
+  (req, res) => {
+    res.render("index", {
+      isAuthenticated: req.isAuthenticated(),
+      error: req.query.error,
+    });
+  },
+);
 
 router.get("/new", (req, res) => {
   const newRoom = {
@@ -43,6 +50,30 @@ router.get("/rooms", (req, res) => {
 
 router.get("/morpheus*", (req, res) => {
   res.render("morpheus");
+});
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
+);
+
+router.get(
+  "/auth/google/callback",
+  (req, res, next) => {
+    passport.authenticate("google", (err, profile) => {
+      if (err || !profile) {
+        const message = (err && err.message) || "Unknown error";
+        return res.redirect(`/?error=${encodeURIComponent(message)}`);
+      }
+
+      return res.redirect("/");
+    })(req, res, next);
+  },
+);
+
+router.get("/auth/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;
