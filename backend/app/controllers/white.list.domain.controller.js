@@ -8,7 +8,7 @@ class WhiteListDomainController {
   }
 
   isValidEmailInWhiteList(email){
-    if(this.whitelistDomains==""){
+    if (whiteListDomains.length == 0) {
     	return true;
     }
 
