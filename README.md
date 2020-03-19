@@ -95,7 +95,6 @@ The **#matrix** project has some environments that important to define.
 		GOOGLE_CLIENT_ID=${paste_your_client_id_here}
 		GOOGLE_SECRET={paste_your_secret_here}
 		GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
-		COOKIE_SESSION_MAX_AGE=2592000000
 
 2. You can define a white List of trusted email domains can enter in the **#matrix**
 
