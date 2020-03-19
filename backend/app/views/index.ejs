@@ -7,7 +7,9 @@
   <%- include('favicons'); %>
 </head>
 <body>
-   <div id="application"></div>
+  <div id="application"></div>
+  <input type="hidden" id="isAuthenticated" value="<%= isAuthenticated %>" />
+  <input type="hidden" id="error" value="<%= error %>" />
   <script src="https://apis.google.com/js/platform.js"></script>
   <script src="<%= assets.url('login.js') %>"></script>
 </body>

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import clsx from "clsx";
 
 import { Footer } from "./footer";
-import { LoginButton } from "./login-button";
 import { Logo } from "./logo";
 import { Title } from "./title";
 
@@ -13,16 +12,31 @@ import { isDarkTheme } from "../../morpheus/Themes";
 import "bootstrap/dist/css/bootstrap.css";
 
 import styles from "./login.module.css";
+import GoogleButton from "./google-button";
 
 export class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isDark: isDarkTheme()
+      isDark: isDarkTheme(),
+      error: null,
     };
 
     this.matrixProfile = new MatrixProfile();
+  }
+
+  componentDidMount() {
+    const error = document.getElementById("error").value;
+    const isAuthenticated = document.getElementById("isAuthenticated").value;
+
+    if (error) {
+      this.setState({ error });
+    }
+
+    if (isAuthenticated === "true") {
+      this.goToOffice();
+    }
   }
 
   onSignIn(profile) {
@@ -39,8 +53,12 @@ export class Login extends Component {
     window.location.href = "./morpheus";
   }
 
+  goToGoogleAuth() {
+    window.location.href = "./auth/google";
+  }
+
   render() {
-    const { isDark } = this.state;
+    const { isDark, error } = this.state;
     return (
       <div
         className={styles.auth_background}
@@ -54,10 +72,20 @@ export class Login extends Component {
               })}
             >
               <div className="row h-100 justify-content-center align-items-center">
-                <div className="col px-5">
+                <div className="col px-5 text-center">
                   <Logo />
                   <Title />
-                  <LoginButton onSignIn={profile => this.onSignIn(profile)} />
+                  <GoogleButton
+                    isDark={isDark}
+                    onClick={() => {
+                      this.goToGoogleAuth();
+                    }}
+                  />
+                  {error && (
+                    <p className={clsx("text-danger", styles.error)}>
+                      {error}
+                    </p>
+                  )}
                 </div>
                 <Footer />
               </div>
