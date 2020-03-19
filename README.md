@@ -108,6 +108,15 @@ The **#matrix** project has some environments that important to define.
 		   }
 		 ]
 
+### Environments Variables with docker
+If you intend to run Matrix with docker, is very simple to set the environment variables. Just needs create a file on root path of project called variables.env, like sample below:
+
+```
+GOOGLE_CREDENTIAL=XXXXXX.googleusercontent.com #Required to authenticate on matrix
+#ENFORCE_SSL=false
+#ROOMS_SOURCE=ENVIRONMENT
+#ROOMS_DATA=[{"id":"17755865-e0a6-4809-b389-eeff5590fd3d","name":"ValarDohaeris"},{"id":"490693fb-1751-498a-a23a-3785e677530c","name":"Osiris"},{"id":"da5eef6b-9e0c-4c32-81eb-17596114bf5b","name":"Icarus"},{"id":"e8ed1b89-afa9-469f-8108-e527b51c76a1","name":"Caduceus"},{"id":"bab0452c-bbfa-4365-b263-6aa9d26d8e33","name":"Brahma"},{"id":"706e8018-8e4e-40a2-a433-97535db6cc54","name":"Novalis"},{"id":"59008e8f-a961-4ad2-a2e4-b31b3e398a50","name":"Vigilant"},{"id":"2acbea57-64ba-4c55-9d20-042843c6e225","name":"Zion"}]
+```
 
 ### External Meet
 The default video conferencing in meetings is [Jitsi](https://jitsi.org/jitsi-meet/), but you can change that in any room, using [Meet](https://meet.google.com/) or [Zoom](https://zoom.us/). For that, you just need provide the parameter `externalMeetUrl` in your room config:
