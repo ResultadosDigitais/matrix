@@ -49,7 +49,7 @@ If you want run the **#matrix**, you need follow steps:
 
 2. We are using Google to authorizations, you need create a credential [here](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) you can follow step by step
 
-3. in the root create a file variables.env
+3. in the root create a file `variables.env`
 
 
 		GOOGLE_CLIENT_ID=000000000-xxxxxxxxxx.apps.googleusercontent.com
@@ -58,7 +58,7 @@ If you want run the **#matrix**, you need follow steps:
 		COOKIE_SESSION_SECRET=matrix-session
 		COOKIE_SESSION_MAX_AGE=2592000000
 		ENFORCE_SSL=false
-		WHITELIST_DOMAINS=[]
+		WHITELIST_DOMAINS="[]"
 
 
 4. Run application with docker compose:
@@ -95,8 +95,6 @@ The **#matrix** project has some environments that important to define.
 		GOOGLE_CLIENT_ID=${paste_your_client_id_here}
 		GOOGLE_SECRET={paste_your_secret_here}
 		GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
-		COOKIE_SESSION_SECRET=matrix-session
-		COOKIE_SESSION_MAX_AGE=2592000000
 
 2. You can define a white List of trusted email domains can enter in the **#matrix**
 
@@ -111,7 +109,7 @@ The **#matrix** project has some environments that important to define.
 
 		ROOMS_SOURCE=ENVIRONMENT
 
-5. There is a config that define the rooms of The **#matrix**, if you prefer you can generate the unique id per room [here](https://www.uuidgenerator.net), to define this:
+5. There is a config that define the rooms of The **#matrix**, If you want to customize your rooms or add and a new room, you have to configure a `ROOMS_SOURCE=ENVIRONMENT` and config `ROOMS_DATA` like the example:
 
 
 		ROOMS_DATA=[
@@ -145,7 +143,7 @@ The default video conferencing in meetings is [Jitsi](https://jitsi.org/jitsi-me
 
 
 # Running in Production
-If you will run in production we strongly recomend to you close your environmen using an internal VPN. In this solution everybody with the link and a valid google credential can enter in your virtual office. Because of this is important to you mantain your environment closed. Or you can define a variable `WHITELIST_DOMAINS` to limit only authorized users enter in the **#matrix**. 
+If you will run in production we strongly recommend you close your environment using an internal VPN. In this solution everybody with the link and a valid google credential can enter your virtual office. Because this is important for you to maintain your environment closed. Or you can define a variable `WHITELIST_DOMAINS` to limit only authorized users to enter in the **#matrix**. You have to choose a strong key to the `COOKIE_SESSION_SECRET` and have to put in `GOOGLE_CALLBACK_URL` your production domain.
 
 		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
 
