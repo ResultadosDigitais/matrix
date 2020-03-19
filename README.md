@@ -21,9 +21,10 @@ When we are working remotely there are no conversations like in a physical offic
 
 | Version | Name | Description | Docs |
 | --- | --- | --- | --- |
-| 1.0.0 | Neo | The one project | - |
-| 1.1.0 | Morpheus | New layout | [Pull request](https://github.com/ResultadosDigitais/matrix/pull/174) |
 | 2.0.0 | Seraph | New authentication | [Migration guide to 2.0.0](/docs/MIGRATION-TO-V2.md) |
+| 1.1.0 | Morpheus | New layout | [Pull request](https://github.com/ResultadosDigitais/matrix/pull/174) |
+| 1.0.0 | Neo | The one project | - |
+
 
 ## Authentication
 
