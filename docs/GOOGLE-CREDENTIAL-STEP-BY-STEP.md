@@ -44,8 +44,8 @@ You have to copy `Client ID` and `Client Secret` and set the environent variable
 
 
 ```
-GOOGLE_CLIENT_ID="00000000-xxxxxxxxxxxxx.apps.googleusercontent.com"
-GOOGLE_SECRET="g4xxxxxxxxxxxxxxxxxxss"
-GOOGLE_CALLBACK_URL="http://localhost:8080/auth/google/callback"
+GOOGLE_CLIENT_ID=00000000-xxxxxxxxxxxxx.apps.googleusercontent.com
+GOOGLE_SECRET=g4xxxxxxxxxxxxxxxxxxss
+GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
 ```
 
