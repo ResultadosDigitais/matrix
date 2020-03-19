@@ -1,0 +1,20 @@
+.GoogleButton {
+  display: inline-block;
+  background-image: url('/images/google-button/btn_google_signin_light_normal_web@2x.png');
+  background-size: contain;
+  width: 270px;
+  height: 65px;
+  cursor: pointer;
+}
+
+.GoogleButton:hover {
+  background-image: url('/images/google-button/btn_google_signin_light_pressed_web@2x.png');
+}
+
+.GoogleButtonDark {
+  background-image: url('/images/google-button/btn_google_signin_dark_normal_web@2x.png');
+}
+
+.GoogleButtonDark:hover {
+  background-image: url('/images/google-button/btn_google_signin_dark_pressed_web@2x.png');
+}

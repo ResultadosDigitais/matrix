@@ -1,25 +1,40 @@
 import express from "express";
+import cookieSession from "cookie-session";
+import bodyParser from "body-parser";
 import path from "path";
 import GoogleCredentialController from "./controllers/google.credentials.controller";
 import fetchRooms from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
+import auth from "./app.auth";
 import {
   ROOMS_SOURCE,
   ENVIRONMENT,
   GOOGLE_CREDENTIAL,
   ENFORCE_SSL,
   CUSTOM_STYLE,
+  COOKIE_SESSION_SECRET,
+  COOKIE_SESSION_MAX_AGE,
 } from "./app.config";
-
 
 const app = express();
 
 app.locals.CUSTOM_STYLE = CUSTOM_STYLE;
 
+app.use(cookieSession({
+  name: "matrix-session",
+  keys: [COOKIE_SESSION_SECRET],
+  maxAge: COOKIE_SESSION_MAX_AGE,
+}));
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // set the template engine ejs
 app.set("view engine", "ejs");
 app.set("views", "./app/views");
+
+// use passport session
+app.use(auth.initialize());
+app.use(auth.session());
 
 app.use("/", express.static(path.join(__dirname, "..", "..", "public")));
 
