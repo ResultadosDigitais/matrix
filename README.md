@@ -51,15 +51,15 @@ If you want run the **#matrix**, you need follow steps:
 
 3. in the root create a file variables.env
 
-```
-GOOGLE_CLIENT_ID="000000000-xxxxxxxxxx.apps.googleusercontent.com"
-GOOGLE_SECRET="gXXXXXXXXXXXXss"
-GOOGLE_CALLBACK_URL="http://localhost:8080/auth/google/callback"
-COOKIE_SESSION_SECRET: "matrix-session"
-COOKIE_SESSION_MAX_AGE: "2592000000"
-ENFORCE_SSL="false"
-WHITELIST_DOMAINS:[]
-```
+
+		GOOGLE_CLIENT_ID=000000000-xxxxxxxxxx.apps.googleusercontent.com
+		GOOGLE_SECRET=gXXXXXXXXXXXXss
+		GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
+		COOKIE_SESSION_SECRET:matrix-session
+		COOKIE_SESSION_MAX_AGE:2592000000
+		ENFORCE_SSL=false
+		WHITELIST_DOMAINS=[]
+
 
 4. Run application with docker compose:
 
