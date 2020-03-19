@@ -58,7 +58,7 @@ If you want run the **#matrix**, you need follow steps:
 		COOKIE_SESSION_SECRET=matrix-session
 		COOKIE_SESSION_MAX_AGE=2592000000
 		ENFORCE_SSL=false
-		WHITELIST_DOMAINS=[]
+		WHITELIST_DOMAINS="[]"
 
 
 4. Run application with docker compose:
