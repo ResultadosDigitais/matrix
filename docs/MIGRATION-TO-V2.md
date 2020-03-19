@@ -33,7 +33,7 @@ Now a session control is done to support Google authentication on the backend, y
 COOKIE_SESSION_SECRET=nebuchadnezzar
 COOKIE_SESSION_MAX_AGE=2592000000
 ```
-
+These values ​​are not required. The default values ​​are `matrix-session` and` 30 days` respectively
 ## Whitelist
 
 It's now possible to add domains from users' emails to restrict access through the environment variable:
