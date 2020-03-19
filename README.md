@@ -28,7 +28,7 @@ When we are working remotely there are no conversations like in a physical offic
 
 ## Authentication
 
-The login is so simple. You only need to create a google client id and configure the environment variable `GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com`. Follow [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) to configure your own google client key.
+The login is so simple. You only need to configure the Google API credentials following [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) .
 
 |                                 Login                                 |                                   Login in Dark Mode                                    |
 | :-------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
