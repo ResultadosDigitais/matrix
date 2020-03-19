@@ -25,6 +25,15 @@ To obtain the Google client id and secret just follow [this step by step](./GOOG
 
 In the callback URL you must put the domain where the project is hosted, followed by the context `/auth/google/callback`.
 
+## Session
+
+Now a session control is done to support Google authentication on the backend, you can change the secret and duration of the session by the environment variables:
+
+```
+COOKIE_SESSION_SECRET=nebuchadnezzar
+COOKIE_SESSION_MAX_AGE=2592000000
+```
+
 ## Whitelist
 
 It's now possible to add domains from users' emails to restrict access through the environment variable:
@@ -32,4 +41,3 @@ It's now possible to add domains from users' emails to restrict access through t
 ```
 WHITELIST_DOMAINS=["@resultadosdigitais.com.br", "@matrix.com"]
 ```
-
