@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import GoogleCredentialController from "./controllers/google.credentials.controller";
-import { fetchRooms } from "./controllers/rooms.controller";
+import Room from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
 import {
@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-fetchRooms(ROOMS_SOURCE)
+Room.fetchRooms(ROOMS_SOURCE)
   .then((roomsData) => {
     console.log(roomsData);
     app.locals.roomsDetail = roomsData;
