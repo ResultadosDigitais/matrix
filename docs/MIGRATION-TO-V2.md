@@ -37,7 +37,7 @@ These values ​​are not required. The default values ​​are `matrix-sessio
 ## Whitelist
 
 It's now possible to add domains from users' emails to restrict access through the environment variable:
-
+**Attention:** When you did not provide the `WHITELIST_DOMAINS` your matrix will be open for everyone use. Be sure that what you want
 ```
 WHITELIST_DOMAINS=["@resultadosdigitais.com.br", "@matrix.com"]
 ```
