@@ -1,4 +1,4 @@
-/* global gapi */
+import axios from "axios";
 
 import MatrixProfile from "../profile";
 import OfficeEvents from "../office-events";
@@ -87,11 +87,12 @@ export const emitInviteUser = userId => {
 export const signOut = () => {
   closeConnection();
 
-  const auth2 = gapi.auth2.getAuthInstance();
-
-  auth2.signOut().then(() => {
-    profile.terminate();
-    auth2.disconnect();
-    window.location.href = "./";
-  });
+  axios.post("/auth/logout")
+    .then(() => {
+      profile.terminate();
+      window.location.href = "./";
+    })
+    .catch((err) => {
+      window.location.href = `./?error=${err.message}`;
+    });
 };
