@@ -49,7 +49,7 @@ If you want run the **#matrix**, you need follow steps:
 
 2. We are using Google to authorizations, you need create a credential [here](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) you can follow step by step
 
-3. in the root create a file variables.env
+3. in the root create a file `variables.env`
 
 
 		GOOGLE_CLIENT_ID=000000000-xxxxxxxxxx.apps.googleusercontent.com
