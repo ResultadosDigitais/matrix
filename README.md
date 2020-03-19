@@ -17,9 +17,18 @@ When we are working remotely there are no conversations like in a physical offic
 
 ![Matrix Home Screenshot](docs/img/matrix-morpheus.png)
 
+## Versions
+
+| Version | Name | Description | Docs |
+| --- | --- | --- | --- |
+| 2.0.0 | Seraph | New authentication | [Migration guide to 2.0.0](/docs/MIGRATION-TO-V2.md) |
+| 1.1.0 | Morpheus | New layout | [Pull request](https://github.com/ResultadosDigitais/matrix/pull/174) |
+| 1.0.0 | Neo | The one project | - |
+
+
 ## Authentication
 
-The login is so simple. You only need to create a google client id and configure the environment variable `GOOGLE_CREDENTIAL=xxxxxxxxxxx.apps.googleusercontent.com`. Follow [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) to configure your own google client key.
+The login is so simple. You only need to configure the Google API credentials following [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) .
 
 |                                 Login                                 |                                   Login in Dark Mode                                    |
 | :-------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
