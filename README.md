@@ -111,7 +111,7 @@ The **#matrix** project has some environments that important to define.
 
 		ROOMS_SOURCE=ENVIRONMENT
 
-5. There is a config that define the rooms of The **#matrix**, If you want to customize your rooms or add and remove, you have to config a `ROOMS_SOURCE=ENVIRONMENT` and config `ROOMS_DATA` like the example:
+5. There is a config that define the rooms of The **#matrix**, If you want to customize your rooms or add and a new room, you have to configure a `ROOMS_SOURCE=ENVIRONMENT` and config `ROOMS_DATA` like the example:
 
 
 		ROOMS_DATA=[
