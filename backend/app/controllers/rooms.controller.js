@@ -65,4 +65,40 @@ const fetchRooms = (strategy) => {
   }
 };
 
-export default fetchRooms;
+const create = (req, res) => {
+  const newRoom = {
+    id: req.query.roomId,
+    name: req.query.roomName,
+    disableMeeting: false,
+    temporary: true,
+  };
+
+  const found = req.app.locals.roomsDetail.find(
+    element => element.id == req.query.roomId,
+  );
+
+  if (!found) {
+    req.app.locals.roomsDetail.splice(1, 0, newRoom);
+  }
+
+  res.redirect(`/morpheus/room/${req.query.roomId}`);
+};
+
+const remove = (req, res) => {
+  req.app.locals.roomsDetail = req.app.locals.roomsDetail.filter(
+    value => value.id !== req.query.roomId || value.temporary !== true,
+  );
+
+  res.redirect(`/office#${req.app.locals.roomsDetail[0].id}`);
+};
+
+const list = (req, res) => {
+  res.json(req.app.locals.roomsDetail);
+};
+
+export default {
+  list,
+  create,
+  remove,
+  fetchRooms,
+};

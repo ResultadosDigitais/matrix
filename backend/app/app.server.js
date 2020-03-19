@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import GoogleCredentialController from "./controllers/google.credentials.controller";
-import fetchRooms from "./controllers/rooms.controller";
+import { fetchRooms } from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
 import {
