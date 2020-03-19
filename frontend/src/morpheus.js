@@ -18,19 +18,35 @@ function renderApp() {
 }
 
 window.onload = () => {
-  const isAuthenticated = document.getElementById("isAuthenticated").value === "true";
-  const userString = document.getElementById("user").value;
-  const matrixProfile = new MatrixProfile();
+  gapi.load("auth2", () => {
+    gapi.auth2.init().then(
+      auth2 => {
+        if (!auth2.isSignedIn.get()) {
+          window.location.href = "/";
+          return;
+        }
 
-  if (!isAuthenticated) {
-    matrixProfile.terminate();
-    window.location.href = "/";
-    return;
-  }
+        const matrixProfile = new MatrixProfile();
 
-  const user = JSON.parse(userString);
+        if (!matrixProfile.isProfileStored()) {
+          const currentUser = auth2.currentUser.get();
+          const basicProfile = currentUser.getBasicProfile();
 
-  matrixProfile.storeProfileData(user);
+          const profileData = {
+            id: basicProfile.getId(),
+            name: basicProfile.getName(),
+            imageUrl: basicProfile.getImageUrl(),
+            email: basicProfile.getEmail()
+          };
 
-  renderApp();
+          matrixProfile.storeProfileData(profileData);
+        }
+
+        renderApp();
+      },
+      () => {
+        window.location.href = "/";
+      }
+    );
+  });
 };
