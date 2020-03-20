@@ -158,14 +158,14 @@ The default video conferencing in meetings is [Jitsi](https://jitsi.org/jitsi-me
 		 ]
 
 
-# Running in Production
+## Running in Production
 
 If you will run in production we strongly recommend you close your environment using an internal VPN. In this solution everybody with the link and a valid google credential can enter your virtual office. Because this is important for you to maintain your environment closed. Or you can define a variable `WHITELIST_DOMAINS` to limit only authorized users to enter in the **#matrix**. You have to choose a strong key to the `COOKIE_SESSION_SECRET` and have to put in `GOOGLE_CALLBACK_URL` your production domain.
 
 		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
 
 
-# Contributing
+## Contributing
 
 We encourage you to contribute to The **#matrix**!
 
