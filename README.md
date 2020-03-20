@@ -107,7 +107,7 @@ The **#matrix** project has some environment variables that important to define.
 		GOOGLE_SECRET={paste_your_secret_here}
 		GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
 
-- You can change the secret and 
+- You can change the secret and maximum age from session:
 
 		COOKIE_SESSION_SECRET=matrix-session
 		COOKIE_SESSION_MAX_AGE=2592000000
