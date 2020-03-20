@@ -22,11 +22,6 @@ export const adaptJitsiConfig = (roomId, parentNode, meetingSettings) => {
         // Enables experimental simulcast support on Firefox.
         enableFirefoxSimulcast: meetingSettings.enableFirefoxSimulcast
       }
-    },
-    interfaceConfigOverwrite: {
-      SHOW_JITSI_WATERMARK: true,
-      SHOW_WATERMARK_FOR_GUESTS: true,
-      SHOW_BRAND_WATERMARK: true
     }
   };
 
