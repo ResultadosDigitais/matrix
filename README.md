@@ -41,7 +41,6 @@ The embeded meet is provided by [meet.jit.si](https://meet.jit.si) service and t
 at [8x8](https://8x8.com). Access the [jitsi GitHub](https://github.com/jitsi/jitsi-meet#security) and learn more about this amazing video bridge service.     
 
 
-
 |                                Meeting Room                                |                                          With Sidebar                                           |
 | :------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
 | <img src="docs/img/matrix-meet-room.png" title="Office page" width="100%"> | <img src="docs/img/matrix-meet-room-sidebar.png" title="Office page with Sidebar" width="100%"> |
