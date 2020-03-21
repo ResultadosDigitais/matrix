@@ -72,7 +72,7 @@ router.get(
 
       req.session.currentUser = profile;
 
-      return res.redirect("/");
+      return res.redirect("/morpheus");
     })(req, res, next);
   },
 );
