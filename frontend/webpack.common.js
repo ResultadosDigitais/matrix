@@ -30,7 +30,6 @@ const getStyleLoader = cssOptions => [
 
 module.exports = {
   entry: {
-    office: `${sourcePath}/office.js`,
     login: `${sourcePath}/login-application.js`,
     morpheus: `${sourcePath}/morpheus.js`,
   },
@@ -39,10 +38,6 @@ module.exports = {
   },
   plugins: [
     new WebpackCleanupPlugin(),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-    }),
     new ManifestPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name]-[contenthash].css",

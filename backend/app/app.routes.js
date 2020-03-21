@@ -34,11 +34,7 @@ router.get("/remove", (req, res) => {
     value => value.id !== req.query.roomId || value.temporary !== true,
   );
 
-  res.redirect(`/office#${req.app.locals.roomsDetail[0].id}`);
-});
-
-router.get("/office", (req, res) => {
-  res.render("office");
+  res.redirect(`/morpheus/office/${req.app.locals.roomsDetail[0].id}`);
 });
 
 router.get("/rooms", (req, res) => {
