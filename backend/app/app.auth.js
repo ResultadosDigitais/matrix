@@ -48,10 +48,16 @@ const auth = {
     return req.user;
   },
 
-  authenticate() {
+  authenticate(opts) {
+    const { loginURL = null } = opts || {};
+
     return (req, resp, next) => {
       if (this.isUserLoggedIn(req)) {
         return next();
+      }
+
+      if (loginURL) {
+        return resp.status(401).redirect(loginURL);
       }
 
       resp.sendStatus(401);

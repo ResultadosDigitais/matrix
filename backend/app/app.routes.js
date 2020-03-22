@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   if (auth.isUserLoggedIn(req)) {
-    res.redirect("/morpheus");
+    return res.redirect("/morpheus");
   }
 
   return res.render("index", { error: req.query.error });
 });
 
-router.get("/new", auth.authenticate(), (req, res) => {
+router.get("/new", auth.authenticate({ loginURL: "/" }), (req, res) => {
   const newRoom = {
     id: req.query.roomId,
     name: req.query.roomName,
@@ -31,7 +31,7 @@ router.get("/new", auth.authenticate(), (req, res) => {
   res.redirect(`/morpheus/room/${req.query.roomId}`);
 });
 
-router.get("/remove", auth.authenticate(), (req, res) => {
+router.get("/remove", auth.authenticate({ loginURL: "/ " }), (req, res) => {
   req.app.locals.roomsDetail = req.app.locals.roomsDetail.filter(
     value => value.id !== req.query.roomId || value.temporary !== true
   );
@@ -43,7 +43,7 @@ router.get("/rooms", auth.authenticate(), (req, res) => {
   res.json(req.app.locals.roomsDetail);
 });
 
-router.get("/morpheus*", auth.authenticate(), (req, res) => {
+router.get("/morpheus*", auth.authenticate({ loginURL: "/" }), (req, res) => {
   const userString = JSON.stringify(auth.currentUser(req));
 
   res.render("morpheus", { userString });
@@ -62,7 +62,7 @@ router.get("/auth/google/callback", (req, res, next) => {
     }
 
     auth
-      .login(profile)
+      .login(req, profile)
       .then(user => res.redirect("/"))
       .catch(err => next(err));
   })(req, res, next);
