@@ -14,7 +14,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import styles from "./login.module.css";
 import GoogleButton from "./google-button";
 
-export default function Login() {
+export function Login() {
   const [error, setError] = useState(null);
   const isDark = isDarkTheme();
 
