@@ -11,15 +11,6 @@ describe("Unit testing the / route", () => {
         assert.equal(response.status, 200);
       }));
 
-  it("should there is <meta> google-signin-client_id on rendering", () =>
-    request(app)
-      .get("/")
-      .then(response => {
-        expect(response.text).to.contain(
-          '<meta name="google-signin-client_id" content="">'
-        );
-      }));
-
   it("should there is an element with id='application' to render react app", () =>
     request(app)
       .get("/")
