@@ -9,7 +9,7 @@ passport.use(
     {
       clientID: config.GOOGLE_CLIENT_ID,
       clientSecret: config.GOOGLE_SECRET,
-      callbackURL: config.GOOGLE_CALLBACK_URL,
+      callbackURL: config.GOOGLE_CALLBACK_URL
     },
     (accessToken, refreshToken, profile, cb) => {
       const user = security.adaptGoogleUser(profile);
@@ -19,8 +19,8 @@ passport.use(
       }
 
       return cb(undefined, user);
-    },
-  ),
+    }
+  )
 );
 
 passport.serializeUser((user, done) => {
@@ -32,8 +32,47 @@ passport.deserializeUser((user, done) => {
 });
 
 const auth = {
-  initialize: () => passport.initialize(),
-  session: () => passport.session(),
+  initialize() {
+    return passport.initialize();
+  },
+
+  session() {
+    return passport.session();
+  },
+
+  isUserLogged(req) {
+    return !!this.currentUser(req);
+  },
+
+  currentUser(req) {
+    return req.user;
+  },
+
+  authenticate() {
+    return (req, resp, next) => {
+      if (this.isUserLogged(req)) {
+        return next();
+      }
+
+      resp.sendStatus(401);
+    };
+  },
+
+  login(req, user) {
+    return new Promise((success, reject) => {
+      req.login(user, err => {
+        if (err) {
+          return reject(err);
+        }
+
+        success(user);
+      });
+    });
+  },
+
+  logout(req) {
+    req.logout();
+  }
 };
 
 module.exports = auth;
