@@ -2,7 +2,6 @@ import express from "express";
 import cookieSession from "cookie-session";
 import bodyParser from "body-parser";
 import path from "path";
-import GoogleCredentialController from "./controllers/google.credentials.controller";
 import fetchRooms from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
@@ -37,9 +36,6 @@ app.use(auth.initialize());
 app.use(auth.session());
 
 app.use("/", express.static(path.join(__dirname, "..", "..", "public")));
-
-// FIX ME: here we have to get the google APIkey in another way.
-app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 const assetsManifestFile = path.join(
   __dirname,
