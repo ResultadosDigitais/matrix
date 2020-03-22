@@ -40,7 +40,7 @@ const auth = {
     return passport.session();
   },
 
-  isUserLogged(req) {
+  isUserLoggedIn(req) {
     return !!this.currentUser(req);
   },
 
@@ -50,7 +50,7 @@ const auth = {
 
   authenticate() {
     return (req, resp, next) => {
-      if (this.isUserLogged(req)) {
+      if (this.isUserLoggedIn(req)) {
         return next();
       }
 
