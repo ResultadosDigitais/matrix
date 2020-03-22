@@ -15,8 +15,8 @@ import styles from "./login.module.css";
 import GoogleButton from "./google-button";
 
 export default function Login() {
-  const [isDark, setDark] = useState(isDarkTheme());
   const [error, setError] = useState(null);
+  const isDark = isDarkTheme();
 
   useEffect(() => {
     const err = document.getElementById("error").value;
