@@ -1,25 +1,27 @@
 import express from "express";
+import auth from "./app.auth";
 import passport from "passport";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index", {
-    isAuthenticated: !!req.session.currentUser,
-    error: req.query.error,
-  });
+  if (auth.isUserLoggedIn(req)) {
+    res.redirect("/morpheus");
+  }
+
+  return res.render("index", { error: req.query.error });
 });
 
-router.get("/new", (req, res) => {
+router.get("/new", auth.authenticate(), (req, res) => {
   const newRoom = {
     id: req.query.roomId,
     name: req.query.roomName,
     disableMeeting: false,
-    temporary: true,
+    temporary: true
   };
 
   const found = req.app.locals.roomsDetail.find(
-    element => element.id == req.query.roomId,
+    element => element.id == req.query.roomId
   );
 
   if (!found) {
@@ -29,57 +31,45 @@ router.get("/new", (req, res) => {
   res.redirect(`/morpheus/room/${req.query.roomId}`);
 });
 
-router.get("/remove", (req, res) => {
+router.get("/remove", auth.authenticate(), (req, res) => {
   req.app.locals.roomsDetail = req.app.locals.roomsDetail.filter(
-    value => value.id !== req.query.roomId || value.temporary !== true,
+    value => value.id !== req.query.roomId || value.temporary !== true
   );
 
   res.redirect(`/morpheus/office/${req.app.locals.roomsDetail[0].id}`);
 });
 
-router.get("/rooms", (req, res) => {
+router.get("/rooms", auth.authenticate(), (req, res) => {
   res.json(req.app.locals.roomsDetail);
 });
 
-router.get("/morpheus*", (req, res) => {
-  const { currentUser } = req.session;
-  const isAuthenticated = !!currentUser;
-  let userString = "";
+router.get("/morpheus*", auth.authenticate(), (req, res) => {
+  const userString = JSON.stringify(auth.currentUser(req));
 
-  if (isAuthenticated) {
-    userString = JSON.stringify(currentUser);
-  }
-
-  res.render("morpheus", {
-    isAuthenticated,
-    userString,
-  });
+  res.render("morpheus", { userString });
 });
 
 router.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] }),
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-router.get(
-  "/auth/google/callback",
-  (req, res, next) => {
-    passport.authenticate("google", (err, profile) => {
-      if (err || !profile) {
-        const message = (err && err.message) || "Unknown error";
-        return res.redirect(`/?error=${encodeURIComponent(message)}`);
-      }
+router.get("/auth/google/callback", (req, res, next) => {
+  passport.authenticate("google", (err, profile) => {
+    if (err || !profile) {
+      const message = (err && err.message) || "Unknown error";
+      return res.redirect(`/?error=${encodeURIComponent(message)}`);
+    }
 
-      req.session.currentUser = profile;
-
-      return res.redirect("/morpheus");
-    })(req, res, next);
-  },
-);
+    auth
+      .login(profile)
+      .then(user => res.redirect("/"))
+      .catch(err => next(err));
+  })(req, res, next);
+});
 
 router.post("/auth/logout", (req, res) => {
-  req.session.currentUser = null;
-  req.logout();
+  auth.logout(req);
   res.redirect("/");
 });
 
