@@ -14,7 +14,7 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
-    "nodemon": "^1.19.1",
+    "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "socket.io": "^2.2.0"
