@@ -11,12 +11,21 @@ import NotificationImportant from "@material-ui/icons/NotificationImportant";
 import {
   isNotificationEnabled,
   isNotificationBlocked,
+  browserHasSupport,
   requestPermissionToNotify
 } from "../notification";
 import { showMessageDialog } from "../morpheus/store/actions";
 
 const NotificationCheckbox = ({ onChange, openMessageDialog, isDisabled }) => {
   const [isAllowed, toggleAllowed] = useState(isNotificationEnabled());
+
+  if (!browserHasSupport()) {
+    return (
+      <Tooltip title="This browser doesn't support notifications">
+        <NotificationsOff />
+      </Tooltip>
+    );
+  }
 
   if (!isAllowed) {
     return (
