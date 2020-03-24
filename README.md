@@ -43,7 +43,7 @@ The inside of **#matrix** there are some rooms. In this rooms is possible to see
 | <img src="docs/img/matrix-rooms.png" title="Office page" width="100%"> | <img src="docs/img/matrix-online.png" title="Office page with Sidebar" width="100%"> |
 
 ### Availability And Meetings
-**#matrix** is a virtual environment office, so you can show you are available to show for the other on enter in a room through the `ENTER ROOM` button, it's like "Hey, I am here in the office".
+**#matrix** is a virtual environment office, so you can show you are available for the other on enter in a room through the `ENTER ROOM` button. This is like "Hey, I am here in the office".
 Or you can enter in a meeting through the button `ENTER MEETING`. 
 
 The embeded meet is provided by [meet.jit.si](https://meet.jit.si) service and this service is maintained by the [Jitsi team](https://jitsi.org/the-community/#meet-our-team)
@@ -109,7 +109,7 @@ The embeded meet is provided by [meet.jit.si](https://meet.jit.si) service, but 
 		   {
 		      "id":"${UUID}",
 		      "name":"Meeting External",
-			  "externalMeetUrl": "https://external-url-room/key-room"
+		      "externalMeetUrl": "https://external-url-room/key-room"
 		   }
 		 ]
 ### Authentication
@@ -185,7 +185,7 @@ There are several ways to get in touch with us:
 
 * Open an issue at: https://github.com/ResultadosDigitais/matrix/issues
 * See questions on Stackoverflow using tags: https://stackoverflow.com/questions/tagged/hash-matrix
-* Chat with us on: http://hash-matrix.slack.com/ ((Invite here)[https://join.slack.com/t/hash-matrix/shared_invite/zt-cwglw6te-kMlJiimq7qn4WeSTiv91og])
+* Chat with us on: http://hash-matrix.slack.com/ ([Invite here](https://join.slack.com/t/hash-matrix/shared_invite/zt-cwglw6te-kMlJiimq7qn4WeSTiv91og))
 
 ## License
 
