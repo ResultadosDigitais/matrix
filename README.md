@@ -81,14 +81,14 @@ If you want run the **#matrix**, you need follow steps:
 
 If you prefer, you can run **#matrix** on GCP:
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix&revision=gcp-deploy-button)
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix/tree/0.1.0)
 
 
 ## On Heroku
 
 If you prefer, you can run **#matrix** in Heroku: 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix/tree/0.1.0)
 
 
 ## Environment Variables

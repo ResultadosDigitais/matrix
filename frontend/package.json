@@ -47,5 +47,6 @@
     "webpack-cli": "^3.3.8",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "version": "0.1.0"
 }
