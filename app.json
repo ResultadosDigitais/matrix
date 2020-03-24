@@ -3,7 +3,6 @@
   "description": "Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment",
   "repository": "https://github.com/ResultadosDigitais/matrix",
   "keywords": ["online workspace", "virtual office", "remote teams"],
-  "stack": "container",
   "env": {
     "GOOGLE_CLIENT_ID": {
       "description": "Google Client Id to the OAuth authentication",
