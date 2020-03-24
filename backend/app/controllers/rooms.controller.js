@@ -55,7 +55,7 @@ const fetchFromEnvironment = (env) => {
   return new Promise(resolve => resolve(roomsDetail));
 };
 
-const fetchRooms = (strategy) => {
+const fetchAll = (strategy) => {
   switch (strategy) {
     // TODO add suport to fetch from endpoint
     case "ENVIRONMENT":
@@ -100,5 +100,5 @@ export default {
   list,
   create,
   remove,
-  fetchRooms,
+  fetchAll,
 };

@@ -70,7 +70,7 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-Room.fetchRooms(ROOMS_SOURCE)
+Room.fetchAll(ROOMS_SOURCE)
   .then((roomsData) => {
     console.log(roomsData);
     app.locals.roomsDetail = roomsData;
