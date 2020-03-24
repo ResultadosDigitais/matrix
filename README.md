@@ -5,9 +5,10 @@
 <p align="center">
   <a href="https://codeclimate.com/github/ResultadosDigitais/matrix/maintainability"><img src="https://api.codeclimate.com/v1/badges/a41e6e73f69c94d8b9c5/maintainability" /></a>
   <a href="https://circleci.com/gh/ResultadosDigitais/matrix"><img alt="CircleCI Status" src="https://img.shields.io/circleci/project/github/babel/babel/master.svg?label=CircleCI&maxAge=43200"></a>
+  <a href="http://hash-matrix.slack.com/"><img alt="Slack" src="https://img.shields.io/badge/slack-@oresoftware?logo=slack"></a>
 </p>
 
-# Welcome to **#matrix**
+## Welcome to the **#matrix**
 
 The objective of **#matrix** project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
 
@@ -18,21 +19,24 @@ When we are working remotely there are no conversations like in a physical offic
 ![Matrix Home Screenshot](docs/img/matrix-morpheus.png)
 
 ## Table of Contents
-1. [Understanding #matrix](#Understanding-#matrix)
-   1. [Rooms](#Rooms)
-   2. [Availability And Meetings](#Availability-And-Meetings)
-2. [Installation](#Installation)
-   1. [Environment Variables](#Environment-Variables)    
-   2. [Authentication](#Authentication)       
-   3. [Docker Compose](#Docker-Compose)
-   4. [On GCP](#On-GCP)
-   5. [On Heroku](#On-Heroku)
-   6. [Production concerns](#Production-concerns)
-3. [Versions](#Versions)
-4. [Contributing](#Contributing)
-5. [Frequently Asked Questions](#Frequently-Asked-Questions)
-6. [Get in Touch](#Get-in-Touch)
-7. [License](#License)
+- [Welcome to the **#matrix**](#welcome-to-the-matrix)
+- [Table of Contents](#table-of-contents)
+- [Understanding #matrix](#understanding-matrix)
+	- [Rooms](#rooms)
+	- [Availability And Meetings](#availability-and-meetings)
+- [Installation](#installation)
+	- [Environment Variables](#environment-variables)
+		- [External Meet](#external-meet)
+	- [Authentication](#authentication)
+	- [Docker Compose](#docker-compose)
+	- [On GCP](#on-gcp)
+	- [On Heroku](#on-heroku)
+	- [Production concerns](#production-concerns)
+- [Versions](#versions)
+- [Contributing](#contributing)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Get in Touch](#get-in-touch)
+- [License](#license)
 
 ## Understanding #matrix
 ### Rooms
@@ -181,6 +185,7 @@ Some questions come up over and over again. Check here first:
 [FAQ](docs/faq.md)
 
 ## Get in Touch
+
 There are several ways to get in touch with us:
 
 * Open an issue at: https://github.com/ResultadosDigitais/matrix/issues
