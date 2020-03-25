@@ -5,7 +5,7 @@
 <p align="center">
   <a href="https://codeclimate.com/github/ResultadosDigitais/matrix/maintainability"><img src="https://api.codeclimate.com/v1/badges/a41e6e73f69c94d8b9c5/maintainability" /></a>
   <a href="https://circleci.com/gh/ResultadosDigitais/matrix"><img alt="CircleCI Status" src="https://img.shields.io/circleci/project/github/babel/babel/master.svg?label=CircleCI&maxAge=43200"></a>
-  <a href="http://hash-matrix.slack.com/"><img alt="Slack" src="https://img.shields.io/badge/slack-@oresoftware?logo=slack"></a>
+  <a href="http://hash-matrix.slack.com/"><img alt="chat on Slack" src="https://img.shields.io/badge/Slack-chat%20with%20us-blue?logo=slack"></a>
 </p>
 
 ## Welcome to the **#matrix**
@@ -150,7 +150,9 @@ If you want run the **#matrix**, you need [docker-compose](https://docs.docker.c
 
 If you prefer, you can run **#matrix** on GCP:
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix&revision=gcp-deploy-button)
+<a href="https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix&revision=gcp-deploy-button">
+<img alt="Run on Google Cloud" src="https://deploy.cloud.run/button.svg" style="max-width:200px"  />
+</a>
 
 ### On Heroku
 
@@ -196,4 +198,4 @@ There are several ways to get in touch with us:
 
 The **#matrix** is released under the [MIT License](docs/LICENSE)
 
-`"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."`
+> "The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."
