@@ -31,6 +31,7 @@ When we are working remotely there are no conversations like in a physical offic
 	- [Docker Compose](#docker-compose)
 	- [On GCP](#on-gcp)
 	- [On Heroku](#on-heroku)
+	- [On Kubernetes](#on-kubernetes)
 	- [Production concerns](#production-concerns)
 - [Versions](#versions)
 - [Contributing](#contributing)
@@ -40,7 +41,7 @@ When we are working remotely there are no conversations like in a physical offic
 
 ## Understanding #matrix
 ### Rooms
-The inside of **#matrix** there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)  
+The inside of **#matrix** there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)
 
 |                              Office Page                               |                                     With Sidebar                                     |
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
@@ -48,7 +49,7 @@ The inside of **#matrix** there are some rooms. In this rooms is possible to see
 
 ### Availability And Meetings
 **#matrix** is a virtual environment office, so you can show you are available for the other on enter in a room through the `ENTER ROOM` button. This is like "Hey, I am here in the office".
-Or you can enter in a meeting through the button `ENTER MEETING`. 
+Or you can enter in a meeting through the button `ENTER MEETING`.
 
 The embeded meet is provided by [meet.jit.si](https://meet.jit.si) service and this service is maintained by the [Jitsi team](https://jitsi.org/the-community/#meet-our-team)
 at [8x8](https://8x8.com). Access the [jitsi GitHub](https://github.com/jitsi/jitsi-meet#security) and learn more about this amazing video bridge service. You can change that using [external meet option](#External-Meet) in any room.
@@ -123,7 +124,7 @@ The login is so simple. You only need to configure the Google API credentials fo
 |                                 Login                                 |                                   Login in Dark Mode                                    |
 | :-------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
 | <img src="docs/img/matrix-login.png" title="Login page" width="100%"> | <img src="docs/img/matrix-dark-login.png" title="Login page in Dark Mode" width="100%"> |
-		
+
 ### Docker Compose
 
 If you want run the **#matrix**, you need [docker-compose](https://docs.docker.com/compose/) and follow steps:
@@ -138,7 +139,7 @@ If you want run the **#matrix**, you need [docker-compose](https://docs.docker.c
 
 		$ docker-compose up
 
-5. Open your browser and access: 
+5. Open your browser and access:
 
 		http://localhost:8080/
 
@@ -146,7 +147,7 @@ If you want run the **#matrix**, you need [docker-compose](https://docs.docker.c
 
 		$ docker-compose down
 
-### On GCP 
+### On GCP
 
 If you prefer, you can run **#matrix** on GCP:
 
@@ -156,9 +157,35 @@ If you prefer, you can run **#matrix** on GCP:
 
 ### On Heroku
 
-If you prefer, you can run **#matrix** in Heroku: 
+If you prefer, you can run **#matrix** in Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ResultadosDigitais/matrix)
+
+### On Kubernetes
+
+It is possible to run **#matrix** on Kubernetes, what you need to have is a running cluster and a Docker repository to fetch image from.
+
+Example files can be found in `docs/kubernetes/`. Copy the files and follow the instructions bellow:
+
+1. Change the values for `MATRIX_IMG` and `MATRIX_TAG` in deployment.yaml
+2. Adjust the `GOOGLE_CALLBACK_URL`
+3. Add your Google Credentials in `credentials.env` and create the secret with
+   ```bash
+	kubectl create secret generic matrix-credentials --from-env-file=env_credentials
+	```
+4. Create you `rooms.json` file and create a config map with
+	```bash
+	kubectl create configmap matrix-rooms --from-file=rooms.json
+	```
+5. Apply the services and deployment files
+	```bash
+	kubectl apply -f deployment.yaml
+	kubectl apply -f service.yaml
+	```
+
+Currently the service is using a LoadBalancer, it is possible to change to ClusterIP and use it behind an Ingress as well. Also note that in the example we are using HTTP, it is highly recommended to use HTTPS instead!
+
+If you are using HTTPS, do change `ENFORCE_SSL` to `true` and add your company domain to `WHITELIST_DOMAINS`.
 
 ### Production concerns
 

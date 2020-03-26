@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: matrix
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: matrix
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: matrix
+        image: MATRIX_IMG:MATRIX_TAG
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: 150Mi
+          requests:
+            cpu: "0.1"
+            memory: 150Mi
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+          - containerPort: 8080
+        env:
+        - name: ENFORCE_SSL
+          value: "false"
+        - name: WHITELIST_DOMAINS
+          value: "[]"
+        - name: GOOGLE_CALLBACK_URL
+          value: "http://<YOUR_URL_HERE>/auth/google/callback"
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: matrix-credentials
+              key: GOOGLE_CLIENT_ID
+        - name: GOOGLE_CREDENTIAL
+          valueFrom:
+            secretKeyRef:
+              name: matrix-credentials
+              key: GOOGLE_CLIENT_ID
+        - name: GOOGLE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: matrix-credentials
+              key: GOOGLE_SECRET
+        volumeMounts:
+        - name: matrix-rooms
+          mountPath: "/var/app/file/matrix.room.web.json"
+          subPath: rooms.json
+      volumes:
+      - name: matrix-rooms
+        configMap:
+          name: matrix-rooms
