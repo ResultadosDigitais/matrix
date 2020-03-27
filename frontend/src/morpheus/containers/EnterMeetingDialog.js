@@ -31,7 +31,7 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
       <Divider />
       <DialogContent className={classes.content}>
         <DialogContentText id="alert-dialog-description">
-          Enter the meeting with:
+        Entrar na sala com:
         </DialogContentText>
         <Grid justify="center" spacing={3} container>
           <BaseMeetingSettings
@@ -52,10 +52,10 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
       <Divider />
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          Cancel
+        Cancelar
         </Button>
         <Button onClick={onConfirm} color="primary" autoFocus>
-          Enter
+        Entrar
         </Button>
       </DialogActions>
     </Dialog>

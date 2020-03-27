@@ -22,7 +22,7 @@ const Loading = () => {
     <div className={classes.root}>
       <CircularProgress className={classes.progress} />
       <Typography variant="h5" color="primary">
-        Loading...
+        Carregando...
       </Typography>
     </div>
   );
