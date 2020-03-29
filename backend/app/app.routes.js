@@ -1,76 +1,102 @@
 import express from "express";
-import auth from "./app.auth";
-import passport from "passport";
+import authenticate from "./middlewares/authenticate";
+import {
+  authStrategy,
+  authenticationHandler,
+  authenticationCallbackHandler,
+  currentUser,
+  login,
+  logout,
+  isUserLoggedIn
+} from "./services/auth";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  if (auth.isUserLoggedIn(req)) {
-    return res.redirect("/morpheus");
+const routes = {
+  loginPath: "/",
+  logoutPath: "/auth/logout",
+  createRoomPath: "/new",
+  removeRoomPath: "/remove",
+  listRoomsPath: "/rooms",
+  officePath: id => `/morpheus/office/${id}`,
+  roomPath: id => `/morpheus/room/${id}`,
+  homePath: "/morpheus/",
+  loginStrategyPath: `/auth/${authStrategy}`,
+  loginStrategyCallbackPath: `/auth/${authStrategy}/callback`
+};
+
+router.get(routes.loginPath, (req, res) => {
+  if (isUserLoggedIn(req)) {
+    return res.redirect(routes.homePath);
   }
 
   return res.render("index", { error: req.query.error });
 });
 
-router.get("/new", auth.authenticate({ loginURL: "/" }), (req, res) => {
-  const newRoom = {
-    id: req.query.roomId,
-    name: req.query.roomName,
-    disableMeeting: false,
-    temporary: true
-  };
+router.get(
+  routes.createRoomPath,
+  authenticate({ loginPath: routes.loginPath }),
+  (req, res) => {
+    const newRoom = {
+      id: req.query.roomId,
+      name: req.query.roomName,
+      disableMeeting: false,
+      temporary: true
+    };
 
-  const found = req.app.locals.roomsDetail.find(
-    element => element.id == req.query.roomId
-  );
+    const found = req.app.locals.roomsDetail.find(
+      element => element.id == req.query.roomId
+    );
 
-  if (!found) {
-    req.app.locals.roomsDetail.splice(1, 0, newRoom);
+    if (!found) {
+      req.app.locals.roomsDetail.splice(1, 0, newRoom);
+    }
+
+    res.redirect(routes.roomPath(req.query.roomId));
   }
+);
 
-  res.redirect(`/morpheus/room/${req.query.roomId}`);
-});
+router.get(
+  routes.removeRoomPath,
+  authenticate({ loginPath: routes.loginPath }),
+  (req, res) => {
+    req.app.locals.roomsDetail = req.app.locals.roomsDetail.filter(
+      value => value.id !== req.query.roomId || value.temporary !== true
+    );
 
-router.get("/remove", auth.authenticate({ loginURL: "/ " }), (req, res) => {
-  req.app.locals.roomsDetail = req.app.locals.roomsDetail.filter(
-    value => value.id !== req.query.roomId || value.temporary !== true
-  );
+    const defaultRoom = req.app.locals.roomsDetail[0].id;
 
-  res.redirect(`/morpheus/office/${req.app.locals.roomsDetail[0].id}`);
-});
+    res.redirect(routes.officePath(defaultRoom));
+  }
+);
 
-router.get("/rooms", auth.authenticate(), (req, res) => {
+router.get(routes.listRoomsPath, authenticate(), (req, res) => {
   res.json(req.app.locals.roomsDetail);
 });
 
-router.get("/morpheus*", auth.authenticate({ loginURL: "/" }), (req, res) => {
-  const userString = JSON.stringify(auth.currentUser(req));
-
-  res.render("morpheus", { userString });
-});
-
 router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  `${routes.homePath}*`,
+  authenticate({ loginPath: routes.loginPath }),
+  (req, res) => {
+    const userString = JSON.stringify(currentUser(req));
+
+    res.render("morpheus", { userString });
+  }
 );
 
-router.get("/auth/google/callback", (req, res, next) => {
-  passport.authenticate("google", (err, profile) => {
-    if (err || !profile) {
-      const message = (err && err.message) || "Unknown error";
-      return res.redirect(`/?error=${encodeURIComponent(message)}`);
-    }
+router.get(routes.loginStrategyPath, authenticationHandler());
 
-    auth
-      .login(req, profile)
-      .then(user => res.redirect("/"))
-      .catch(err => next(err));
-  })(req, res, next);
+router.get(
+  routes.loginStrategyCallbackPath,
+  authenticationCallbackHandler({
+    successRedirect: routes.homePath,
+    failureRedirect: routes.loginPath
+  })
+);
+
+router.post(routes.logoutPath, (req, res) => {
+  logout(req);
+  res.redirect(routes.loginPath);
 });
 
-router.post("/auth/logout", (req, res) => {
-  auth.logout(req);
-  res.redirect("/");
-});
-
-module.exports = router;
+export default router;
