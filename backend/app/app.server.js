@@ -7,7 +7,9 @@ import morgan from "morgan"
 import fetchRooms from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
-import auth from "./app.auth";
+
+import { setupAppAuth } from "./services/auth";
+
 import {
   getRoomsSource,
   getCustomStyle,
@@ -28,9 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", "./app/views");
 
-// use passport session
-app.use(auth.initialize());
-app.use(auth.session());
+// use authentication
+setupAppAuth(app);
 
 app.use("/", express.static(path.join(__dirname, "..", "..", "public")));
 

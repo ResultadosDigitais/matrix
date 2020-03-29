@@ -15,8 +15,11 @@ function googleProfileToMatrixProfile(profile) {
   };
 }
 
-export function buildAuthStrategy({ clientID, clientSecret, callbackURL }, isAuthorized) {
-  return new Strategy(
+export function buildAuthStrategy(
+  { clientID, clientSecret, callbackURL },
+  isAuthorized
+) {
+  return new GoogleOAuth(
     { clientID, clientSecret, callbackURL },
 
     (accessToken, refreshToken, googleProfile, cb) => {
