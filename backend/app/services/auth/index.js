@@ -1,9 +1,15 @@
 import passport from "passport";
 import GooglePassport from "passport-google-oauth20";
 
-import { authConfig  } from "../app.config";
+import { authConfig, allowedDomains } from "../app.config";
+
+import { domainAuthorization } from "./authorization"
+
 
 import security from "./helpers/security";
+
+
+const isAuthorized = domainAuthorization(allowedDomains)
 
 passport.use(
   new GooglePassport.Strategy(
@@ -11,7 +17,7 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       const user = security.adaptGoogleUser(profile);
 
-      if (!security.hasValidEmailDomain(user.email)) {
+      if (!isAuthorized(user)) {
         return cb(new Error(`E-mail "${user.email}" has invalid domain.`));
       }
 

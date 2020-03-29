@@ -28,4 +28,8 @@ export function authConfig() {
   };
 }
 
+export function allowedDomain() {
+  return config.WHITELIST_DOMAINS;
+}
+
 export default config;
