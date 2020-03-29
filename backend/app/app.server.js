@@ -2,6 +2,8 @@ import express from "express";
 import cookieSession from "cookie-session";
 import bodyParser from "body-parser";
 import path from "path";
+import morgan from "morgan"
+
 import fetchRooms from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
