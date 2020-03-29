@@ -8,12 +8,13 @@
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;"
   },
   "dependencies": {
+    "@godaddy/terminus": "^4.3.1",
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
-    "@godaddy/terminus": "^4.3.1",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
@@ -23,6 +24,7 @@
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/preset-env": "^7.4.3",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
