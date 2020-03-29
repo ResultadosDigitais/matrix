@@ -1,16 +1,13 @@
 import passport from "passport";
 import GooglePassport from "passport-google-oauth20";
 
-import config from "./app.config";
+import { authConfig  } from "../app.config";
+
 import security from "./helpers/security";
 
 passport.use(
   new GooglePassport.Strategy(
-    {
-      clientID: config.GOOGLE_CLIENT_ID,
-      clientSecret: config.GOOGLE_SECRET,
-      callbackURL: config.GOOGLE_CALLBACK_URL
-    },
+    authConfig(),
     (accessToken, refreshToken, profile, cb) => {
       const user = security.adaptGoogleUser(profile);
 
