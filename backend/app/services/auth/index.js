@@ -1,5 +1,4 @@
 import passport from "passport";
-import GooglePassport from "passport-google-oauth20";
 
 import { authConfig, allowedDomains } from "../app.config";
 
@@ -12,54 +11,47 @@ passport.use(buildAuthStrategy(authConfig(), isAuthorized));
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-const auth = {
-  initialize() {
-    return passport.initialize();
-  },
+export function setupAppAuth(app) {
+  app.use(passport.initialize());
+  app.use(passport.session());
+}
 
-  session() {
-    return passport.session();
-  },
+export function currentUser(req) {
+  return req.user;
+}
 
-  isUserLoggedIn(req) {
-    return !!this.currentUser(req);
-  },
+export function isUserLoggedIn(req) {
+  return !!this.currentUser(req);
+}
 
-  currentUser(req) {
-    return req.user;
-  },
+export function authenticate(opts) {
+  const { loginURL = null } = opts || {};
 
-  authenticate(opts) {
-    const { loginURL = null } = opts || {};
+  return (req, resp, next) => {
+    if (this.isUserLoggedIn(req)) {
+      return next();
+    }
 
-    return (req, resp, next) => {
-      if (this.isUserLoggedIn(req)) {
-        return next();
+    if (loginURL) {
+      return resp.status(401).redirect(loginURL);
+    }
+
+    resp.sendStatus(401);
+  };
+}
+
+export function login(req, user) {
+  return new Promise((success, reject) => {
+    req.login(user, err => {
+      if (err) {
+        return reject(err);
       }
 
-      if (loginURL) {
-        return resp.status(401).redirect(loginURL);
-      }
-
-      resp.sendStatus(401);
-    };
-  },
-
-  login(req, user) {
-    return new Promise((success, reject) => {
-      req.login(user, err => {
-        if (err) {
-          return reject(err);
-        }
-
-        success(user);
-      });
+      success(user);
     });
-  },
+  });
+}
 
-  logout(req) {
-    req.logout();
-  }
-};
-
-module.exports = auth;
+export function logout(req) {
+  req.logout();
+}
