@@ -1,6 +1,6 @@
 import { Strategy as GoogleOAuth } from "passport-google-oauth20";
 
-function googleProfileToMatrixProfile(profile) {
+export function googleProfileToMatrixProfile(profile) {
   const { id, emails, displayName: name, photos, provider } = profile;
 
   const email = emails?.[0]?.value;
