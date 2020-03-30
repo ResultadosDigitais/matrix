@@ -14,3 +14,21 @@
   font-size: 18px;
   color: #fd5f7d;
 }
+.blox {
+  width: 78px;
+}
+.customFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.customFooter img {
+  margin: 0;
+}
+.customFooter p {
+  font-size: 12px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  text-align: left;
+}

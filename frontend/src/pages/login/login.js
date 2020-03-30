@@ -44,11 +44,6 @@ export class Login extends Component {
     this.goToOffice();
   }
 
-  getBackgroundImage(isDark) {
-    const imageName = isDark ? "bg-dark.png" : "bg.png";
-    return `url(/images/${imageName})`;
-  }
-
   goToOffice() {
     window.location.href = "./morpheus";
   }
@@ -60,38 +55,43 @@ export class Login extends Component {
   render() {
     const { isDark, error } = this.state;
     return (
-      <div
-        className={styles.auth_background}
-        style={{ backgroundImage: this.getBackgroundImage(isDark) }}
-      >
-        <div className="container-fluid">
-          <div className="row h-100">
-            <div
-              className={clsx("col-auto", "", styles.auth_panel, {
-                [styles.auth_panel_dark]: isDark
-              })}
-            >
-              <div className="row h-100 justify-content-center align-items-center">
-                <div className="col px-5 text-center">
-                  <Logo />
-                  <Title />
-                  <GoogleButton
-                    isDark={isDark}
-                    onClick={() => {
-                      this.goToGoogleAuth();
-                    }}
-                  />
-                  {error && (
-                    <p className={clsx("text-danger", styles.error)}>
-                      {error}
-                    </p>
-                  )}
+      <div className={styles.containerLogin}>
+        <div className={styles.containerForm}>
+
+             <div className="container-fluid">
+             <div className="row h-100">
+               <div
+                className={clsx("col-auto", "", styles.auth_panel, {
+                  [styles.auth_panel_dark]: isDark
+                })}
+                >
+                <div className="row h-100 justify-content-center align-items-center">
+                  <div className="col px-2 text-center">
+                      <div className={styles.logoTransform}>
+                        <Logo />
+                      </div>
+                    <Title />
+                    <hr className={styles.customHr} />
+                    <GoogleButton
+                      isDark={isDark}
+                      onClick={() => {
+                        this.goToGoogleAuth();
+                      }}
+                      />
+                    {error && (
+                      <p className={clsx("text-danger", styles.error)}>
+                        {error}
+                      </p>
+                    )}
+                  </div>
+                  <Footer />
                 </div>
-                <Footer />
               </div>
             </div>
           </div>
-        </div>
+
+          </div>
+        <div className={styles.containerBackground } />
       </div>
     );
   }
