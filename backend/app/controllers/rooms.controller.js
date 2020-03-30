@@ -13,7 +13,7 @@ const fetchFromFile = () => {
   const roomsData = fs.readFileSync(roomFilePath);
   const roomsDetail = JSON.parse(roomsData);
 
-  return new Promise(resolve => resolve(roomsDetail));
+  return new Promise((resolve) => resolve(roomsDetail));
 };
 
 const createRoomFileSync = () => {
@@ -40,7 +40,7 @@ const createRoomFileSync = () => {
   for (const niceName of niceNames) {
     roomsData.push({
       id: uuid(),
-      name: niceName
+      name: niceName,
     });
   }
 
@@ -52,7 +52,7 @@ const fetchFromEnvironment = (env) => {
   const roomsData = env.ROOMS_DATA;
   const roomsDetail = JSON.parse(roomsData);
 
-  return new Promise(resolve => resolve(roomsDetail));
+  return new Promise((resolve) => resolve(roomsDetail));
 };
 
 const fetchRooms = (strategy) => {

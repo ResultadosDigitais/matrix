@@ -11,10 +11,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
-const headerColor = "#EA8B68"
-const bloxColor = "#D66C45"
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -28,15 +26,15 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     alignItems: "stretch"
   },
-  contentHeader: {
+  contentHeader: props => ({
     position: "relative",
     flex: 1,
     padding: 0,
     width: "100%",
-    backgroundColor: headerColor,
+    backgroundColor: props.headerColor,
     minHeight: "83px",
     display: "flex",
-  },
+  }),
   contentTitle: {
     display: "flex",
     alignItems: "center",
@@ -48,16 +46,16 @@ const useStyles = makeStyles(() => ({
   contentHexaCard: {
     position: "relative",
   },
-  contentHexa: {
+  contentHexa: props => ({
     position: "absolute",
     top: "15px",
     left: "15px",
     padding: 0,
     width: "83px",
     height: "100px",
-    backgroundColor: bloxColor,
+    backgroundColor: props.bloxColor,
     clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-  },
+  }),
   content: {
     flex: 1,
     padding: "40px 16px 16px 16px",
@@ -84,7 +82,7 @@ const useStyles = makeStyles(() => ({
       backgroundRepeat: "no-repeat"
     }
   }
-}));
+});
 
 const ColorButton = withStyles(() => ({
   root: {
@@ -104,9 +102,12 @@ const StyledTypography = withStyles(() => ({
   },
 }))(Typography);
 
-const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
+const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
   const [isExpanded, toggleExpand] = useState(false);
-  const classes = useStyles();
+
+  const props = { headerColor, bloxColor }
+
+  const classes = useStyles(props);
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
 
@@ -169,7 +170,9 @@ RoomCard.propTypes = {
   onEnterMeeting: PropTypes.func,
   meetingEnabled: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
-  name: PropTypes.string
+  name: PropTypes.string,
+  bloxColor: PropTypes.string,
+  headerColor: PropTypes.string
 };
 
 RoomCard.defaultProps = {
@@ -177,7 +180,9 @@ RoomCard.defaultProps = {
   onEnterMeeting: () => {},
   meetingEnabled: true,
   users: [],
-  name: ""
+  name: "",
+  bloxColor: "#2380C1",
+  headerColor: "#2196F3"
 };
 
 export default RoomCard;
