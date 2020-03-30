@@ -44,11 +44,6 @@ export class Login extends Component {
     this.goToOffice();
   }
 
-  getBackgroundImage(isDark) {
-    const imageName = isDark ? "bg.svg" : "bg.svg";
-    return `url(/images/${imageName})`;
-  }
-
   goToOffice() {
     window.location.href = "./morpheus";
   }
