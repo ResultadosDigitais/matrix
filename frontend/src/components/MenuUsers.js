@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import InputBase from "@material-ui/core/InputBase";
@@ -54,14 +54,21 @@ const MenuUsers = ({
   const classes = useStyles();
   const commitSearch = debounce(onChangeFilter, 300);
 
+  const StyledList = withStyles(() => ({
+    root: {
+     color: "#37414B!important",
+     fontSize: "24px!important",
+    },
+  }))(ListSubheader);
+
   return (
-    <List subheader={<ListSubheader>Users Online</ListSubheader>}>
+    <List subheader={<StyledList>Usuários Online</StyledList>}>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
         </div>
         <InputBase
-          placeholder="Search users..."
+          placeholder="Buscar usuários"
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput

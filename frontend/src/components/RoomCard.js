@@ -8,13 +8,17 @@ import Avatar from "@material-ui/core/Avatar";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
-const useStyles = makeStyles(() => ({
+
+const useStyles = makeStyles({
   root: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor: "#fff",
+    color: "#fff",
+    boxShadow: "0px 3px 6px #00000029",
   },
   contentAction: {
     flex: 1,
@@ -22,8 +26,39 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     alignItems: "stretch"
   },
+  contentHeader: props => ({
+    position: "relative",
+    flex: 1,
+    padding: 0,
+    width: "100%",
+    backgroundColor: props.headerColor,
+    minHeight: "83px",
+    display: "flex",
+  }),
+  contentTitle: {
+    display: "flex",
+    alignItems: "center",
+    padding: "0 0 0 75px",
+    paddingBottom: "0!important",
+    width: "245px",
+    backgroundColor: "transparent",
+  },
+  contentHexaCard: {
+    position: "relative",
+  },
+  contentHexa: props => ({
+    position: "absolute",
+    top: "15px",
+    left: "15px",
+    padding: 0,
+    width: "83px",
+    height: "100px",
+    backgroundColor: props.bloxColor,
+    clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+  }),
   content: {
-    flex: 1
+    flex: 1,
+    padding: "40px 16px 16px 16px",
   },
   userGrid: {
     display: "grid",
@@ -47,11 +82,32 @@ const useStyles = makeStyles(() => ({
       backgroundRepeat: "no-repeat"
     }
   }
-}));
+});
 
-const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
+const ColorButton = withStyles(() => ({
+  root: {
+    whiteSpace: "nowrap",
+    color: "#2196f3",
+    backgroundColor: "#fff",
+    fontWeight: "normal",
+    "&:hover": {
+      backgroundColor: "#fff",
+    },
+  },
+}))(Button);
+
+const StyledTypography = withStyles(() => ({
+  root: {
+    margin: "12px 0 0 0",
+  },
+}))(Typography);
+
+const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
   const [isExpanded, toggleExpand] = useState(false);
-  const classes = useStyles();
+
+  const props = { headerColor, bloxColor }
+
+  const classes = useStyles(props);
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
 
@@ -63,10 +119,17 @@ const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) 
           toggleExpand(!isExpanded);
         }}
       >
-        <CardContent className={classes.content}>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent className={classes.contentHeader}>
+          <CardContent className={classes.contentHexaCard}>
+          <CardContent className={classes.contentHexa}  />
+          </CardContent>
+          <CardContent className={classes.contentTitle}>
+        <StyledTypography gutterBottom variant="h5" component="h2">
             {name}
-          </Typography>
+          </StyledTypography>
+          </CardContent>
+        </CardContent>
+        <CardContent className={classes.content}>
           <div className={classes.userGrid}>
             {userToShow.map(user => (
               <Tooltip key={user.id} title={user.name}>
@@ -89,13 +152,13 @@ const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) 
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={onEnterRoom}>
-          Enter room
-        </Button>
+        <ColorButton size="small" className={classes.margin} color="primary" onClick={onEnterRoom}>
+         Entrar na sala
+        </ColorButton>
         {meetingEnabled && (
-          <Button size="small" color="primary" onClick={onEnterMeeting}>
-            Enter meeting
-          </Button>
+          <ColorButton size="small" color="primary" onClick={onEnterMeeting}>
+            Participar da aula
+          </ColorButton>
         )}
       </CardActions>
     </Card>
@@ -107,7 +170,9 @@ RoomCard.propTypes = {
   onEnterMeeting: PropTypes.func,
   meetingEnabled: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
-  name: PropTypes.string
+  name: PropTypes.string,
+  bloxColor: PropTypes.string,
+  headerColor: PropTypes.string
 };
 
 RoomCard.defaultProps = {
@@ -115,7 +180,9 @@ RoomCard.defaultProps = {
   onEnterMeeting: () => {},
   meetingEnabled: true,
   users: [],
-  name: ""
+  name: "",
+  bloxColor: "#2380C1",
+  headerColor: "#2196F3"
 };
 
 export default RoomCard;

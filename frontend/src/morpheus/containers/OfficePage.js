@@ -48,6 +48,8 @@ const OfficePage = ({
           <RoomCard
             {...room}
             key={room.id}
+            headerColor={room.header_color}
+            bloxColor={room.blox_color}
             onEnterRoom={() => {
               emitEnterInRoom(room.id);
               onSetCurrentRoom(room);
@@ -58,19 +60,19 @@ const OfficePage = ({
               onSetCurrentRoom(room);
               console.log(room.externalMeetUrl);
               if(room.externalMeetUrl){
-                emitStartMeeting();   
-                var externalMeetRoom = window.open(room.externalMeetUrl);
+                emitStartMeeting();
+                const externalMeetRoom = window.open(room.externalMeetUrl);
 
                 var externalMeetRoomMonitoring = function(){
                   window.setTimeout(function() {
                     console.log(externalMeetRoom.closed);
                     if (externalMeetRoom.closed) {
-                      console.log('The external meeting has been closed');
+                      console.log("The external meeting has been closed");
                       emitLeftMeeting();
                     }else{
                       externalMeetRoomMonitoring();
                     }
-                    
+
                     }, 1000);
                 }
 

@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 const AdvancedMeetingPanel = ({ children }) => (
   <ExpansionPanel elevation={0}>
     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-      <Typography color="textSecondary">Advanced options</Typography>
+      <Typography color="textSecondary">Opções avançadas</Typography>
     </ExpansionPanelSummary>
     <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
   </ExpansionPanel>

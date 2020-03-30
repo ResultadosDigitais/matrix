@@ -49,7 +49,7 @@ export default {
     palette: {
       primary: blue,
       secondary: pink,
-      background: { default: "#e1f5fe" }
+      background: { default: "#fff" }
     }
   }),
   [THEMES.dark]: createMuiTheme({
