@@ -12,15 +12,12 @@ import { setupAppAuth } from "./services/auth";
 
 import {
   getRoomsSource,
-  getCustomStyle,
   getSessionConfig,
   getEnvironment,
   shouldEnforceSSL
 } from "./app.config";
 
 const app = express();
-
-app.locals.CUSTOM_STYLE = getCustomStyle();
 
 app.use(morgan("tiny"));
 app.use(cookieSession(getSessionConfig()));
