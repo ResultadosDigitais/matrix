@@ -5,12 +5,6 @@ export function getRoomsSource() {
   return roomsSource
 }
 
-export function getCustomStyle() {
-  const customStyle = process.env.CUSTOM_STYLE || "";
-
-  return customStyle;
-}
-
 export function shouldEnforceSSL() {
   const enforceSSL = process.env.ENFORCE_SSL || "false";
 
