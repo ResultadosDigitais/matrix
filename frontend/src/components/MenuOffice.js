@@ -9,7 +9,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import debounce from "lodash.debounce";
 
 import ThemeCheckbox from "./ThemeCheckbox";
-import NotificationCheckbox from "./NotificationCheckbox";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -90,12 +89,6 @@ const MenuOffice = ({
         />
       </Tooltip>
       <ThemeCheckbox onChange={onChangeTheme} />
-      <NotificationCheckbox
-        isDisabled={settings.notificationDisabled}
-        onChange={event => {
-          onChangeSettings("notificationDisabled", event.target.checked);
-        }}
-      />
     </>
   );
 };

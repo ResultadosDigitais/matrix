@@ -48,8 +48,8 @@ const OfficePage = ({
           <RoomCard
             {...room}
             key={room.id}
-            headerColor={room.header_color}
-            bloxColor={room.blox_color}
+            headerColor={rooms.find(item => room.id === item.id).header_color}
+            bloxColor={rooms.find(item => room.id === item.id).blox_color}
             onEnterRoom={() => {
               emitEnterInRoom(room.id);
               onSetCurrentRoom(room);

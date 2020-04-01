@@ -20,7 +20,7 @@ const PageNotFound = () => {
   return (
     <div className={classes.root}>
       <Typography variant="h3" gutterBottom>
-        404 - Page not found
+        404 - Página não encontrada
       </Typography>
       <Button
         component={AdapterLink}
@@ -29,7 +29,7 @@ const PageNotFound = () => {
         color="primary"
         size="large"
       >
-        Go to home page
+        Voltar a tela inícial
       </Button>
     </div>
   );
