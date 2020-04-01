@@ -9,7 +9,7 @@ import { signOut } from "../socket";
 const ConfirmLogoutDialog = ({ onClose, isOpen }) => (
   <ConfirmDialog
     title="Sair"
-    message="Deseja realmente deseja desconectar?"
+    message="Deseja realmente desconectar?"
     open={isOpen}
     onClose={onClose}
     onConfirm={signOut}

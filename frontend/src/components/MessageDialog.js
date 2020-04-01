@@ -25,7 +25,7 @@ const MessageDialog = ({ onClose, modalData }) => (
         color="primary"
         autoFocus
       >
-        Certo
+        OK
       </Button>
     </DialogActions>
   </Dialog>

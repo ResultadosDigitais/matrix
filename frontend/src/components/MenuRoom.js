@@ -35,7 +35,7 @@ Compartilhar link da sala">
         <Share />
       </IconButton>
     </Tooltip>
-    <Tooltip title="Sair sala">
+    <Tooltip title="Sair da sala">
       <IconButton
         aria-label="Exit room"
         aria-controls="menu-appbar"
