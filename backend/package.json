@@ -11,7 +11,7 @@
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
     "@godaddy/terminus": "^4.3.1",
-    "ejs": "^2.6.2",
+    "ejs": "^3.0.2",
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
     "nodemon": "^2.0.2",
