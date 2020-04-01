@@ -39,7 +39,7 @@ const MenuAuth = ({ onLogout, userName }) => {
             onLogout();
           }}
         >
-          Logout
+          Sair
         </MenuItem>
       </Menu>
     </>

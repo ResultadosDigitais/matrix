@@ -15,7 +15,7 @@ const ConfirmDialog = ({ open, onClose, onConfirm, title, message }) => (
     </DialogContent>
     <DialogActions>
       <Button onClick={onClose} color="primary">
-        No
+        Não
       </Button>
       <Button
         onClick={() => {
@@ -25,7 +25,7 @@ const ConfirmDialog = ({ open, onClose, onConfirm, title, message }) => (
         color="primary"
         autoFocus
       >
-        Yes
+        Sim
       </Button>
     </DialogActions>
   </Dialog>

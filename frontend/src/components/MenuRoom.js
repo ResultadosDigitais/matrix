@@ -24,7 +24,8 @@ const MenuRoom = ({
         onChangeSettings("notificationDisabled", event.target.checked);
       }}
     />
-    <Tooltip title="Share room link">
+    <Tooltip title="
+Compartilhar link da sala">
       <IconButton
         aria-label="Share room link"
         aria-controls="menu-appbar"
@@ -34,7 +35,7 @@ const MenuRoom = ({
         <Share />
       </IconButton>
     </Tooltip>
-    <Tooltip title="Exit room">
+    <Tooltip title="Sair sala">
       <IconButton
         aria-label="Exit room"
         aria-controls="menu-appbar"
