@@ -151,7 +151,7 @@ If you want run the **#matrix**, you need [docker-compose](https://docs.docker.c
 
 If you prefer, you can run **#matrix** on GCP:
 
-<a href="https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix&revision=gcp-deploy-button">
+<a href="https://deploy.cloud.run?git_repo=https://github.com/ResultadosDigitais/matrix">
 <img alt="Run on Google Cloud" src="https://deploy.cloud.run/button.svg" style="max-width:200px"  />
 </a>
 
