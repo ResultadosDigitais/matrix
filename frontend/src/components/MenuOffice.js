@@ -79,7 +79,7 @@ const MenuOffice = ({
           }}
         />
       </div>
-      <Tooltip title="Show only full room">
+      <Tooltip title="Mostrar salas ocupadas">
         <Checkbox
           icon={<SupervisedUserCircle />}
           checkedIcon={<SupervisedUserCircle />}

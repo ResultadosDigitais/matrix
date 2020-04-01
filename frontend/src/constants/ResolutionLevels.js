@@ -11,9 +11,9 @@ const formatOption = (level, label, standard = false) => ({
 });
 
 export const getResolutionLevelsOptions = () => [
-  formatOption(ResolutionLevels.hd, "High Definition"),
-  formatOption(ResolutionLevels.sd, "Standard Definition", true),
-  formatOption(ResolutionLevels.ld, "Low Definition")
+  formatOption(ResolutionLevels.hd, "Alta definição"),
+  formatOption(ResolutionLevels.sd, "Definição padrão", true),
+  formatOption(ResolutionLevels.ld, "Baixa definição")
 ];
 
 export const getVideoHeight = resolution =>
