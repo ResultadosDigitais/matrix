@@ -15,6 +15,8 @@ import {
   CUSTOM_STYLE,
   COOKIE_SESSION_SECRET,
   COOKIE_SESSION_MAX_AGE,
+  REACT_APP_BIGBLUEBUTTON_URL,
+  REACT_APP_BIGBLUEBUTTON_SECRET,
 } from "./app.config";
 
 const app = express();
@@ -73,7 +75,13 @@ app.use(routes);
 fetchRooms(ROOMS_SOURCE)
   .then((roomsData) => {
     console.log(roomsData);
-    app.locals.roomsDetail = roomsData;
+    app.locals.roomsDetail = {
+      rooms: roomsData,
+      environment: {
+        url: REACT_APP_BIGBLUEBUTTON_URL,
+        secret: REACT_APP_BIGBLUEBUTTON_SECRET,
+      },
+    };
   })
   .catch((err) => {
     console.error(err);

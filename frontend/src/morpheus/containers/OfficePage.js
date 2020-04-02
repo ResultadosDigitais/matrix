@@ -8,6 +8,7 @@ import Grid from "../../components/Grid";
 import RoomCard from "../../components/RoomCard";
 import {
   selectOffice,
+  selectEnvironment,
   selectCurrentRoom,
   selectRooms
 } from "../store/selectors";
@@ -28,6 +29,7 @@ const OfficePage = ({
   match,
   office,
   rooms,
+  environment,
   currentRoom
 }) => {
   const classes = useStyles();
@@ -43,16 +45,14 @@ const OfficePage = ({
     }
   }, [match.params.roomId]);
 
-   const enteringVirtualRooom = (roomId, roomName) => {
-     console.log('process', process.env)
+  const enteringVirtualRooom = (roomId, roomName) => {
       try {
         const userName = JSON.parse(localStorage.getItem('user')).name
         const api = axios.create({
-          baseURL: process.env.REACT_APP_BIGBLUEBUTTON_URL,
+          baseURL: environment.url
         })
 
-        const secret = process.env.REACT_APP_BIGBLUEBUTTON_SECRET
-
+        const secret = environment.secret
 
         const createParams = new URLSearchParams({
           meetingID: roomId,
@@ -75,7 +75,7 @@ const OfficePage = ({
         const joinChecksum = sha1(`join${joinParams.toString()}${secret}`)
         joinParams.append('checksum', joinChecksum)
 
-        window.open(`${process.env.REACT_APP_BIGBLUEBUTTON_URL}/join?${joinParams.toString()}`)
+        window.open(`${environment.url}/join?${joinParams.toString()}`)
        })
       }catch {
         console.log('não foi possível entrar na sala')
@@ -108,6 +108,10 @@ OfficePage.propTypes = {
   onSetCurrentRoom: PropTypes.func,
   office: PropTypes.arrayOf(PropTypes.object),
   rooms: PropTypes.arrayOf(PropTypes.object),
+  environment: PropTypes.shape({
+    url: PropTypes.string,
+    secret: PropTypes.string
+  }),
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired
@@ -124,12 +128,14 @@ OfficePage.defaultProps = {
   onSetCurrentRoom: () => {},
   office: [],
   rooms: [],
+  environment: {},
   currentRoom: {}
 };
 
 const mapStateToProps = state => ({
   office: selectOffice(state),
   rooms: selectRooms(state),
+  environment: selectEnvironment(state),
   currentRoom: selectCurrentRoom(state)
 });
 

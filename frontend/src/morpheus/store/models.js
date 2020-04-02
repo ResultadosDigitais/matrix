@@ -1,5 +1,10 @@
 import PropTypes from "prop-types";
 
+export const EnvironmentPropType = PropTypes.shape({
+  url: PropTypes.string,
+  secret: PropTypes.string
+});
+
 export const RoomsPropType = PropTypes.arrayOf(
   PropTypes.shape({
     id: PropTypes.string,

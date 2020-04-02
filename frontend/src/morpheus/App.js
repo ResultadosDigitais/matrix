@@ -18,6 +18,7 @@ import { emitEnterInRoom, emitInviteUser } from "./socket";
 import {
   setCurrentUser,
   setCurrentRoom,
+  setEnvironment,
   addRooms,
   syncOffice,
   changeUsersFilter,
@@ -28,6 +29,7 @@ import {
   userLeftMeeting
 } from "./store/actions";
 import {
+  selectEnvironment,
   selectRooms,
   selectCurrentUser,
   selectUsers,
@@ -53,6 +55,7 @@ const MorpheusApp = ({
   onChangeUsersFilter,
   onSetCurrentUser,
   onSetCurrentRoom,
+  onSetEnvironment,
   onAddRooms,
   onSyncOffice,
   onAddUser,
@@ -82,6 +85,7 @@ const MorpheusApp = ({
     setLoggedIn,
     onSetCurrentUser,
     onSetCurrentRoom,
+    onSetEnvironment,
     onAddRooms,
     onAddError
   );
@@ -166,6 +170,7 @@ MorpheusApp.propTypes = {
   onChangeUsersFilter: PropTypes.func,
   onSetCurrentUser: PropTypes.func,
   onSetCurrentRoom: PropTypes.func,
+  onSetEnvironment: PropTypes.func,
   onAddRooms: PropTypes.func,
   onSyncOffice: PropTypes.func,
   onAddUser: PropTypes.func,
@@ -189,6 +194,7 @@ MorpheusApp.defaultProps = {
   onChangeUsersFilter: () => {},
   onSetCurrentUser: () => {},
   onSetCurrentRoom: () => {},
+  onSetEnvironment: () => {},
   onAddRooms: () => {},
   onSyncOffice: () => {},
   onAddUser: () => {},
@@ -203,6 +209,7 @@ const mapStateToProps = state => ({
   theme: selectTheme(state),
   currentRoom: selectCurrentRoom(state),
   rooms: selectRooms(state),
+  environment: selectEnvironment(state),
   currentUser: selectCurrentUser(state),
   users: selectUsers(state),
   usersFilter: selectUsersFilter(state),
@@ -214,6 +221,7 @@ const mapDispatchToProps = {
   onChangeUsersFilter: changeUsersFilter,
   onSetCurrentUser: setCurrentUser,
   onSetCurrentRoom: setCurrentRoom,
+  onSetEnvironment: setEnvironment,
   onAddRooms: addRooms,
   onSyncOffice: syncOffice,
   onAddUser: addUser,

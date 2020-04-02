@@ -15,4 +15,6 @@ module.exports = {
   HOST: "0.0.0.0",
   PORT: process.env.PORT || 8080,
   WHITELIST_DOMAINS: environment.parseVariable(process.env.WHITELIST_DOMAINS) || [],
+  REACT_APP_BIGBLUEBUTTON_URL: process.env.REACT_APP_BIGBLUEBUTTON_URL,
+  REACT_APP_BIGBLUEBUTTON_SECRET: process.env.REACT_APP_BIGBLUEBUTTON_SECRET,
 };
