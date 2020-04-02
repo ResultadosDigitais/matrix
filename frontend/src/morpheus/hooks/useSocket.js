@@ -5,7 +5,7 @@ import {
   initProfile,
   getCurrentUser,
   emitEnterInRoom,
-  getCurrentRoomId
+  getCurrentRoomId,
 } from "../socket";
 
 const useSocket = (
@@ -13,6 +13,7 @@ const useSocket = (
   setLoggedIn,
   onSetCurrentUser,
   onSetCurrentRoom,
+  onSetEnvironment,
   onAddRooms,
   onAddError
 ) => {
@@ -29,7 +30,7 @@ const useSocket = (
     axios
       .get("/rooms")
       .then(response => {
-        const rooms = response.data;
+        const {rooms, environment} = response.data;
         const savedRoomId = getCurrentRoomId();
         let currentRoom = rooms.find(r => r.id === savedRoomId);
 
@@ -37,7 +38,7 @@ const useSocket = (
           [currentRoom] = rooms;
           emitEnterInRoom(currentRoom.id);
         }
-
+        onSetEnvironment(environment);
         onAddRooms(rooms);
         onSetCurrentRoom(currentRoom);
         setLoggedIn(true);
@@ -53,7 +54,8 @@ const useSocket = (
     onSetCurrentUser,
     onAddRooms,
     onAddError,
-    onSetCurrentRoom
+    onSetCurrentRoom,
+    onSetEnvironment
   ]);
 };
 

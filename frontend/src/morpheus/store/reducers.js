@@ -2,6 +2,7 @@ import {
   ADD_ERROR,
   SET_CURRENT_USER,
   SET_CURRENT_ROOM,
+  SET_ENVIRONMENT,
   ADD_ROOMS,
   SYNC_OFFICE,
   CHANGE_OFFICE_FILTER,
@@ -26,6 +27,7 @@ export const initialState = {
   currentUser: {},
   currentRoom: {},
   rooms: [],
+  environment: {},
   usersInRoom: [],
   users: [],
   usersFilter: {
@@ -150,6 +152,11 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         currentRoom: action.room
+      };
+    case SET_ENVIRONMENT:
+      return {
+        ...state,
+        environment: action.environment
       };
     case ADD_ROOMS:
       return buildOfficeState({

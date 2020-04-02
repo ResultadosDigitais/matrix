@@ -102,7 +102,7 @@ const StyledTypography = withStyles(() => ({
   },
 }))(Typography);
 
-const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
+const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, enteringVirtualRooom }) => {
   const [isExpanded, toggleExpand] = useState(false);
 
   const props = { headerColor, bloxColor }
@@ -156,7 +156,7 @@ const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnter
          Entrar na sala
         </ColorButton>
         {meetingEnabled && (
-          <ColorButton size="small" color="primary" onClick={onEnterMeeting}>
+          <ColorButton size="small" color="primary" onClick={() => enteringVirtualRooom(id, name)}>
             Participar da aula
           </ColorButton>
         )}
@@ -167,7 +167,7 @@ const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnter
 
 RoomCard.propTypes = {
   onEnterRoom: PropTypes.func,
-  onEnterMeeting: PropTypes.func,
+  enteringVirtualRooom: PropTypes.func,
   meetingEnabled: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
   name: PropTypes.string,
@@ -177,7 +177,7 @@ RoomCard.propTypes = {
 
 RoomCard.defaultProps = {
   onEnterRoom: () => {},
-  onEnterMeeting: () => {},
+  enteringVirtualRooom: () => {},
   meetingEnabled: true,
   users: [],
   name: "",

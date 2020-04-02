@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,12 +8,14 @@ import Grid from "../../components/Grid";
 import RoomCard from "../../components/RoomCard";
 import {
   selectOffice,
+  selectEnvironment,
   selectCurrentRoom,
   selectRooms
 } from "../store/selectors";
 import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
+import sha1 from '../../util/encrypt'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +29,7 @@ const OfficePage = ({
   match,
   office,
   rooms,
+  environment,
   currentRoom
 }) => {
   const classes = useStyles();
@@ -41,6 +45,43 @@ const OfficePage = ({
     }
   }, [match.params.roomId]);
 
+  const enteringVirtualRooom = (roomId, roomName) => {
+      try {
+        const userName = JSON.parse(localStorage.getItem('user')).name
+        const api = axios.create({
+          baseURL: environment.url
+        })
+
+        const secret = environment.secret
+
+        const createParams = new URLSearchParams({
+          meetingID: roomId,
+          name: roomName,
+          attendeePW: 'ap',
+          moderatorPW: 'mp',
+          muteOnStart: true,
+          logoutURL: window.location.href,
+        })
+
+        const createChecksum = sha1(`create${createParams.toString()}${secret}`)
+        createParams.append('checksum', createChecksum)
+        api.get(`/create?${createParams.toString()}`).then(() => { const joinParams = new URLSearchParams({
+          meetingID: roomId,
+          redirect: true,
+          password: 'ap',
+          fullName: userName,
+        })
+
+        const joinChecksum = sha1(`join${joinParams.toString()}${secret}`)
+        joinParams.append('checksum', joinChecksum)
+
+        window.open(`${environment.url}/join?${joinParams.toString()}`)
+       })
+      }catch {
+        console.log('não foi possível entrar na sala')
+      }
+  }
+
   return (
     <div className={classes.root}>
       <Grid>
@@ -55,33 +96,7 @@ const OfficePage = ({
               onSetCurrentRoom(room);
               history.replace(`/morpheus/office/${room.id}`);
             }}
-            onEnterMeeting={() => {
-              emitEnterInRoom(room.id);
-              onSetCurrentRoom(room);
-              console.log(room.externalMeetUrl);
-              if(room.externalMeetUrl){
-                emitStartMeeting();
-                const externalMeetRoom = window.open(room.externalMeetUrl);
-
-                var externalMeetRoomMonitoring = function(){
-                  window.setTimeout(function() {
-                    console.log(externalMeetRoom.closed);
-                    if (externalMeetRoom.closed) {
-                      console.log("The external meeting has been closed");
-                      emitLeftMeeting();
-                    }else{
-                      externalMeetRoomMonitoring();
-                    }
-
-                    }, 1000);
-                }
-
-                externalMeetRoomMonitoring();
-
-              }else{
-                history.push(`/morpheus/room/${room.id}`);
-              }
-            }}
+            enteringVirtualRooom={enteringVirtualRooom}
           />
         ))}
       </Grid>
@@ -93,6 +108,10 @@ OfficePage.propTypes = {
   onSetCurrentRoom: PropTypes.func,
   office: PropTypes.arrayOf(PropTypes.object),
   rooms: PropTypes.arrayOf(PropTypes.object),
+  environment: PropTypes.shape({
+    url: PropTypes.string,
+    secret: PropTypes.string
+  }),
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired
@@ -109,12 +128,14 @@ OfficePage.defaultProps = {
   onSetCurrentRoom: () => {},
   office: [],
   rooms: [],
+  environment: {},
   currentRoom: {}
 };
 
 const mapStateToProps = state => ({
   office: selectOffice(state),
   rooms: selectRooms(state),
+  environment: selectEnvironment(state),
   currentRoom: selectCurrentRoom(state)
 });
 
