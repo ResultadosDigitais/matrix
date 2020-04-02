@@ -102,7 +102,7 @@ const StyledTypography = withStyles(() => ({
   },
 }))(Typography);
 
-const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
+const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, enteringVirtualRooom }) => {
   const [isExpanded, toggleExpand] = useState(false);
 
   const props = { headerColor, bloxColor }
@@ -110,6 +110,8 @@ const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnter
   const classes = useStyles(props);
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
+
+  console.log("room",enteringVirtualRooom)
 
   return (
     <Card className={classes.root}>
@@ -156,7 +158,7 @@ const RoomCard = ({ name, users, headerColor, bloxColor, meetingEnabled, onEnter
          Entrar na sala
         </ColorButton>
         {meetingEnabled && (
-          <ColorButton size="small" color="primary" onClick={onEnterMeeting}>
+          <ColorButton size="small" color="primary" onClick={() => enteringVirtualRooom(id, name)}>
             Participar da aula
           </ColorButton>
         )}
