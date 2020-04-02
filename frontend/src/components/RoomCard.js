@@ -111,8 +111,6 @@ const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onE
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
 
-  console.log("room",enteringVirtualRooom)
-
   return (
     <Card className={classes.root}>
       <CardActionArea
@@ -169,7 +167,7 @@ const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onE
 
 RoomCard.propTypes = {
   onEnterRoom: PropTypes.func,
-  onEnterMeeting: PropTypes.func,
+  enteringVirtualRooom: PropTypes.func,
   meetingEnabled: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
   name: PropTypes.string,
@@ -179,7 +177,7 @@ RoomCard.propTypes = {
 
 RoomCard.defaultProps = {
   onEnterRoom: () => {},
-  onEnterMeeting: () => {},
+  enteringVirtualRooom: () => {},
   meetingEnabled: true,
   users: [],
   name: "",
