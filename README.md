@@ -228,6 +228,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://juliemar.com.br"><img src="https://avatars0.githubusercontent.com/u/643779?v=4" width="100px;" alt=""/><br /><sub><b>Juliemar Berri</b></sub></a><br /><a href="#blog-juliemar" title="Blogposts">📝</a></td>
+  </tr>
+</table>
+
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
