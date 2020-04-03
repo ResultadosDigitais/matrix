@@ -215,11 +215,6 @@ There are several ways to get in touch with us:
 * See questions on Stackoverflow using tags: https://stackoverflow.com/questions/tagged/hash-matrix
 * Chat with us on: http://hash-matrix.slack.com/ ([Invite here](https://join.slack.com/t/hash-matrix/shared_invite/zt-cwglw6te-kMlJiimq7qn4WeSTiv91og))
 
-## License
-
-The **#matrix** is released under the [MIT License](docs/LICENSE)
-
-> "The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."
 
 ## Contributors ✨
 
@@ -244,3 +239,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
+
+## License
+
+The **#matrix** is released under the [MIT License](docs/LICENSE)
+
+> "The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."
