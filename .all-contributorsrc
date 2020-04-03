@@ -64,6 +64,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Verhaeg",
+      "name": "Ricardo F. Verhaeg",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/205890?v=4",
+      "profile": "https://arquivei.com.br",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
