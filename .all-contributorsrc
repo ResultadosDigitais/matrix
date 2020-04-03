@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Verhaeg",
+      "name": "Ricardo F. Verhaeg",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/205890?v=4",
+      "profile": "https://arquivei.com.br",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "matrix",
+  "projectOwner": "ResultadosDigitais",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
