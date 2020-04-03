@@ -1,6 +1,6 @@
 <h1 align="center">#matrix</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">Online open-source workplace for distributed teams.</p>
@@ -233,6 +233,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://alesshh.com"><img src="https://avatars3.githubusercontent.com/u/1260049?v=4" width="100px;" alt=""/><br /><sub><b>Alessandro Tegner</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=alesshh" title="Code">💻</a> <a href="#maintenance-alesshh" title="Maintenance">🚧</a> <a href="#infra-alesshh" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="http://angeliski.com.br"><img src="https://avatars3.githubusercontent.com/u/1574240?v=4" width="100px;" alt=""/><br /><sub><b>Rogerio Angeliski</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Code">💻</a> <a href="#maintenance-angeliski" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/diogonicoleti"><img src="https://avatars1.githubusercontent.com/u/4973742?v=4" width="100px;" alt=""/><br /><sub><b>Diogo Nicoleti</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=diogonicoleti" title="Code">💻</a></td>
+    <td align="center"><a href="https://arquivei.com.br"><img src="https://avatars1.githubusercontent.com/u/205890?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo F. Verhaeg</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Verhaeg" title="Documentation">📖</a></td>
   </tr>
 </table>
 
