@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "helderburato",
+      "name": "Helder Burato Berto",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/862575?v=4",
+      "profile": "https://helder.dev",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "matrix",
+  "projectOwner": "ResultadosDigitais",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
