@@ -1,7 +1,5 @@
 <h1 align="center">#matrix</h1>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 
 <p align="center">Online open-source workplace for distributed teams.</p>
 
