@@ -1,0 +1,61 @@
+{
+  "projectName": "matrix",
+  "projectOwner": "ResultadosDigitais",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "juliemar",
+      "name": "Juliemar Berri",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/643779?v=4",
+      "profile": "http://juliemar.com.br",
+      "contributions": [
+        "blog",
+        "code",
+        "maintenance",
+        "doc",
+        "talk"
+      ]
+    },
+    {
+      "login": "megatroom",
+      "name": "Bruno Nardini",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/673904?v=4",
+      "profile": "http://www.brunonardini.com.br",
+      "contributions": [
+        "code",
+        "maintenance",
+        "doc"
+      ]
+    },
+    {
+      "login": "alesshh",
+      "name": "Alessandro Tegner",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1260049?v=4",
+      "profile": "http://alesshh.com",
+      "contributions": [
+        "code",
+        "maintenance",
+        "infra"
+      ]
+    },
+    {
+      "login": "angeliski",
+      "name": "Rogerio Angeliski",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1574240?v=4",
+      "profile": "http://angeliski.com.br",
+      "contributions": [
+        "code",
+        "maintenance",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

@@ -202,12 +202,6 @@ If you will run in production we strongly recommend you close your environment u
 | 1.0.0 | Neo | The one project | - |
 
 
-## Contributing
-
-We encourage you to contribute to The **#matrix**!
-
-Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
-
 ## Frequently Asked Questions
 
 Some questions come up over and over again. Check here first:
@@ -220,6 +214,31 @@ There are several ways to get in touch with us:
 * Open an issue at: https://github.com/ResultadosDigitais/matrix/issues
 * See questions on Stackoverflow using tags: https://stackoverflow.com/questions/tagged/hash-matrix
 * Chat with us on: http://hash-matrix.slack.com/ ([Invite here](https://join.slack.com/t/hash-matrix/shared_invite/zt-cwglw6te-kMlJiimq7qn4WeSTiv91og))
+
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://juliemar.com.br"><img src="https://avatars0.githubusercontent.com/u/643779?v=4" width="100px;" alt=""/><br /><sub><b>Juliemar Berri</b></sub></a><br /><a href="#blog-juliemar" title="Blogposts">📝</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=juliemar" title="Code">💻</a> <a href="#maintenance-juliemar" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=juliemar" title="Documentation">📖</a> <a href="#talk-juliemar" title="Talks">📢</a></td>
+    <td align="center"><a href="http://www.brunonardini.com.br"><img src="https://avatars1.githubusercontent.com/u/673904?v=4" width="100px;" alt=""/><br /><sub><b>Bruno Nardini</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=megatroom" title="Code">💻</a> <a href="#maintenance-megatroom" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=megatroom" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://alesshh.com"><img src="https://avatars3.githubusercontent.com/u/1260049?v=4" width="100px;" alt=""/><br /><sub><b>Alessandro Tegner</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=alesshh" title="Code">💻</a> <a href="#maintenance-alesshh" title="Maintenance">🚧</a> <a href="#infra-alesshh" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="http://angeliski.com.br"><img src="https://avatars3.githubusercontent.com/u/1574240?v=4" width="100px;" alt=""/><br /><sub><b>Rogerio Angeliski</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Code">💻</a> <a href="#maintenance-angeliski" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
 
 ## License
 
