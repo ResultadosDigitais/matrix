@@ -33,6 +33,15 @@
         "maintenance",
         "doc"
       ]
+    },
+    {
+      "login": "alesshh",
+      "name": "Alessandro Tegner",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1260049?v=4",
+      "profile": "http://alesshh.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
