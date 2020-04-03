@@ -55,7 +55,19 @@
         "maintenance",
         "doc"
       ]
+    },
+    {
+      "login": "raphaelln",
+      "name": "Raphael Nascimento",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/16543511?v=4",
+      "profile": "http://www.raphaelln.com",
+      "contributions": [
+        "code",
+        "doc",
+        "design"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
