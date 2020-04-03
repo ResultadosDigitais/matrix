@@ -44,6 +44,15 @@
         "maintenance",
         "infra"
       ]
+    },
+    {
+      "login": "angeliski",
+      "name": "Rogerio Angeliski",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1574240?v=4",
+      "profile": "http://angeliski.com.br",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
