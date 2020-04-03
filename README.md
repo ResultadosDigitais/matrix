@@ -202,12 +202,6 @@ If you will run in production we strongly recommend you close your environment u
 | 1.0.0 | Neo | The one project | - |
 
 
-## Contributing
-
-We encourage you to contribute to The **#matrix**!
-
-Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
-
 ## Frequently Asked Questions
 
 Some questions come up over and over again. Check here first:
@@ -226,3 +220,18 @@ There are several ways to get in touch with us:
 The **#matrix** is released under the [MIT License](docs/LICENSE)
 
 > "The answer is out there, Neo, and it's looking for you, and it will find you if you want it to."
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+Everyone interacting in **#matrix** codebase, issue trackers, chat rooms, and mailing lists is expected to follow [code of conduct](docs/CODE_OF_CONDUCT.md).
