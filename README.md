@@ -231,7 +231,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://juliemar.com.br"><img src="https://avatars0.githubusercontent.com/u/643779?v=4" width="100px;" alt=""/><br /><sub><b>Juliemar Berri</b></sub></a><br /><a href="#blog-juliemar" title="Blogposts">📝</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=juliemar" title="Code">💻</a> <a href="#maintenance-juliemar" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=juliemar" title="Documentation">📖</a> <a href="#talk-juliemar" title="Talks">📢</a></td>
-    <td align="center"><a href="http://www.brunonardini.com.br"><img src="https://avatars1.githubusercontent.com/u/673904?v=4" width="100px;" alt=""/><br /><sub><b>Bruno Nardini</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=megatroom" title="Code">💻</a> <a href="#maintenance-megatroom" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="http://www.brunonardini.com.br"><img src="https://avatars1.githubusercontent.com/u/673904?v=4" width="100px;" alt=""/><br /><sub><b>Bruno Nardini</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=megatroom" title="Code">💻</a> <a href="#maintenance-megatroom" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=megatroom" title="Documentation">📖</a></td>
   </tr>
 </table>
 
