@@ -55,7 +55,17 @@
         "maintenance",
         "doc"
       ]
+    },
+    {
+      "login": "lccezinha",
+      "name": "Luiz Cezer",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2160392?v=4",
+      "profile": "http://dev.to/lccezinha/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
