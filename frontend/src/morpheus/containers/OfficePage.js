@@ -16,6 +16,7 @@ import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 import sha1 from '../../util/encrypt'
+import Loading from "../../components/Loading";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,6 +34,7 @@ const OfficePage = ({
   currentRoom
 }) => {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false)
   useState(() => {
     if (currentRoom && match.params.roomId !== currentRoom.id) {
       const findResult = rooms.find(r => r.id === match.params.roomId);
@@ -47,6 +49,7 @@ const OfficePage = ({
 
   const enteringVirtualRooom = (roomId, roomName) => {
       try {
+        setIsLoading(true)
         const userName = JSON.parse(localStorage.getItem('user')).name
         const api = axios.create({
           baseURL: environment.url
@@ -77,30 +80,35 @@ const OfficePage = ({
 
         window.open(`${environment.url}/join?${joinParams.toString()}`)
        })
+       setIsLoading(false)
       }catch {
         console.log('não foi possível entrar na sala')
       }
   }
 
   return (
-    <div className={classes.root}>
+    isLoading ? (
+      <Loading />
+    ) : (
+      <div className={classes.root}>
       <Grid>
-        {office.map(room => (
-          <RoomCard
-            {...room}
-            key={room.id}
-            headerColor={rooms.find(item => room.id === item.id).header_color}
-            bloxColor={rooms.find(item => room.id === item.id).blox_color}
-            onEnterRoom={() => {
-              emitEnterInRoom(room.id);
-              onSetCurrentRoom(room);
-              history.replace(`/morpheus/office/${room.id}`);
-            }}
-            enteringVirtualRooom={enteringVirtualRooom}
-          />
+      {office.map(room => (
+        <RoomCard
+        {...room}
+        key={room.id}
+        headerColor={rooms.find(item => room.id === item.id).header_color}
+        bloxColor={rooms.find(item => room.id === item.id).blox_color}
+        onEnterRoom={() => {
+          emitEnterInRoom(room.id);
+          onSetCurrentRoom(room);
+          history.replace(`/morpheus/office/${room.id}`);
+        }}
+        enteringVirtualRooom={enteringVirtualRooom}
+        />
         ))}
-      </Grid>
-    </div>
+        </Grid>
+        </div>
+    )
   );
 };
 

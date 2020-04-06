@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "url('/images/matrix-code-animated.gif')",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat"
   },
@@ -28,20 +27,13 @@ const Error500 = ({ onReload }) => {
   return (
     <div className={classes.root}>
       <div className={classes.box}>
-        <div>
-          <img
-            className={classes.imgTitle}
-            src="/images/systemfailure.jpeg"
-            alt="System Failure"
-          />
-        </div>
         <Fab
           variant="extended"
           color="secondary"
           aria-label="Reload"
           onClick={onReload}
         >
-          Reload the Matrix
+          Atualizar a página
         </Fab>
       </div>
     </div>

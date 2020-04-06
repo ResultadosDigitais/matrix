@@ -143,7 +143,7 @@ const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onE
               </Tooltip>
             ))}
             {totalUsersHidden > 0 && (
-              <Tooltip title={`more ${totalUsersHidden} users`}>
+              <Tooltip title={`mais ${totalUsersHidden} usuários`}>
                 <Avatar>{`+${totalUsersHidden}`}</Avatar>
               </Tooltip>
             )}

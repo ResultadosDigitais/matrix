@@ -45,7 +45,7 @@ const useEvents = (
         onAddUser(user, roomId);
         if (currentUser.id !== user.id && currentRoom.id === roomId) {
           const room = rooms.find(r => r.id === roomId);
-          showNotification(`${user.name} entered ${room.name}.`);
+          showNotification(`${user.name} entrou na sala ${room.name}.`);
         }
       });
       events.onParticipantStartedMeet((user, roomId) => {
@@ -63,7 +63,7 @@ const useEvents = (
         setInvitation({ user, room });
         if (!settings.notificationDisabled) {
           showBrowserNotification(
-            `${user.name} is inviting you to ${room.name}`
+            `${user.name} está convidando você para a sala: ${room.name}`
           );
         }
       });
