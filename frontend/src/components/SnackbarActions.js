@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 
 const SnackbarActions = ({ onDismiss }) => (
   <Button color="primary" onClick={onDismiss}>
-    Dismiss
+    Fechar
   </Button>
 );
 
