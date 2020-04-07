@@ -87,7 +87,7 @@ The **#matrix** project has some environment variables that important to define.
 
 - The **#matrix** needs to know, where it get rooms definitions:
 
-		ROOMS_SOURCE=ENVIRONMENT
+		ROOMS_SOURCE=ENVIRONMENT | REMOTE
 
 - There is a config that define the rooms of The **#matrix**, If you want to customize your rooms or add and a new room, you have to configure a `ROOMS_SOURCE=ENVIRONMENT` and config `ROOMS_DATA` like the example:
 
@@ -108,6 +108,10 @@ The **#matrix** project has some environment variables that important to define.
 			  "externalMeetUrl": "https://external-url-room/key-room"
 		   }
 		 ]
+
+Other option is to have a remote rooms config file. You can to configure a `ROOMS_SOURCE=REMOTE` and config `ROOMS_DATA` like the example:
+
+		ROOMS_DATA=https://myfilelocation.io/myrooms_data.json
 
 
 #### External Meet
