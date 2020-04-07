@@ -77,8 +77,7 @@ const OfficePage = ({
                 const redirectUrl = `/morpheus/room/${room.id}`;
                 if (event.ctrlKey) {
                   window.open(redirectUrl, "_blank");
-                }
-                else{
+                } else {
                   history.push(redirectUrl);
                 }
               }
