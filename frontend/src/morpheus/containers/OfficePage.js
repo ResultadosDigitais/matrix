@@ -53,19 +53,20 @@ const OfficePage = ({
               onSetCurrentRoom(room);
               history.replace(`/morpheus/office/${room.id}`);
             }}
-            onEnterMeeting={() => {
+            onEnterMeeting={(event) => {
               emitEnterInRoom(room.id);
               onSetCurrentRoom(room);
               console.log(room.externalMeetUrl);
+
               if(room.externalMeetUrl){
                 emitStartMeeting();   
-                var externalMeetRoom = window.open(room.externalMeetUrl);
+                const externalMeetRoom = window.open(room.externalMeetUrl);
 
-                var externalMeetRoomMonitoring = function(){
+                const externalMeetRoomMonitoring = function(){
                   window.setTimeout(function() {
                     console.log(externalMeetRoom.closed);
                     if (externalMeetRoom.closed) {
-                      console.log('The external meeting has been closed');
+                      console.log("The external meeting has been closed");
                       emitLeftMeeting();
                     }else{
                       externalMeetRoomMonitoring();
@@ -77,7 +78,14 @@ const OfficePage = ({
                 externalMeetRoomMonitoring();
 
               }else{
-                history.push(`/morpheus/room/${room.id}`);
+                const redirectUrl= `/morpheus/room/${room.id}`
+                if (event.ctrlKey) {
+                  window.open(redirectUrl, "_blank");
+                }
+                else{
+                  history.push(redirectUrl);
+                }
+
               }
             }}
           />
