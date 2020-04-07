@@ -232,6 +232,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://angeliski.com.br"><img src="https://avatars3.githubusercontent.com/u/1574240?v=4" width="100px;" alt=""/><br /><sub><b>Rogerio Angeliski</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Code">💻</a> <a href="#maintenance-angeliski" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/diogonicoleti"><img src="https://avatars1.githubusercontent.com/u/4973742?v=4" width="100px;" alt=""/><br /><sub><b>Diogo Nicoleti</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=diogonicoleti" title="Code">💻</a></td>
     <td align="center"><a href="https://arquivei.com.br"><img src="https://avatars1.githubusercontent.com/u/205890?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo F. Verhaeg</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Verhaeg" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/nataliafavareto"><img src="https://avatars1.githubusercontent.com/u/36651634?v=4" width="100px;" alt=""/><br /><sub><b>Natalia Favareto</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=NFavareto" title="Code">💻</a></td>
   </tr>
 </table>
 
