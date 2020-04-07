@@ -56,36 +56,31 @@ const OfficePage = ({
             onEnterMeeting={(event) => {
               emitEnterInRoom(room.id);
               onSetCurrentRoom(room);
-              console.log(room.externalMeetUrl);
 
               if(room.externalMeetUrl){
                 emitStartMeeting();   
                 const externalMeetRoom = window.open(room.externalMeetUrl);
 
-                const externalMeetRoomMonitoring = function(){
-                  window.setTimeout(function() {
-                    console.log(externalMeetRoom.closed);
+                const externalMeetRoomMonitoring = () => {
+                  window.setTimeout(() => {
                     if (externalMeetRoom.closed) {
-                      console.log("The external meeting has been closed");
                       emitLeftMeeting();
                     }else{
                       externalMeetRoomMonitoring();
-                    }
-                    
-                    }, 1000);
+                    } 
+                  }, 1000);
                 }
 
                 externalMeetRoomMonitoring();
 
               }else{
-                const redirectUrl= `/morpheus/room/${room.id}`
+                const redirectUrl = `/morpheus/room/${room.id}`;
                 if (event.ctrlKey) {
                   window.open(redirectUrl, "_blank");
                 }
                 else{
                   history.push(redirectUrl);
                 }
-
               }
             }}
           />
