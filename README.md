@@ -109,7 +109,7 @@ The **#matrix** project has some environment variables that important to define.
 		   }
 		 ]
 
-Other option is to have a remote rooms config file. You can to configure a `ROOMS_SOURCE=REMOTE` and config `ROOMS_DATA` like the example:
+Another option is to have a remote rooms config file (this file needs to be accessible via http/s). You can configure a `ROOMS_SOURCE=REMOTE` and config `ROOMS_DATA` like the example:
 
 		ROOMS_DATA=https://myfilelocation.io/myrooms_data.json
 
