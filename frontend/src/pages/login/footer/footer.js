@@ -4,7 +4,7 @@ import styles from "./footer.module.css";
 
 export const Footer = () => (
   <div
-    className={`row p-5 justify-content-center align-items-center ${styles.bottomdiv}`}
+    className={`justify-content-center align-items-center ${styles.bottomdiv}`}
   >
     <div className={styles.customFooter}>
       <SmallLogo />

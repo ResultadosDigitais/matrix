@@ -14,6 +14,7 @@
 }
 
 .auth_panel {
+  width: 100%;
   background-color: #fff;
   height: 100%;
   font-size: 18px;
@@ -74,5 +75,92 @@
   max-width: 408px;
   border: 1px solid #39414A;
   opacity: .51;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
+}
+
+.form_link {
+  width: 170px;
+  margin: 10px auto 0 auto;
+  font-size: 12px;
+  color: #2196F3;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  text-decoration: solid;
+  cursor: pointer;
+  transition: all .4s ease-in-out;
+}
+.form_link:hover {
+  color: #1F39D8;
+  text-decoration: underline;
+}
+.form_login {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 310px;
+  width: 100%;
+  margin: auto;
+  animation: fadeIn .2s linear;
+}
+.btn_login {
+  width: 100%;
+  border: 1px solid #D5D5D5;
+  padding: 10px 25px;
+  border-radius: 50px;
+  background-color: transparent;
+  font-weight: bold;
+  color: #5D5C5C;
+}
+.btn_login:hover {
+  border: 1px solid #2196F3;
+}
+.form_input {
+  width: 100%;
+  color: #5D5C5C;
+  border: 1px solid #D5D5D5;
+  padding: 10px 25px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+.form_select {
+  width: 100%;
+  background-color: #fff;
+  color: #5D5C5C;
+  border: 1px solid #D5D5D5;
+  padding: 10px 25px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  transition: all .2s ease-in-out;
+}
+.select_div {
+  position: relative;
+  width: 100%;
+}
+.select_arrow {
+  position: absolute;
+  right: 20px;
+  top: 13px;
+  transform: rotate(180deg);
+  transition: all 0.7s ease-in-out;
+}
+.form_select:focus + .select_arrow {
+  transform: rotate(0deg);
+}
+.form_input:focus, .form_input:hover {
+  border: 1px solid #2196F3;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    margin: 0 auto 0 -50px;
+  }
+  to {
+    opacity: 1;
+    margin: auto;
+  }
 }
