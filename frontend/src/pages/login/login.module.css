@@ -28,8 +28,8 @@
 
 .error {
   margin-top: 16px;
-  max-width: 270px;
   text-align: center;
+  font-size: 12px;
 }
 
 .logoTransform {
@@ -150,7 +150,7 @@
 .form_select:focus + .select_arrow {
   transform: rotate(0deg);
 }
-.form_input:focus, .form_input:hover {
+.form_input:focus, .form_input:hover, .form_select:focus, .form_select:hover {
   border: 1px solid #2196F3;
 }
 

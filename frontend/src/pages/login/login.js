@@ -31,7 +31,8 @@ export class Login extends Component {
       roomName: "",
       password: "",
       baseURL: "",
-      secret: ""
+      secret: "",
+      loginError: false
     };
 
     this.matrixProfile = new MatrixProfile();
@@ -73,7 +74,7 @@ export class Login extends Component {
     this.setState({ isTeacher: !(this.state.isTeacher)})
   }
 
-  handleSubmit() {
+   handleSubmit() {
     event.preventDefault()
     try {
       const {fullName, roomId, roomName, baseURL, secret} = this.state
@@ -104,12 +105,15 @@ export class Login extends Component {
         window.open(`${baseURL}/join?${joinParams.toString()}`)
       })
     } catch (e) {
+      this.setState({ loginError: true })
       console.log("não foi possível entrar na sala")
+    }finally {
+      this.setState({ fullName: "", password: "", isTeacher: false})
     }
   }
 
   render() {
-    const { isDark, error, isTeacher, rooms, fullName, roomId } = this.state;
+    const { isDark, error, isTeacher, rooms, fullName, roomId, loginError } = this.state;
     return (
       <div className={styles.containerLogin}>
         <div className={styles.containerForm}>
@@ -130,9 +134,20 @@ export class Login extends Component {
                       <hr className={styles.customHr} />
                       {isTeacher ? (
                         <div className={styles.form_login}>
-                          <form onSubmit={this.handleSubmit}>
-                          <input type="txt" name="userName" autoFocus value={fullName} onChange={(e) => this.setState({ fullName: e.target.value })} className={styles.form_input} placeholder="Nome completo" required />
+                          <form onSubmit={this.handleSubmit} method="POST">
+                          <input
+                          type="txt"
+                          name="userName"
+                          autoFocus
+                          value={fullName}
+                          onChange={(e) => this.setState({ fullName: e.target.value })}
+                          className={styles.form_input}
+                          placeholder="Nome completo"
+                          required
+                          />
+
                           <div className={styles.select_div}>
+
                           <select name="listRooms" className={styles.form_select} value={roomId} onChange={(e) => {
                             const selected = e.target.options.selectedIndex
                             this.setState({ roomId: e.target.value, roomName: e.target.options[selected].innerText })
@@ -143,7 +158,16 @@ export class Login extends Component {
                           </select>
                           <ExpandLessIcon className={styles.select_arrow} />
                           </div>
-                          <input type="password" name="userPassword" className={styles.form_input} value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} placeholder="Senha Institucional" required />
+
+                          <input
+                          type="password"
+                          name="password"
+                          className={styles.form_input}
+                          value={this.state.password}
+                          onChange={(e) => this.setState({ password: e.target.value })}
+                          placeholder="Senha Institucional"
+                          required />
+
                           <button type="submit" value="submit" className={styles.btn_login}>Entrar</button>
                           </form>
                         </div>
@@ -158,6 +182,11 @@ export class Login extends Component {
                         {error && (
                           <p className={clsx("text-danger", styles.error)}>
                           {error}
+                          </p>
+                        )}
+                        {loginError && (
+                          <p className={clsx("text-danger", styles.error)}>
+                          Erro ao tentar criar sala, tente novamente!
                           </p>
                         )}
                       </>
