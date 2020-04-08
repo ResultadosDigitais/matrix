@@ -76,7 +76,6 @@ const fetchFromRemote = (env) => {
 
 const fetchRooms = (strategy) => {
   switch (strategy) {
-    // TODO add suport to fetch from endpoint
     case "ENVIRONMENT":
       return fetchFromEnvironment(process.env);
     case "REMOTE":
