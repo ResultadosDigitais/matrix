@@ -28,8 +28,10 @@ export class Login extends Component {
       isTeacher: false,
       fullName: "",
       roomId: "",
-      roomText: "",
+      roomName: "",
       password: "",
+      baseURL: "",
+      secret: ""
     };
 
     this.matrixProfile = new MatrixProfile();
@@ -47,6 +49,11 @@ export class Login extends Component {
     if (isAuthenticated === "true") {
       this.goToOffice();
     }
+
+    axios.get("http://localhost:8080/rooms").then(response => {
+      this.setState({ baseURL: response.data.environment.url, secret: response.data.environment.secret, rooms: response.data.rooms, roomId: response.data.rooms[0].id, roomName: response.data.rooms[0].name })
+      return response
+    })
   }
 
   onSignIn(profile) {
@@ -67,13 +74,10 @@ export class Login extends Component {
   }
 
   handleSubmit() {
+    event.preventDefault()
     try {
-      const {fullName, roomId, roomName} = this.state
-      const api = axios.create({
-        baseURL: "https://webconference.education/bigbluebutton/api"
-      })
-
-      const secret = "uGmFnUc0I6NxylqDbDkCgRYVOdSIixPt0btbgmVZTJQ"
+      const {fullName, roomId, roomName, baseURL, secret} = this.state
+      const api = axios.create({ baseURL })
 
       const createParams = new URLSearchParams({
         meetingID: roomId,
@@ -90,14 +94,14 @@ export class Login extends Component {
         const joinParams = new URLSearchParams({
           meetingID: roomId,
           redirect: true,
-          password: "ap",
+          password: "mp",
           fullName,
         })
 
         const joinChecksum = sha1(`join${joinParams.toString()}${secret}`)
         joinParams.append("checksum", joinChecksum)
 
-        window.open(`https://webconference.education/bigbluebutton/api/join?${joinParams.toString()}`)
+        window.open(`${baseURL}/join?${joinParams.toString()}`)
       })
     } catch (e) {
       console.log("não foi possível entrar na sala")
@@ -105,7 +109,7 @@ export class Login extends Component {
   }
 
   render() {
-    const { isDark, error, isTeacher } = this.state;
+    const { isDark, error, isTeacher, rooms, fullName, roomId } = this.state;
     return (
       <div className={styles.containerLogin}>
         <div className={styles.containerForm}>
@@ -127,15 +131,15 @@ export class Login extends Component {
                       {isTeacher ? (
                         <div className={styles.form_login}>
                           <form onSubmit={this.handleSubmit}>
-                          <input type="txt" name="userName" autoFocus value={this.state.fullName} onChange={(e) => this.setState({ ...this.state, fullName: e.target.value })} className={styles.form_input} placeholder="Nome completo" required />
+                          <input type="txt" name="userName" autoFocus value={fullName} onChange={(e) => this.setState({ fullName: e.target.value })} className={styles.form_input} placeholder="Nome completo" required />
                           <div className={styles.select_div}>
-                          <select name="listRooms" className={styles.form_select} value={this.state.roomId} onChange={(e) => {
+                          <select name="listRooms" className={styles.form_select} value={roomId} onChange={(e) => {
                             const selected = e.target.options.selectedIndex
-                            this.setState({ ...this.state, roomId: e.target.value, roomName: e.target.options[selected].innerText })
+                            this.setState({ roomId: e.target.value, roomName: e.target.options[selected].innerText })
                           }} placeholder="Sala de Aula Virtual" required>
-                            <option value="room-1" selected default>Sala 1</option>
-                            <option value="room-2">Sala 2</option>
-                            <option value="room-3">Sala 3</option>
+                            {rooms.map((room, index) => {
+                              return <option selected={index === 1}  value={room.id}>{room.name}</option>
+                            })}
                           </select>
                           <ExpandLessIcon className={styles.select_arrow} />
                           </div>
