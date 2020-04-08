@@ -15,7 +15,7 @@
     },
     "GOOGLE_CALLBACK_URL": {
       "description": "The callback Url to the OAuth authentication",
-      "value": "http://localhost:8080/auth/google/callback"
+      "value": "https://${app.name}.herokuapp.com/auth/google/callback"
     },
     "COOKIE_SESSION_SECRET": {
       "description": "The secret of session",

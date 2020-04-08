@@ -16,6 +16,7 @@
     "start-backend": "lerna run start-backend --stream"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.14.1",
     "eslint": "^6.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.2.0",
