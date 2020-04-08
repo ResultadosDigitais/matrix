@@ -1,7 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from "react";
 import clsx from "clsx";
+import axios from "axios"
 
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Footer } from "./footer";
 import { Logo } from "./logo";
 import { Title } from "./title";
@@ -13,8 +15,8 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import styles from "./login.module.css";
 import GoogleButton from "./google-button";
+import sha1 from "../../util/encrypt"
 
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 export class Login extends Component {
   constructor(props) {
@@ -26,6 +28,7 @@ export class Login extends Component {
       isTeacher: false,
       fullName: "",
       roomId: "",
+      roomText: "",
       password: "",
     };
 
@@ -64,12 +67,41 @@ export class Login extends Component {
   }
 
   handleSubmit() {
-    alert( this.state.fullName, this.state.roomId, this.state.password)
-    event.preventDefault();
-    console.log("event",event)
-    console.log(this.state.fullName)
-    console.log(this.state.roomId)
-    console.log(this.state.password)
+    try {
+      const {fullName, roomId, roomName} = this.state
+      const api = axios.create({
+        baseURL: "https://webconference.education/bigbluebutton/api"
+      })
+
+      const secret = "uGmFnUc0I6NxylqDbDkCgRYVOdSIixPt0btbgmVZTJQ"
+
+      const createParams = new URLSearchParams({
+        meetingID: roomId,
+        name: roomName,
+        attendeePW: "ap",
+        moderatorPW: "mp",
+        muteOnStart: true,
+        logoutURL: window.location.href,
+      })
+
+      const createChecksum = sha1(`create${createParams.toString()}${secret}`)
+      createParams.append("checksum", createChecksum)
+      api.get(`/create?${createParams.toString()}`).then(() => {
+        const joinParams = new URLSearchParams({
+          meetingID: roomId,
+          redirect: true,
+          password: "ap",
+          fullName,
+        })
+
+        const joinChecksum = sha1(`join${joinParams.toString()}${secret}`)
+        joinParams.append("checksum", joinChecksum)
+
+        window.open(`https://webconference.education/bigbluebutton/api/join?${joinParams.toString()}`)
+      })
+    } catch (e) {
+      console.log("não foi possível entrar na sala")
+    }
   }
 
   render() {
@@ -95,12 +127,15 @@ export class Login extends Component {
                       {isTeacher ? (
                         <div className={styles.form_login}>
                           <form onSubmit={this.handleSubmit}>
-                          <input type="txt" name="userName" autoFocus value={this.state.fullName} onChange={(e) => this.setState({ fullName: e.target.value })} className={styles.form_input} placeholder="Nome completo" required />
+                          <input type="txt" name="userName" autoFocus value={this.state.fullName} onChange={(e) => this.setState({ ...this.state, fullName: e.target.value })} className={styles.form_input} placeholder="Nome completo" required />
                           <div className={styles.select_div}>
-                          <select name="listRooms" className={styles.form_select} value={this.state.roomId} onChange={(e) => this.setState({ roomId: e.target.value })} placeholder="Sala de Aula Virtual" required>
-                            <option value="teste" selected default>Teste</option>
-                            <option value="teste">Teste</option>
-                            <option value="teste">Teste</option>
+                          <select name="listRooms" className={styles.form_select} value={this.state.roomId} onChange={(e) => {
+                            const selected = e.target.options.selectedIndex
+                            this.setState({ ...this.state, roomId: e.target.value, roomName: e.target.options[selected].innerText })
+                          }} placeholder="Sala de Aula Virtual" required>
+                            <option value="room-1" selected default>Sala 1</option>
+                            <option value="room-2">Sala 2</option>
+                            <option value="room-3">Sala 3</option>
                           </select>
                           <ExpandLessIcon className={styles.select_arrow} />
                           </div>
