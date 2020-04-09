@@ -1,7 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from "react";
 import clsx from "clsx";
+import axios from "axios"
 
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Footer } from "./footer";
 import { Logo } from "./logo";
 import { Title } from "./title";
@@ -13,6 +15,8 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import styles from "./login.module.css";
 import GoogleButton from "./google-button";
+import sha1 from "../../util/encrypt"
+
 
 export class Login extends Component {
   constructor(props) {
@@ -21,9 +25,18 @@ export class Login extends Component {
     this.state = {
       isDark: isDarkTheme(),
       error: null,
+      isTeacher: false,
+      fullName: "",
+      roomId: "",
+      roomName: "",
+      password: "",
+      baseURL: "",
+      secret: "",
+      loginError: false
     };
 
     this.matrixProfile = new MatrixProfile();
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +50,11 @@ export class Login extends Component {
     if (isAuthenticated === "true") {
       this.goToOffice();
     }
+
+    axios.get("http://localhost:8080/rooms").then(response => {
+      this.setState({ baseURL: response.data.environment.url, secret: response.data.environment.secret, rooms: response.data.rooms, roomId: response.data.rooms[0].id, roomName: response.data.rooms[0].name })
+      return response
+    })
   }
 
   onSignIn(profile) {
@@ -52,44 +70,150 @@ export class Login extends Component {
     window.location.href = "./auth/google";
   }
 
+  goToggle() {
+    this.setState({ isTeacher: !(this.state.isTeacher)})
+  }
+
+   handleSubmit() {
+    event.preventDefault()
+    try {
+      const {fullName, roomId, roomName, baseURL, secret} = this.state
+      const api = axios.create({ baseURL })
+
+      const createParams = new URLSearchParams({
+        meetingID: roomId,
+        name: roomName,
+        attendeePW: "ap",
+        moderatorPW: "mp",
+        muteOnStart: true,
+        logoutURL: window.location.href,
+      })
+
+      const createChecksum = sha1(`create${createParams.toString()}${secret}`)
+      createParams.append("checksum", createChecksum)
+      api.get(`/create?${createParams.toString()}`).then(() => {
+        const joinParams = new URLSearchParams({
+          meetingID: roomId,
+          redirect: true,
+          password: "mp",
+          fullName,
+        })
+
+        const joinChecksum = sha1(`join${joinParams.toString()}${secret}`)
+        joinParams.append("checksum", joinChecksum)
+
+        window.open(`${baseURL}/join?${joinParams.toString()}`)
+      })
+    } catch (e) {
+      this.setState({ loginError: true })
+      console.log("não foi possível entrar na sala")
+    }finally {
+      this.setState({ fullName: "", password: "", isTeacher: false})
+    }
+  }
+
   render() {
-    const { isDark, error } = this.state;
+    const { isDark, error, isTeacher, rooms, fullName, roomId, loginError } = this.state;
     return (
       <div className={styles.containerLogin}>
         <div className={styles.containerForm}>
 
              <div className="container-fluid">
-             <div className="row h-100">
-               <div
-                className={clsx("col-auto", "", styles.auth_panel, {
-                  [styles.auth_panel_dark]: isDark
-                })}
-                >
-                <div className="row h-100 justify-content-center align-items-center">
-                  <div className="col px-2 text-center">
-                      <div className={styles.logoTransform}>
-                        <Logo />
-                      </div>
-                    <Title />
-                    <hr className={styles.customHr} />
-                    <GoogleButton
-                      isDark={isDark}
-                      onClick={() => {
-                        this.goToGoogleAuth();
-                      }}
-                      />
-                    {error && (
-                      <p className={clsx("text-danger", styles.error)}>
-                        {error}
-                      </p>
-                    )}
+              <div className="row h-100">
+                <div
+                  className={clsx("col-auto", styles.auth_panel, {
+                    [styles.auth_panel_dark]: isDark
+                  })}
+                  >
+                  <div className="h-100 justify-content-center align-items-start py-4">
+                    <div className="col text-center py-5">
+                        <div className={styles.logoTransform}>
+                          <Logo />
+                        </div>
+                      <Title />
+                      <hr className={styles.customHr} />
+                      {isTeacher ? (
+                        <div className={styles.form_login}>
+                          <form onSubmit={this.handleSubmit} method="POST">
+                          <input
+                          type="txt"
+                          name="userName"
+                          autoFocus
+                          value={fullName}
+                          onChange={(e) => this.setState({ fullName: e.target.value })}
+                          className={styles.form_input}
+                          placeholder="Nome completo"
+                          required
+                          />
+
+                          <div className={styles.select_div}>
+
+                          <select name="listRooms" className={styles.form_select} value={roomId} onChange={(e) => {
+                            const selected = e.target.options.selectedIndex
+                            this.setState({ roomId: e.target.value, roomName: e.target.options[selected].innerText })
+                          }} placeholder="Sala de Aula Virtual" required>
+                            {rooms.map((room, index) => {
+                              return <option selected={index === 1}  value={room.id}>{room.name}</option>
+                            })}
+                          </select>
+                          <ExpandLessIcon className={styles.select_arrow} />
+                          </div>
+
+                          <input
+                          type="password"
+                          name="password"
+                          className={styles.form_input}
+                          value={this.state.password}
+                          onChange={(e) => this.setState({ password: e.target.value })}
+                          placeholder="Senha Institucional"
+                          required />
+
+                          <button type="submit" value="submit" className={styles.btn_login}>Entrar</button>
+                          </form>
+                        </div>
+                      ) : (
+                        <>
+                          <GoogleButton
+                          isDark={isDark}
+                          onClick={() => {
+                            this.goToGoogleAuth();
+                          }}
+                          />
+                        {error && (
+                          <p className={clsx("text-danger", styles.error)}>
+                          {error}
+                          </p>
+                        )}
+                        {loginError && (
+                          <p className={clsx("text-danger", styles.error)}>
+                          Erro ao tentar criar sala, tente novamente!
+                          </p>
+                        )}
+                      </>
+                      )}
+
+                      {isTeacher ? (
+                        <p className={styles.form_link}
+                          onClick={() => {
+                            this.goToggle();
+                        }}>
+                          Aluno, faça seu login aqui
+                        </p>
+                      ) : (
+                        <p className={styles.form_link}
+                        onClick={() => {
+                            this.goToggle();
+                        }}>
+                          Professor, faça seu login aqui
+                          </p>
+                      )}
+
+                    </div>
+                    <Footer />
                   </div>
-                  <Footer />
                 </div>
               </div>
             </div>
-          </div>
-
           </div>
         <div className={styles.containerBackground } />
       </div>
