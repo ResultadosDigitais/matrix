@@ -1,21 +1,19 @@
-import { expect } from "chai";
-
-import { domainAuthorization } from "../../../app/services/auth/authorization";
+import { domainAuthorization } from "./authorization";
 
 describe(".domainAuthorization()", () => {
   describe("when allowed list is empty", () => {
     const isAuthorized = domainAuthorization([]);
 
     it("should return true with email", () => {
-      expect(isAuthorized({ email: "teste@teste.com" })).to.be.true;
+      expect(isAuthorized({ email: "teste@teste.com" })).toBeTruthy();
     });
 
     it("should return true without email", () => {
-      expect(isAuthorized({ email: undefined })).to.be.true;
+      expect(isAuthorized({ email: undefined })).toBeTruthy();
     });
 
     it("should return true with empty email", () => {
-      expect(isAuthorized({ email: "" })).to.be.true;
+      expect(isAuthorized({ email: "" })).toBeTruthy();
     });
   });
 
@@ -23,19 +21,19 @@ describe(".domainAuthorization()", () => {
     const isAuthorized = domainAuthorization(["gmail.com"]);
 
     it("should return true when email is valid", () => {
-      expect(isAuthorized({ email: "teste@gmail.com" })).to.be.true;
+      expect(isAuthorized({ email: "teste@gmail.com" })).toBeTruthy();
     });
 
     it("should return false when email is invalid", () => {
-      expect(isAuthorized({ email: "teste@teste.com" })).to.be.false;
+      expect(isAuthorized({ email: "teste@teste.com" })).toBeFalsy();
     });
 
     it("should return false when email is empty string", () => {
-      expect(isAuthorized({ email: "" })).to.be.false;
+      expect(isAuthorized({ email: "" })).toBeFalsy();
     });
 
     it("should return false when email is undefined", () => {
-      expect(isAuthorized({ email: undefined })).to.be.false;
+      expect(isAuthorized({ email: undefined })).toBeFalsy();
     });
   });
 });
