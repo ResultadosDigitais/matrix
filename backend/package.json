@@ -4,8 +4,11 @@
     "build-backend": "babel ./app -d ./dist",
     "start": "nodemon --exec babel-node ./app/index.js",
     "start-backend": "NODE_ENV=production node ./dist/index.js",
-    "test": "nyc --reporter=text mocha './test/**/*.test.js'",
-    "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;"
+    "test": "jest app/",
+    "test:coverage": "yarn test --collect-coverage",
+    "test:ci": "yarn test:coverage --ci --runInBand --reporters=default",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "test:watch": "yarn test --watch"
   },
   "dependencies": {
     "@godaddy/terminus": "^4.3.1",
@@ -27,8 +30,8 @@
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/preset-env": "^7.4.3",
     "chai": "^4.2.0",
-    "mocha": "^6.2.0",
-    "nyc": "^15.0.0",
+    "jest": "^25.3.0",
+    "jest-junit": "^10.0.0",
     "sinon": "^9.0.1",
     "supertest": "^4.0.2"
   }
