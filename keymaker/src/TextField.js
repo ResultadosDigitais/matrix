@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import MUTextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupPanel = ({ field, model, onChange, ...props }) => {
+const TextField = ({ field, model, onChange, ...props }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <TextField
+      <MUTextField
         {...props}
         variant="outlined"
         className={classes.field}
@@ -28,4 +28,4 @@ const GroupPanel = ({ field, model, onChange, ...props }) => {
   );
 };
 
-export default GroupPanel;
+export default TextField;

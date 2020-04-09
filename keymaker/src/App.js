@@ -4,9 +4,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { reducer, initialState } from "./App.reducer";
+import { reducer, initialState, actions } from "./App.reducer";
 import Editor from "./Editor";
 import Preview from "./Preview";
+import RoomDialog from "./RoomDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const classes = useStyles();
 
-  const { model, config } = state;
+  const { model, config, roomDialog } = state;
 
   return (
     <>
@@ -27,7 +28,10 @@ const App = () => {
         <Grid item xs={12} sm={6} component={Paper} elevation={6} square>
           <Editor
             onChange={(field, value) => {
-              dispatch({ type: "change-model", field, value });
+              dispatch({ type: actions.changeModel, field, value });
+            }}
+            onRoomDialogOpen={() => {
+              dispatch({ type: actions.newRoom });
             }}
             model={model}
           />
@@ -35,12 +39,25 @@ const App = () => {
         <Grid item xs={12} sm={6}>
           <Preview
             onChange={(config) => {
-              dispatch({ type: "change-config", config });
+              dispatch({ type: actions.changeConfig, config });
             }}
             config={config}
           />
         </Grid>
       </Grid>
+      <RoomDialog
+        open={roomDialog.open}
+        room={roomDialog.room}
+        onChangeRoom={(key, value) => {
+          dispatch({ type: actions.changeRoomInDialog, key, value });
+        }}
+        onClose={() => {
+          dispatch({ type: actions.closeRoomDialog });
+        }}
+        onSubmit={(room) => {
+          dispatch({ type: actions.submitRoomDialog, room });
+        }}
+      />
     </>
   );
 };

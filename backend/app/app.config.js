@@ -1,5 +1,9 @@
 import environment from "./helpers/environment";
 
+/**
+ * Attention!
+ * Replicate any changes made here to the Keymaker package
+ */
 module.exports = {
   ROOMS_SOURCE: process.env.ROOMS_SOURCE,
   ENVIRONMENT: process.env.NODE_ENV,

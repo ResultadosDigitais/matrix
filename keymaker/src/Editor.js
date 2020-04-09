@@ -1,19 +1,20 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 import GroupPanel from "./GroupPanel";
 import TextField from "./TextField";
+import ArrayField from "./ArrayField";
+import RoomTable from "./RoomTable";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
+  room: {
+    backgroundColor: theme.palette.background.default,
   },
 }));
 
-const Editor = ({ model, onChange }) => {
+const Editor = ({ model, onChange, onRoomDialogOpen }) => {
   const classes = useStyles();
 
   return (
@@ -37,21 +38,56 @@ const Editor = ({ model, onChange }) => {
           onChange={onChange}
           model={model}
         />
-      </GroupPanel>
-      <GroupPanel title="Salas">
-        <TextField
-          label="Client ID"
-          field="GOOGLE_CLIENT_ID"
+        <ArrayField
+          label="Whitelist domains"
+          field="WHITELIST_DOMAINS"
+          helperText="Example: @matrix.com;@zion.com;@gmail.com"
           onChange={onChange}
           model={model}
         />
       </GroupPanel>
-      <GroupPanel title="Salas">
-        <List>
-          <ListItem>
-            <ListItemText primary="Single-line item" />
-          </ListItem>
-        </List>
+      <GroupPanel title="System">
+        <TextField
+          label="Environment"
+          field="ENVIRONMENT"
+          onChange={onChange}
+          model={model}
+        />
+        <TextField
+          label="Host"
+          field="HOST"
+          onChange={onChange}
+          model={model}
+        />
+        <TextField
+          label="Port"
+          field="PORT"
+          onChange={onChange}
+          model={model}
+        />
+        <TextField
+          label="Cookie session secret"
+          field="COOKIE_SESSION_SECRET"
+          onChange={onChange}
+          model={model}
+        />
+        <TextField
+          label="Cookie session max age"
+          field="COOKIE_SESSION_MAX_AGE"
+          onChange={onChange}
+          model={model}
+        />
+      </GroupPanel>
+      <GroupPanel title="Rooms" className={classes.room}>
+        <RoomTable
+          rooms={model.ROOMS_DATA}
+          onRoomDialogOpen={onRoomDialogOpen}
+        />
+        {model.errors.ROOMS_DATA && (
+          <Box color="error.main">
+            <Typography>{model.errors.ROOMS_DATA}</Typography>
+          </Box>
+        )}
       </GroupPanel>
     </div>
   );
