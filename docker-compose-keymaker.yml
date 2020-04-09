@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  matrix_keymaker:
+    container_name: matrix_keymaker
+    build:
+      context: .
+      dockerfile: Dockerfile-keymaker
+    volumes:
+      - "./keymaker/src:/app/src"
+      - "./keymaker/public:/app/public"
+    ports:
+      - "5000:5000"
+    entrypoint: /app/entrypoint-keymaker.sh

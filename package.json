@@ -12,8 +12,10 @@
     "cover": "env CI=true lerna run cover --stream",
     "build-backend": "lerna run build-backend --stream",
     "build-frontend": "lerna run build-frontend --stream",
+    "build-keymaker": "lerna run build-keymaker --stream",
     "start": "lerna run start --stream",
-    "start-backend": "lerna run start-backend --stream"
+    "start-backend": "lerna run start-backend --stream",
+    "start-keymaker": "env CI=true lerna run start-keymaker --stream"
   },
   "devDependencies": {
     "all-contributors-cli": "^6.14.1",

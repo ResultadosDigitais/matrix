@@ -61,7 +61,22 @@ at [8x8](https://8x8.com). Access the [jitsi GitHub](https://github.com/jitsi/ji
 | <img src="docs/img/matrix-meet-room.png" title="Office page" width="100%"> | <img src="docs/img/matrix-meet-room-sidebar.png" title="Office page with Sidebar" width="100%"> |
 
 ## Installation
+
+### The Keymaker
+
+> "We do only what we're meant to do."
+> - The Keymaker
+
+The Keymaker is a program created to open up the door to the Source for The One. You will find it by the command:
+
+```bash
+docker-compose -f docker-compose-keymaker.yml up
+```
+
+You may find the entryway in: [http://0.0.0.0:5000](http://0.0.0.0:5000)
+
 ### Environment Variables
+
 The **#matrix** project has some environment variables that important to define.
 
 - We are using Google to authorizations, you need create a credential [here](https://developers.google.com/identity/sign-in/web/sign-in) and before define these variables:

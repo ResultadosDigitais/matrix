@@ -1,8 +1,9 @@
 {
   "name": "matrix-keymaker",
+  "homepage": ".",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-keymaker": "react-scripts start",
+    "build-keymaker": "react-scripts build",
     "test": "react-scripts test"
   },
   "dependencies": {

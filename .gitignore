@@ -73,3 +73,6 @@ file/matrix.room.web.json
 
 # VSCode user settings
 .vscode/
+
+# keymaker build
+keymaker/build

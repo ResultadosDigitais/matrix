@@ -1,0 +1,15 @@
+FROM node:10-alpine
+
+WORKDIR /app
+
+EXPOSE 5000
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY keymaker/package.json /app/package.json
+COPY entrypoint-keymaker.sh /app/entrypoint-keymaker.sh
+
+RUN npm install -g serve
+
+RUN npm install
+
