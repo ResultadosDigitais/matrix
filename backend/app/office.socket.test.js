@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const io = require("socket.io-client");
 
 const app = require("../app/app.server");
@@ -58,9 +59,9 @@ describe("Office server", () => {
     connectSocketServer();
 
     socketClient.on("connect", () => {
-      expect(officeController.addUserInRoom.mock.calls.length).toBe(1);
-      expect(officeController.getUserInRoom.mock.calls.length).toBe(1);
-      expect(officeController.getUsersInOfficeByMap.mock.calls.length).toBe(1);
+      expect(officeController.addUserInRoom).toHaveBeenCalledTimes(1);
+      expect(officeController.getUserInRoom).toHaveBeenCalledTimes(1);
+      expect(officeController.getUsersInOfficeByMap).toHaveBeenCalledTimes(1);
       done();
     });
   });

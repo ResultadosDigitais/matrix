@@ -4,11 +4,10 @@
     "build-backend": "babel ./app -d ./dist",
     "start": "nodemon --exec babel-node ./app/index.js",
     "start-backend": "NODE_ENV=production node ./dist/index.js",
-    "test": "jest app/",
-    "test:coverage": "yarn test --collect-coverage",
-    "test:ci": "yarn test:coverage --ci --runInBand --reporters=default",
-    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
-    "test:watch": "yarn test --watch"
+    "test": "jest app/ --watch",
+    "cover": "jest app/ test --collect-coverage",
+    "test:ci": "yarn test:cover --ci --runInBand --reporters=default",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@godaddy/terminus": "^4.3.1",
