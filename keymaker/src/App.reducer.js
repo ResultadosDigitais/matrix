@@ -1,15 +1,17 @@
 import dotenv from "dotenv";
+import uuid from "uuid/v4";
 
 export const actions = {
   changeModel: "change-model",
   changeConfig: "change-config",
-  newRoom: "new-room",
+  openRoomDialog: "open-room-room",
   closeRoomDialog: "close-room-dialog",
+  deleteRoom: "delete-room",
   submitRoomDialog: "submit-room-dialog",
   changeRoomInDialog: "change-room-in-dialog",
 };
 
-const jsonFields = ["ROOMS_DATA", "WHITELIST_DOMAINS"];
+const jsonArrayFields = ["ROOMS_DATA", "WHITELIST_DOMAINS"];
 const primitiveFields = ["ENFORCE_SSL", "PORT", "COOKIE_SESSION_MAX_AGE"];
 
 const adaptConfig = (model) => {
@@ -18,7 +20,7 @@ const adaptConfig = (model) => {
   for (const field in model) {
     if (field === "errors") {
       continue;
-    } else if (jsonFields.includes(field)) {
+    } else if (jsonArrayFields.includes(field)) {
       result.push(`${field}=${JSON.stringify(model[field])}`);
     } else if (primitiveFields.includes(field)) {
       result.push(`${field}=${model[field]}`);
@@ -37,19 +39,21 @@ const adaptModel = (config) => {
   const model = dotenv.parse(config);
   model.errors = {};
 
-  jsonFields.forEach((field) => {
+  jsonArrayFields.forEach((field) => {
     if (model[field]) {
       try {
         model[field] = JSON.parse(model[field]);
       } catch (e) {
-        model[field] = undefined;
-        model.errors.ROOMS_DATA = `Unable to parse ${field}`;
+        model[field] = [];
+        model.errors[field] = `Unable to parse ${field}`;
       }
     }
   });
 
   return model;
 };
+
+const findRoom = (state, id) => state.model.ROOMS_DATA.find((r) => r.id === id);
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -70,12 +74,12 @@ export const reducer = (state, action) => {
         config: action.config,
         model: adaptModel(action.config.text),
       };
-    case actions.newRoom:
+    case actions.openRoomDialog:
       return {
         ...state,
         roomDialog: {
           open: true,
-          room: {},
+          room: action.id ? findRoom(state, action.id) : {},
         },
       };
     case actions.closeRoomDialog:
@@ -87,10 +91,25 @@ export const reducer = (state, action) => {
         },
       };
     case actions.submitRoomDialog: {
+      const { id } = state.roomDialog.room;
+      let newRooms;
+
+      if (id) {
+        newRooms = state.model.ROOMS_DATA.slice();
+        const index = newRooms.findIndex((r) => r.id === id);
+        newRooms[index] = state.roomDialog.room;
+      } else {
+        newRooms = [].concat(state.model.ROOMS_DATA, {
+          id: uuid(),
+          ...state.roomDialog.room,
+        });
+      }
+
       const model = {
         ...state.model,
-        ROOMS_DATA: [].concat(state.model.ROOMS_DATA, state.roomDialog.room),
+        ROOMS_DATA: newRooms,
       };
+
       return {
         ...state,
         model,
@@ -117,6 +136,23 @@ export const reducer = (state, action) => {
           ...state.roomDialog,
           room,
         },
+      };
+    }
+    case actions.deleteRoom: {
+      const newRooms = state.model.ROOMS_DATA;
+      const index = newRooms.findIndex((r) => r.id === action.id);
+
+      newRooms.splice(index, 1);
+
+      const model = {
+        ...state.model,
+        ROOMS_DATA: newRooms,
+      };
+
+      return {
+        ...state,
+        model,
+        config: adaptConfig(model),
       };
     }
     default:

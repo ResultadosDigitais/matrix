@@ -21,7 +21,7 @@ const GroupPanel = ({ title, children }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
+      <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>{title}</Typography>
         </ExpansionPanelSummary>

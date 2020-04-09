@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Editor = ({ model, onChange, onRoomDialogOpen }) => {
+const Editor = ({ model, onChange, onRoomDialogOpen, onRoomDelete }) => {
   const classes = useStyles();
 
   return (
@@ -82,6 +82,7 @@ const Editor = ({ model, onChange, onRoomDialogOpen }) => {
         <RoomTable
           rooms={model.ROOMS_DATA}
           onRoomDialogOpen={onRoomDialogOpen}
+          onRoomDelete={onRoomDelete}
         />
         {model.errors.ROOMS_DATA && (
           <Box color="error.main">

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ArrayField = ({ field, model, onChange, ...props }) => {
+const ArrayField = ({ field, model, onChange, label, ...props }) => {
   const classes = useStyles();
 
   const arr = model[field] || [];
@@ -22,6 +22,8 @@ const ArrayField = ({ field, model, onChange, ...props }) => {
       <TextField
         {...props}
         variant="outlined"
+        label={model.errors[field] || label}
+        error={!!model.errors[field]}
         className={classes.field}
         value={value}
         onChange={(event) => {

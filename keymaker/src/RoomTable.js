@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RoomTable = ({ onRoomDialogOpen, rooms }) => {
+const RoomTable = ({ onRoomDialogOpen, onRoomDelete, rooms }) => {
   const classes = useStyles();
 
   return (
@@ -78,7 +78,15 @@ const RoomTable = ({ onRoomDialogOpen, rooms }) => {
                   <Tooltip title="Delete room">
                     <IconButton
                       aria-label="Delete room"
-                      onClick={() => onRoomDialogOpen(room.id)}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Do you confirm and delete the "${room.name}"?`
+                          )
+                        ) {
+                          onRoomDelete(room.id);
+                        }
+                      }}
                     >
                       <Delete fontSize="small" />
                     </IconButton>

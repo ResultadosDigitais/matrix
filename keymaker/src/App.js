@@ -30,8 +30,11 @@ const App = () => {
             onChange={(field, value) => {
               dispatch({ type: actions.changeModel, field, value });
             }}
-            onRoomDialogOpen={() => {
-              dispatch({ type: actions.newRoom });
+            onRoomDialogOpen={(id) => {
+              dispatch({ type: actions.openRoomDialog, id });
+            }}
+            onRoomDelete={(id) => {
+              dispatch({ type: actions.deleteRoom, id });
             }}
             model={model}
           />
