@@ -51,7 +51,7 @@ export class Login extends Component {
       this.goToOffice();
     }
 
-    axios.get("http://localhost:8080/rooms").then(response => {
+    axios.get("/rooms").then(response => {
       this.setState({ baseURL: response.data.environment.url, secret: response.data.environment.secret, rooms: response.data.rooms, roomId: response.data.rooms[0].id, roomName: response.data.rooms[0].name })
       return response
     })
