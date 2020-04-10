@@ -9,6 +9,9 @@
     "test:ci": "yarn cover --ci --runInBand --reporters=default",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
+  "jest": {
+    "roots" : ["<rootDir>/app/"]
+  },
   "dependencies": {
     "@godaddy/terminus": "^4.3.1",
     "body-parser": "^1.19.0",
