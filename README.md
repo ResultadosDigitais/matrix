@@ -64,7 +64,8 @@ at [8x8](https://8x8.com). Access the [jitsi GitHub](https://github.com/jitsi/ji
 ### Environment Variables
 The **#matrix** project has some environment variables that important to define.
 
-- We are using Google to authorizations, you need create a credential [here](https://developers.google.com/identity/sign-in/web/sign-in) and before define these variables:
+- We are using Google to authorizations, you only need to configure the Google API credentials following [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) and after define these variables:
+
 
 		GOOGLE_CLIENT_ID=${paste_your_client_id_here}
 		GOOGLE_SECRET={paste_your_secret_here}
