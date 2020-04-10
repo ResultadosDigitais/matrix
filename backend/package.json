@@ -6,7 +6,7 @@
     "start-backend": "NODE_ENV=production node ./dist/index.js",
     "test": "jest app/ --watch",
     "cover": "jest app/ test --collect-coverage",
-    "test:ci": "yarn test:cover --ci --runInBand --reporters=default",
+    "test:ci": "yarn cover --ci --runInBand --reporters=default",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
