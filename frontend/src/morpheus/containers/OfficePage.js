@@ -61,7 +61,7 @@ const OfficePage = ({
           meetingID: roomId,
           name: roomName,
           attendeePW: 'ap',
-          moderatorPW: environment.password,
+          moderatorPW: environment.password || 'mp',
           muteOnStart: true,
           logoutURL: window.location.href,
         })
