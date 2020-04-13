@@ -14,7 +14,8 @@ import {
 import {
   selectOfficeFilter,
   selectCurrentUser,
-  selectSystemSettings
+  selectSystemSettings,
+  selectInstitution
 } from "../store/selectors";
 import {
   OfficeFilterPropType,
@@ -29,10 +30,11 @@ const OfficeAppBar = ({
   onLogout,
   officeFilter,
   settings,
-  currentUser
+  currentUser,
+  institution
 }) => (
   <>
-    <AppBarTitle><img src="/images/appBarLogo.svg" alt="Logo da Instituição"/></AppBarTitle>
+    {institution && <AppBarTitle><img style={{ maxHeight: "50px" }} src={institution.logo || "/images/appBarLogo.svg"} alt="Logo da Instituição"/></AppBarTitle>}
     <MenuOffice
       filter={officeFilter}
       onChangeFilter={onChangeOfficeFilter}
@@ -67,7 +69,8 @@ OfficeAppBar.defaultProps = {
 const mapStateToProps = state => ({
   officeFilter: selectOfficeFilter(state),
   currentUser: selectCurrentUser(state),
-  settings: selectSystemSettings(state)
+  settings: selectSystemSettings(state),
+  institution: selectInstitution(state)
 });
 
 const mapDispatchToProps = {

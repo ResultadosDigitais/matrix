@@ -61,7 +61,7 @@ const OfficePage = ({
           meetingID: roomId,
           name: roomName,
           attendeePW: 'ap',
-          moderatorPW: 'mp',
+          moderatorPW: environment.password,
           muteOnStart: true,
           logoutURL: window.location.href,
         })
@@ -71,7 +71,7 @@ const OfficePage = ({
         api.get(`/create?${createParams.toString()}`).then(() => { const joinParams = new URLSearchParams({
           meetingID: roomId,
           redirect: true,
-          password: 'mp',
+          password: 'ap',
           fullName: userName,
         })
 

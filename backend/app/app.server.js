@@ -15,8 +15,13 @@ import {
   CUSTOM_STYLE,
   COOKIE_SESSION_SECRET,
   COOKIE_SESSION_MAX_AGE,
-  REACT_APP_BIGBLUEBUTTON_URL,
-  REACT_APP_BIGBLUEBUTTON_SECRET,
+  BIGBLUEBUTTON_URL,
+  BIGBLUEBUTTON_SECRET,
+  BIGBLUEBUTTON_PASSWORD,
+  INSTITUTION_NAME,
+  INSTITUTION_SLOGAN,
+  LOGO_URL,
+  BACKGROUND_IMAGE_URL,
 } from "./app.config";
 
 const app = express();
@@ -78,8 +83,15 @@ fetchRooms(ROOMS_SOURCE)
     app.locals.roomsDetail = {
       rooms: roomsData,
       environment: {
-        url: REACT_APP_BIGBLUEBUTTON_URL,
-        secret: REACT_APP_BIGBLUEBUTTON_SECRET,
+        url: BIGBLUEBUTTON_URL,
+        secret: BIGBLUEBUTTON_SECRET,
+        password: BIGBLUEBUTTON_PASSWORD,
+      },
+      institution: {
+        name: INSTITUTION_NAME,
+        slogan: INSTITUTION_SLOGAN,
+        logo: LOGO_URL,
+        background: BACKGROUND_IMAGE_URL,
       },
     };
   })

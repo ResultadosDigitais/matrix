@@ -30,7 +30,7 @@ const useSocket = (
     axios
       .get("/rooms")
       .then(response => {
-        const {rooms, environment} = response.data;
+        const {rooms, environment, institution} = response.data;
         const savedRoomId = getCurrentRoomId();
         let currentRoom = rooms.find(r => r.id === savedRoomId);
 
@@ -38,7 +38,7 @@ const useSocket = (
           [currentRoom] = rooms;
           emitEnterInRoom(currentRoom.id);
         }
-        onSetEnvironment(environment);
+        onSetEnvironment({...environment, institution });
         onAddRooms(rooms);
         onSetCurrentRoom(currentRoom);
         setLoggedIn(true);

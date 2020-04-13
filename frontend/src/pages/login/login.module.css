@@ -64,7 +64,6 @@
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-image: url('/images/bg.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -113,9 +112,13 @@
   background-color: transparent;
   font-weight: bold;
   color: #5D5C5C;
+  outline: none;
 }
 .btn_login:hover {
   border: 1px solid #2196F3;
+}
+.btn_login:focus {
+  outline: none;
 }
 .form_input {
   width: 100%;
@@ -124,6 +127,7 @@
   padding: 10px 25px;
   border-radius: 50px;
   margin-bottom: 10px;
+  outline: none;
 }
 .form_select {
   width: 100%;
@@ -135,6 +139,7 @@
   margin-bottom: 10px;
   -webkit-appearance: none;
   transition: all .2s ease-in-out;
+  outline: none;
 }
 .select_div {
   position: relative;
