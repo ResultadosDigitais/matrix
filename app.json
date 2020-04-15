@@ -49,7 +49,7 @@
       "description": "Todos os usuário devem entrar SEMPRE com poderes de moderadores?",
       "value": "false"
     },
-    "BIGBLUEBUTTON_MAX_PARTICIPANS: {
+    "BIGBLUEBUTTON_MAX_PARTICIPANS": {
       "description": "Quantidade Máxima de Participantes por sala de aula",
       "value": "70"
     },
