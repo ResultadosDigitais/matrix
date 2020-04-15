@@ -164,32 +164,31 @@ If you prefer, you can run **#matrix** in Heroku:
 
 If you will run in production we strongly recommend you close your environment using an internal VPN. In this solution everybody with the link and a valid google credential can enter your virtual office. Because this is important for you to maintain your environment closed. Or you can define a variable `WHITELIST_DOMAINS` to limit only authorized users to enter in the **#matrix**. You have to choose a strong key to the `COOKIE_SESSION_SECRET` and have to put in `GOOGLE_CALLBACK_URL` your production domain.
 
-GOOGLE_CLIENT_ID=833875294305-5082ophis3b20aokui3kgudja92kts07.apps.googleusercontent.com
-GOOGLE_SECRET=MoGShTOdI0R3JJ0zfBjIj5hn
-GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
-COOKIE_SESSION_SECRET=matrix-session
-COOKIE_SESSION_MAX_AGE=2592000000
-ENFORCE_SSL=false
-WHITELIST_DOMAINS="['@gmail.com','@blox.education','@nave.rs']"
-BIGBLUEBUTTON_URL=https://bbbapi.com/bigbluebutton/api
-BIGBLUEBUTTON_SECRET=mysupersecrebigbluebuttonhash
-BIGBLUEBUTTON_PASSWORD=professorpassword
-BIGBLUEBUTTON_ALWAYS_MODERATOR=true
-BIGBLUEBUTTON_MAX_PARTICIPANTS=10
-BIGBLUEBUTTON_ENABLE_RECORD=false
-BIGBLUEBUTTON_DURATION=40
-BIGBLUEBUTTON_CONTROL_RECORDING=true
-BIGBLUEBUTTON_WEBCAM_ONLY_MODERATOR=false
-BIGBLUEBUTTON_DISABLE_WEBCAM=false
-BIGBLUEBUTTON_PRESENTATION=true
-INSTITUTION_NAME=Nome da instituição
-INSTITUTION_SLOGAN=Frase abaixo do logo
-LOGO_URL=https://www.google.com/logos/doodles/2020/thank-you-grocery-workers-6753651837108758.2-law.gif
-BACKGROUND_IMAGE_URL=https://images.unsplash.com/photo-1586768402091-1b4015017d8a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80
-ROOMS_SOURCE=ENVIRONMENT
-ROOMS_DATA=[{"id":"papo-de-buteco","name":"Papo de Buteco","header_color":"#4EB585","blox_color":"#56D59A"},{"id":"implementacao-pedagogica","name":"Implementação Pedagógica","header_color":"#2196F3","blox_color":"#2380C1"},{"id":"dev","name":"Dev","header_color":"#EA8B68","blox_color":"#D66C45"},{"id":"comercial","name":"Comercial","header_color":"#2196F3","blox_color":"#13628E"},{"id":"product-owner-scrum-master","name":"Product Owner/Scrum Master","header_color":"#D82E60","blox_color":"#B4254F"}]
 
-		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
+    GOOGLE_CLIENT_ID=833875294305-5082ophis3b20aokui3kgudja92kts07.apps.googleusercontent.com
+    GOOGLE_SECRET=MoGShTOdI0R3JJ0zfBjIj5hn
+    GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
+    COOKIE_SESSION_SECRET=matrix-session
+    COOKIE_SESSION_MAX_AGE=2592000000
+    ENFORCE_SSL=false
+    WHITELIST_DOMAINS="['@gmail.com','@blox.education','@nave.rs']"
+    BIGBLUEBUTTON_URL=https://bbbapi.com/bigbluebutton/api
+    BIGBLUEBUTTON_SECRET=mysupersecrebigbluebuttonhash
+    BIGBLUEBUTTON_PASSWORD=professorpassword
+    BIGBLUEBUTTON_ALWAYS_MODERATOR=true
+    BIGBLUEBUTTON_MAX_PARTICIPANTS=10
+    BIGBLUEBUTTON_ENABLE_RECORD=false
+    BIGBLUEBUTTON_DURATION=40
+    BIGBLUEBUTTON_CONTROL_RECORDING=true
+    BIGBLUEBUTTON_WEBCAM_ONLY_MODERATOR=false
+    BIGBLUEBUTTON_DISABLE_WEBCAM=false
+    BIGBLUEBUTTON_PRESENTATION=true
+    INSTITUTION_NAME=Nome da instituição
+    INSTITUTION_SLOGAN=Frase abaixo do logo
+    LOGO_URL=https://www.google.com/logos/doodles/2020/thank-you-grocery-workers-6753651837108758.2-law.gif
+    BACKGROUND_IMAGE_URL=https://images.unsplash.com/photo-1586768402091-1b4015017d8a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80
+    ROOMS_SOURCE=ENVIRONMENT
+    ROOMS_DATA=[{"id":"papo-de-buteco","name":"Papo de Buteco","header_color":"#4EB585","blox_color":"#56D59A"},{"id":"implementacao-pedagogica","name":"Implementação Pedagógica","header_color":"#2196F3","blox_color":"#2380C1"},{"id":"dev","name":"Dev","header_color":"#EA8B68","blox_color":"#D66C45"},{"id":"comercial","name":"Comercial","header_color":"#2196F3","blox_color":"#13628E"},{"id":"product-owner-scrum-master","name":"Product Owner/Scrum Master","header_color":"#D82E60","blox_color":"#B4254F"}]
 
 ## Versions
 
