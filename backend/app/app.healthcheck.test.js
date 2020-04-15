@@ -1,13 +1,13 @@
 const request = require("supertest");
-const healthCheck = require("../app/app.healthcheck");
-const app = require("../app/app.server");
+const healthCheck = require("./app.healthcheck");
+const app = require("./app.server");
 
 describe("Unit testing the /healthz route", () => {
   let server;
-  beforeEach(function () {
+  beforeEach(() => {
     server = app.listen();
   });
-  afterEach(function () {
+  afterEach(() => {
     server.close();
   });
 
@@ -16,7 +16,7 @@ describe("Unit testing the /healthz route", () => {
     request(server)
       .get("/healthz")
       .expect(200, {
-        status: 'ok'
+        status: "ok",
       }, done);
   });
 });

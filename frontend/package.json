@@ -2,7 +2,8 @@
   "name": "matrix-frontend",
   "scripts": {
     "build-frontend": "webpack --mode production --config webpack.production.js",
-    "test": "nyc --reporter=text mocha './test/**/*.test.js'",
+    "test": "nyc --reporter=text mocha './test/**/*.test.js' --watch",
+    "test:ci": "nyc --reporter=text mocha './test/**/*.test.js'",
     "watch-test": "npm test -- --watch --recursive",
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;",
     "start": "webpack --watch --config webpack.development.js"

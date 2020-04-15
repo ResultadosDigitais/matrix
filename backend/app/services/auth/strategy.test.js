@@ -1,6 +1,4 @@
-import { expect } from "chai";
-
-import { googleProfileToMatrixProfile } from "../../../app/services/auth/strategy";
+import { googleProfileToMatrixProfile } from "./strategy";
 
 describe("googleProfileToMatrixProfile()", () => {
   const defaultProfile = {
@@ -19,7 +17,7 @@ describe("googleProfileToMatrixProfile()", () => {
   };
 
   it("should adapt google profile", () => {
-    expect(googleProfileToMatrixProfile(defaultProfile)).to.be.deep.equal(
+    expect(googleProfileToMatrixProfile(defaultProfile)).toEqual(
       defaultResult
     );
   });
@@ -30,7 +28,7 @@ describe("googleProfileToMatrixProfile()", () => {
       emails: undefined
     };
 
-    expect(googleProfileToMatrixProfile(profile)).to.be.deep.equal({
+    expect(googleProfileToMatrixProfile(profile)).toEqual({
       ...defaultResult,
       email: undefined
     });
@@ -42,7 +40,7 @@ describe("googleProfileToMatrixProfile()", () => {
       emails: []
     };
 
-    expect(googleProfileToMatrixProfile(profile)).to.be.deep.equal({
+    expect(googleProfileToMatrixProfile(profile)).toEqual({
       ...defaultResult,
       email: undefined
     });
@@ -54,7 +52,7 @@ describe("googleProfileToMatrixProfile()", () => {
       photos: undefined
     };
 
-    expect(googleProfileToMatrixProfile(profile)).to.be.deep.equal({
+    expect(googleProfileToMatrixProfile(profile)).toEqual({
       ...defaultResult,
       imageUrl: undefined
     });
@@ -66,7 +64,7 @@ describe("googleProfileToMatrixProfile()", () => {
       photos: []
     };
 
-    expect(googleProfileToMatrixProfile(profile)).to.be.deep.equal({
+    expect(googleProfileToMatrixProfile(profile)).toEqual({
       ...defaultResult,
       imageUrl: undefined
     });
