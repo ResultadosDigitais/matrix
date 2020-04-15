@@ -66,6 +66,7 @@ const OfficePage = ({
           moderatorPW: environment.password || 'mp',
           muteOnStart: true,
           logoutURL: window.location.href,
+          ...(environment.welcome !== undefined && {welcome: environment.welcome}),
           ...(environment.maxParticipants !== undefined && {maxParticipants: environment.maxParticipants}),
           ...(environment.record !== undefined && {record: environment.record}),
           ...(environment.duration !== undefined && {duration: environment.duration}),
