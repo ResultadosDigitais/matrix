@@ -39,7 +39,7 @@ const useSocket = (
           emitEnterInRoom(currentRoom.id);
         }
         onSetEnvironment({...environment, institution });
-        onAddRooms(rooms);
+        onAddRooms([{id: "lobby", name: "Lobby", header_color: "#aaa", blox_color: "#444"}, ...rooms]);
         onSetCurrentRoom(currentRoom);
         setLoggedIn(true);
         toggleLoading(false);

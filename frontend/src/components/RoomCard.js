@@ -104,7 +104,6 @@ const StyledTypography = withStyles(() => ({
 
 const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onEnterRoom, enteringVirtualRooom }) => {
   const [isExpanded, toggleExpand] = useState(false);
-
   const props = { headerColor, bloxColor }
 
   const classes = useStyles(props);
@@ -152,12 +151,14 @@ const RoomCard = ({ id, name, users, headerColor, bloxColor, meetingEnabled, onE
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <ColorButton size="small" className={classes.margin} color="primary" onClick={onEnterRoom}>
-         Entrar na sala
-        </ColorButton>
         {meetingEnabled && (
-          <ColorButton size="small" color="primary" onClick={() => enteringVirtualRooom(id, name)}>
-            Participar da aula
+          <ColorButton size="small" color="primary" onClick={() => {
+            if (id !== "lobby") {
+              enteringVirtualRooom(id, name)
+            }
+            onEnterRoom()
+          }}>
+            {id === "lobby" ? "Entrar na sala" : "Participar da aula"}
           </ColorButton>
         )}
       </CardActions>

@@ -50,6 +50,8 @@ const OfficePage = ({
   const enteringVirtualRooom = (roomId, roomName) => {
       try {
         setIsLoading(true)
+        const bbb = window.open('', '_blank')
+        bbb.document.write('Carregando sala de aula, por favor aguarde...')
         const userName = JSON.parse(localStorage.getItem('user')).name
         const api = axios.create({
           baseURL: environment.url
@@ -64,6 +66,13 @@ const OfficePage = ({
           moderatorPW: environment.password || 'mp',
           muteOnStart: true,
           logoutURL: window.location.href,
+          ...(environment.maxParticipants !== undefined && {maxParticipants: environment.maxParticipants}),
+          ...(environment.record !== undefined && {record: environment.record}),
+          ...(environment.duration !== undefined && {duration: environment.duration}),
+          ...(environment.allowStartStopRecording !== undefined && {allowStartStopRecording: environment.allowStartStopRecording}),
+          ...(environment.webcamsOnlyForModerator !== undefined && {webcamsOnlyForModerator: environment.webcamsOnlyForModerator}),
+          ...(environment.lockSettingsDisableCam !== undefined && {lockSettingsDisableCam: environment.lockSettingsDisableCam}),
+          ...(environment.presentation !== undefined && {presentation: environment.presentation}),
         })
 
         const createChecksum = sha1(`create${createParams.toString()}${secret}`)
@@ -71,19 +80,20 @@ const OfficePage = ({
         api.get(`/create?${createParams.toString()}`).then(() => { const joinParams = new URLSearchParams({
           meetingID: roomId,
           redirect: true,
-          password: 'ap',
+          password: environment.alwaysModerator ? environment.password : 'ap',
           fullName: userName,
         })
 
         const joinChecksum = sha1(`join${joinParams.toString()}${secret}`)
         joinParams.append('checksum', joinChecksum)
 
-        window.open(`${environment.url}/join?${joinParams.toString()}`)
-       })
-       setIsLoading(false)
-      }catch {
-        console.log('não foi possível entrar na sala')
-      }
+        bbb.location.href = `${environment.url}/join?${joinParams.toString()}`
+      })
+      setIsLoading(false)
+    } catch {
+      console.log('não foi possível entrar na sala')
+      bbb.close()
+    }
   }
 
   return (
