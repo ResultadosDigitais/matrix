@@ -45,6 +45,10 @@
       "description": "Senha para professores logarem na solução",
       "value": "salavirtual@blox"
     },
+    "BIGBLUEBUTTON_WELCOME_MESSAGE": {
+      "description": "Mensagem de boas-vindas para a Sala de Aula virtual. Keywords (%%CONFNAME%%, %%DIALNUM%%, %%CONFNUM%%) ",
+      "value": ""
+    },
     "BIGBLUEBUTTON_ALWAYS_MODERATOR": {
       "description": "Todos os usuário devem entrar SEMPRE com poderes de moderadores?",
       "value": "false"
