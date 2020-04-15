@@ -99,7 +99,7 @@
     },
     "ROOMS_DATA": {
       "description": "Nome e cores das salas de aula",
-      "value": "[{"id":"papo-de-buteco","name":"Papo de Buteco","header_color":"#4EB585","blox_color":"#56D59A"},{"id":"implementacao-pedagogica","name":"Implementação Pedagógica","header_color":"#2196F3","blox_color":"#2380C1"},{"id":"dev","name":"Dev","header_color":"#EA8B68","blox_color":"#D66C45"},{"id":"comercial","name":"Comercial","header_color":"#2196F3","blox_color":"#13628E"},{"id":"product-owner-scrum-master","name":"Product Owner/Scrum Master","header_color":"#D82E60","blox_color":"#B4254F"}]"
+      "value": ""
     }
 
   }
