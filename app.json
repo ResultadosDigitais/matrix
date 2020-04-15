@@ -1,8 +1,8 @@
 {
-  "name": "Matrix",
-  "description": "Matrix produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment",
-  "repository": "https://github.com/ResultadosDigitais/matrix",
-  "keywords": ["online workspace", "virtual office", "remote teams"],
+  "name": "Sala de Aula Virtual Blox",
+  "description": "Ambiente simples e rápido para aulas ao vivo à distância",
+  "repository": "https://github.com/sistema-blox/matrix/",
+  "keywords": ["online classroom", "virtual classroom", "remote education"],
   "stack": "container",
   "env": {
     "GOOGLE_CLIENT_ID": {
@@ -26,12 +26,81 @@
       "value": "2592000000"
     },
     "WHITELIST_DOMAINS": {
-      "description": "The list of valid email domains to enter in matrix",
+      "description": "The list of valid email domains to enter in the classroom",
       "value": "[]"
     },
     "ENFORCE_SSL": {
       "description": "If you running in HTTPS this variable forces redirect to HTTPS when user access with HTTP",
       "value": "true"
+    },
+   "BIGBLUEBUTTON_URL": {
+      "description": "URL to the BBB server",
+      "value": "https://bbbapi.com/bigbluebutton/api"
+    },
+    "BIGBLUEBUTTON_SECRET": {
+      "description": "Share Secret of the BBB server",
+      "value": "gXXXXXXXXXXXXXXss"
+    },
+    "BIGBLUEBUTTON_PASSWORD": {
+      "description": "Senha para professores logarem na solução",
+      "value": "salavirtual@blox"
+    },
+    "BIGBLUEBUTTON_ALWAYS_MODERATOR": {
+      "description": "Todos os usuário devem entrar SEMPRE com poderes de moderadores?",
+      "value": "false"
+    },
+    "BIGBLUEBUTTON_MAX_PARTICIPANTS: {
+      "description": "Quantidade Máxima de Participantes por sala de aula",
+      "value": "70"
+    },
+    "BIGBLUEBUTTON_ENABLE_RECORD": {
+      "description": "Liberar gravações das aulas?",
+      "value": "false"
+    },
+    "BIGBLUEBUTTON_DURATION": {
+      "description": "Deseja estabelecer um tempo máximo de duração para cada utilização da sala virtual? (Digite 0 para ilimitado)",
+      "value": "0"
+    },
+   "GOOGLE_CLIENT_ID": {
+      "description": "Google Client Id to the OAuth authentication",
+      "value": "xxxxxxx.apps.googleusercontent.com"
+    },
+    "BIGBLUEBUTTON_WEBCAM_ONLY_MODERATOR": {
+      "description": "O Professor/Moderador pode ativar e desativar a gravação da aula?",
+      "value": "true"
+    },
+    "BIGBLUEBUTTON_DISABLE_WEBCAM": {
+      "description": "Deseja desabilitar webcams?",
+      "value": "false"
+    },
+    "BIGBLUEBUTTON_PRESENTATION": {
+      "description": "Defina a URL de um arquivo PDF para servir de Quadro Branco virtual (Max 2MB)",
+      "value": ""
+    },
+    "LOGO_URL": {
+      "description": "URL do logo da Instituição (PNG com fundo Transparente)",
+      "value": "https://instituicao.com/logo.png"
+    },
+    "BACKGROUND_IMAGE_URL": {
+      "description": "URL da Imagem de Fundo da Tela de Login",
+      "value": "https://instituicao.com/background.png"
+    },
+    "INSTITUTION_SLOGAN": {
+      "description": "Frase da Instituição",
+      "value": "Preparando as melhores cabeças"
+    },
+    "LOGO_URL": {
+      "description": "URL do logo da Instituição (PNG com fundo Transparente)",
+      "value": "https://instituicao.com/logo.png"
+    },
+    "ROOMS_SOURCE": {
+      "description": "Origem das salas (Default: ENVIRONMENT)",
+      "value": "ENVIRONMENT"
+    },
+    "ROOMS_DATA": {
+      "description": "Nome e cores das salas de aula",
+      "value": "[{"id":"papo-de-buteco","name":"Papo de Buteco","header_color":"#4EB585","blox_color":"#56D59A"},{"id":"implementacao-pedagogica","name":"Implementação Pedagógica","header_color":"#2196F3","blox_color":"#2380C1"},{"id":"dev","name":"Dev","header_color":"#EA8B68","blox_color":"#D66C45"},{"id":"comercial","name":"Comercial","header_color":"#2196F3","blox_color":"#13628E"},{"id":"product-owner-scrum-master","name":"Product Owner/Scrum Master","header_color":"#D82E60","blox_color":"#B4254F"}]"
     }
+
   }
 }
