@@ -1,5 +1,6 @@
 import nock from "nock";
 import fs from "fs";
+import path from "path";
 import fetchRooms from "./rooms";
 
 
@@ -74,6 +75,7 @@ describe(".fetchRooms", () => {
   describe("when strategy is not defined", () => {
     const filename = "../file/matrix.room.web.json";
     beforeEach(() => {
+      fs.mkdirSync(path.dirname(filename), { recursive: true });
       fs.writeFileSync(filename, JSON.stringify(validRoomsData));
     });
 
