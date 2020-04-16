@@ -15,8 +15,12 @@ describe("Unit testing the /healthz route", () => {
     healthCheck(server);
     request(server)
       .get("/healthz")
-      .expect(200, {
-        status: "ok",
-      }, done);
+      .expect(200)
+      .then((response) => {
+        expect(response.body.status).toBe("ok");
+        expect(response.body['0']).toBeDefined();
+        expect(response.body['0'].length).toBe(10);
+      })
+      .then(done);
   });
 });
