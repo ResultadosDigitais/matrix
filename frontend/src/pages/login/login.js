@@ -33,6 +33,15 @@ export class Login extends Component {
       baseURL: "",
       bbbPassword: "",
       secret: "",
+      alwaysModerator: undefined,
+      welcome: undefined,
+      maxParticipants: undefined,
+      record: undefined,
+      duration: undefined,
+      allowStartStopRecording: undefined,
+      webcamsOnlyForModerator: undefined,
+      lockSettingsDisableCam: undefined,
+      presentation: undefined,
       institution: {},
       loginError: false
     };
@@ -58,6 +67,15 @@ export class Login extends Component {
         baseURL: response.data.environment.url,
         secret: response.data.environment.secret,
         bbbPassword: response.data.environment.password,
+        alwaysModerator: response.data.environment.alwaysModerator,
+        welcome: response.data.environment.welcome,
+        maxParticipants: response.data.environment.maxParticipants,
+        record: response.data.environment.record,
+        duration: response.data.environment.duration,
+        allowStartStopRecording: response.data.environment.allowStartStopRecording,
+        webcamsOnlyForModerator: response.data.environment.webcamsOnlyForModerator,
+        lockSettingsDisableCam: response.data.environment.lockSettingsDisableCam,
+        presentation: response.data.environment.presentation,
         rooms: response.data.rooms, roomId: response.data.rooms[0].id,
         roomName: response.data.rooms[0].name,
         institution: response.data.institution,
@@ -86,8 +104,17 @@ export class Login extends Component {
   handleSubmit() {
     event.preventDefault()
     try {
-      const { fullName, password, roomId, roomName, baseURL, secret, bbbPassword } = this.state
+      const { fullName, password, roomId, roomName, baseURL, secret, bbbPassword, welcome,
+        maxParticipants,
+        record,
+        duration,
+        allowStartStopRecording,
+        webcamsOnlyForModerator,
+        lockSettingsDisableCam,
+        presentation } = this.state
 
+      const bbb = window.open("", "_blank")
+      bbb.document.write("Carregando sala de aula, por favor aguarde...")
       if (password !== bbbPassword) {
         this.setState({ ...this.state, error: "A senha informada está incorreta" })
         return
@@ -104,6 +131,14 @@ export class Login extends Component {
         moderatorPW: bbbPassword || "mp",
         muteOnStart: true,
         logoutURL: window.location.href,
+        ...(welcome !== undefined && { welcome }),
+        ...(maxParticipants !== undefined && { maxParticipants }),
+        ...(record !== undefined && { record }),
+        ...(duration !== undefined && { duration }),
+        ...(allowStartStopRecording !== undefined && { allowStartStopRecording }),
+        ...(webcamsOnlyForModerator !== undefined && { webcamsOnlyForModerator }),
+        ...(lockSettingsDisableCam !== undefined && { lockSettingsDisableCam }),
+        ...(presentation !== undefined && { presentation }),
       })
 
       const createChecksum = sha1(`create${createParams.toString()}${secret}`)
@@ -121,10 +156,12 @@ export class Login extends Component {
 
         window.open(`${baseURL}/join?${joinParams.toString()}`)
         this.setState({ fullName: "", password: "", isTeacher: false })
+        bbb.location.href = `${environment.url}/join?${joinParams.toString()}`
       })
     } catch (e) {
       this.setState({ loginError: true })
       console.log("não foi possível entrar na sala")
+      bbb.close()
     }
   }
 

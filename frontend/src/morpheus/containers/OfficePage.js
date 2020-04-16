@@ -12,7 +12,7 @@ import {
   selectCurrentRoom,
   selectRooms
 } from "../store/selectors";
-import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
+import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting } from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 import sha1 from '../../util/encrypt'
@@ -48,37 +48,38 @@ const OfficePage = ({
   }, [match.params.roomId]);
 
   const enteringVirtualRooom = (roomId, roomName) => {
-      try {
-        setIsLoading(true)
-        const bbb = window.open('', '_blank')
-        bbb.document.write('Carregando sala de aula, por favor aguarde...')
-        const userName = JSON.parse(localStorage.getItem('user')).name
-        const api = axios.create({
-          baseURL: environment.url
-        })
+    try {
+      setIsLoading(true)
+      const bbb = window.open('', '_blank')
+      bbb.document.write('Carregando sala de aula, por favor aguarde...')
+      const userName = JSON.parse(localStorage.getItem('user')).name
+      const api = axios.create({
+        baseURL: environment.url
+      })
 
-        const secret = environment.secret
+      const secret = environment.secret
 
-        const createParams = new URLSearchParams({
-          meetingID: roomId,
-          name: roomName,
-          attendeePW: 'ap',
-          moderatorPW: environment.password || 'mp',
-          muteOnStart: true,
-          logoutURL: window.location.href,
-          ...(environment.welcome !== undefined && {welcome: environment.welcome}),
-          ...(environment.maxParticipants !== undefined && {maxParticipants: environment.maxParticipants}),
-          ...(environment.record !== undefined && {record: environment.record}),
-          ...(environment.duration !== undefined && {duration: environment.duration}),
-          ...(environment.allowStartStopRecording !== undefined && {allowStartStopRecording: environment.allowStartStopRecording}),
-          ...(environment.webcamsOnlyForModerator !== undefined && {webcamsOnlyForModerator: environment.webcamsOnlyForModerator}),
-          ...(environment.lockSettingsDisableCam !== undefined && {lockSettingsDisableCam: environment.lockSettingsDisableCam}),
-          ...(environment.presentation !== undefined && {presentation: environment.presentation}),
-        })
+      const createParams = new URLSearchParams({
+        meetingID: roomId,
+        name: roomName,
+        attendeePW: 'ap',
+        moderatorPW: environment.password || 'mp',
+        muteOnStart: true,
+        logoutURL: window.location.href,
+        ...(environment.welcome !== undefined && { welcome: environment.welcome }),
+        ...(environment.maxParticipants !== undefined && { maxParticipants: environment.maxParticipants }),
+        ...(environment.record !== undefined && { record: environment.record }),
+        ...(environment.duration !== undefined && { duration: environment.duration }),
+        ...(environment.allowStartStopRecording !== undefined && { allowStartStopRecording: environment.allowStartStopRecording }),
+        ...(environment.webcamsOnlyForModerator !== undefined && { webcamsOnlyForModerator: environment.webcamsOnlyForModerator }),
+        ...(environment.lockSettingsDisableCam !== undefined && { lockSettingsDisableCam: environment.lockSettingsDisableCam }),
+        ...(environment.presentation !== undefined && { presentation: environment.presentation }),
+      })
 
-        const createChecksum = sha1(`create${createParams.toString()}${secret}`)
-        createParams.append('checksum', createChecksum)
-        api.get(`/create?${createParams.toString()}`).then(() => { const joinParams = new URLSearchParams({
+      const createChecksum = sha1(`create${createParams.toString()}${secret}`)
+      createParams.append('checksum', createChecksum)
+      api.get(`/create?${createParams.toString()}`).then(() => {
+        const joinParams = new URLSearchParams({
           meetingID: roomId,
           redirect: true,
           password: environment.alwaysModerator ? environment.password : 'ap',
@@ -101,25 +102,25 @@ const OfficePage = ({
     isLoading ? (
       <Loading />
     ) : (
-      <div className={classes.root}>
-      <Grid>
-      {office.map(room => (
-        <RoomCard
-        {...room}
-        key={room.id}
-        headerColor={rooms.find(item => room.id === item.id).header_color}
-        bloxColor={rooms.find(item => room.id === item.id).blox_color}
-        onEnterRoom={() => {
-          emitEnterInRoom(room.id);
-          onSetCurrentRoom(room);
-          history.replace(`/morpheus/office/${room.id}`);
-        }}
-        enteringVirtualRooom={enteringVirtualRooom}
-        />
-        ))}
-        </Grid>
+        <div className={classes.root}>
+          <Grid>
+            {office.map(room => (
+              <RoomCard
+                {...room}
+                key={room.id}
+                headerColor={rooms.find(item => room.id === item.id).header_color}
+                bloxColor={rooms.find(item => room.id === item.id).blox_color}
+                onEnterRoom={() => {
+                  emitEnterInRoom(room.id);
+                  onSetCurrentRoom(room);
+                  history.replace(`/morpheus/office/${room.id}`);
+                }}
+                enteringVirtualRooom={enteringVirtualRooom}
+              />
+            ))}
+          </Grid>
         </div>
-    )
+      )
   );
 };
 
@@ -144,7 +145,7 @@ OfficePage.propTypes = {
 };
 
 OfficePage.defaultProps = {
-  onSetCurrentRoom: () => {},
+  onSetCurrentRoom: () => { },
   office: [],
   rooms: [],
   environment: {},
