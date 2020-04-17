@@ -15,4 +15,5 @@ module.exports = {
   HOST: "0.0.0.0",
   PORT: process.env.PORT || 8080,
   WHITELIST_DOMAINS: environment.parseVariable(process.env.WHITELIST_DOMAINS) || [],
+  WHITELIST_DOMAINS: environment.parseVariable(process.env.USER_LIST) || [],
 };

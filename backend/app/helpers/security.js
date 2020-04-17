@@ -20,6 +20,26 @@ const security = {
     return false;
   },
 
+  isListedInUserFile: (email) => {
+
+    const userList = config.USERS;
+
+    if (userList.length === 0) {
+      // No user in list
+      return true;
+    }
+
+    if (email) {
+      for (let i = 0; i < userList.length; i += 1) {
+        if (email === (userList[i]) ) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  },
+
   adaptGoogleUser: (profile) => {
     const {
       id,

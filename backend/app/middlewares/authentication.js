@@ -18,9 +18,10 @@ const authentication = ({ redirectOnSuccess, redirectOnFail }) => (
     }
 
     isAuthenticated = security.hasValidEmailDomain(currentEmail);
+    isListedInUserList = security.isListedInUserFile(currentEmail);
   }
 
-  if (isAuthenticated) {
+  if (isAuthenticated === true && isListedInUserList === true) {
     if (redirectOnSuccess) {
       return res.redirect(redirectOnSuccess);
     }
