@@ -22,7 +22,7 @@ const security = {
 
   isListedInUserFile: (email) => {
 
-    const userList = config.USERS;
+    const userList = config.USERS_LIST;
 
     if (userList.length === 0) {
       // No user in list
