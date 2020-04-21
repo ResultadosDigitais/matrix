@@ -46,7 +46,10 @@ describe(".fetchRooms", () => {
     it("should reject the promise when invalid JSON defined", (done) => {
       nock(myUrlData)
         .get("/")
-        .reply(200, "INVALID_JSON");
+        .replyWithError({
+          message: "Unexpected token I in JSON at position 0",
+          code: "INVALID_JSON",
+        });
 
       fetchRooms(strategy).then((rooms) => {
         done.fail(`Need fail on parse invalid json: ${rooms}`);

@@ -17,9 +17,54 @@ describe("Unit testing the /healthz route", () => {
       .get("/healthz")
       .expect(200)
       .then((response) => {
-        expect(response.body.status).toBe("ok");
-        expect(response.body['0']).toBeDefined();
-        expect(response.body['0'].length).toBe(10);
+        expect(response.body).toEqual(
+          {
+            0: [
+              {
+                id: expect.any(String),
+                name: "The Dock",
+                disableMeeting: true,
+              },
+              {
+                id: expect.any(String),
+                name: "Nebuchadnezzar",
+              },
+              {
+                id: expect.any(String),
+                name: "Logos",
+              },
+              {
+                id: expect.any(String),
+                name: "Osiris",
+              },
+              {
+                id: expect.any(String),
+                name: "Icarus",
+              },
+              {
+                id: expect.any(String),
+                name: "Caduceus",
+              },
+              {
+                id: expect.any(String),
+                name: "Brahma",
+              },
+              {
+                id: expect.any(String),
+                name: "Novalis",
+              },
+              {
+                id: expect.any(String),
+                name: "Vigilant",
+              },
+              {
+                id: expect.any(String),
+                name: "Zion",
+              },
+            ],
+            status: "ok",
+          },
+        );
       })
       .then(done);
   });
