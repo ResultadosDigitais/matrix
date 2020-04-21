@@ -211,7 +211,6 @@ If you will run in production we strongly recommend you close your environment u
 
 Please read more details about our versions folowing [changelog](/docs/CHANGELOG.md) file.
 
-
 ## Frequently Asked Questions
 
 Some questions come up over and over again. Check here first:
