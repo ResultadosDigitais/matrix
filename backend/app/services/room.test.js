@@ -3,7 +3,6 @@ import fs from "fs";
 import path from "path";
 import fetchRooms from "./rooms";
 
-
 describe(".fetchRooms", () => {
   const validRoomsData = [{ id: "afce3adc-00f0-4424-923c-d10cd72939b3", name: "Logos" }];
   describe("when strategy is ENVIRONMENT", () => {
