@@ -209,6 +209,8 @@ If you will run in production we strongly recommend you close your environment u
 | 1.1.0 | Morpheus | New layout | [Pull request](https://github.com/ResultadosDigitais/matrix/pull/174) |
 | 1.0.0 | Neo | The one project | - |
 
+Please read more details about our versions folowing [changelog](/docs/CHANGELOG.md) file.
+
 
 ## Frequently Asked Questions
 
