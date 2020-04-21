@@ -57,21 +57,6 @@ describe(".fetchRooms", () => {
         done();
       });
     });
-
-    it("should reject the promise when a error ocurred", (done) => {
-      nock(myUrlData)
-        .get("/")
-        .replyWithError({
-          message: "something awful happened",
-          code: "AWFUL_ERROR",
-        });
-      fetchRooms(strategy).then((rooms) => {
-        done.fail(`Need fail on make the request: ${rooms}`);
-      }).catch((error) => {
-        expect(error.message).toEqual("something awful happened");
-        done();
-      });
-    });
   });
 
   describe("when strategy is not defined", () => {
