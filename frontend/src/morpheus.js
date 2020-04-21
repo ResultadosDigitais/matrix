@@ -18,16 +18,8 @@ function renderApp() {
 }
 
 window.onload = () => {
-  const isAuthenticated = document.getElementById("isAuthenticated").value === "true";
   const userString = document.getElementById("user").value;
   const matrixProfile = new MatrixProfile();
-
-  if (!isAuthenticated) {
-    matrixProfile.terminate();
-    window.location.href = "/";
-    return;
-  }
-
   const user = JSON.parse(userString);
 
   matrixProfile.storeProfileData(user);

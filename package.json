@@ -9,6 +9,7 @@
     "list": "lerna list",
     "lint": "eslint './**/*.js'",
     "test": "env CI=true lerna run test --stream",
+    "test:ci": "env CI=true lerna run test:ci --stream",
     "cover": "env CI=true lerna run cover --stream",
     "build-backend": "lerna run build-backend --stream",
     "build-frontend": "lerna run build-frontend --stream",

@@ -1,6 +1,5 @@
-const assert = require("assert");
+// eslint-disable-next-line import/no-extraneous-dependencies
 const io = require("socket.io-client");
-const sinon = require("sinon");
 
 const app = require("../app/app.server");
 const Office = require("../app/office.socket");
@@ -18,17 +17,17 @@ describe("Office server", () => {
 
   beforeEach(() => {
     officeController = {
-      addUserInRoom: sinon.fake(),
-      getUserInRoom: sinon.fake(),
-      getUsersInOfficeByMap: sinon.fake(),
-      removeUser: sinon.fake()
+      addUserInRoom: jest.fn(),
+      getUserInRoom: jest.fn(),
+      getUsersInOfficeByMap: jest.fn(),
+      removeUser: jest.fn(),
     };
 
     ioOptions = {
       transports: ["websocket"],
       forceNew: true,
       reconnection: false,
-      query: `user=${defaultUser}`
+      query: `user=${defaultUser}`,
     };
   });
 
@@ -52,54 +51,48 @@ describe("Office server", () => {
     // connect a client to Office server
     socketClient = io.connect(
       `http://${SOCKET_HOST}:${SOCKET_PORT}/`,
-      ioOptions
+      ioOptions,
     );
   };
 
-  it("should connect and disconnect with success", done => {
+  it("should connect and disconnect with success", (done) => {
     connectSocketServer();
 
     socketClient.on("connect", () => {
-      assert(officeController.addUserInRoom.calledOnce);
-      assert(officeController.getUserInRoom.calledOnce);
-      assert(officeController.getUsersInOfficeByMap.calledOnce);
+      expect(officeController.addUserInRoom).toHaveBeenCalledTimes(1);
+      expect(officeController.getUserInRoom).toHaveBeenCalledTimes(1);
+      expect(officeController.getUsersInOfficeByMap).toHaveBeenCalledTimes(1);
       done();
     });
   });
 
-  it("should enter in default room on connect", done => {
+  it("should enter in default room on connect", (done) => {
     connectSocketServer();
 
     socketClient.on("connect", () => {
       socketClient.on("enter-room", () => {
-        assert.equal(
-          officeController.addUserInRoom.getCall(0).lastArg,
-          "room-1"
-        );
+        expect(officeController.addUserInRoom.mock.calls[0][1]).toBe("room-1");
         done();
       });
     });
   });
 
-  it("should enter in query room on connect", done => {
+  it("should enter in query room on connect", (done) => {
     ioOptions.query = `user=${defaultUser}&room=Nebuchadnezzar`;
 
     connectSocketServer();
 
     socketClient.on("connect", () => {
       socketClient.on("enter-room", () => {
-        assert.equal(
-          officeController.addUserInRoom.getCall(0).lastArg,
-          "Nebuchadnezzar"
-        );
+        expect(officeController.addUserInRoom.mock.calls[0][1]).toBe("Nebuchadnezzar");
         done();
       });
     });
   });
 
-  it("should enter a room with success", done => {
+  it("should enter a room with success", (done) => {
     const payload = {
-      room: "test-room"
+      room: "test-room",
     };
 
     connectSocketServer();
@@ -108,11 +101,8 @@ describe("Office server", () => {
       socketClient.on("enter-room", () => {
         // validates the second event when "enter-room" was emitted
         // because the first is triggered on connection
-        if (officeController.addUserInRoom.callCount === 2) {
-          assert.equal(
-            officeController.addUserInRoom.getCall(1).lastArg,
-            "test-room"
-          );
+        if (officeController.addUserInRoom.mock.calls.length === 2) {
+          expect(officeController.addUserInRoom.mock.calls[1][1]).toBe("test-room");
           done();
         }
       });
@@ -121,18 +111,17 @@ describe("Office server", () => {
     });
   });
 
-  it("should emit error when given user is an invalid json", done => {
-    ioOptions.query = `user=invalid&room=Nebuchadnezzar`;
+  it("should emit error when given user is an invalid json", (done) => {
+    ioOptions.query = "user=invalid&room=Nebuchadnezzar";
 
     connectSocketServer();
 
     socketClient
       .on("connect", () => {
-        assert.fail("should not connect because user is invalid");
-        done();
+        done.fail("should not connect because user is invalid")();
       })
-      .on("error", err => {
-        assert.equal(err, "Invalid user");
+      .on("error", (err) => {
+        expect(err).toEqual("Invalid user")
         done();
       });
   });
