@@ -11,7 +11,7 @@
 
 ## Welcome to the **#matrix**
 
-The objective of **#matrix** project is to provide a virtual office environment like in a physical office. When we are working in a physical office, it's very common to go from one room to another to meet people and have conversations, for example: kitchen, lobby, gaming room, etc.
+The objective of **#matrix** project is to provide a virtual office environment like in a physical office. When we are working in a physical office, it's very common to go from one room to another to meet people and have conversations, for example: kitchen, lounge, gaming room, etc.
 
 When working remotely there is less interaction with other members of your team like in a physical office. The **#matrix** project was born as a proposal to improve that experience. The idea is to allow you to create several virtual rooms mimicking the real world where people can _enter_ an room.
 
