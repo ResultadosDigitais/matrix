@@ -11,11 +11,11 @@
 
 ## Welcome to the **#matrix**
 
-The objective of **#matrix** project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
+The objective of **#matrix** project is to provide a virtual office environment like in a physical office. When we are working in a physical office, it's very common to go from one room to another to meet people and have conversations, for example: kitchen, lobby, gaming room, etc.
 
-When we are working remotely there are no conversations like in a physical office. The **#matrix** project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
+When working remotely there is less interaction with other members of your team like in a physical office. The **#matrix** project was born as a proposal to improve that experience. The idea is to allow you to create several virtual rooms mimicking the real world where people can _enter_ an room.
 
-**#matrix** produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
+**#matrix** creates a virtual office for remote teams. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
 
 ![Matrix Home Screenshot](docs/img/matrix-morpheus.png)
 
@@ -42,7 +42,7 @@ When we are working remotely there are no conversations like in a physical offic
 
 ## Understanding #matrix
 ### Rooms
-The inside of **#matrix** there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)
+When you are inside of the **#matrix** you will see several rooms. Because there is no way to actually _see_ the person you can't tell if they are on a meeting or phone call. To help with that, we show a headset icon around their avatar. In the image below you can see that people in the _Platform-Email_ room are in a meeting.
 
 |                              Office Page                               |                                     With Sidebar                                     |
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
