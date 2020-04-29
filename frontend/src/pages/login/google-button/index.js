@@ -4,24 +4,20 @@ import clsx from "clsx";
 
 import styles from "./index.module.css";
 
-const GoogleButton = ({ isDark, onClick }) => (
-  <div
+const GoogleButton = ({ isDark }) => (
+  <a
     role="button"
     aria-label="Sign in with Google"
     className={clsx(styles.GoogleButton, { [styles.GoogleButtonDark]: isDark })}
     tabIndex={0}
-    onClick={onClick}
-    onKeyPress={event => {
-      if (event.key === "Enter") {
-        onClick();
-      }
-    }}
-  />
+    href="/auth/google"
+  >
+    Sign in with Google
+  </a>
 );
 
 GoogleButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  isDark: PropTypes.bool.isRequired,
+  isDark: PropTypes.bool.isRequired
 };
 
 export default GoogleButton;

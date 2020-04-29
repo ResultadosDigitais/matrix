@@ -64,11 +64,14 @@ at [8x8](https://8x8.com). Access the [jitsi GitHub](https://github.com/jitsi/ji
 ### Environment Variables
 The **#matrix** project has some environment variables that important to define.
 
-- We are using Google to authorizations, you need create a credential [here](https://developers.google.com/identity/sign-in/web/sign-in) and before define this variables:
+- We are using Google to authorizations, you only need to configure the Google API credentials following [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) and after define these variables:
+
 
 		GOOGLE_CLIENT_ID=${paste_your_client_id_here}
 		GOOGLE_SECRET={paste_your_secret_here}
 		GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
+
+	**Note: if you used version 1, with variable GOOGLE_CREDENTIAL, follow [this guide](/docs/MIGRATION-TO-V2.md)**
 
 - You can change the secret and maximum age from session:
 
@@ -85,7 +88,7 @@ The **#matrix** project has some environment variables that important to define.
 
 - The **#matrix** needs to know, where it get rooms definitions:
 
-		ROOMS_SOURCE=ENVIRONMENT
+		ROOMS_SOURCE=ENVIRONMENT | REMOTE
 
 - There is a config that define the rooms of The **#matrix**, If you want to customize your rooms or add and a new room, you have to configure a `ROOMS_SOURCE=ENVIRONMENT` and config `ROOMS_DATA` like the example:
 
@@ -106,6 +109,10 @@ The **#matrix** project has some environment variables that important to define.
 			  "externalMeetUrl": "https://external-url-room/key-room"
 		   }
 		 ]
+
+Another option is to have a remote rooms config file (this file needs to be accessible via http/s). You can configure a `ROOMS_SOURCE=REMOTE` and config `ROOMS_DATA` like the example:
+
+		ROOMS_DATA=https://myfilelocation.io/myrooms_data.json
 
 
 #### External Meet
@@ -232,6 +239,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://angeliski.com.br"><img src="https://avatars3.githubusercontent.com/u/1574240?v=4" width="100px;" alt=""/><br /><sub><b>Rogerio Angeliski</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Code">💻</a> <a href="#maintenance-angeliski" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/diogonicoleti"><img src="https://avatars1.githubusercontent.com/u/4973742?v=4" width="100px;" alt=""/><br /><sub><b>Diogo Nicoleti</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=diogonicoleti" title="Code">💻</a></td>
     <td align="center"><a href="https://arquivei.com.br"><img src="https://avatars1.githubusercontent.com/u/205890?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo F. Verhaeg</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Verhaeg" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/nataliafavareto"><img src="https://avatars1.githubusercontent.com/u/36651634?v=4" width="100px;" alt=""/><br /><sub><b>Natalia Favareto</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=NFavareto" title="Code">💻</a></td>
   </tr>
 </table>
 

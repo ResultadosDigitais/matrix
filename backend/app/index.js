@@ -1,10 +1,11 @@
 import app from "./app.server";
 import officeFactory from "./office.factory";
 import healthCheck from "./app.healthcheck";
-import { HOST, PORT } from "./app.config";
+import { getServerConfig } from "./app.config";
 
-const server = app.listen(PORT, HOST, undefined, () => {
-  console.log(`Running on http://${HOST}:${PORT}`);
+const { host, port } = getServerConfig();
+const server = app.listen(port, host, undefined, () => {
+  console.log(`Running on http://${host}:${port}`);
 });
 
 healthCheck(server);
