@@ -4,11 +4,11 @@ import bodyParser from "body-parser";
 import path from "path";
 import morgan from "morgan"
 
-import fetchRooms from "./controllers/rooms.controller";
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
 
 import { setupAppAuth } from "./services/auth";
+import fetchRooms from "./services/rooms";
 
 import {
   getRoomsSource,
