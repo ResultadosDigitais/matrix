@@ -178,8 +178,8 @@ export class Login extends Component {
                   [styles.auth_panel_dark]: isDark
                 })}
               >
-                <div className="h-100 justify-content-center align-items-start py-4">
-                  <div className="col text-center py-5">
+                <div className="h-100 justify-content-center align-items-start py-4 d-flex flex-column">
+                  <div className="col text-center">
                     <div className={styles.logoTransform}>
                       <Logo src={institution.logo} />
                     </div>
