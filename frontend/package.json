@@ -2,7 +2,8 @@
   "name": "matrix-frontend",
   "scripts": {
     "build-frontend": "webpack --mode production --config webpack.production.js",
-    "test": "nyc --reporter=text mocha './test/**/*.test.js'",
+    "test": "nyc --reporter=text mocha './test/**/*.test.js' --watch",
+    "test:ci": "nyc --reporter=text mocha './test/**/*.test.js'",
     "watch-test": "npm test -- --watch --recursive",
     "cover": "nyc report --reporter=html --reporter=text --reporter=lcovonly --report-dir=test/coverage;",
     "start": "webpack --watch --config webpack.development.js"
@@ -39,7 +40,7 @@
     "jsdom-global": "^3.0.2",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha": "^6.2.0",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "sinon": "^9.0.1",
     "webpack": "^4.39.3",

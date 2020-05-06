@@ -5,6 +5,8 @@
   width: 270px;
   height: 65px;
   cursor: pointer;
+  text-indent: -5000em;
+  overflow: hidden;
 }
 
 .GoogleButton:hover {

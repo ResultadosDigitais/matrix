@@ -2,44 +2,35 @@ import express from "express";
 import cookieSession from "cookie-session";
 import bodyParser from "body-parser";
 import path from "path";
-import GoogleCredentialController from "./controllers/google.credentials.controller";
-import fetchRooms from "./controllers/rooms.controller";
+import morgan from "morgan"
+
 import assets from "./controllers/assets.controller";
 import routes from "./app.routes";
-import auth from "./app.auth";
+
+import { setupAppAuth } from "./services/auth";
+import fetchRooms from "./services/rooms";
+
 import {
-  ROOMS_SOURCE,
-  ENVIRONMENT,
-  GOOGLE_CREDENTIAL,
-  ENFORCE_SSL,
-  CUSTOM_STYLE,
-  COOKIE_SESSION_SECRET,
-  COOKIE_SESSION_MAX_AGE,
+  getRoomsSource,
+  getSessionConfig,
+  getEnvironment,
+  shouldEnforceSSL
 } from "./app.config";
 
 const app = express();
 
-app.locals.CUSTOM_STYLE = CUSTOM_STYLE;
-
-app.use(cookieSession({
-  name: "matrix-session",
-  keys: [COOKIE_SESSION_SECRET],
-  maxAge: COOKIE_SESSION_MAX_AGE,
-}));
+app.use(morgan("tiny"));
+app.use(cookieSession(getSessionConfig()));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // set the template engine ejs
 app.set("view engine", "ejs");
 app.set("views", "./app/views");
 
-// use passport session
-app.use(auth.initialize());
-app.use(auth.session());
+// use authentication
+setupAppAuth(app);
 
 app.use("/", express.static(path.join(__dirname, "..", "..", "public")));
-
-// FIX ME: here we have to get the google APIkey in another way.
-app.locals.googleCredential = new GoogleCredentialController(GOOGLE_CREDENTIAL);
 
 const assetsManifestFile = path.join(
   __dirname,
@@ -47,21 +38,22 @@ const assetsManifestFile = path.join(
   "..",
   "public",
   "dist",
-  "manifest.json",
+  "manifest.json"
 );
-const assetsManifestResolver = ENVIRONMENT === "production"
-  ? assets.staticManifestResolver(assetsManifestFile)
-  : assets.lazyManifestResolver(assetsManifestFile);
+const assetsManifestResolver =
+  getEnvironment() === "production"
+    ? assets.staticManifestResolver(assetsManifestFile)
+    : assets.lazyManifestResolver(assetsManifestFile);
 
 app.locals.assets = assets.createAssetsResolver(
   assetsManifestResolver,
-  "/dist",
+  "/dist"
 );
 
 app.use((req, res, next) => {
   const isSecure = req.secure || req.header("x-forwarded-proto") === "https";
 
-  if (ENFORCE_SSL === "true" && !isSecure) {
+  if (shouldEnforceSSL() && !isSecure) {
     res.redirect(`https://${req.hostname}${req.url}`);
   } else {
     next();
@@ -70,12 +62,12 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-fetchRooms(ROOMS_SOURCE)
-  .then((roomsData) => {
+fetchRooms(getRoomsSource())
+  .then(roomsData => {
     console.log(roomsData);
     app.locals.roomsDetail = roomsData;
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
   });
 

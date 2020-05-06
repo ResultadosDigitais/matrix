@@ -11,11 +11,11 @@
 
 ## Welcome to the **#matrix**
 
-The objective of **#matrix** project is to offer a virtual environment office, as nice as physical offices. When we are working in a physical office is very common entering in discussion threads in many different environments, for example: on coffee, on lunch and others.
+The objective of **#matrix** project is to provide a virtual office environment like in a physical office. When we are working in a physical office, it's very common to go from one room to another to meet people and have conversations, for example: kitchen, lounge, gaming room, etc.
 
-When we are working remotely there are no conversations like in a physical office. The **#matrix** project was born as a proposal to better that experience. The idea is to create a lot of virtual rooms where people can see and enter these rooms to participate.
+When working remotely there is less interaction with other members of your team like in a physical office. The **#matrix** project was born as a proposal to improve that experience. The idea is to allow you to create several virtual rooms mimicking the real world where people can _enter_ an room.
 
-**#matrix** produces a virtual office for remote teams. In this project, you can run a virtual office to simulate the physical environment. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
+**#matrix** creates a virtual office for remote teams. Read more on [this post in Medium](https://medium.com/rd-shipit/matrix-d4cfc4ad4c75).
 
 ![Matrix Home Screenshot](docs/img/matrix-morpheus.png)
 
@@ -42,7 +42,7 @@ When we are working remotely there are no conversations like in a physical offic
 
 ## Understanding #matrix
 ### Rooms
-The inside of **#matrix** there are some rooms. In this rooms is possible to see others colleagues and if they are talking or in a meeting in the avatar will appear a head set icon. (eg. In the image the guys in the Platform-Email room are in a meeting)
+When you are inside of the **#matrix** you will see several rooms. Because there is no way to actually _see_ the person you can't tell if they are on a meeting or phone call. To help with that, we show a headset icon around their avatar. In the image below you can see that people in the _Platform-Email_ room are in a meeting.
 
 |                              Office Page                               |                                     With Sidebar                                     |
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
@@ -64,11 +64,14 @@ at [8x8](https://8x8.com). Access the [jitsi GitHub](https://github.com/jitsi/ji
 ### Environment Variables
 The **#matrix** project has some environment variables that important to define.
 
-- We are using Google to authorizations, you need create a credential [here](https://developers.google.com/identity/sign-in/web/sign-in) and before define this variables:
+- We are using Google to authorizations, you only need to configure the Google API credentials following [this step by step](/docs/GOOGLE-CREDENTIAL-STEP-BY-STEP.md) and after define these variables:
+
 
 		GOOGLE_CLIENT_ID=${paste_your_client_id_here}
 		GOOGLE_SECRET={paste_your_secret_here}
 		GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
+
+	**Note: if you used version 1, with variable GOOGLE_CREDENTIAL, follow [this guide](/docs/MIGRATION-TO-V2.md)**
 
 - You can change the secret and maximum age from session:
 
@@ -85,7 +88,7 @@ The **#matrix** project has some environment variables that important to define.
 
 - The **#matrix** needs to know, where it get rooms definitions:
 
-		ROOMS_SOURCE=ENVIRONMENT
+		ROOMS_SOURCE=ENVIRONMENT | REMOTE
 
 - There is a config that define the rooms of The **#matrix**, If you want to customize your rooms or add and a new room, you have to configure a `ROOMS_SOURCE=ENVIRONMENT` and config `ROOMS_DATA` like the example:
 
@@ -106,6 +109,10 @@ The **#matrix** project has some environment variables that important to define.
 			  "externalMeetUrl": "https://external-url-room/key-room"
 		   }
 		 ]
+
+Another option is to have a remote rooms config file (this file needs to be accessible via http/s). You can configure a `ROOMS_SOURCE=REMOTE` and config `ROOMS_DATA` like the example:
+
+		ROOMS_DATA=https://myfilelocation.io/myrooms_data.json
 
 
 #### External Meet
@@ -198,10 +205,12 @@ If you will run in production we strongly recommend you close your environment u
 
 | Version | Name | Description | Docs |
 | --- | --- | --- | --- |
+| Latest | upcoming | small improvements | [changelog](/docs/CHANGELOG.md) |
 | 2.0.0 | Seraph | New authentication | [Migration guide to 2.0.0](/docs/MIGRATION-TO-V2.md) |
 | 1.1.0 | Morpheus | New layout | [Pull request](https://github.com/ResultadosDigitais/matrix/pull/174) |
 | 1.0.0 | Neo | The one project | - |
 
+Please read more details about our versions folowing [changelog](/docs/CHANGELOG.md) file.
 
 ## Frequently Asked Questions
 
@@ -232,6 +241,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://angeliski.com.br"><img src="https://avatars3.githubusercontent.com/u/1574240?v=4" width="100px;" alt=""/><br /><sub><b>Rogerio Angeliski</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Code">💻</a> <a href="#maintenance-angeliski" title="Maintenance">🚧</a> <a href="https://github.com/ResultadosDigitais/matrix/commits?author=angeliski" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/diogonicoleti"><img src="https://avatars1.githubusercontent.com/u/4973742?v=4" width="100px;" alt=""/><br /><sub><b>Diogo Nicoleti</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=diogonicoleti" title="Code">💻</a></td>
     <td align="center"><a href="https://arquivei.com.br"><img src="https://avatars1.githubusercontent.com/u/205890?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo F. Verhaeg</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Verhaeg" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/nataliafavareto"><img src="https://avatars1.githubusercontent.com/u/36651634?v=4" width="100px;" alt=""/><br /><sub><b>Natalia Favareto</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=NFavareto" title="Code">💻</a></td>
   </tr>
 </table>
 
