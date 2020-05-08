@@ -1,4 +1,4 @@
-import { domainAuthorization } from "./authorization";
+import { domainAuthorization, userAuthorization } from "./authorization";
 
 describe(".domainAuthorization()", () => {
   describe("when allowed list is empty", () => {
@@ -41,15 +41,15 @@ describe(".userAuthorization()", () => {
   describe("when user list is empty", () => {
     const isAuthorized = userAuthorization([]);
 
-    it("should return true with email", () => {
+    it("should return true with an email", () => {
       expect(isAuthorized({ email: "teste@teste.com" })).toBeTruthy();
     });
 
-    it("should return true without email", () => {
+    it("should return true with an undefined email", () => {
       expect(isAuthorized({ email: undefined })).toBeTruthy();
     });
 
-    it("should return true with empty email", () => {
+    it("should return true with an empty email", () => {
       expect(isAuthorized({ email: "" })).toBeTruthy();
     });
   });
