@@ -52,6 +52,13 @@ export function getAllowedDomains() {
   return allowedDomains;
 }
 
+export function getAllowedUsers() {
+  const allowedUsers =
+    environment.parseVariable(process.env.WHITELIST_USERS) || [];
+
+  return allowedUsers;
+}
+
 export function getServerConfig() {
   const host = "0.0.0.0"
   const port = process.env.PORT || 8080
