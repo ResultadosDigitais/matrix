@@ -243,6 +243,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://arquivei.com.br"><img src="https://avatars1.githubusercontent.com/u/205890?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo F. Verhaeg</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Verhaeg" title="Documentation">📖</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/nataliafavareto"><img src="https://avatars1.githubusercontent.com/u/36651634?v=4" width="100px;" alt=""/><br /><sub><b>Natalia Favareto</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=NFavareto" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Jarzamendia"><img src="https://avatars2.githubusercontent.com/u/14064715?v=4" width="100px;" alt=""/><br /><sub><b>João Ernesto Arzamendia</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Jarzamendia" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
