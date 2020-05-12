@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Improve heroku urlcallback in app.json from `http://localhost:8080/auth/google/callback` to `https://${app.name}.herokuapp.com/auth/google/callback`
+- The Environment variable `WHITELIST_DOMAINS` now is not necessary to use `@` (eg. `@mydomain.com`) to run this versiion is necessary to remove `@` (eg. `mydomain.com`)
 
 ## [2.0.0] - 2020-03-20
 ### Changed
