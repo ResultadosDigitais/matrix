@@ -1,0 +1,22 @@
+name: Production Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: kciter/aws-ecr-action@v1
+      with:
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        repo: /sistema-blox/matrix/
+        region: us-east-1
+        tags: latest,${{ github.sha }}
+        create_repo: false
+        dockerfile: Dockerfile
+        path: /docker-images/matrix-prod/
