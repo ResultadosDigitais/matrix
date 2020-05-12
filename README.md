@@ -80,7 +80,7 @@ The **#matrix** project has some environment variables that important to define.
 
 - You can define a white List of trusted email domains can enter in the **#matrix**
 
-		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
+		WHITELIST_DOMAINS=["domain1.com","domain2.com"]
 
 - If you are running with ssl It's important to configure SSL, to define this:
 
@@ -199,7 +199,7 @@ If you are using HTTPS, do change `ENFORCE_SSL` to `true` and add your company d
 
 If you will run in production we strongly recommend you close your environment using an internal VPN. In this solution everybody with the link and a valid google credential can enter your virtual office. Because this is important for you to maintain your environment closed. Or you can define a variable `WHITELIST_DOMAINS` to limit only authorized users to enter in the **#matrix**. You have to choose a strong key to the `COOKIE_SESSION_SECRET` and have to put in `GOOGLE_CALLBACK_URL` your production domain.
 
-		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
+		WHITELIST_DOMAINS=["domain1.com","domain2.com"]
 
 If you can't use a VPN or don't have a custom domain for your users, and you still want to restrict access to the **#matrix**, you can define a `WHITELIST_USERS` variable to create an array of trusted e-mails that can access your virtual office.
 
