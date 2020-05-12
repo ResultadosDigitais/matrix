@@ -80,7 +80,7 @@ The **#matrix** project has some environment variables that important to define.
 
 - You can define a white List of trusted email domains can enter in the **#matrix**
 
-		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
+		WHITELIST_DOMAINS=["domain1.com","domain2.com"]
 
 - If you are running with ssl It's important to configure SSL, to define this:
 
@@ -199,7 +199,7 @@ If you are using HTTPS, do change `ENFORCE_SSL` to `true` and add your company d
 
 If you will run in production we strongly recommend you close your environment using an internal VPN. In this solution everybody with the link and a valid google credential can enter your virtual office. Because this is important for you to maintain your environment closed. Or you can define a variable `WHITELIST_DOMAINS` to limit only authorized users to enter in the **#matrix**. You have to choose a strong key to the `COOKIE_SESSION_SECRET` and have to put in `GOOGLE_CALLBACK_URL` your production domain.
 
-		WHITELIST_DOMAINS=["@domain1.com","@domain2.com"]
+		WHITELIST_DOMAINS=["domain1.com","domain2.com"]
 
 ## Versions
 
@@ -242,6 +242,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/diogonicoleti"><img src="https://avatars1.githubusercontent.com/u/4973742?v=4" width="100px;" alt=""/><br /><sub><b>Diogo Nicoleti</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=diogonicoleti" title="Code">💻</a></td>
     <td align="center"><a href="https://arquivei.com.br"><img src="https://avatars1.githubusercontent.com/u/205890?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo F. Verhaeg</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Verhaeg" title="Documentation">📖</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/nataliafavareto"><img src="https://avatars1.githubusercontent.com/u/36651634?v=4" width="100px;" alt=""/><br /><sub><b>Natalia Favareto</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=NFavareto" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Jarzamendia"><img src="https://avatars2.githubusercontent.com/u/14064715?v=4" width="100px;" alt=""/><br /><sub><b>João Ernesto Arzamendia</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Jarzamendia" title="Code">💻</a></td>
   </tr>
 </table>
 
