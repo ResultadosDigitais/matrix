@@ -20,7 +20,7 @@ const app = express();
 
 app.use(morgan("tiny"));
 app.use(cookieSession(getSessionConfig()));
-app.use(app.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 // set the template engine ejs
 app.set("view engine", "ejs");
