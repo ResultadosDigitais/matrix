@@ -8,6 +8,8 @@ import Avatar from "@material-ui/core/Avatar";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
+import Badge from '@material-ui/core/Badge';
+import LockIcon from '@material-ui/icons/Lock';
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
@@ -49,7 +51,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
+const RoomCard = ({ name, users,meetingPrivate, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
   const [isExpanded, toggleExpand] = useState(false);
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
@@ -65,7 +67,8 @@ const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) 
       >
         <CardContent className={classes.content}>
           <Typography gutterBottom variant="h5" component="h2">
-            {name}
+            {name} {meetingPrivate && (<Badge color="secondary" badgeContent="Private" showZero>&nbsp;&nbsp;
+        </Badge>)}
           </Typography>
           <div className={classes.userGrid}>
             {userToShow.map(user => (
@@ -114,6 +117,7 @@ RoomCard.defaultProps = {
   onEnterRoom: () => {},
   onEnterMeeting: () => {},
   meetingEnabled: true,
+  meetingPrivate: false,
   users: [],
   name: ""
 };
