@@ -9,7 +9,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import Badge from '@material-ui/core/Badge';
-import LockIcon from '@material-ui/icons/Lock';
+import PrivateRoomDialog from "../components/PrivateRoomDialog";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
@@ -56,6 +56,7 @@ const RoomCard = ({ name, users,meetingPrivate, meetingEnabled, onEnterRoom, onE
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
+  const [openPrivateDialog, SetPrivateRoomDialogOpen] = useState(false);
 
   return (
     <Card className={classes.root}>
@@ -67,8 +68,7 @@ const RoomCard = ({ name, users,meetingPrivate, meetingEnabled, onEnterRoom, onE
       >
         <CardContent className={classes.content}>
           <Typography gutterBottom variant="h5" component="h2">
-            {name} {meetingPrivate && (<Badge color="secondary" badgeContent="Private" showZero>&nbsp;&nbsp;
-        </Badge>)}
+            {name} {meetingPrivate && (<Badge color="secondary" badgeContent="Private" showZero>&nbsp;&nbsp;</Badge>)}
           </Typography>
           <div className={classes.userGrid}>
             {userToShow.map(user => (
@@ -96,10 +96,23 @@ const RoomCard = ({ name, users,meetingPrivate, meetingEnabled, onEnterRoom, onE
           Enter room
         </Button>
         {meetingEnabled && (
-          <Button size="small" color="primary" onClick={onEnterMeeting}>
+          meetingPrivate ? (
+            <div>
+              <Button size="small" color="primary" onClick={() => {SetPrivateRoomDialogOpen(true);}}>
+              Enter meeting
+              </Button>
+              <PrivateRoomDialog
+                open={openPrivateDialog}
+                onClose={() => {SetPrivateRoomDialogOpen(false);}}
+              />
+            </div>
+          ):(
+            <Button size="small" color="primary" onClick={onEnterMeeting}>
             Enter meeting
-          </Button>
-        )}
+            </Button>)
+          )}
+        <div>
+    </div>
       </CardActions>
     </Card>
   );
