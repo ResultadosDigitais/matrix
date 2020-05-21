@@ -26,6 +26,8 @@ class PassForm extends React.Component {
     console.log(this.props.pass)
     if (this.state.password == this.props.pass){
       document.getElementById("meetingButton").onclick =  this.props.action
+    }else if(document.getElementById("meetingButton") !== null){
+      document.getElementById("meetingButton").onclick = ""
     }
   }
   render () {
@@ -71,7 +73,7 @@ return(
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button id="meetingButton" onClick="" color="primary" disabled="true" >
+          <Button id="meetingButton" onClick="" color="primary" >
           Enter meeting
           </Button>
         </DialogActions>
