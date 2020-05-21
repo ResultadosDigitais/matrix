@@ -104,6 +104,8 @@ const RoomCard = ({ name, users,meetingPrivate, meetingEnabled, onEnterRoom, onE
               <PrivateRoomDialog
                 open={openPrivateDialog}
                 onClose={() => {SetPrivateRoomDialogOpen(false);}}
+                pass = {meetingPrivate}
+                action = {onEnterMeeting}
               />
             </div>
           ):(

@@ -8,34 +8,77 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from '@material-ui/core/TextField';
 
-const PrivateRoomDialog = ({ open, onClose }) => (
+class PassForm extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      password: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event){
+    this.setState({ password: event.target.value });
+  }
+  check(value){
+    console.log(value == this.props.pass)
+    console.log(value)
+    console.log(this.props.pass)
+    if (this.state.password == this.props.pass){
+      document.getElementById("meetingButton").onclick =  this.props.action
+    }
+  }
+  render () {
+    const { password } = this.state
+    return (
+      <div>
+         <form>
+        
+            <TextField 
+              autoFocus
+              type="password" 
+              value={password} 
+              onChange={this.handleChange} 
+              id="password"
+              label="Password"
+              fullWidth
+            />
+        {this.check(this.state.password)}
+        </form>
+      </div>
+    )
+  }
+}
+
+
+const PrivateRoomDialog = ({ open, onClose,state,pass,action}) => {
+  state = {
+    name: ''
+  }
+return(
  <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Private room</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please introduce the password to join
+            Please introduce the password to join {state.name}
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Password"
-            type="password"
-            fullWidth
+          <PassForm
+          pass={pass}
+          action = {action}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={onClose} color="primary">
+          <Button id="meetingButton" onClick="" color="primary" disabled="true" >
           Enter meeting
           </Button>
         </DialogActions>
       </Dialog>
 
 );
-
+}
 PrivateRoomDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
@@ -44,6 +87,7 @@ PrivateRoomDialog.propTypes = {
 PrivateRoomDialog.defaultProps = {
   open: false,
   onClose: undefined,
+  
 };
 
 export default PrivateRoomDialog;
