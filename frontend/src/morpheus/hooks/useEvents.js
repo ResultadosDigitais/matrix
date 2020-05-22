@@ -58,6 +58,9 @@ const useEvents = (
         onRemoveUser(userId);
       });
       events.onParticipantIsCalled((user, roomId) => {
+        const audio = new Audio("/mp3/invite_sound.wav");
+        audio.play();
+
         const room = rooms.find(r => r.id === roomId);
         setReceiveInviteOpen(true);
         setInvitation({ user, room });
