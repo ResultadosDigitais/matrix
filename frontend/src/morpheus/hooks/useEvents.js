@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import debounce from "lodash.debounce";
 
-import AudioFiles from '../../constants/AudioFiles';
+import AudioFiles from "../../constants/AudioFiles";
 import SnackbarActions from "../../components/SnackbarActions";
 import { showBrowserNotification } from "../../notification";
 import { initEvents, closeConnection } from "../socket";
