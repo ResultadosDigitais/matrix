@@ -104,7 +104,7 @@ describe("morpheus/store/reducers", () => {
       ...initialState,
       rooms: [
         { id: "1", name: "room 1", externalMeetUrl:"http://externalMeetUrl-1", users: [], disableMeeting: true },
-        { id: "2", name: "room 2", externalMeetUrl:"http://externalMeetUrl-2", users: [] }
+        { id: "2", name: "room 2", externalMeetUrl:"http://externalMeetUrl-2", users: [], description: "Hello" }
       ]
     };
     const stateAfter = {
@@ -115,13 +115,15 @@ describe("morpheus/store/reducers", () => {
           name: "room 1",
           externalMeetUrl:"http://externalMeetUrl-1",
           users: [],
-          disableMeeting: true
+          disableMeeting: true,
+          description: undefined,
         },
         {
           id: "2",
           name: "room 2",
           externalMeetUrl:"http://externalMeetUrl-2",
-          users: []
+          users: [],
+          description: "Hello",
         }
       ],
       usersInRoom: [
