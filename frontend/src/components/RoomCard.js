@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import InfoIcon from "@material-ui/icons/InfoOutlined";
 import Avatar from "@material-ui/core/Avatar";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
@@ -15,6 +16,13 @@ const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     flexDirection: "column"
+  },
+  flex: {
+    display: "flex",
+  },
+  descriptionIcon: {
+    marginLeft: "auto",
+    flex: "0 0 auto",
   },
   contentAction: {
     flex: 1,
@@ -49,7 +57,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
+const RoomCard = ({ name, description, users, meetingEnabled, onEnterRoom, onEnterMeeting }) => {
   const [isExpanded, toggleExpand] = useState(false);
   const classes = useStyles();
   const userToShow = isExpanded ? users : users.slice(0, 3);
@@ -64,9 +72,16 @@ const RoomCard = ({ name, users, meetingEnabled, onEnterRoom, onEnterMeeting }) 
         }}
       >
         <CardContent className={classes.content}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
+          <div className={classes.flex}>
+            <Typography gutterBottom variant="h5" component="h2" className={classes.content}>
+              {name}
+            </Typography>
+            {description && (
+              <Tooltip title={description}>
+                <InfoIcon className={classes.descriptionIcon} color="action" />
+              </Tooltip>
+            )}
+          </div>
           <div className={classes.userGrid}>
             {userToShow.map(user => (
               <Tooltip key={user.id} title={user.name}>
@@ -107,7 +122,8 @@ RoomCard.propTypes = {
   onEnterMeeting: PropTypes.func,
   meetingEnabled: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
-  name: PropTypes.string
+  name: PropTypes.string,
+  description: PropTypes.string,
 };
 
 RoomCard.defaultProps = {
@@ -115,7 +131,8 @@ RoomCard.defaultProps = {
   onEnterMeeting: () => {},
   meetingEnabled: true,
   users: [],
-  name: ""
+  name: "",
+  description: null,
 };
 
 export default RoomCard;

@@ -40,7 +40,6 @@ const OfficePage = ({
       }
     }
   }, [match.params.roomId]);
-
   return (
     <div className={classes.root}>
       <Grid>
@@ -58,7 +57,7 @@ const OfficePage = ({
               onSetCurrentRoom(room);
 
               if(room.externalMeetUrl){
-                emitStartMeeting();   
+                emitStartMeeting();
                 const externalMeetRoom = window.open(room.externalMeetUrl);
 
                 const externalMeetRoomMonitoring = () => {
@@ -67,7 +66,7 @@ const OfficePage = ({
                       emitLeftMeeting();
                     }else{
                       externalMeetRoomMonitoring();
-                    } 
+                    }
                   }, 1000);
                 }
 
