@@ -23,15 +23,15 @@ const externalMeetRoomMonitoring = (externalMeetRoom) => {
   }, 1000);
 };
 
-const startMeeting = (redirectUrl, openInNewTab = false) => {
+const startMeeting = (redirectUrl, history, openInNewTab = false) => {
   if (openInNewTab) {
     window.open(redirectUrl, "_blank");
   } else {
-    window.history.push(redirectUrl);
+    history.push(redirectUrl);
   }
 };
 
-export const enterRoom = (room, event) => {
+export const enterRoom = (room, history, openInNewTab = false) => {
   emitEnterInRoom(room.id);
 
   if(room.externalMeetUrl) {
@@ -40,7 +40,7 @@ export const enterRoom = (room, event) => {
 
     externalMeetRoomMonitoring(externalMeetRoom);
   } else {
-    startMeeting(`/morpheus/room/${room.id}`, event.ctrlKey);
+    startMeeting(`/morpheus/room/${room.id}`, history, openInNewTab);
   }
 };
 
@@ -86,7 +86,7 @@ const OfficePage = ({
             onEnterMeeting={(event) => {
               onSetCurrentRoom(room);
 
-              enterRoom(room, event);
+              enterRoom(room, event, event.ctrlKey);
             }}
           />
         ))}

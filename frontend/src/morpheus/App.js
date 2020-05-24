@@ -154,7 +154,7 @@ const MorpheusApp = ({
         onConfirm={() => {
           emitEnterInRoom(invitation.room.id);
           onSetCurrentRoom(invitation.room);
-          enterRoom(invitation.room);
+          enterRoom(invitation.room, history);
         }}
       />
       <MessageDialog />
