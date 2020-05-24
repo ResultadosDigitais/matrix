@@ -14,6 +14,35 @@ import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 
+export const enterRoom = (room, event) => {
+  emitEnterInRoom(room.id);
+
+  if(room.externalMeetUrl){
+    emitStartMeeting();
+    const externalMeetRoom = window.open(room.externalMeetUrl);
+
+    const externalMeetRoomMonitoring = () => {
+      window.setTimeout(() => {
+        if (externalMeetRoom.closed) {
+          emitLeftMeeting();
+        }else{
+          externalMeetRoomMonitoring();
+        }
+      }, 1000);
+    }
+
+    externalMeetRoomMonitoring();
+
+  }else{
+    const redirectUrl = `/morpheus/room/${room.id}`;
+    if (event.ctrlKey) {
+      window.open(redirectUrl, "_blank");
+    } else {
+      history.push(redirectUrl);
+    }
+  }
+}
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3)
@@ -54,33 +83,9 @@ const OfficePage = ({
               history.replace(`/morpheus/office/${room.id}`);
             }}
             onEnterMeeting={(event) => {
-              emitEnterInRoom(room.id);
               onSetCurrentRoom(room);
 
-              if(room.externalMeetUrl){
-                emitStartMeeting();   
-                const externalMeetRoom = window.open(room.externalMeetUrl);
-
-                const externalMeetRoomMonitoring = () => {
-                  window.setTimeout(() => {
-                    if (externalMeetRoom.closed) {
-                      emitLeftMeeting();
-                    }else{
-                      externalMeetRoomMonitoring();
-                    } 
-                  }, 1000);
-                }
-
-                externalMeetRoomMonitoring();
-
-              }else{
-                const redirectUrl = `/morpheus/room/${room.id}`;
-                if (event.ctrlKey) {
-                  window.open(redirectUrl, "_blank");
-                } else {
-                  history.push(redirectUrl);
-                }
-              }
+              enterRoom(room, event);
             }}
           />
         ))}
