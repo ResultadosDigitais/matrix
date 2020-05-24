@@ -14,34 +14,35 @@ import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 
+const externalMeetRoomMonitoring = (externalMeetRoom) => {
+  const interval = window.setInterval(() => {
+    if (!externalMeetRoom.closed) return;
+
+    emitLeftMeeting();
+    window.clearInterval(interval);
+  }, 1000);
+};
+
+const startMeeting = (redirectUrl, openInNewTab = false) => {
+  if (openInNewTab) {
+    window.open(redirectUrl, "_blank");
+  } else {
+    window.history.push(redirectUrl);
+  }
+};
+
 export const enterRoom = (room, event) => {
   emitEnterInRoom(room.id);
 
-  if(room.externalMeetUrl){
+  if(room.externalMeetUrl) {
     emitStartMeeting();
     const externalMeetRoom = window.open(room.externalMeetUrl);
 
-    const externalMeetRoomMonitoring = () => {
-      window.setTimeout(() => {
-        if (externalMeetRoom.closed) {
-          emitLeftMeeting();
-        }else{
-          externalMeetRoomMonitoring();
-        }
-      }, 1000);
-    }
-
-    externalMeetRoomMonitoring();
-
-  }else{
-    const redirectUrl = `/morpheus/room/${room.id}`;
-    if (event.ctrlKey) {
-      window.open(redirectUrl, "_blank");
-    } else {
-      history.push(redirectUrl);
-    }
+    externalMeetRoomMonitoring(externalMeetRoom);
+  } else {
+    startMeeting(`/morpheus/room/${room.id}`, event.ctrlKey);
   }
-}
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
