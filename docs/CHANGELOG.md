@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Changed
+- `express` now has the responsibilities previously attributed to `body-parser`
 
 ## [2.0.1] 2020-05-05
 ### Added
