@@ -85,8 +85,8 @@ const OfficePage = ({
             }}
             onEnterMeeting={(event) => {
               onSetCurrentRoom(room);
-
-              enterRoom(room, event, event.ctrlKey);
+              const openInNewTab = event.ctrlKey
+              enterRoom(room, history, openInNewTab);
             }}
           />
         ))}
