@@ -201,6 +201,10 @@ If you will run in production we strongly recommend you close your environment u
 
 		WHITELIST_DOMAINS=["domain1.com","domain2.com"]
 
+If you can't use a VPN or don't have a custom domain for your users, and you still want to restrict access to the **#matrix**, you can define a `WHITELIST_USERS` variable to create an array of trusted e-mails that can access your virtual office.
+
+		WHITELIST_USERS=["teste@domain.com","teste2@domain.com"]
+
 ## Versions
 
 | Version | Name | Description | Docs |
