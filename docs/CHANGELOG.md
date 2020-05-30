@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - new room description option
+- Plays matrix ringtone when user is being invited to join a meeting
+- Added a new form of user authorization: WHITELIST_USERS.
+
 ### Removed
 
 ### Changed
