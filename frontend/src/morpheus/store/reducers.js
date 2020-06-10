@@ -62,6 +62,7 @@ const buildOfficeState = state => {
   let office = rooms.map(room => ({
     id: room.id,
     name: room.name,
+    description: room.description,
     meetingEnabled: !room.disableMeeting,
     externalMeetUrl: room.externalMeetUrl,
     users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)

@@ -70,7 +70,6 @@ const OfficePage = ({
       }
     }
   }, [match.params.roomId]);
-
   return (
     <div className={classes.root}>
       <Grid>

@@ -101,7 +101,8 @@ The **#matrix** project has some environment variables that important to define.
 		   },
 		   {
 		      "id":"${UUID}",
-		      "name":"WAR ROOM CDP"
+		      "name":"WAR ROOM CDP",
+          "description": "Welcome to the WAR room"
 		   },
 		   {
 		      "id":"${UUID}",
