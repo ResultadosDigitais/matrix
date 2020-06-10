@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
-
+import { enterRoom } from "./containers/OfficePage";
 import Loading from "../components/Loading";
 import PageLayout from "../components/PageLayout";
 import MenuUsers from "../components/MenuUsers";
@@ -163,7 +163,8 @@ const MorpheusApp = ({
             receiveInviteAudio.pause();
             setReceiveInviteAudio(null);
           }
-          history.push(`/morpheus/room/${invitation.room.id}`);
+          onSetCurrentRoom(invitation.room);
+          enterRoom(invitation.room, history);
         }}
       />
       <MessageDialog />
