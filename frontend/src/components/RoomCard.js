@@ -73,7 +73,7 @@ const RoomCard = ({ name, description, users, meetingEnabled, onEnterRoom, onEnt
       >
         <CardContent className={classes.content}>
           <div className={classes.flex}>
-            <Typography gutterBottom variant="h5" component="h2" className={classes.content}>
+            <Typography gutterBottom variant="h5" component="h3" className={classes.content}>
               {name}
             </Typography>
             {description && (

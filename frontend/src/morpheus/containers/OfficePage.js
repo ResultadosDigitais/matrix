@@ -46,8 +46,9 @@ export const enterRoom = (room, history, openInNewTab = false) => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+    flexGrow: 1
+  },
 }));
 
 const OfficePage = ({
@@ -70,26 +71,47 @@ const OfficePage = ({
       }
     }
   }, [match.params.roomId]);
+
+  const roomGroups = rooms.reduce((rv, room) => {
+    const group = room.group || "ungrouped";
+    // eslint-disable-next-line no-param-reassign
+    if (!rv[group]) rv[group] = [];
+    rv[group].push(room);
+    return rv;
+  }, { "ungrouped": [] });
+
+  const Room = room => (
+    <RoomCard
+      {...room}
+      key={room.id}
+      onEnterRoom={() => {
+        emitEnterInRoom(room.id);
+        onSetCurrentRoom(room);
+        history.replace(`/morpheus/office/${room.id}`);
+      }}
+      onEnterMeeting={(event) => {
+        onSetCurrentRoom(room);
+        const openInNewTab = event.ctrlKey
+        enterRoom(room, history, openInNewTab);
+      }}
+    />
+  );
+
   return (
     <div className={classes.root}>
-      <Grid>
-        {office.map(room => (
-          <RoomCard
-            {...room}
-            key={room.id}
-            onEnterRoom={() => {
-              emitEnterInRoom(room.id);
-              onSetCurrentRoom(room);
-              history.replace(`/morpheus/office/${room.id}`);
-            }}
-            onEnterMeeting={(event) => {
-              onSetCurrentRoom(room);
-              const openInNewTab = event.ctrlKey
-              enterRoom(room, history, openInNewTab);
-            }}
-          />
-        ))}
-      </Grid>
+      {(Object.keys(roomGroups).map(group => (
+          <div key={group}>
+            {(group !== "ungrouped" &&
+              <h2>
+                {group}
+              </h2>
+            )}
+            <Grid>
+              {roomGroups[group].map(Room)}
+            </Grid>
+          </div>
+        ))
+      )}
     </div>
   );
 };
