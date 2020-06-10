@@ -72,7 +72,7 @@ const OfficePage = ({
     }
   }, [match.params.roomId]);
 
-  const roomGroups = rooms.reduce((rv, room) => {
+  const roomGroups = office.reduce((rv, room) => {
     const group = room.group || "ungrouped";
     // eslint-disable-next-line no-param-reassign
     if (!rv[group]) rv[group] = [];
