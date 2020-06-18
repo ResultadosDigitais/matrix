@@ -101,7 +101,8 @@ The **#matrix** project has some environment variables that important to define.
 		   },
 		   {
 		      "id":"${UUID}",
-		      "name":"WAR ROOM CDP"
+		      "name":"WAR ROOM CDP",
+          "description": "Welcome to the WAR room"
 		   },
 		   {
 		      "id":"${UUID}",
@@ -201,6 +202,10 @@ If you will run in production we strongly recommend you close your environment u
 
 		WHITELIST_DOMAINS=["domain1.com","domain2.com"]
 
+If you can't use a VPN or don't have a custom domain for your users, and you still want to restrict access to the **#matrix**, you can define a `WHITELIST_USERS` variable to create an array of trusted e-mails that can access your virtual office.
+
+		WHITELIST_USERS=["teste@domain.com","teste2@domain.com"]
+
 ## Versions
 
 | Version | Name | Description | Docs |
@@ -246,6 +251,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/Jarzamendia"><img src="https://avatars2.githubusercontent.com/u/14064715?v=4" width="100px;" alt=""/><br /><sub><b>João Ernesto Arzamendia</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Jarzamendia" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/g-nogara"><img src="https://avatars0.githubusercontent.com/u/48070989?v=4" width="100px;" alt=""/><br /><sub><b>Guilherme Nogara</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=g-nogara" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/phiter"><img src="https://avatars2.githubusercontent.com/u/12252332?v=4" width="100px;" alt=""/><br /><sub><b>Phiter Fernandes</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=phiter" title="Code">💻</a></td>
   </tr>
 </table>
 

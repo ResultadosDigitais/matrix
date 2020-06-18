@@ -14,6 +14,36 @@ import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 
+const externalMeetRoomMonitoring = (externalMeetRoom) => {
+  const interval = window.setInterval(() => {
+    if (!externalMeetRoom.closed) return;
+
+    emitLeftMeeting();
+    window.clearInterval(interval);
+  }, 1000);
+};
+
+const startMeeting = (redirectUrl, history, openInNewTab = false) => {
+  if (openInNewTab) {
+    window.open(redirectUrl, "_blank");
+  } else {
+    history.push(redirectUrl);
+  }
+};
+
+export const enterRoom = (room, history, openInNewTab = false) => {
+  emitEnterInRoom(room.id);
+
+  if(room.externalMeetUrl) {
+    emitStartMeeting();
+    const externalMeetRoom = window.open(room.externalMeetUrl);
+
+    externalMeetRoomMonitoring(externalMeetRoom);
+  } else {
+    startMeeting(`/morpheus/room/${room.id}`, history, openInNewTab);
+  }
+};
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3)
@@ -40,7 +70,6 @@ const OfficePage = ({
       }
     }
   }, [match.params.roomId]);
-
   return (
     <div className={classes.root}>
       <Grid>
@@ -54,33 +83,9 @@ const OfficePage = ({
               history.replace(`/morpheus/office/${room.id}`);
             }}
             onEnterMeeting={(event) => {
-              emitEnterInRoom(room.id);
               onSetCurrentRoom(room);
-
-              if(room.externalMeetUrl){
-                emitStartMeeting();   
-                const externalMeetRoom = window.open(room.externalMeetUrl);
-
-                const externalMeetRoomMonitoring = () => {
-                  window.setTimeout(() => {
-                    if (externalMeetRoom.closed) {
-                      emitLeftMeeting();
-                    }else{
-                      externalMeetRoomMonitoring();
-                    } 
-                  }, 1000);
-                }
-
-                externalMeetRoomMonitoring();
-
-              }else{
-                const redirectUrl = `/morpheus/room/${room.id}`;
-                if (event.ctrlKey) {
-                  window.open(redirectUrl, "_blank");
-                } else {
-                  history.push(redirectUrl);
-                }
-              }
+              const openInNewTab = event.ctrlKey
+              enterRoom(room, history, openInNewTab);
             }}
           />
         ))}

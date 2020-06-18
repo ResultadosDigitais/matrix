@@ -6,10 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- new room description option
+- Plays matrix ringtone when user is being invited to join a meeting
+- Added a new form of user authorization: WHITELIST_USERS.
 
 ### Removed
 
 ### Changed
+- `express` now has the responsibilities previously attributed to `body-parser`
+- fixed behavior when inviting user to external meeting, now matrix will not open a new jitsi room
+
 
 ## [2.0.1] 2020-05-05
 ### Added
