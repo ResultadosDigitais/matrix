@@ -245,6 +245,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/Jarzamendia"><img src="https://avatars2.githubusercontent.com/u/14064715?v=4" width="100px;" alt=""/><br /><sub><b>João Ernesto Arzamendia</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=Jarzamendia" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/g-nogara"><img src="https://avatars0.githubusercontent.com/u/48070989?v=4" width="100px;" alt=""/><br /><sub><b>Guilherme Nogara</b></sub></a><br /><a href="https://github.com/ResultadosDigitais/matrix/commits?author=g-nogara" title="Code">💻</a></td>
   </tr>
 </table>
 
