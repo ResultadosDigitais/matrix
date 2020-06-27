@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from "../../components/Grid";
 import RoomCard from "../../components/RoomCard";
+import RoomGroup from "../../components/RoomGroup";
+
 import {
   selectOffice,
   selectCurrentRoom,
@@ -80,38 +81,31 @@ const OfficePage = ({
     return rv;
   }, { "ungrouped": [] });
 
-  const Room = room => (
-    <RoomCard
-      {...room}
-      key={room.id}
-      onEnterRoom={() => {
-        emitEnterInRoom(room.id);
-        onSetCurrentRoom(room);
-        history.replace(`/morpheus/office/${room.id}`);
-      }}
-      onEnterMeeting={(event) => {
-        onSetCurrentRoom(room);
-        const openInNewTab = event.ctrlKey
-        enterRoom(room, history, openInNewTab);
-      }}
-    />
-  );
-
   return (
     <div className={classes.root}>
-      {(Object.keys(roomGroups).map(group => (
-          <div key={group}>
-            {(group !== "ungrouped" &&
-              <h2>
-                {group}
-              </h2>
-            )}
-            <Grid>
-              {roomGroups[group].map(Room)}
-            </Grid>
-          </div>
-        ))
-      )}
+      {( Object.keys(roomGroups).map(group => (
+        <RoomGroup
+          key={group}
+          name={group}
+        >
+          {roomGroups[group].map((room) => (
+            <RoomCard
+              {...room}
+              key={room.id}
+              onEnterRoom={() => {
+                emitEnterInRoom(room.id);
+                onSetCurrentRoom(room);
+                history.replace(`/morpheus/office/${room.id}`);
+              }}
+              onEnterMeeting={(event) => {
+                onSetCurrentRoom(room);
+                const openInNewTab = event.ctrlKey
+                enterRoom(room, history, openInNewTab);
+              }}
+            />
+          ))}
+        </RoomGroup>
+      )) )}
     </div>
   );
 };
