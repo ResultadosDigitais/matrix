@@ -1,0 +1,22 @@
+name: Build and publish
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Project checkout
+        uses: actions/checkout@v1
+      - name: Docker Hub login
+        uses: azure/docker-login@v1
+        with:
+          login-server: 'https://index.docker.io/v1/'
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - run: |
+          docker build -t ${{ github.repository }} .
+          docker tag ${{ github.repository }}:latest ${{ github.repository }}:${{ github.sha }}
+          docker push ${{ github.repository }}
+          
