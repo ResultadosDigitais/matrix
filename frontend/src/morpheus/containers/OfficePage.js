@@ -14,12 +14,16 @@ import { emitEnterInRoom, emitStartMeeting, emitLeftMeeting} from "../socket";
 import { setCurrentRoom } from "../store/actions";
 import { CurrentRoomPropType } from "../store/models";
 
+let activeMonitorInterval;
+
 const externalMeetRoomMonitoring = (externalMeetRoom) => {
-  const interval = window.setInterval(() => {
+  window.clearInterval(activeMonitorInterval);
+
+  activeMonitorInterval = window.setInterval(() => {
     if (!externalMeetRoom.closed) return;
 
     emitLeftMeeting();
-    window.clearInterval(interval);
+    window.clearInterval(activeMonitorInterval);
   }, 1000);
 };
 
