@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -63,6 +64,8 @@ const RoomCard = ({ name, description, users, meetingEnabled, onEnterRoom, onEnt
   const userToShow = isExpanded ? users : users.slice(0, 3);
   const totalUsersHidden = users.length - userToShow.length;
 
+  const { t } = useTranslation();
+
   return (
     <Card className={classes.root}>
       <CardActionArea
@@ -105,11 +108,11 @@ const RoomCard = ({ name, description, users, meetingEnabled, onEnterRoom, onEnt
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={onEnterRoom}>
-          Enter room
+          {t("office:enter-room")}
         </Button>
         {meetingEnabled && (
           <Button size="small" color="primary" onClick={onEnterMeeting}>
-            Enter meeting
+            {t("office:enter-meeting")}
           </Button>
         )}
       </CardActions>

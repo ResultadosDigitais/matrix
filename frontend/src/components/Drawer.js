@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/core/styles";
 import UIDrawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
@@ -29,6 +30,9 @@ const useStyles = makeStyles(theme => ({
 
 const Drawer = ({ open, onClose, children }) => {
   const classes = useStyles();
+
+  const { t } = useTranslation();
+
   return (
     <UIDrawer
       className={classes.root}
@@ -40,7 +44,7 @@ const Drawer = ({ open, onClose, children }) => {
       }}
     >
       <div className={classes.drawerHeader}>
-        <IconButton onClick={onClose}>
+        <IconButton title={t("general:close-menu")} onClick={onClose}>
           <ChevronLeftIcon />
         </IconButton>
       </div>

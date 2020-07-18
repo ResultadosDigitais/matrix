@@ -1,0 +1,24 @@
+{
+  "cancel": "Cancelar",
+  "change-language": "Mudar idioma",
+  "close": "Fechar",
+  "close-menu": "Fechar menu",
+  "disable": "Desativar",
+  "dismiss": "Dispensar",
+  "enable": "Habilitar",
+  "enter": "Entrar",
+  "languages": {
+    "en": "Inglês",
+    "pt-br": "Português"
+  },
+  "loading": "Carregando",
+  "no": "Não",
+  "ok": "Ok",
+  "online-users": "Usuários online",
+  "open-menu": "Abrir menu",
+  "reload": "Recarregar",
+  "search": "Pesquisar",
+  "search-users": "Pesquisar usuários",
+  "toggle-theme": "Alternar entre tema claro/escuro",
+  "yes": "Sim"
+}

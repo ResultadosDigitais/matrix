@@ -1,0 +1,18 @@
+{
+  "accept-invite": "Sim, me leve até lá!",
+  "advanced-options": "Opções avançadas",
+  "copy-link": "Copiar link da sala",
+  "enter-meeting-with": "Entrar na reunião com",
+  "invite": "Convite",
+  "invite-received": "Convite recebido",
+  "invite-text": "{{user}} convidou você para a sala {{room}}. Deseja aceitar?",
+  "invite-user": "Convidar usuário",
+  "invite-user-text": "Convidar {{user}} para {{room}}?",
+  "leave-room": "Sair da sala",
+  "mic": "Microfone",
+  "resolution": "Resolução",
+  "share-room": "Compartilhar link da sala",
+  "simulcast-support": "Suporte para Simulcast no Firefox (Experimental)",
+  "url": "URL",
+  "video": "Vídeo"
+}

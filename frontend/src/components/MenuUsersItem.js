@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -37,6 +38,8 @@ const MenuUsersItem = ({
 }) => {
   const classes = useStyles();
 
+  const { t } = useTranslation();
+
   return (
     <ListItem>
       <ListItemAvatar>
@@ -51,7 +54,7 @@ const MenuUsersItem = ({
       <ListItemText primary={name} secondary={roomName} />
       {showInviteAction && (
         <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="Comments" onClick={onInviteUser}>
+          <IconButton edge="end" title={t("meeting:invite-user")} onClick={onInviteUser}>
             <PhoneForwardedIcon />
           </IconButton>
         </ListItemSecondaryAction>

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -33,14 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: 120,
-      "&:focus": {
-        width: 200
-      }
-    }
   }
 }));
 
@@ -54,19 +48,21 @@ const MenuUsers = ({
   const classes = useStyles();
   const commitSearch = debounce(onChangeFilter, 300);
 
+  const { t } = useTranslation();
+
   return (
-    <List subheader={<ListSubheader>Users Online</ListSubheader>}>
+    <List subheader={<ListSubheader>{t("general:online-users")}</ListSubheader>}>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
         </div>
         <InputBase
-          placeholder="Search users..."
+          placeholder={`${t("general:search-users")}...`}
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput
           }}
-          inputProps={{ "aria-label": "Search" }}
+          inputProps={{ "aria-label": t("general:search") }}
           onChange={event => {
             commitSearch("search", event.target.value);
           }}

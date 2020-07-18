@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
@@ -8,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Tooltip from "@material-ui/core/Tooltip";
 import debounce from "lodash.debounce";
 
+import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
 
@@ -61,6 +63,8 @@ const MenuOffice = ({
   const classes = useStyles();
   const commitSearch = debounce(onChangeFilter, 300);
 
+  const { t } = useTranslation();
+
   return (
     <>
       <div className={classes.search}>
@@ -68,18 +72,20 @@ const MenuOffice = ({
           <SearchIcon />
         </div>
         <InputBase
-          placeholder="Search…"
+          placeholder={`${t("general:search")}...`}
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput
           }}
-          inputProps={{ "aria-label": "Search" }}
+          inputProps={{ "aria-label": t("general:search") }}
           onChange={event => {
             commitSearch("search", event.target.value);
           }}
         />
       </div>
-      <Tooltip title="Show only full room">
+      <Tooltip
+        title={filter.onlyFullRoom ? t("office:show-empty-rooms") : t("office:hide-empty-rooms")}
+      >
         <Checkbox
           icon={<SupervisedUserCircle />}
           checkedIcon={<SupervisedUserCircle />}
@@ -90,6 +96,7 @@ const MenuOffice = ({
         />
       </Tooltip>
       <ThemeCheckbox onChange={onChangeTheme} />
+      <LanguageSwitcher />
       <NotificationCheckbox
         isDisabled={settings.notificationDisabled}
         onChange={event => {

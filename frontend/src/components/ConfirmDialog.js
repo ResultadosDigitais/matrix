@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -7,29 +8,33 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const ConfirmDialog = ({ open, onClose, onConfirm, title, message }) => (
-  <Dialog open={open} onClose={onClose}>
-    <DialogTitle>{title}</DialogTitle>
-    <DialogContent>
-      <DialogContentText>{message}</DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={onClose} color="primary">
-        No
-      </Button>
-      <Button
-        onClick={() => {
-          onClose();
-          onConfirm();
-        }}
-        color="primary"
-        autoFocus
-      >
-        Yes
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+const ConfirmDialog = ({ open, onClose, onConfirm, title, message }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>{message}</DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          {t("general:no")}
+        </Button>
+        <Button
+          onClick={() => {
+            onClose();
+            onConfirm();
+          }}
+          color="primary"
+          autoFocus
+        >
+          {t("general:yes")}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 ConfirmDialog.propTypes = {
   open: PropTypes.bool,

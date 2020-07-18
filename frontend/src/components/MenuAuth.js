@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -11,6 +12,8 @@ const MenuAuth = ({ onLogout, userName }) => {
     setAnchorEl(null);
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Button
@@ -22,7 +25,7 @@ const MenuAuth = ({ onLogout, userName }) => {
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "top",
+          vertical: "bottom",
           horizontal: "right"
         }}
         keepMounted
@@ -32,6 +35,7 @@ const MenuAuth = ({ onLogout, userName }) => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
+        getContentAnchorEl={null}
       >
         <MenuItem
           onClick={() => {
@@ -39,7 +43,7 @@ const MenuAuth = ({ onLogout, userName }) => {
             onLogout();
           }}
         >
-          Logout
+          { t("auth:logout") }
         </MenuItem>
       </Menu>
     </>

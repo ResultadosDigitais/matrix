@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import UIAppBar from "@material-ui/core/AppBar";
@@ -38,6 +39,8 @@ const useStyles = makeStyles(theme => ({
 const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
   const classes = useStyles();
 
+  const { t } = useTranslation();
+
   return (
     <div className={classes.root}>
       <UIAppBar
@@ -52,7 +55,7 @@ const AppBar = ({ isDrawerOpen, openDrawer, children }) => {
             edge="start"
             className={clsx(classes.menuButton, isDrawerOpen && classes.hide)}
             color="inherit"
-            aria-label="Menu"
+            title={t("general:open-menu")}
             onClick={openDrawer}
           >
             <MenuIcon />

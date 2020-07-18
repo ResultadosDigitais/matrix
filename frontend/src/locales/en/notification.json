@@ -1,0 +1,8 @@
+{
+  "blocked": "Notifications blocked",
+  "disable": "Disable notifications",
+  "enable": "Enable notifications",
+  "request-permission": "Request notifications permission",
+  "unlock": "You must unlock Matrix's notification option in your browser settings.",
+  "unsupported-browser": "This browser doesn't support notifications"
+}

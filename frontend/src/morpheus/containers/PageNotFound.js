@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -17,10 +18,12 @@ const AdapterLink = React.forwardRef((props, ref) => (
 const PageNotFound = () => {
   const classes = useStyles();
 
+  const { t } = useTranslation();
+
   return (
     <div className={classes.root}>
       <Typography variant="h3" gutterBottom>
-        404 - Page not found
+        404 - {t("error:not-found")}
       </Typography>
       <Button
         component={AdapterLink}
@@ -29,7 +32,7 @@ const PageNotFound = () => {
         color="primary"
         size="large"
       >
-        Go to home page
+        {t("error:go-home")}
       </Button>
     </div>
   );

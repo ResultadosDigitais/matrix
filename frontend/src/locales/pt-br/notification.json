@@ -1,0 +1,8 @@
+{
+  "blocked": "Notificações bloqueadas",
+  "disable": "Desativar as notificações",
+  "enable": "Ativar as notificações",
+  "request-permission": "Solicitar permissão de notificações",
+  "unlock": "Você deve desbloquear a opção de notificação do Matrix nas configurações do seu navegador.",
+  "unsupported-browser": "Este navegador não suporta notificações"
+}

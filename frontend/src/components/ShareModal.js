@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -13,14 +14,18 @@ import FileCopyOutlined from "@material-ui/icons/FileCopyOutlined";
 const ShareModal = ({ open, onClose }) => {
   const inputRef = useRef();
 
+  const { t } = useTranslation();
+
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle id="alert-dialog-title">Share room link</DialogTitle>
+      <DialogTitle id="alert-dialog-title">
+        {t("meeting:share-room")}
+      </DialogTitle>
       <DialogContent>
         <TextField
           id="outlined-adornment-password"
           variant="outlined"
-          label="URL"
+          label={t("meeting:url")}
           inputRef={inputRef}
           defaultValue={window.location.href}
           InputProps={{
@@ -28,7 +33,7 @@ const ShareModal = ({ open, onClose }) => {
               <InputAdornment position="end">
                 <IconButton
                   edge="end"
-                  aria-label="Toggle password visibility"
+                  title={t("meeting:copy-link")}
                   onClick={() => {
                     if (inputRef && inputRef.current) {
                       inputRef.current.select();
@@ -45,7 +50,7 @@ const ShareModal = ({ open, onClose }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          Close
+          {t("general:close")}
         </Button>
       </DialogActions>
     </Dialog>
