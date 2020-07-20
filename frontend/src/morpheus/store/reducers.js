@@ -56,6 +56,8 @@ export const initialState = {
   }
 };
 
+const normalize = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
 const buildOfficeState = state => {
   const { rooms, usersInRoom, officeFilter } = state;
 
@@ -73,7 +75,7 @@ const buildOfficeState = state => {
   }
   if (officeFilter.search) {
     const search = officeFilter.search.toLowerCase();
-    office = office.filter(o => o.name.toLowerCase().includes(search));
+    office = office.filter(room => normalize(room.name).includes(normalize(search)));
   }
 
   return {
@@ -100,7 +102,7 @@ const buildUsersState = state => {
 
   if (usersFilter.search) {
     const search = usersFilter.search.toLowerCase();
-    users = users.filter(u => u.name.toLowerCase().includes(search));
+    users = users.filter(u => normalize(u.name).includes(normalize(search)));
   }
 
   return {
