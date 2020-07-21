@@ -5,6 +5,8 @@ import sinon from "sinon";
 import {
   addRooms,
   syncOffice,
+  changeOfficeFilter,
+  changeUsersFilter,
   toggleTheme
 } from "../../../src/morpheus/store/actions";
 import reducers, { initialState } from "../../../src/morpheus/store/reducers";
@@ -207,6 +209,115 @@ describe("morpheus/store/reducers", () => {
         }
       }
     });
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+  });
+
+  it("should reduce action CHANGE_OFFICE_FILTER with accents", () => {
+    const stateBefore = {
+      ...initialState,
+      rooms: [
+        { id: "1", name: "Café", externalMeetUrl:"http://externalMeetUrl-1", users: [], disableMeeting: true },
+        { id: "2", name: "Another", externalMeetUrl:"http://externalMeetUrl-2", users: [], description: "Hello" }
+      ],
+      office: [
+        { id: "1", name: "Café", externalMeetUrl:"http://externalMeetUrl-1", users: [], disableMeeting: true },
+        { id: "2", name: "Another", externalMeetUrl:"http://externalMeetUrl-2", users: [], description: "Hello" }
+      ]
+    };
+
+    const stateAfter = {
+      ...initialState,
+      officeFilter: {
+        onlyFullRoom: false,
+        search: "cafe"
+      },
+      rooms: [
+        { id: "1", name: "Café", externalMeetUrl:"http://externalMeetUrl-1", users: [], disableMeeting: true },
+        { id: "2", name: "Another", externalMeetUrl:"http://externalMeetUrl-2", users: [], description: "Hello" },
+      ],
+      office: [
+        {
+          id: "1",
+          name: "Café",
+          externalMeetUrl:"http://externalMeetUrl-1",
+          users: [],
+          description: undefined,
+          meetingEnabled: false,
+        },
+      ]
+    };
+
+    const action = changeOfficeFilter("search", "cafe");
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+  });
+
+  it("should reduce action CHANGE_USERS_FILTER with accents", () => {
+    const users = [
+      { name: "José", room: "1" },
+      { name: "Phillip", room: "1" },
+    ];
+
+    const room = { id: "1", name: "Café", externalMeetUrl:"http://externalMeetUrl-1", users, disableMeeting: true };
+    const stateBefore = {
+      ...initialState,
+      rooms: [
+        room,
+      ],
+      office: [
+        room,
+      ],
+      usersInRoom: [
+        {
+          user: users[0],
+          room,
+        },
+        {
+          user: users[1],
+          room,
+        },
+      ],
+    };
+
+    const stateAfter = {
+      ...initialState,
+      usersFilter: {
+        search: "jose"
+      },
+      users: [{
+        avatar: undefined,
+        id: undefined,
+        inMeet: false,
+        name: "José",
+        roomId: "",
+        roomName: ""
+      }],
+      rooms: [
+        room,
+      ],
+      office: [
+        room,
+      ],
+      usersInRoom: [
+        {
+          user: users[0],
+          room,
+        },
+        {
+          user: users[1],
+          room,
+        },
+      ],
+    };
+
+    const action = changeUsersFilter("search", "jose");
 
     deepFreeze(stateBefore);
     deepFreeze(action);
