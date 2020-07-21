@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -17,30 +18,35 @@ const AdvancedMeetingSettings = ({
   onVideoQualityChange,
   enableFirefoxSimulcast,
   onEnableFirefoxSimulcastChange
-}) => (
-  <Grid container spacing={3}>
-    <Grid item xs={12} sm={6}>
-      <Select
-        label="Resolution"
-        options={videoQualityOptions}
-        value={videoQualityValue}
-        onChange={onVideoQualityChange}
-      />
+}) => {
+
+  const { t } = useTranslation();
+
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs={12} sm={6}>
+        <Select
+          label={t("meeting:resolution")}
+          options={videoQualityOptions}
+          value={videoQualityValue}
+          onChange={onVideoQualityChange}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={enableFirefoxSimulcast}
+              onChange={onEnableFirefoxSimulcastChange}
+              color="secondary"
+            />
+          }
+          label={t("meeting:simulcast-support")}
+        />
+      </Grid>
     </Grid>
-    <Grid item xs={12} sm={6}>
-      <FormControlLabel
-        control={
-          <Switch
-            checked={enableFirefoxSimulcast}
-            onChange={onEnableFirefoxSimulcastChange}
-            color="secondary"
-          />
-        }
-        label="Simulcast support on Firefox (Experimental)"
-      />
-    </Grid>
-  </Grid>
-);
+  );
+};
 
 AdvancedMeetingSettings.propTypes = {
   videoQualityOptions: PropTypes.arrayOf(

@@ -6,6 +6,8 @@ import SnackbarActions from "../../components/SnackbarActions";
 import { showBrowserNotification } from "../../notification";
 import { initEvents, closeConnection } from "../socket";
 
+// TODO: find a way to add translations for those strings
+
 const useEvents = (
   onSyncOffice,
   onAddUser,

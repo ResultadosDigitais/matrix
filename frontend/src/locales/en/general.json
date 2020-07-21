@@ -1,0 +1,24 @@
+{
+  "cancel": "Cancel",
+  "change-language": "Change language",
+  "close": "Close",
+  "close-menu": "Close menu",
+  "disable": "Disable",
+  "dismiss": "Dismiss",
+  "enable": "Enable",
+  "enter": "Enter",
+  "languages": {
+    "en": "English",
+    "pt-br": "Portuguese"
+  },
+  "loading": "Loading",
+  "no": "No",
+  "ok": "Ok",
+  "online-users": "Online users",
+  "open-menu": "Open menu",
+  "reload": "Reload",
+  "search": "Search",
+  "search-users": "Search users",
+  "toggle-theme": "Toggle light/dark theme",
+  "yes": "Yes"
+}

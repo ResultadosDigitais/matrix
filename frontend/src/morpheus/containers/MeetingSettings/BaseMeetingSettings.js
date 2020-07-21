@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Checkbox from "@material-ui/core/Checkbox";
 import Mic from "@material-ui/icons/Mic";
@@ -18,30 +19,38 @@ const BaseMeetingSettings = ({
   onMicEnabledChange,
   videoEnabled,
   onVideoEnabledChange
-}) => (
-  <>
-    <Grid item>
-      <Tooltip title={`${micEnabled ? "Disable" : "Enable"} MIC`}>
-        <Checkbox
-          icon={<MicOff fontSize="large" />}
-          checkedIcon={<Mic fontSize="large" />}
-          onChange={onMicEnabledChange}
-          checked={micEnabled}
-        />
-      </Tooltip>
-    </Grid>
-    <Grid item>
-      <Tooltip title={`${videoEnabled ? "Disable" : "Enable"} Video`}>
-        <Checkbox
-          icon={<VideocamOff fontSize="large" />}
-          checkedIcon={<Videocam fontSize="large" />}
-          onChange={onVideoEnabledChange}
-          checked={videoEnabled}
-        />
-      </Tooltip>
-    </Grid>
-  </>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <Grid item>
+        <Tooltip
+          title={`${micEnabled ? t("general:disable") : t("general:enable")} ${t("meeting:mic")}`}
+        >
+          <Checkbox
+            icon={<MicOff fontSize="large" />}
+            checkedIcon={<Mic fontSize="large" />}
+            onChange={onMicEnabledChange}
+            checked={micEnabled}
+          />
+        </Tooltip>
+      </Grid>
+      <Grid item>
+        <Tooltip
+          title={`${videoEnabled ? t("general:disable") : t("general:enable")} ${t("meeting:video")}`}
+        >
+          <Checkbox
+            icon={<VideocamOff fontSize="large" />}
+            checkedIcon={<Videocam fontSize="large" />}
+            onChange={onVideoEnabledChange}
+            checked={videoEnabled}
+          />
+        </Tooltip>
+      </Grid>
+    </>
+  );
+};
 
 BaseMeetingSettings.propTypes = {
   micEnabled: PropTypes.bool.isRequired,

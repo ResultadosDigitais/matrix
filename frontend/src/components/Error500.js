@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 
@@ -25,6 +26,8 @@ const useStyles = makeStyles(() => ({
 const Error500 = ({ onReload }) => {
   const classes = useStyles();
 
+  const { t } = useTranslation();
+
   return (
     <div className={classes.root}>
       <div className={classes.box}>
@@ -32,16 +35,15 @@ const Error500 = ({ onReload }) => {
           <img
             className={classes.imgTitle}
             src="/images/systemfailure.jpeg"
-            alt="System Failure"
+            alt={t("error:system-failure")}
           />
         </div>
         <Fab
           variant="extended"
           color="secondary"
-          aria-label="Reload"
           onClick={onReload}
         >
-          Reload the Matrix
+          {t("error:reload-matrix")}
         </Fab>
       </div>
     </div>

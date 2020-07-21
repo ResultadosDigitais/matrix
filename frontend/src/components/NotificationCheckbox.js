@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -19,9 +20,11 @@ import { showMessageDialog } from "../morpheus/store/actions";
 const NotificationCheckbox = ({ onChange, openMessageDialog, isDisabled }) => {
   const [isAllowed, toggleAllowed] = useState(isNotificationEnabled());
 
+  const { t } = useTranslation();
+
   if (!browserHasSupport()) {
     return (
-      <Tooltip title="This browser doesn't support notifications">
+      <Tooltip title={t("notification:unsupported-browser")}>
         <NotificationsOff />
       </Tooltip>
     );
@@ -29,15 +32,13 @@ const NotificationCheckbox = ({ onChange, openMessageDialog, isDisabled }) => {
 
   if (!isAllowed) {
     return (
-      <Tooltip title="Request notification permission">
+      <Tooltip title={t("notification:request-permission")}>
         <IconButton
-          aria-label="Exit room"
-          aria-controls="menu-appbar"
           onClick={() => {
             if (isNotificationBlocked()) {
               openMessageDialog(
-                "Notification blocked",
-                "You must unlock Matrix's notification option in your browser settings."
+                t("notification:blocked"),
+                t("notification:unlock")
               );
             } else {
               requestPermissionToNotify(hasPermission => {
@@ -56,7 +57,7 @@ const NotificationCheckbox = ({ onChange, openMessageDialog, isDisabled }) => {
   }
 
   return (
-    <Tooltip title={`${isDisabled ? "Enable" : "Disable"} notification`}>
+    <Tooltip title={isDisabled ? t("notification:enable") : t("notification:disable")}>
       <Checkbox
         icon={<Notifications />}
         checkedIcon={<NotificationsOff />}

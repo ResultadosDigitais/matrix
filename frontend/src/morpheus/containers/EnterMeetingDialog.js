@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -25,13 +26,15 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
   const [videoEnabled, setVideoEnabled] = useState(true);
   const classes = useStyles();
 
+  const { t } = useTranslation();
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <Divider />
       <DialogContent className={classes.content}>
         <DialogContentText id="alert-dialog-description">
-          Enter the meeting with:
+          {t("meeting:enter-meeting-with")}
         </DialogContentText>
         <Grid justify="center" spacing={3} container>
           <BaseMeetingSettings
@@ -52,10 +55,10 @@ const EnterMeetingDialog = ({ open, onClose, onConfirm, title }) => {
       <Divider />
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          Cancel
+          {t("general:cancel")}
         </Button>
         <Button onClick={onConfirm} color="primary" autoFocus>
-          Enter
+          {t("general:enter")}
         </Button>
       </DialogActions>
     </Dialog>

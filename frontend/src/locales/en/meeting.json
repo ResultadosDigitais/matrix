@@ -1,0 +1,18 @@
+{
+  "accept-invite": "Yes, take me there!",
+  "advanced-options": "Advanced options",
+  "copy-link": "Copy room link",
+  "enter-meeting-with": "Enter meeting with",
+  "invite": "Invite",
+  "invite-received": "You have an invitation",
+  "invite-text": "{{user}} invited you to {{room}}. Do you want to accept it?",
+  "invite-user": "Invite user",
+  "invite-user-text": "Invite {{user}} to {{room}}?",
+  "leave-room": "Leave room",
+  "mic": "MIC",
+  "resolution": "Resolution",
+  "share-room": "Share room link",
+  "simulcast-support": "Simulcast support on Firefox (Experimental)",
+  "url": "URL",
+  "video": "Video"
+}
