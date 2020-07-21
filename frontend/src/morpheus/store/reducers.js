@@ -60,9 +60,9 @@ export const initialState = {
 const normalize = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 // Creates a filter function normalizing both the field value and query
-const normalizedFilter = (field, query) => {
-  return (item) => normalize(item[field]).includes(normalize(query));
-};
+const normalizedFilter = (field, query) => (
+  (item) => normalize(item[field]).includes(normalize(query))
+);
 
 const buildOfficeState = state => {
   const { rooms, usersInRoom, officeFilter } = state;
