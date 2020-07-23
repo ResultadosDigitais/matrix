@@ -1,22 +1,43 @@
 .GoogleButton {
-  display: inline-block;
-  background-image: url('/images/google-button/btn_google_signin_light_normal_web@2x.png');
-  background-size: contain;
-  width: 270px;
-  height: 65px;
-  cursor: pointer;
-  text-indent: -5000em;
-  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 1px;
+  border-radius: 2px;
+  background: white;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
 }
 
 .GoogleButton:hover {
-  background-image: url('/images/google-button/btn_google_signin_light_pressed_web@2x.png');
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.1);
 }
-
 .GoogleButtonDark {
-  background-image: url('/images/google-button/btn_google_signin_dark_normal_web@2x.png');
+  background-color: #4285f4;
+}
+.GoogleButtonDark:hover {
+  background-color: #356abe;
 }
 
-.GoogleButtonDark:hover {
-  background-image: url('/images/google-button/btn_google_signin_dark_pressed_web@2x.png');
+.GoogleButtonLogo {
+  padding: 8px;
+  border-radius: 2px;
+}
+
+.GoogleButtonLogoDark {
+  background: white;
+}
+
+.GoogleButtonText {
+  display: block;
+  flex: 1;
+  margin: 0 16px;
+  text-align: center;
+  font-weight: 600;
+  color: #757575;
+}
+
+.GoogleButtonTextDark {
+  color: #fbffff;
 }
