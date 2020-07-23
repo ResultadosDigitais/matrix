@@ -7,6 +7,7 @@ import Providers from "./morpheus/providers";
 import store from "./morpheus/store";
 import App from "./morpheus/App";
 import MatrixProfile from "./profile";
+import "./i18n";
 
 function renderApp() {
   ReactDOM.render(
