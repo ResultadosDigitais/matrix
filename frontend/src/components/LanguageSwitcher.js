@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -8,8 +9,46 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import LanguageIcon from "@material-ui/icons/Translate";
 import FlagImages from "../constants/FlagImages";
 
-const LanguageSwitcher = () => {
+const availableLanguages = [
+  {
+    lang: "pt-br",
+    flag: FlagImages.ptBr,
+  },
+  {
+    lang: "en",
+    flag: FlagImages.en,
+  }
+];
+
+const switchLanguage = (i18n, lang) => {
+  i18n.changeLanguage(lang)
+  localStorage.setItem("matrix-language", lang);
+}
+
+const LanguageMenuItem = ({ lang, flag }) => {
   const { t, i18n } = useTranslation();
+  return (
+    <MenuItem selected={i18n.language === lang} onClick={() => switchLanguage(i18n, lang)}>
+      <ListItemIcon>
+        <img alt="" src={flag} />
+      </ListItemIcon>
+      <strong>{t(`general:languages.${lang}`)}</strong>
+    </MenuItem>
+  );
+};
+
+LanguageMenuItem.propTypes = {
+  lang: PropTypes.string,
+  flag: PropTypes.string,
+};
+
+LanguageMenuItem.defaultProps = {
+  lang: "",
+  flag: "",
+};
+
+const LanguageSwitcher = () => {
+  const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -20,12 +59,6 @@ const LanguageSwitcher = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const switchLanguage = (lang) => {
-    i18n.changeLanguage(lang)
-    localStorage.setItem("matrix-language", lang);
-    handleClose();
-  }
 
   return (
     <>
@@ -54,18 +87,13 @@ const LanguageSwitcher = () => {
           horizontal: "center",
         }}
       >
-        <MenuItem selected={i18n.language === "en"} onClick={() => switchLanguage("en")}>
-          <ListItemIcon>
-            <img alt="" src={FlagImages.en} />
-          </ListItemIcon>
-          <strong>{t("general:languages.en")}</strong>
-        </MenuItem>
-        <MenuItem selected={i18n.language === "pt-BR"} onClick={() => switchLanguage("pt-BR")}>
-          <ListItemIcon>
-            <img alt="" src={FlagImages.ptBr} />
-          </ListItemIcon>
-          <strong>{t("general:languages.pt-br")}</strong>
-        </MenuItem>
+        {availableLanguages.map((language) => (
+          <LanguageMenuItem
+            key={language.lang}
+            lang={language.lang}
+            flag={language.flag}
+          />
+        ))}
       </Menu>
     </>
   );
