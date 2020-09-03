@@ -10,6 +10,7 @@ import debounce from "lodash.debounce";
 
 import ThemeCheckbox from "./ThemeCheckbox";
 import NotificationCheckbox from "./NotificationCheckbox";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -90,6 +91,7 @@ const MenuOffice = ({
         />
       </Tooltip>
       <ThemeCheckbox onChange={onChangeTheme} />
+      <LanguageSwitcher />
       <NotificationCheckbox
         isDisabled={settings.notificationDisabled}
         onChange={event => {
