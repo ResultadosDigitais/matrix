@@ -1,18 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Typography from "@material-ui/core/Typography";
 
 const AdvancedMeetingPanel = ({ children }) => (
-  <ExpansionPanel elevation={0}>
-    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+  <Accordion elevation={0}>
+    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
       <Typography color="textSecondary">Advanced options</Typography>
-    </ExpansionPanelSummary>
-    <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
-  </ExpansionPanel>
+    </AccordionSummary>
+    <AccordionDetails>{children}</AccordionDetails>
+  </Accordion>
 );
 
 AdvancedMeetingPanel.propTypes = {
