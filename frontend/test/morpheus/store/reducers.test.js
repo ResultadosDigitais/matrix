@@ -18,7 +18,7 @@ describe("morpheus/store/reducers", () => {
     const stateAfter = {
       ...initialState,
       rooms: [
-        { id: 1, name: "room 1",externalMeetUrl:"http://externalMeetUrl-1" },
+        { id: 1, name: "room 1",externalMeetUrl:"http://externalMeetUrl-1", group: "test" },
         { id: 2, name: "room 2",externalMeetUrl:"http://externalMeetUrl-2", description: "Hello", disableMeeting: true }
       ],
       office: [
@@ -29,6 +29,7 @@ describe("morpheus/store/reducers", () => {
           externalMeetUrl:"http://externalMeetUrl-1",
           users: [],
           description: undefined,
+          group: "test"
         },
         {
           id: 2,
@@ -37,11 +38,12 @@ describe("morpheus/store/reducers", () => {
           externalMeetUrl:"http://externalMeetUrl-2",
           users: [],
           description: "Hello",
+          group: undefined
         }
       ]
     };
     const action = addRooms([
-      { id: 1, name: "room 1", externalMeetUrl:"http://externalMeetUrl-1" },
+      { id: 1, name: "room 1", externalMeetUrl:"http://externalMeetUrl-1", group: "test" },
       { id: 2, name: "room 2", externalMeetUrl:"http://externalMeetUrl-2", description: "Hello", disableMeeting: true }
     ]);
 
@@ -107,8 +109,8 @@ describe("morpheus/store/reducers", () => {
     const stateBefore = {
       ...initialState,
       rooms: [
-        { id: "1", name: "room 1", externalMeetUrl:"http://externalMeetUrl-1", users: [], disableMeeting: true },
-        { id: "2", name: "room 2", externalMeetUrl:"http://externalMeetUrl-2", users: [], description: "Hello" }
+        { id: "1", name: "room 1", externalMeetUrl:"http://externalMeetUrl-1", users: [], disableMeeting: true, group: undefined },
+        { id: "2", name: "room 2", externalMeetUrl:"http://externalMeetUrl-2", users: [], description: "Hello", group: "test" }
       ]
     };
     const stateAfter = {
@@ -120,6 +122,7 @@ describe("morpheus/store/reducers", () => {
           externalMeetUrl:"http://externalMeetUrl-1",
           users: [],
           disableMeeting: true,
+          group: undefined
         },
         {
           id: "2",
@@ -127,6 +130,7 @@ describe("morpheus/store/reducers", () => {
           externalMeetUrl:"http://externalMeetUrl-2",
           users: [],
           description: "Hello",
+          group: "test"
         }
       ],
       usersInRoom: [
@@ -151,6 +155,7 @@ describe("morpheus/store/reducers", () => {
           meetingEnabled: false,
           externalMeetUrl:"http://externalMeetUrl-1",
           description: undefined,
+          group: undefined,
           users: [
             {
               id: 100,
@@ -165,6 +170,7 @@ describe("morpheus/store/reducers", () => {
           meetingEnabled: true,
           externalMeetUrl:"http://externalMeetUrl-2",
           description: "Hello",
+          group: "test",
           users: [
             {
               id: 200,

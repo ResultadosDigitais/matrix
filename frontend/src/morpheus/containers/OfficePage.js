@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from "../../components/Grid";
 import RoomCard from "../../components/RoomCard";
+import RoomGroup from "../../components/RoomGroup";
+
 import {
   selectOffice,
   selectCurrentRoom,
@@ -50,8 +51,9 @@ export const enterRoom = (room, history, openInNewTab = false) => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+    flexGrow: 1
+  },
 }));
 
 const OfficePage = ({
@@ -74,26 +76,40 @@ const OfficePage = ({
       }
     }
   }, [match.params.roomId]);
+
+  const roomGroups = office.reduce((rv, room) => {
+    const group = room.group || "ungrouped";
+    // eslint-disable-next-line no-param-reassign
+    if (!rv[group]) rv[group] = [];
+    rv[group].push(room);
+    return rv;
+  }, { "ungrouped": [] });
+
   return (
     <div className={classes.root}>
-      <Grid>
-        {office.map(room => (
-          <RoomCard
-            {...room}
-            key={room.id}
-            onEnterRoom={() => {
-              emitEnterInRoom(room.id);
-              onSetCurrentRoom(room);
-              history.replace(`/morpheus/office/${room.id}`);
-            }}
-            onEnterMeeting={(event) => {
-              onSetCurrentRoom(room);
-              const openInNewTab = event.ctrlKey
-              enterRoom(room, history, openInNewTab);
-            }}
-          />
-        ))}
-      </Grid>
+      {( Object.keys(roomGroups).map(group => (
+        <RoomGroup
+          key={group}
+          name={group}
+        >
+          {roomGroups[group].map((room) => (
+            <RoomCard
+              {...room}
+              key={room.id}
+              onEnterRoom={() => {
+                emitEnterInRoom(room.id);
+                onSetCurrentRoom(room);
+                history.replace(`/morpheus/office/${room.id}`);
+              }}
+              onEnterMeeting={(event) => {
+                onSetCurrentRoom(room);
+                const openInNewTab = event.ctrlKey
+                enterRoom(room, history, openInNewTab);
+              }}
+            />
+          ))}
+        </RoomGroup>
+      )) )}
     </div>
   );
 };

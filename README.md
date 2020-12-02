@@ -116,6 +116,30 @@ Another option is to have a remote rooms config file (this file needs to be acce
 		ROOMS_DATA=https://myfilelocation.io/myrooms_data.json
 
 
+#### Room groups
+
+You can also group rooms by addind `"group": "Group name"` in the setting of each room.
+
+Example:
+
+    {
+      "id": "${UUID}",
+      "name": "First room",
+      "group": "Group 1"
+    },
+    {
+      "id": "${UUID}",
+      "name": "Second room",
+      "group": "Group 1"
+    },
+    {
+      "id": "${UUID}",
+      "name": "Another room"
+    },
+
+This will separate the rooms by group in the main screen. Each room will be contained within the section of its own group.
+Rooms without the `group` option will be placed on the top of the list, without a section title.
+
 #### External Meet
 The embeded meet is provided by [meet.jit.si](https://meet.jit.si) service, but you can change that in any room, using serices like [Meet](https://meet.google.com/) or [Zoom](https://zoom.us/). For that, you just need provide the parameter `externalMeetUrl` in your room config:
 
