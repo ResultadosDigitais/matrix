@@ -56,12 +56,21 @@ export const initialState = {
   }
 };
 
+// Removes accents from a string and makes it lowercase.
+const normalize = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+// Creates a filter function normalizing both the field value and query
+const normalizedFilter = (field, query) => (
+  (item) => normalize(item[field]).includes(normalize(query))
+);
+
 const buildOfficeState = state => {
   const { rooms, usersInRoom, officeFilter } = state;
 
   let office = rooms.map(room => ({
     id: room.id,
     name: room.name,
+    description: room.description,
     meetingEnabled: !room.disableMeeting,
     externalMeetUrl: room.externalMeetUrl,
     users: usersInRoom.filter(u => u.room === room.id).map(u => u.user)
@@ -71,8 +80,8 @@ const buildOfficeState = state => {
     office = office.filter(o => o.users.length > 0);
   }
   if (officeFilter.search) {
-    const search = officeFilter.search.toLowerCase();
-    office = office.filter(o => o.name.toLowerCase().includes(search));
+    const { search } = officeFilter;
+    office = office.filter(normalizedFilter("name", search));
   }
 
   return {
@@ -98,8 +107,8 @@ const buildUsersState = state => {
   });
 
   if (usersFilter.search) {
-    const search = usersFilter.search.toLowerCase();
-    users = users.filter(u => u.name.toLowerCase().includes(search));
+    const { search } = usersFilter;
+    users = users.filter(normalizedFilter("name", search));
   }
 
   return {

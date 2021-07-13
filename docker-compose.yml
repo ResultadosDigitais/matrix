@@ -2,7 +2,10 @@ version: '3'
 services:
   web:
     working_dir: /var/app
+    env_file:
+      - variables.env
     ports:
-     - '8080:8080'
+     - '8080:8080'    
+    # entrypoint: 'sh /docker-entrypoint.sh npm run start'
     build:
       context: ./
