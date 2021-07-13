@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - checkout
-      - node/install
+      - node/install-packages
 
       - run: npm run build-frontend
       - run: npm run build-backend
