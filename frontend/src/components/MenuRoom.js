@@ -12,7 +12,7 @@ import { SettingsPropType } from "../morpheus/store/models";
 const MenuRoom = ({
   onExitRoom,
   onShare,
-  onChangeSettings,
+  onChangeNotification,
   onChangeTheme,
   settings
 }) => (
@@ -20,9 +20,7 @@ const MenuRoom = ({
     <ThemeCheckbox onChange={onChangeTheme} />
     <NotificationCheckbox
       isDisabled={settings.notificationDisabled}
-      onChange={event => {
-        onChangeSettings("notificationDisabled", event.target.checked);
-      }}
+      onChange={onChangeNotification}
     />
     <Tooltip title="Share room link">
       <IconButton
@@ -50,7 +48,7 @@ const MenuRoom = ({
 MenuRoom.propTypes = {
   onExitRoom: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-  onChangeSettings: PropTypes.func.isRequired,
+  onChangeNotification: PropTypes.func.isRequired,
   onChangeTheme: PropTypes.func.isRequired,
   settings: SettingsPropType.isRequired
 };
