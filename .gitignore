@@ -55,7 +55,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+*.env
+!*.example.env
 
 # next.js build output
 .next
@@ -72,3 +73,8 @@ file/matrix.room.web.json
 
 # VSCode user settings
 .vscode/
+
+# package-lock.json
+backend/package-lock.json
+frontend/package-lock.json
+package-lock.json

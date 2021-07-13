@@ -9,6 +9,7 @@
     "list": "lerna list",
     "lint": "eslint './**/*.js'",
     "test": "env CI=true lerna run test --stream",
+    "test:ci": "env CI=true lerna run test:ci --stream",
     "cover": "env CI=true lerna run cover --stream",
     "build-backend": "lerna run build-backend --stream",
     "build-frontend": "lerna run build-frontend --stream",
@@ -16,6 +17,7 @@
     "start-backend": "lerna run start-backend --stream"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.14.1",
     "eslint": "^6.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.2.0",

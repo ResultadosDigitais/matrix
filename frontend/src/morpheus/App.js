@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
-
+import { enterRoom } from "./containers/OfficePage";
 import Loading from "../components/Loading";
 import PageLayout from "../components/PageLayout";
 import MenuUsers from "../components/MenuUsers";
@@ -75,6 +75,7 @@ const MorpheusApp = ({
   const [userToInvite, setUserToInvite] = useState();
   const [isReceiveInviteOpen, setReceiveInviteOpen] = useState(false);
   const [invitation, setInvitation] = useState();
+  const [receiveInviteAudio, setReceiveInviteAudio] = useState();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   useSocket(
@@ -94,6 +95,7 @@ const MorpheusApp = ({
     enqueueSnackbar,
     closeSnackbar,
     setReceiveInviteOpen,
+    setReceiveInviteAudio,
     setInvitation,
     isLoggedIn,
     rooms,
@@ -150,10 +152,19 @@ const MorpheusApp = ({
         invitation={invitation}
         onClose={() => {
           setReceiveInviteOpen(false);
+          if (receiveInviteAudio) {
+            receiveInviteAudio.pause();
+            setReceiveInviteAudio(null);
+          }
         }}
         onConfirm={() => {
           emitEnterInRoom(invitation.room.id);
-          history.push(`/morpheus/room/${invitation.room.id}`);
+          if (receiveInviteAudio) {
+            receiveInviteAudio.pause();
+            setReceiveInviteAudio(null);
+          }
+          onSetCurrentRoom(invitation.room);
+          enterRoom(invitation.room, history);
         }}
       />
       <MessageDialog />

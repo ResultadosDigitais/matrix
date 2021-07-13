@@ -7,6 +7,7 @@ import Providers from "./morpheus/providers";
 import store from "./morpheus/store";
 import App from "./morpheus/App";
 import MatrixProfile from "./profile";
+import "./i18n";
 
 function renderApp() {
   ReactDOM.render(
@@ -18,35 +19,11 @@ function renderApp() {
 }
 
 window.onload = () => {
-  gapi.load("auth2", () => {
-    gapi.auth2.init().then(
-      auth2 => {
-        if (!auth2.isSignedIn.get()) {
-          window.location.href = "/";
-          return;
-        }
+  const userString = document.getElementById("user").value;
+  const matrixProfile = new MatrixProfile();
+  const user = JSON.parse(userString);
 
-        const matrixProfile = new MatrixProfile();
+  matrixProfile.storeProfileData(user);
 
-        if (!matrixProfile.isProfileStored()) {
-          const currentUser = auth2.currentUser.get();
-          const basicProfile = currentUser.getBasicProfile();
-
-          const profileData = {
-            id: basicProfile.getId(),
-            name: basicProfile.getName(),
-            imageUrl: basicProfile.getImageUrl(),
-            email: basicProfile.getEmail()
-          };
-
-          matrixProfile.storeProfileData(profileData);
-        }
-
-        renderApp();
-      },
-      () => {
-        window.location.href = "/";
-      }
-    );
-  });
+  renderApp();
 };
