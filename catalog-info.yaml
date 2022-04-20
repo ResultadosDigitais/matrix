@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: matrix
+  description: Matrix é o local de trabalho online de código aberto para equipes distribuídas terem a experiência de trabalhar juntos todos os dias, lado a lado.
+  annotations:
+    circleci.com/project-slug: github/ResultadosDigitais/matrix
+    github.com/project-slug: ResultadosDigitais/matrix
+spec:
+  type: service
+  owner: devtools
+  lifecycle: production
