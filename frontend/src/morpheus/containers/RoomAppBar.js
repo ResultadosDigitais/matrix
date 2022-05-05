@@ -9,7 +9,7 @@ import MenuRoom from "../../components/MenuRoom";
 import ShareModal from "../../components/ShareModal";
 import { selectRooms, selectSystemSettings } from "../store/selectors";
 import { emitLeftMeeting } from "../socket";
-import { changeSystemSetting, toggleTheme } from "../store/actions";
+import { toggleNotification, toggleTheme } from "../store/actions";
 import { RoomsPropType, SettingsPropType } from "../store/models";
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const RoomAppBar = ({
-  onChangeSettings,
+  onChangeNotification,
   onChangeTheme,
   history,
   match,
@@ -50,7 +50,7 @@ const RoomAppBar = ({
         onShare={() => {
           setShareModalOpen(true);
         }}
-        onChangeSettings={onChangeSettings}
+        onChangeNotification={onChangeNotification}
         onChangeTheme={onChangeTheme}
         settings={settings}
       />
@@ -65,7 +65,7 @@ const RoomAppBar = ({
 };
 
 RoomAppBar.propTypes = {
-  onChangeSettings: PropTypes.func.isRequired,
+  onChangeNotification: PropTypes.func.isRequired,
   onChangeTheme: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
@@ -89,7 +89,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onChangeSettings: changeSystemSetting,
+  onChangeNotification: toggleNotification,
   onChangeTheme: toggleTheme
 };
 

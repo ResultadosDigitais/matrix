@@ -7,7 +7,8 @@ import {
   syncOffice,
   changeOfficeFilter,
   changeUsersFilter,
-  toggleTheme
+  toggleTheme,
+  toggleNotification,
 } from "../../../src/morpheus/store/actions";
 import reducers, { initialState } from "../../../src/morpheus/store/reducers";
 import storage from "../../../src/morpheus/store/storage";
@@ -360,4 +361,41 @@ describe("morpheus/store/reducers", () => {
       expect(storage.setTheme.calledWithMatch("dark")).to.equal(true);
     });
   });
+
+  describe("action TOGGLE_NOTIFICATION", () => {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("should toggle notificationDisabled from true to false", () => {
+      const stateBefore = { ...initialState, systemSettings: { notificationDisabled: true } };
+      const stateAfter = { ...initialState, systemSettings: { notificationDisabled: false } };
+      const action = toggleNotification();
+
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+
+      sinon.replace(storage, "setNotificationDisabled", sinon.fake());
+
+      expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+
+      expect(storage.setNotificationDisabled.calledWithMatch(false)).to.equal(true);
+    });
+
+    it("should toggle notificationDisabled from false to true", () => {
+      const stateBefore = { ...initialState, systemSettings: { notificationDisabled: false } };
+      const stateAfter = { ...initialState, systemSettings: { notificationDisabled: true } };
+      const action = toggleNotification();
+
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+
+      sinon.replace(storage, "setNotificationDisabled", sinon.fake());
+
+      expect(reducers(stateBefore, action)).to.deep.equal(stateAfter);
+
+      expect(storage.setNotificationDisabled.calledWithMatch(true)).to.equal(true);
+    });
+
+  })
 });

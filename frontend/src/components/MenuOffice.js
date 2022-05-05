@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 
 const MenuOffice = ({
   onChangeFilter,
-  onChangeSettings,
+  onChangeNotification,
   onChangeTheme,
   filter,
   settings
@@ -94,9 +94,7 @@ const MenuOffice = ({
       <LanguageSwitcher />
       <NotificationCheckbox
         isDisabled={settings.notificationDisabled}
-        onChange={event => {
-          onChangeSettings("notificationDisabled", event.target.checked);
-        }}
+        onChange={onChangeNotification}
       />
     </>
   );
@@ -104,7 +102,7 @@ const MenuOffice = ({
 
 MenuOffice.propTypes = {
   onChangeFilter: PropTypes.func,
-  onChangeSettings: PropTypes.func,
+  onChangeNotification: PropTypes.func,
   onChangeTheme: PropTypes.func,
   filter: PropTypes.shape({
     onlyFullRoom: PropTypes.bool
@@ -116,7 +114,7 @@ MenuOffice.propTypes = {
 
 MenuOffice.defaultProps = {
   onChangeFilter: () => {},
-  onChangeSettings: () => {},
+  onChangeNotification: () => {},
   onChangeTheme: () => {},
   filter: {},
   settings: {}

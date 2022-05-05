@@ -15,7 +15,8 @@ import {
   TOGGLE_MESSAGE_DIALOG,
   TOGGLE_THEME,
   OPEN_LOGOUT_CONFIRM_DIALOG,
-  CLOSE_LOGOUT_CONFIRM_DIALOG
+  CLOSE_LOGOUT_CONFIRM_DIALOG,
+  TOGGLE_NOTIFICATION
 } from "./actions";
 import storage from "./storage";
 import { getDefaultTheme, toggleTheme } from "../Themes";
@@ -37,7 +38,8 @@ export const initialState = {
     search: ""
   },
   systemSettings: {
-    notificationDisabled: false
+    notificationDisabled: 
+      storage.isNotificationDisabled(true),
   },
   meetingSettings: storage.getMeetingSettings({
     micEnabled: true,
@@ -278,6 +280,19 @@ const reducers = (state = initialState, action) => {
           isOpen: false
         }
       };
+    case TOGGLE_NOTIFICATION: {
+      const notificationStatus = !state.systemSettings.notificationDisabled
+
+      storage.setNotificationDisabled(notificationStatus);
+
+      return {
+        ...state,
+        systemSettings: {
+          ...state.systemSettings,
+          notificationDisabled: notificationStatus
+        },
+      };
+    }
     default:
       return state;
   }

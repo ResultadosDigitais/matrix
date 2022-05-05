@@ -13,7 +13,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 const MenuRoom = ({
   onExitRoom,
   onShare,
-  onChangeSettings,
+  onChangeNotification,
   onChangeTheme,
   settings
 }) => (
@@ -22,9 +22,7 @@ const MenuRoom = ({
     <LanguageSwitcher />
     <NotificationCheckbox
       isDisabled={settings.notificationDisabled}
-      onChange={event => {
-        onChangeSettings("notificationDisabled", event.target.checked);
-      }}
+      onChange={onChangeNotification}
     />
     <Tooltip title="Share room link">
       <IconButton
@@ -52,7 +50,7 @@ const MenuRoom = ({
 MenuRoom.propTypes = {
   onExitRoom: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-  onChangeSettings: PropTypes.func.isRequired,
+  onChangeNotification: PropTypes.func.isRequired,
   onChangeTheme: PropTypes.func.isRequired,
   settings: SettingsPropType.isRequired
 };
