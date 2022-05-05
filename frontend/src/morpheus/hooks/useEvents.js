@@ -51,9 +51,11 @@ const useEvents = (
         }
       });
       events.onParticipantStartedMeet((user, roomId) => {
+        user.inMeet = true;
         onUserEnterMeeting(user, roomId);
       });
       events.onParticipantLeftMeet((user, roomId) => {
+        user.inMeet = false;
         onUserLeftMeeting(user, roomId);
       });
       events.onDisconnect(userId => {
