@@ -17,7 +17,7 @@
   "dependencies": {
     "@godaddy/terminus": "^4.3.1",
     "cookie-session": "^1.4.0",
-    "ejs": "^2.6.2",
+    "ejs": "^3.1.7",
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
     "morgan": "^1.10.0",
