@@ -38,7 +38,7 @@
     "chai": "^4.2.0",
     "css-loader": "^3.2.0",
     "deep-freeze": "0.0.1",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha": "^6.2.0",
