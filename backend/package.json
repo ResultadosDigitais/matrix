@@ -18,7 +18,7 @@
     "@godaddy/terminus": "^4.3.1",
     "cookie-session": "^1.4.0",
     "ejs": "^2.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "hashmap": "^2.3.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.2",
