@@ -41,7 +41,7 @@
     "jsdom": "^15.1.1",
     "jsdom-global": "^3.0.2",
     "mini-css-extract-plugin": "^0.8.0",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "sinon": "^9.0.1",
