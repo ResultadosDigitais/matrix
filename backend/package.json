@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "hashmap": "^2.3.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.20",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "request": "^2.88.2",
